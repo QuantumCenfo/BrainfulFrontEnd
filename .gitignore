@@ -97,6 +97,10 @@ dist
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
+
+# Ignore cache created with the Angular CLI.
+.angular/
+
 # vuepress build output
 .vuepress/dist
 
