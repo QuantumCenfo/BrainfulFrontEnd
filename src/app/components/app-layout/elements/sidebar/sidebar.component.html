@@ -2,8 +2,8 @@
   <a routerLink="/">
     <img
       class="img-fluid"
-      src="../../../../../assets/icons/logo@2x.png"
-      width="50"
+      src="../../../../../assets/icons/LogoCompleto.png"
+      
       alt="Logo"
     />
   </a>
@@ -21,7 +21,7 @@
   <a href="javascript:void(0)">
     <img
       class="img-fluid"
-      src="../../../../../assets/icons/logo@2x.png"
+      src="../../../../../assets/icons/LogoCompleto.png"
       width="35"
       alt=""
     />
@@ -64,22 +64,22 @@
 
                 <li class="sidebar-main-title">
                   <div>
-                    <h6>General</h6>
+                    <h6>Funciones</h6>
                   </div>
                 </li>
 
                 @for (route of permittedRoutes; track $index) {
+                  @if (route.data && route.data['showInSidebar']) {
                   <li class="sidebar-list">
                     <a
                       routerLink="{{route.path}}"
                       routerLinkActive="active"
                       class="sidebar-link sidebar-title"
                     >
-                      @if (route.data) {
                         <span>{{route.data['name']}}</span>
-                      }
-                    </a>
-                  </li>
+                      </a>
+                    </li>
+                  }
                 }
 
               </div>

@@ -35,7 +35,7 @@ export class LoginComponent {
     }
     if (this.emailModel.valid && this.passwordModel.valid) {
       this.authService.login(this.loginForm).subscribe({
-        next: () => this.router.navigateByUrl('/app/dashboard'),
+        next: () => this.router.navigateByUrl('/app/badges'),
         error: (err: any) => (this.loginError = err.error.description),
       });
     }

@@ -9,6 +9,18 @@ import { AdminRoleGuard } from './guards/admin-role.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestGuard } from './guards/guest.guard';
 import { IRole } from './interfaces';
+import { ChallengesComponent } from './pages/challenges/challenges.component';
+import { BadgesComponent } from './pages/badges/badges.component';
+import { ContentsComponent } from './pages/contents/contents.component';
+import { BadgesUsersComponent } from './pages/badges-users/badges-users.component';
+import { RecommendationsComponent } from './pages/recommendations/recommendations.component';
+import { ForumsComponent } from './pages/forums/forums.component';
+import { RemindersComponent } from './pages/reminders/reminders.component';
+import { GamesComponent } from './pages/games/games.component';
+import { FormComponent } from './pages/form/form.component';
+import { ContentsUsersComponent } from './pages/contents-users/contents-users.component';
+import { ChallengesUsersComponent } from './pages/challenges-users/challenges-users.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   {
@@ -45,22 +57,153 @@ export const routes: Routes = [
         component: UsersComponent,
         canActivate:[AdminRoleGuard],
         data: { 
-          authorities: [
-            IRole.admin, 
+          authorities: [ 
             IRole.superAdmin
           ],
-          name: 'Users'
+          name: 'Users',
+          showInSidebar: true
+        }
+      },
+      // {
+      //   path: 'dashboard',
+      //   component: DashboardComponent,
+      //   data: { authorities: [
+      //       IRole.superAdmin,
+      //       IRole.user
+      //     ],
+      //     name: 'Dashboard'
+      //   }
+      // },
+      {
+        path: 'challenges',
+        component: ChallengesComponent,
+        data: { authorities: [
+            IRole.superAdmin,
+          ],
+          name: 'Desafios',
+          showInSidebar: true
         }
       },
       {
-        path: 'dashboard',
-        component: DashboardComponent,
+        path: 'badges',
+        component: BadgesComponent,
         data: { authorities: [
-            IRole.admin, 
+            IRole.superAdmin,
+          ],
+          name: 'Insignias',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'contents',
+        component: ContentsComponent,
+        data: { authorities: [
+            IRole.superAdmin,
+          ],
+          name: 'Contenido Educativo',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'badges-users',
+        component: BadgesUsersComponent,
+        data: { authorities: [
+            IRole.user,
+          ],
+          name: 'Insignias',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'recommendations',
+        component: RecommendationsComponent,
+        data: { authorities: [
+            IRole.superAdmin,
+          ],
+          name: 'Recomendaciones',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'forums',
+        component: ForumsComponent,
+        data: { authorities: [
+            IRole.user,
+          ],
+          name: 'Foros',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'reminders',
+        component: RemindersComponent,
+        data: { authorities: [
+            IRole.user,
+          ],
+          name: 'Recordatorios',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'games',
+        component: GamesComponent,
+        data: { authorities: [
+            IRole.user,
+          ],
+          name: 'Juegos',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'form',
+        component: FormComponent,
+        data: { authorities: [
+            IRole.user,
+          ],
+          name: 'Questionario',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'contents-user',
+        component: ContentsUsersComponent,
+        data: { authorities: [
+            IRole.user,
+          ],
+          name: 'ContenidoEducativo',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'habits',
+        component: ContentsUsersComponent,
+        data: { authorities: [
+            IRole.user,
+          ],
+          name: 'Habitos',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'challenges-users',
+        component: ChallengesUsersComponent,
+        data: { authorities: [
+            IRole.user,
+          ],
+          name: 'Desafios',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { 
+          authorities: [
             IRole.superAdmin,
             IRole.user
           ],
-          name: 'Dashboard'
+          name: 'profile',
+          showInSidebar: false
         }
       },
     ],
