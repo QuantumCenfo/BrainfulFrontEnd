@@ -1,68 +1,66 @@
-import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/auth/login/login.component';
-import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { SigUpComponent } from './pages/auth/sign-up/signup.component';
-import { UsersComponent } from './pages/users/users.component';
-import { AuthGuard } from './guards/auth.guard';
-import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
-import { AdminRoleGuard } from './guards/admin-role.guard';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { GuestGuard } from './guards/guest.guard';
-import { IRole } from './interfaces';
-import { ChallengesComponent } from './pages/challenges/challenges.component';
-import { BadgesComponent } from './pages/badges/badges.component';
-import { ContentsComponent } from './pages/contents/contents.component';
-import { BadgesUsersComponent } from './pages/badges-users/badges-users.component';
-import { RecommendationsComponent } from './pages/recommendations/recommendations.component';
-import { ForumsComponent } from './pages/forums/forums.component';
-import { RemindersComponent } from './pages/reminders/reminders.component';
-import { GamesComponent } from './pages/games/games.component';
-import { FormComponent } from './pages/form/form.component';
-import { ContentsUsersComponent } from './pages/contents-users/contents-users.component';
-import { ChallengesUsersComponent } from './pages/challenges-users/challenges-users.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import { Routes } from "@angular/router";
+import { LoginComponent } from "./pages/auth/login/login.component";
+import { AppLayoutComponent } from "./components/app-layout/app-layout.component";
+import { SigUpComponent } from "./pages/auth/sign-up/signup.component";
+import { UsersComponent } from "./pages/users/users.component";
+import { AuthGuard } from "./guards/auth.guard";
+import { AccessDeniedComponent } from "./pages/access-denied/access-denied.component";
+import { AdminRoleGuard } from "./guards/admin-role.guard";
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+import { GuestGuard } from "./guards/guest.guard";
+import { IRole } from "./interfaces";
+import { ChallengesComponent } from "./pages/challenges/challenges.component";
+import { BadgesComponent } from "./pages/badges/badges.component";
+import { ContentsComponent } from "./pages/contents/contents.component";
+import { BadgesUsersComponent } from "./pages/badges-users/badges-users.component";
+import { RecommendationsComponent } from "./pages/recommendations/recommendations.component";
+import { ForumsComponent } from "./pages/forums/forums.component";
+import { RemindersComponent } from "./pages/reminders/reminders.component";
+import { GamesComponent } from "./pages/games/games.component";
+import { FormComponent } from "./pages/form/form.component";
+import { ContentsUsersComponent } from "./pages/contents-users/contents-users.component";
+import { ChallengesUsersComponent } from "./pages/challenges-users/challenges-users.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
 
 export const routes: Routes = [
   {
-    path: 'login',
+    path: "login",
     component: LoginComponent,
     canActivate: [GuestGuard],
   },
   {
-    path: 'signup',
+    path: "signup",
     component: SigUpComponent,
     canActivate: [GuestGuard],
   },
   {
-    path: 'access-denied',
+    path: "access-denied",
     component: AccessDeniedComponent,
   },
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full",
   },
   {
-    path: 'app',
+    path: "app",
     component: AppLayoutComponent,
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'app',
-        redirectTo: 'users',
-        pathMatch: 'full',
+        path: "app",
+        redirectTo: "users",
+        pathMatch: "full",
       },
       {
-        path: 'users',
+        path: "users",
         component: UsersComponent,
-        canActivate:[AdminRoleGuard],
-        data: { 
-          authorities: [ 
-            IRole.superAdmin
-          ],
-          name: 'Users',
-          showInSidebar: true
-        }
+        canActivate: [AdminRoleGuard],
+        data: {
+          authorities: [IRole.superAdmin],
+          name: "Users",
+          showInSidebar: true,
+        },
       },
       // {
       //   path: 'dashboard',
@@ -75,136 +73,118 @@ export const routes: Routes = [
       //   }
       // },
       {
-        path: 'challenges',
+        path: "challenges",
         component: ChallengesComponent,
-        data: { authorities: [
-            IRole.superAdmin,
-          ],
-          name: 'Desafios',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.superAdmin],
+          name: "Desafios",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'badges',
+        path: "badges",
         component: BadgesComponent,
-        data: { authorities: [
-            IRole.superAdmin,
-          ],
-          name: 'Insignias',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.superAdmin],
+          name: "Insignias",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'contents',
+        path: "contents",
         component: ContentsComponent,
-        data: { authorities: [
-            IRole.superAdmin,
-          ],
-          name: 'Contenido Educativo',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.superAdmin],
+          name: "Contenido Educativo",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'badges-users',
+        path: "badges-users",
         component: BadgesUsersComponent,
-        data: { authorities: [
-            IRole.user,
-          ],
-          name: 'Insignias',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.user],
+          name: "Insignias",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'recommendations',
+        path: "recommendations",
         component: RecommendationsComponent,
-        data: { authorities: [
-            IRole.superAdmin,
-          ],
-          name: 'Recomendaciones',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.superAdmin],
+          name: "Recomendaciones",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'forums',
+        path: "forums",
         component: ForumsComponent,
-        data: { authorities: [
-            IRole.user,
-          ],
-          name: 'Foros',
-          showInSidebar: true
-        }
+        data: { authorities: [IRole.user], name: "Foros", showInSidebar: true },
       },
       {
-        path: 'reminders',
+        path: "reminders",
         component: RemindersComponent,
-        data: { authorities: [
-            IRole.user,
-          ],
-          name: 'Recordatorios',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.user],
+          name: "Recordatorios",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'games',
+        path: "games",
         component: GamesComponent,
-        data: { authorities: [
-            IRole.user,
-          ],
-          name: 'Juegos',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.user],
+
+          name: "Juegos",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'form',
+        path: "form",
         component: FormComponent,
-        data: { authorities: [
-            IRole.user,
-          ],
-          name: 'Questionario',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.user],
+          name: "Questionario",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'contents-user',
+        path: "contents-user",
         component: ContentsUsersComponent,
-        data: { authorities: [
-            IRole.user,
-          ],
-          name: 'ContenidoEducativo',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.user],
+          name: "ContenidoEducativo",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'habits',
+        path: "habits",
         component: ContentsUsersComponent,
-        data: { authorities: [
-            IRole.user,
-          ],
-          name: 'Habitos',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.user],
+          name: "Habitos",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'challenges-users',
+        path: "challenges-users",
         component: ChallengesUsersComponent,
-        data: { authorities: [
-            IRole.user,
-          ],
-          name: 'Desafios',
-          showInSidebar: true
-        }
+        data: {
+          authorities: [IRole.user],
+          name: "Desafios",
+          showInSidebar: true,
+        },
       },
       {
-        path: 'profile',
+        path: "profile",
         component: ProfileComponent,
-        data: { 
-          authorities: [
-            IRole.superAdmin,
-            IRole.user
-          ],
-          name: 'profile',
-          showInSidebar: false
-        }
+        data: {
+          authorities: [IRole.superAdmin, IRole.user],
+          name: "profile",
+          showInSidebar: false,
+        },
       },
     ],
   },

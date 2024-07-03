@@ -1,6 +1,6 @@
 export interface ILoginResponse {
   accessToken: string;
-  expiresIn: number
+  expiresIn: number;
 }
 
 export interface IResponse<T> {
@@ -31,11 +31,29 @@ export interface IFeedBackMessage {
 export enum IFeedbackStatus {
   success = "SUCCESS",
   error = "ERROR",
-  default = ''
+  default = "",
 }
 
 export enum IRole {
   admin = "ROLE_ADMIN",
   user = "ROLE_USER",
-  superAdmin = 'ROLE_SUPER_ADMIN'
+  superAdmin = "ROLE_SUPER_ADMIN",
+}
+
+export interface IGame {
+  gameId?: number;
+  name?: string;
+  description?: string;
+  levelDifficult?: string;
+  typeExercise?: string;
+}
+
+export interface IGameResults {
+  resultId?: number;
+  gameDate?: string;
+  levelDifficult?: string;
+  score?: number;
+  time?: number;
+  gameId?: number;
+  userId?: number;
 }

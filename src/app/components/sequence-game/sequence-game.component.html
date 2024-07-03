@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Secuencia</title>
+  </head>
+  <body>
+    <h1 id="level-title">Presione una tecla para iniciar el juego.</h1>
+    <div class="d-flex justify-content-center">
+      <div class="color-container container">
+        <div
+          (click)="onButtonClick('orange')"
+          id="orange"
+          class="btn orange"
+        ></div>
+        <div (click)="onButtonClick('blue')" id="blue" class="btn blue"></div>
+        <div
+          (click)="onButtonClick('green')"
+          id="green"
+          class="btn green"
+        ></div>
+        <div
+          (click)="onButtonClick('purple')"
+          id="purple"
+          class="btn purple"
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>
