@@ -74,7 +74,13 @@ body {
   background-color: grey;
 }
 
-.flash {
+.flash-facil {
+  animation: flash-animation 1.5s ease-in-out;
+}
+.flash-medio {
+  animation: flash-animation 0.5s ease-in-out;
+}
+.flash-dificil {
   animation: flash-animation 0.2s ease-in-out;
 }
 

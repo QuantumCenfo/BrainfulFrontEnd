@@ -2,6 +2,7 @@ import {
   Component,
   HostListener,
   inject,
+  Input,
   OnInit,
   ViewChild,
 } from "@angular/core";
@@ -18,9 +19,14 @@ import { TimerComponent } from "../timer/timer.component";
 export class SequenceGameComponent implements OnInit {
   title = "Simon Dice";
 
+  //private gameDificulty: string = "Facil";
+
+  @Input() gameDificultyInput: string = "";
+
   //Decorador usado para acceder a un componente hijo
   //Nos permite acceder a propiedades y metodos del componente hijo
-  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
+  @ViewChild(TimerComponent)
+  timerComponent!: TimerComponent;
 
   //public countdown = inject(TimerComponent);
 
@@ -40,12 +46,6 @@ export class SequenceGameComponent implements OnInit {
   // Contador de puntos del jugador
   points: number = 0;
 
-  // Tiempo restante en segundos
-  timeLeft: number = 60;
-
-  // ID del intervalo del temporizador
-  intervalId: any;
-
   ngOnInit(): void {
     throw new Error("Method not implemented.");
   }
@@ -63,6 +63,7 @@ export class SequenceGameComponent implements OnInit {
   onButtonPlayClick(): void {
     if (!this.started) {
       this.startGame();
+      console.log(this.gameDificultyInput);
     }
   }
 
@@ -99,6 +100,8 @@ export class SequenceGameComponent implements OnInit {
   nextSequence(): void {
     this.userClickPattern = [];
     this.level++;
+    console.log("Level: ", this.level);
+    console.log("Dificultad: ", this.gameDificultyInput);
 
     document.getElementById("level-title")!.innerText = "Nivel " + this.level;
 
@@ -106,10 +109,30 @@ export class SequenceGameComponent implements OnInit {
     const randomChosenColour = this.buttonColours[randomNumber];
     this.gamePattern.push(randomChosenColour);
 
-    document.getElementById(randomChosenColour)!.classList.add("flash");
-    setTimeout(() => {
-      document.getElementById(randomChosenColour)!.classList.remove("flash");
-    }, 200);
+    if (this.gameDificultyInput === "Facil") {
+      document.getElementById(randomChosenColour)!.classList.add("flash-facil");
+      setTimeout(() => {
+        document
+          .getElementById(randomChosenColour)!
+          .classList.remove("flash-facil");
+      }, 800);
+    } else if (this.gameDificultyInput === "Medio") {
+      document.getElementById(randomChosenColour)!.classList.add("flash-medio");
+      setTimeout(() => {
+        document
+          .getElementById(randomChosenColour)!
+          .classList.remove("flash-medio");
+      }, 600);
+    } else if (this.gameDificultyInput === "Dificil") {
+      document
+        .getElementById(randomChosenColour)!
+        .classList.add("flash-dificil");
+      setTimeout(() => {
+        document
+          .getElementById(randomChosenColour)!
+          .classList.remove("flash-dificil");
+      }, 200);
+    }
 
     //PlaySound
   }
@@ -134,6 +157,7 @@ export class SequenceGameComponent implements OnInit {
     this.gamePattern = [];
     this.started = false;
     this.points = 0;
+    this.gameDificultyInput = "";
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
   }
 
