@@ -1,31 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Juego de Secuencia</title>
-  </head>
-  <body>
-    <h1 id="level-title">Presione una tecla para iniciar el juego.</h1>
-    <div class="d-flex justify-content-center">
-      <div class="color-container container">
-        <div
-          (click)="onButtonClick('orange')"
-          id="orange"
-          class="btn orange"
-        ></div>
-        <div (click)="onButtonClick('blue')" id="blue" class="btn blue"></div>
-        <div
-          (click)="onButtonClick('green')"
-          id="green"
-          class="btn green"
-        ></div>
-        <div
-          (click)="onButtonClick('purple')"
-          id="purple"
-          class="btn purple"
-        ></div>
-      </div>
-    </div>
-  </body>
-</html>
+<div class="d-flex">
+  <div class="points-container">
+    <label id="points" for="points">Puntos: {{ points }}</label>
+  </div>
+  <div id="time" class="points-container">
+    <app-timer
+      (timerEnded)="
+        endGame(
+          'Fin del juego! Presione el boton de jugar para iniciar de nuevo'
+        )
+      "
+    >
+    </app-timer>
+  </div>
+
+  <div class="points-container" (click)="onButtonPlayClick()">
+    <label id="btn-play" for="play">Jugar</label>
+  </div>
+</div>
+<h1 id="level-title" class="text-center">Presione el boton de jugar.</h1>
+
+<div class="d-flex justify-content-center">
+  <div class="color-container container">
+    <div (click)="onButtonClick('orange')" id="orange" class="btn orange"></div>
+    <div (click)="onButtonClick('blue')" id="blue" class="btn blue"></div>
+    <div (click)="onButtonClick('green')" id="green" class="btn green"></div>
+    <div (click)="onButtonClick('purple')" id="purple" class="btn purple"></div>
+  </div>
+</div>
