@@ -1,6 +1,5 @@
-<div class="card" [class.flipped]="isFlipped" (click)="flipCard()">
+<div class="card" [class.flipped]="isFlipped || isMatched" (click)="flipCard()" *ngIf="!isHidden">
   <div class="card-inner">
-    
     <div class="card-back">
       {{ cardValue }}
     </div>

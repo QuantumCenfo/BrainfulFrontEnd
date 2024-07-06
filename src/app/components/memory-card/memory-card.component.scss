@@ -43,3 +43,7 @@
  
   border-color: #FF9F1C;
 }
+.card.hidden {
+  visibility: hidden; /* Hide the card, but keep its space */
+  pointer-events: none; /* Disable interactions on hidden cards */
+}

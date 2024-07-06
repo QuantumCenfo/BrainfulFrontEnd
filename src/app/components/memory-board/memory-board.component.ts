@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
 export class MemoryBoardComponent implements OnChanges {
   @Input() difficulty: number = 0; // Default difficulty is 0, meaning no cards initially
   cards: string[] = []; // Array to hold cards
+  flippedCards: MemoryCardComponent[] = [];
+  matchedCards: MemoryCardComponent[] = [];
+
 
   ngOnChanges(changes: SimpleChanges) {
     if ('difficulty' in changes && this.difficulty > 0) {
@@ -43,4 +46,22 @@ export class MemoryBoardComponent implements OnChanges {
     }
     return array;
   }
+  addFlippedCard(card: MemoryCardComponent) {
+    this.flippedCards.push(card);
+  }
+  checkForMatch() {
+    const [card1, card2] = this.flippedCards;
+    if (card1.cardValue === card2.cardValue) {
+      card1.isMatched = true;
+      card2.isMatched = true;
+      this.matchedCards.push(card1, card2);
+    } else {
+      setTimeout(() => {
+        card1.isFlipped = false;
+        card2.isFlipped = false;
+      }, 1000); // Timeout to show the cards for a moment before flipping back
+    }
+    this.flippedCards = [];
+  }
+  
 }

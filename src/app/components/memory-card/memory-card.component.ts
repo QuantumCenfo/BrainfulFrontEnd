@@ -1,19 +1,38 @@
 import { Component, Input } from '@angular/core';
+import { MemoryBoardComponent } from '../memory-board/memory-board.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-memory-card',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './memory-card.component.html',
   styleUrl: './memory-card.component.scss'
 })
 export class MemoryCardComponent {
-  @Input() cardValue: string = ''; // Value to display on the card
-  isFlipped: boolean = false; // State to track if the card is flipped
+  @Input() cardValue: string = '';
+  isFlipped: boolean = false;
+  isMatched: boolean = false;
+  isHidden: boolean = false;
 
-  constructor() { }
+  constructor(private memoryBoard: MemoryBoardComponent) {}
 
   flipCard() {
-    this.isFlipped = !this.isFlipped;
+    if (!this.isFlipped && !this.isMatched && this.memoryBoard.flippedCards.length < 2) {
+      this.isFlipped = true;
+      this.memoryBoard.addFlippedCard(this);
+      if (this.memoryBoard.flippedCards.length === 2) {
+        this.memoryBoard.checkForMatch();
+      }
+    }
   }
+
+  reset() {
+    this.isFlipped = false;
+    this.isMatched = false;
+  }
+  hideCard() {
+    this.isHidden = true;
+  }
+
 }
