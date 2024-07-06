@@ -1,7 +1,13 @@
-<div class="card" [class.flipped]="isFlipped || isMatched" (click)="flipCard()" *ngIf="!isHidden">
+<div class="card" [class.flipped]="isFlipped" (click)="flipCard()">
   <div class="card-inner">
+    <!-- Front of the card with an image -->
+    <div class="card-front">
+      <img *ngIf="isFlipped" [src]="cardImageUrl" alt="Card Image">
+    </div>
+    
+    <!-- Back of the card with a logo -->
     <div class="card-back">
-      {{ cardValue }}
+      <img class="img-card" src="../../../assets/icons/LogoCerebro.png" alt="Logo Image">
     </div>
   </div>
 </div>

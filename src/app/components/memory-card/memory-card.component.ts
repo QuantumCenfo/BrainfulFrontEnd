@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MemoryBoardComponent } from '../memory-board/memory-board.component';
 import { CommonModule } from '@angular/common';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-memory-card',
@@ -10,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './memory-card.component.scss'
 })
 export class MemoryCardComponent {
-  @Input() cardValue: string = '';
+  @Input() cardImageUrl: string = ''; 
   isFlipped: boolean = false;
   isMatched: boolean = false;
   isHidden: boolean = false;

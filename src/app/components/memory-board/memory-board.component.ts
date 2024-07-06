@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MemoryCardComponent } from '../memory-card/memory-card.component';
 import { CommonModule } from '@angular/common';
+import { MemoryService } from '../../services/memory.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class MemoryBoardComponent implements OnChanges {
   flippedCards: MemoryCardComponent[] = [];
   matchedCards: MemoryCardComponent[] = [];
 
-
+  constructor(private imageService: MemoryService) {}
   ngOnChanges(changes: SimpleChanges) {
     if ('difficulty' in changes && this.difficulty > 0) {
       this.initializeGame();
@@ -24,9 +25,18 @@ export class MemoryBoardComponent implements OnChanges {
   }
 
   initializeGame() {
-    this.cards = this.generateRandomCards(this.difficulty);
+    this.imageService.getRandomImages(this.difficulty).subscribe(images => {
+      this.cards = this.generateCardPairs(images);
+    });
   }
-
+  generateCardPairs(images: string[]): string[] {
+    const cards: string[] = [];
+    for (let i = 0; i < images.length; i++) {
+      cards.push(images[i]);
+      cards.push(images[i]);
+    }
+    return this.shuffleArray(cards);
+  }
   generateRandomCards(difficulty: number): string[] {
     const pairs = difficulty / 2;
     const cards: string[] = [];
@@ -51,7 +61,7 @@ export class MemoryBoardComponent implements OnChanges {
   }
   checkForMatch() {
     const [card1, card2] = this.flippedCards;
-    if (card1.cardValue === card2.cardValue) {
+    if (card1.cardImageUrl === card2.cardImageUrl) {
       card1.isMatched = true;
       card2.isMatched = true;
       this.matchedCards.push(card1, card2);
