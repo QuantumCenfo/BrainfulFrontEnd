@@ -57,3 +57,7 @@ export interface IGameResults {
   gameId?: number;
   userId?: number;
 }
+export interface ICard {
+  imageId: string;
+  state: "default" | "flipped" | "matched";
+}

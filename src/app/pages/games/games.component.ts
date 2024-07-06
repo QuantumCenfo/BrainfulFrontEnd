@@ -1,16 +1,26 @@
-import { Component } from "@angular/core";
+import { Component, Input, ViewChild } from "@angular/core";
 import { SequenceGameComponent } from "../../components/sequence-game/sequence-game.component";
 import { IGame } from "../../interfaces";
 import { TimerComponent } from "../../components/timer/timer.component";
+import { MemoryBoardComponent } from "../../components/memory-board/memory-board.component";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { MemoryCardComponent } from "../../components/memory-card/memory-card.component";
 
 @Component({
   selector: "app-games",
   standalone: true,
-  imports: [SequenceGameComponent, TimerComponent],
+  imports: [SequenceGameComponent, TimerComponent,MemoryBoardComponent,FormsModule,CommonModule,MemoryCardComponent],
   templateUrl: "./games.component.html",
   styleUrl: "./games.component.scss",
 })
 export class GamesComponent {
+
+  @ViewChild(MemoryBoardComponent) memoryBoard!: MemoryBoardComponent;
+  difficulty: number = 0; // Initialize difficulty property here
+
+  constructor() { }
+ 
   public gamesList: IGame[] = [
     {
       gameId: 1,
