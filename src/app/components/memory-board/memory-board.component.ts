@@ -23,17 +23,18 @@ export class MemoryBoardComponent implements OnChanges {
       this.initializeGame();
     }
   }
+    // initializeGame() {
+    //   this.cards = this.generateRandomCards(this.difficulty);
+      
+    // }
   initializeGame() {
-    this.cards = this.generateRandomCards(this.difficulty);
-    // this.imageService.getRandomImages(this.difficulty).subscribe(images => {
-    //   this.cards = this.generateCardPairs(images);
-    // });
+    this.imageService.getRandomImages(this.difficulty).subscribe(images => {
+      this.cards = this.generateCardPairs(images);
+    });
+
+
+
   }
-  // initializeGame() {
-  //   this.cards = this.generateCardPairs(images);
-  //   // this.imageService.getRandomImages(this.difficulty).subscribe(images => {
-  //   // });
-  // }
   generateCardPairs(images: string[]): string[] {
     const cards: string[] = [];
     for (let i = 0; i < images.length; i++) {
