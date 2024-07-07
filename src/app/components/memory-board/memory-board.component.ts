@@ -1,39 +1,88 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MemoryCardComponent } from '../memory-card/memory-card.component';
 import { CommonModule } from '@angular/common';
 import { MemoryService } from '../../services/memory.service';
+import { FormsModule } from '@angular/forms';
+import { TimerComponent } from '../timer/timer.component';
+import { IGameResults } from '../../interfaces';
+import Swal from 'sweetalert2';
+
 
 
 @Component({
   selector: 'app-memory-board',
   standalone: true,
-  imports: [MemoryCardComponent,CommonModule],
+  imports: [MemoryCardComponent,CommonModule,FormsModule,TimerComponent],
   templateUrl: './memory-board.component.html',
   styleUrl: './memory-board.component.scss'
 })
 export class MemoryBoardComponent implements OnChanges {
   @Input() difficulty: number = 0; // Default difficulty is 0, meaning no cards initially
   cards: string[] = []; // Array to hold cards
+  @Input() gameStarted: boolean = false;
   flippedCards: MemoryCardComponent[] = [];
   matchedCards: MemoryCardComponent[] = [];
+  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
+  started = false;
+  points: number = 0;
+  timeLeft: number = 60;
+  intervalId: any;
+  constructor(private imageService: MemoryService) {
+    
+  }
 
-  constructor(private imageService: MemoryService) {}
+
   ngOnChanges(changes: SimpleChanges) {
     if ('difficulty' in changes && this.difficulty > 0) {
-      this.initializeGame();
+      this.gameStarted = false;
+      this.cards = [];
     }
   }
-    // initializeGame() {
-    //   this.cards = this.generateRandomCards(this.difficulty);
-      
-    // }
+  
+ 
+  startOver(): void {;
+    this.started = false;
+    this.points = 0;
+    document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+  }
+  endGame(): void {
+   
+    this.startOver();
+    this.timerComponent.stopTimer();
+  }
+
+  // Inicia el juego y la secuencia del temporizador
+  startGame(): void {
+    if (this.difficulty > 0) {
+      this.gameStarted = true;
+      this.points = 0;
+      this.initializeGame();
+      let timer =0;
+      if(this.difficulty == 6){
+        timer=30;
+      }else if(this.difficulty == 9){
+        timer=60;
+      }else if(this.difficulty == 12){
+        timer=90;
+      }
+      this.timerComponent.timer(timer); // Inicia el temporizador con 30 segundos
+    } else {
+        Swal.fire({
+          title: 'Oops...',
+          text: 'Seleccione una dificultad antes de comenzar el juego.',
+          icon: 'warning',
+          iconColor: 'white',
+          color: 'white',
+          background:'#16c2d5',
+          confirmButtonColor: '#ff9f1c',
+      })
+    }
+  }
+   
   initializeGame() {
     this.imageService.getRandomImages(this.difficulty).subscribe(images => {
       this.cards = this.generateCardPairs(images);
     });
-
-
-
   }
   generateCardPairs(images: string[]): string[] {
     const cards: string[] = [];
@@ -75,7 +124,7 @@ export class MemoryBoardComponent implements OnChanges {
       setTimeout(() => {
         card1.isFlipped = false;
         card2.isFlipped = false;
-      }, 1000); // Timeout to show the cards for a moment before flipping back
+      }, 1000); 
     }
     this.flippedCards = [];
   }

@@ -1,17 +1,3 @@
 <div class="games-container">
-  <h2>Memory Game</h2>
-
-  <!-- Difficulty selection -->
-  <div>
-    <label for="difficulty">Select Difficulty:</label>
-    <select id="difficulty" [(ngModel)]="difficulty">
-      <option value="0">-- Select Difficulty --</option>
-      <option value="12">Easy</option>
-      <option value="18">Medium</option>
-      <option value="24">Hard</option>
-    </select>
-  </div>
-
-  <!-- Memory Board -->
-  <app-memory-board [difficulty]="difficulty"></app-memory-board>
+  <app-memory-board ></app-memory-board>
 </div>

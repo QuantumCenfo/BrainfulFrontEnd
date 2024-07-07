@@ -1,3 +1,33 @@
-<div class="memory-board">
-    <app-memory-card *ngFor="let card of cards" [cardImageUrl]="card"></app-memory-card>
+<div class="games-container">
+  
+  <div class="memory-board-container">
+    <div class="d-flex">
+      <div class="points-container">
+        <label id="points" for="points">Puntos: {{ points }}</label>
+      </div>
+      
+        <app-timer
+          (timerEnded)="endGame()"
+        ></app-timer>
+     
+      
+      <div >
+        
+        <select  id="difficulty" [(ngModel)]="difficulty">
+          <option  class="option-diff"value="0">Select Difficulty</option>
+          <option value="6">Easy</option>
+          <option value="9">Medium</option>
+          <option value="12">Hard</option>
+        </select>
+      </div>
+      <div class="points-container" (click)="startGame()">
+        <label id="btn-play" for="play">Jugar</label>
+      </div>
+    </div>
+   
+    
+    <div class="memory-board" *ngIf="gameStarted">
+      <app-memory-card *ngFor="let card of cards" [cardImageUrl]="card"></app-memory-card>
+    </div>
   </div>
+</div>
