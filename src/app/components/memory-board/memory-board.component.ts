@@ -17,18 +17,17 @@ import Swal from 'sweetalert2';
   styleUrl: './memory-board.component.scss'
 })
 export class MemoryBoardComponent implements OnChanges {
-  @Input() difficulty: number = 0; // Default difficulty is 0, meaning no cards initially
-  cards: string[] = []; // Array to hold cards
+  @Input() difficulty: number = 0; 
+  cards: string[] = []; 
   @Input() gameStarted: boolean = false;
   flippedCards: MemoryCardComponent[] = [];
   matchedCards: MemoryCardComponent[] = [];
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   started = false;
   points: number = 0;
-  timeLeft: number = 60;
-  intervalId: any;
+  
   constructor(private imageService: MemoryService) {
-    
+
   }
 
 
@@ -120,10 +119,15 @@ export class MemoryBoardComponent implements OnChanges {
       card1.isMatched = true;
       card2.isMatched = true;
       this.matchedCards.push(card1, card2);
+      this.points = this.points + 10;
     } else {
       setTimeout(() => {
         card1.isFlipped = false;
         card2.isFlipped = false;
+        if(this.points >0){
+          this.points = this.points - 5;
+        }
+        
       }, 1000); 
     }
     this.flippedCards = [];
