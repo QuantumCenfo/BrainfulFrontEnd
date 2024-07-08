@@ -54,6 +54,12 @@ html, body {
   height: 95%; 
 }
 body { margin: 0; font-family: Dosis, "Dosis", sans-serif; }
+.btn-primary {
+  color: #fff;
+  background-color: #ff9f1c;
+  border-radius: 10px;
+  border-color: #ff9f1c;
+}
 
 .error-snackbar .mdc-snackbar__surface{
   background-color: rgb(197, 49, 49) !important;
@@ -176,4 +182,97 @@ ol, ul {
     right: 0px;
   }
   
+}
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #d54f16;
+  background-clip: padding-box;
+  border: 2px solid #77290b;
+  border-radius: 20px;
+  outline: 0;
+  color: #ffffff;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #ff9f1c;
+  border-radius: 10px;
+  border-color: #ff9f1c;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #ec951a;
+  border-radius: 10px;
+  border-color: #ec951a;
+}
+
+.btn-primary:focus{
+  color: #fff;
+  background-color: #ec951a;
+  border-radius: 10px;
+  border-color: #ec951a;
+  
+}
+.btn-secondary {
+  color: #fff;
+  background-color: #16C2D5;
+  border-radius: 10px;
+  border-color: #16C2D5;
+}
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #13acbd;
+  border-radius: 10px;
+  border-color: #13acbd;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+      max-width: 500px;
+      margin: 14.75rem auto;
+      
+  }
+}
+
+.modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem;
+  border-bottom: 0px solid #dee2e6;
+  border-top-left-radius: calc(.3rem - 1px);
+  border-top-right-radius: calc(.3rem - 1px);
+  font-size: 30px;
+}
+.modal-body {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem;
+  font-size: 18px;
+}
+.mat-h4, .mat-body-1, .mat-typography .mat-h4, .mat-typography .mat-body-1, .mat-typography h4 {
+  font-family: Dosis, "Dosis", sans-serif;
+  letter-spacing: .03125em;
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+*{
+  font-family: Dosis, "Dosis", sans-serif;
+}
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: .75rem;
+  border-top: 0px solid #dee2e6;
+  border-bottom-right-radius: calc(.3rem - 1px);
+  border-bottom-left-radius: calc(.3rem - 1px);
 }

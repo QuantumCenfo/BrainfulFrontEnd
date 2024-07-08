@@ -6,6 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { TimerComponent } from '../timer/timer.component';
 import { IGameResults } from '../../interfaces';
 import Swal from 'sweetalert2';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TryAgainModalComponent } from '../try-again-modal/try-again-modal.component';
+import { Router } from '@angular/router';
 
 
 
@@ -26,10 +29,7 @@ export class MemoryBoardComponent implements OnChanges {
   started = false;
   points: number = 0;
   
-  constructor(private imageService: MemoryService) {
-
-  }
-
+  constructor(private imageService: MemoryService, private modalService: NgbModal,private router: Router) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if ('difficulty' in changes && this.difficulty > 0) {
@@ -48,6 +48,18 @@ export class MemoryBoardComponent implements OnChanges {
    
     this.startOver();
     this.timerComponent.stopTimer();
+    const modalRef = this.modalService.open(TryAgainModalComponent);
+    modalRef.componentInstance.message = 'Fin del juego! Presione el boton de jugar para iniciar de nuevo.';
+
+    modalRef.result.then((result) => {
+      if (result === 'tryAgain') {
+        this.startGame();
+      } else if (result === 'goToAnotherView') {
+        this.router.navigate(['app/reminders']);
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   // Inicia el juego y la secuencia del temporizador
@@ -58,7 +70,7 @@ export class MemoryBoardComponent implements OnChanges {
       this.initializeGame();
       let timer =0;
       if(this.difficulty == 6){
-        timer=30;
+        timer=1;
       }else if(this.difficulty == 9){
         timer=60;
       }else if(this.difficulty == 12){
