@@ -8,7 +8,8 @@ import { IGameResults } from '../../interfaces';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TryAgainModalComponent } from '../try-again-modal/try-again-modal.component';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 
@@ -28,9 +29,28 @@ export class MemoryBoardComponent implements OnChanges {
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   started = false;
   points: number = 0;
+  private routerSubscription: Subscription;
   
-  constructor(private imageService: MemoryService, private modalService: NgbModal,private router: Router) {}
-
+  constructor(private imageService: MemoryService, private modalService: NgbModal,private router: Router) {
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        // Reset timer when navigating to another page
+        this.resetTimer();
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+  resetTimer(): void {
+    // Trigger reset in TimerComponent
+    const timerComponent = document.getElementById("timerComponent") as any; // Adjust with correct access method
+    if (timerComponent && timerComponent.resetTimer) {
+      timerComponent.resetTimer();
+    }
+  }
   ngOnChanges(changes: SimpleChanges) {
     if ('difficulty' in changes && this.difficulty > 0) {
       this.gameStarted = false;
@@ -42,6 +62,8 @@ export class MemoryBoardComponent implements OnChanges {
   startOver(): void {;
     this.started = false;
     this.points = 0;
+    this.flippedCards = [];
+    this.matchedCards = [];
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
   }
   endGame(): void {
@@ -70,7 +92,7 @@ export class MemoryBoardComponent implements OnChanges {
       this.initializeGame();
       let timer =0;
       if(this.difficulty == 6){
-        timer=1;
+        timer=30;
       }else if(this.difficulty == 9){
         timer=60;
       }else if(this.difficulty == 12){
@@ -124,6 +146,9 @@ export class MemoryBoardComponent implements OnChanges {
   }
   addFlippedCard(card: MemoryCardComponent) {
     this.flippedCards.push(card);
+    if (this.flippedCards.length === 2) {
+      this.checkForMatch();
+    }
   }
   checkForMatch() {
     const [card1, card2] = this.flippedCards;
@@ -132,6 +157,7 @@ export class MemoryBoardComponent implements OnChanges {
       card2.isMatched = true;
       this.matchedCards.push(card1, card2);
       this.points = this.points + 10;
+      this.checkForWin();
     } else {
       setTimeout(() => {
         card1.isFlipped = false;
@@ -145,4 +171,50 @@ export class MemoryBoardComponent implements OnChanges {
     this.flippedCards = [];
   }
   
+  checkForWin() {
+    if (this.matchedCards.length === this.cards.length) {
+      this.showVictoryAlert();
+    }
+  }
+
+  showVictoryAlert() {
+    this.timerComponent.stopTimer();
+    Swal.fire({
+      iconColor: 'white',
+      color: 'white',
+      background:'#36cf4f',
+      confirmButtonColor: '#ff9f1c',
+      cancelButtonColor: '#16c2d5',
+      title: '¡Felicidades!',
+      text: 'Has ganado el juego',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonText: 'Jugar de nuevo',
+      cancelButtonText: 'Volver al Menú de juegos',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.startWithNewDifficulty();
+      } else {
+        this.router.navigate(['app/reminders']);
+      }
+    });
+  }
+  startWithNewDifficulty(): void {
+    this.started = false;
+    this.points = 0;
+    document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+  
+   
+    this.flippedCards = [];
+    this.matchedCards = [];
+  
+    if (this.difficulty == 6) { 
+      this.difficulty = 9; 
+    } else if (this.difficulty == 9) { 
+      this.difficulty = 12;
+    }
+    this.startGame();
+  }
+  
+
 }
