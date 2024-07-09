@@ -1,9 +1,11 @@
 import {
   Component,
+  EventEmitter,
   HostListener,
   inject,
   Input,
   OnInit,
+  Output,
   ViewChild,
 } from "@angular/core";
 import { IGameResults } from "../../interfaces";
@@ -27,8 +29,6 @@ export class SequenceGameComponent implements OnInit {
   //Nos permite acceder a propiedades y metodos del componente hijo
   @ViewChild(TimerComponent)
   timerComponent!: TimerComponent;
-
-  //public countdown = inject(TimerComponent);
 
   // Colores de los botones utilizados en el juego
   buttonColours: string[] = ["purple", "blue", "green", "orange"];
