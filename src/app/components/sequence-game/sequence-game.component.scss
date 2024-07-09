@@ -1,3 +1,7 @@
+* {
+  font-family: Dosis, "Dosis", sans-serif;
+}
+
 body {
   text-align: center;
   background-color: #b4dce6;
@@ -7,15 +11,17 @@ body {
   font-size: 3rem;
   margin: 5%;
   color: #fef2bf;
-  font-family: Dosis, "Dosis", sans-serif;
 }
 
 #points,
-#time,
 #btn-play {
-  color: #fef2bf;
-  font-size: 3rem;
-  font-family: Dosis, "Dosis", sans-serif;
+  color: #ffffff;
+  padding: 15px;
+}
+.points-counter {
+  color: #ffffff;
+
+  font-size: 2rem;
 }
 
 .points-container {
@@ -23,6 +29,9 @@ body {
   border: solid 3px #16c2d5;
   padding: 10px;
   border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
 }
 
 .color-container {
@@ -95,4 +104,18 @@ body {
   100% {
     opacity: 1;
   }
+}
+
+select {
+  option {
+    color: #ffffff;
+  }
+  margin-top: 35px;
+  background-color: #ff9f1c;
+  border: solid 3px #16c2d5;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  font-family: Dosis, "Dosis", sans-serif;
+  color: #ffffff;
 }

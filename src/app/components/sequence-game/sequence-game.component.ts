@@ -10,11 +10,17 @@ import {
 } from "@angular/core";
 import { IGameResults } from "../../interfaces";
 import { TimerComponent } from "../timer/timer.component";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import Swal from "sweetalert2";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TryAgainModalComponent } from "../try-again-modal/try-again-modal.component";
+import { Route, Router } from "@angular/router";
 
 @Component({
   selector: "app-sequence-game",
   standalone: true,
-  imports: [TimerComponent],
+  imports: [TimerComponent, CommonModule, FormsModule],
   templateUrl: "./sequence-game.component.html",
   styleUrl: "./sequence-game.component.scss",
 })
@@ -23,7 +29,7 @@ export class SequenceGameComponent implements OnInit {
 
   //private gameDificulty: string = "Facil";
 
-  @Input() gameDificultyInput: string = "";
+  @Input() difficulty: string = "";
 
   //Decorador usado para acceder a un componente hijo
   //Nos permite acceder a propiedades y metodos del componente hijo
@@ -45,6 +51,11 @@ export class SequenceGameComponent implements OnInit {
 
   // Contador de puntos del jugador
   points: number = 0;
+  finalResult: number = 0;
+
+  public modalService: NgbModal = inject(NgbModal);
+
+  public router: Router = inject(Router);
 
   ngOnInit(): void {
     throw new Error("Method not implemented.");
@@ -63,26 +74,32 @@ export class SequenceGameComponent implements OnInit {
   onButtonPlayClick(): void {
     if (!this.started) {
       this.startGame();
-      console.log(this.gameDificultyInput);
+      console.log(this.difficulty);
     }
   }
 
   // Método manejador de eventos de clic en los botones de colores
   onButtonClick(colour: string): void {
     this.userClickPattern.push(colour);
-    console.log(colour);
+
     //Play sound
+    this.playSound(colour);
+    console.log("Sound color: ", this.playSound(colour));
     this.animatePress(colour);
     this.checkAnswer(this.userClickPattern.length - 1);
   }
 
   // Verifica si la respuesta del usuario es correcta
   checkAnswer(currentLevel: number): void {
+    if (this.started === false) {
+      return;
+    }
     if (
       this.gamePattern[currentLevel] === this.userClickPattern[currentLevel]
     ) {
       if (this.userClickPattern.length === this.gamePattern.length) {
         this.points = this.points + 10;
+
         document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
         setTimeout(() => {
           this.nextSequence();
@@ -90,9 +107,8 @@ export class SequenceGameComponent implements OnInit {
       }
     } else {
       //play sound
-      this.endGame(
-        "Fin del juego! Presione el boton de jugar para iniciar de nuevo."
-      );
+      this.playSound("wrong");
+      this.endGame();
     }
   }
 
@@ -101,7 +117,7 @@ export class SequenceGameComponent implements OnInit {
     this.userClickPattern = [];
     this.level++;
     console.log("Level: ", this.level);
-    console.log("Dificultad: ", this.gameDificultyInput);
+    console.log("Dificultad: ", this.difficulty);
 
     document.getElementById("level-title")!.innerText = "Nivel " + this.level;
 
@@ -109,21 +125,21 @@ export class SequenceGameComponent implements OnInit {
     const randomChosenColour = this.buttonColours[randomNumber];
     this.gamePattern.push(randomChosenColour);
 
-    if (this.gameDificultyInput === "Facil") {
+    if (this.difficulty === "easy") {
       document.getElementById(randomChosenColour)!.classList.add("flash-facil");
       setTimeout(() => {
         document
           .getElementById(randomChosenColour)!
           .classList.remove("flash-facil");
       }, 800);
-    } else if (this.gameDificultyInput === "Medio") {
+    } else if (this.difficulty === "medium") {
       document.getElementById(randomChosenColour)!.classList.add("flash-medio");
       setTimeout(() => {
         document
           .getElementById(randomChosenColour)!
           .classList.remove("flash-medio");
       }, 600);
-    } else if (this.gameDificultyInput === "Dificil") {
+    } else if (this.difficulty === "hard") {
       document
         .getElementById(randomChosenColour)!
         .classList.add("flash-dificil");
@@ -147,7 +163,7 @@ export class SequenceGameComponent implements OnInit {
 
   // Reproduce el sonido correspondiente al nombre del archivo
   playSound(name: string): void {
-    const audio = new Audio(`assets/sounds/${name}.mp3`);
+    const audio = new Audio("assets/sounds/" + name + ".mp3");
     audio.play;
   }
 
@@ -156,30 +172,71 @@ export class SequenceGameComponent implements OnInit {
     this.level = 0;
     this.gamePattern = [];
     this.started = false;
-    this.points = 0;
-    this.gameDificultyInput = "";
+
+    this.difficulty = "";
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
   }
 
   // Finaliza el juego y muestra un mensaje
-  endGame(message: string): void {
+  endGame(): void {
     document.body.classList.add("game-over");
-    document.getElementById("level-title")!.innerText = message;
+
     setTimeout(() => {
       document.body.classList.remove("game-over");
     }, 200);
     this.startOver();
     this.timerComponent.stopTimer();
+    const modalRef = this.modalService.open(TryAgainModalComponent);
+    modalRef.componentInstance.message =
+      "Fin del juego! Presione el boton de jugar para iniciar de nuevo.";
+
+    modalRef.result.then(
+      (result) => {
+        if (result === "tryAgain") {
+          if (this.points < 10) {
+            this.difficulty = "easy";
+            this.points = 0;
+            this.startGame();
+          } else if (this.points >= 20) {
+            this.difficulty = "medium";
+            this.points = 0;
+            this.startGame();
+          } else if (this.points >= 60) {
+            this.difficulty = "hard";
+            this.points = 0;
+            this.startGame();
+          }
+        } else if (result === "goToAnotherView") {
+          this.router.navigate(["app/reminders"]);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   // Inicia el juego y la secuencia del temporizador
   startGame(): void {
-    this.started = true;
-    this.points = 0;
-    this.level = 0;
-    this.nextSequence();
+    if (this.difficulty === "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Seleccione una dificultad antes de comenzar el juego.",
+        icon: "warning",
+        iconColor: "white",
+        color: "white",
+        background: "#16c2d5",
+        confirmButtonColor: "#ff9f1c",
+      });
+    } else {
+      this.started = true;
+      this.points = 0;
+      this.level = 0;
+      this.nextSequence();
+      document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
 
-    this.timerComponent.timer(30);
+      this.timerComponent.timer(30);
+    }
   }
 
   public gameResults: IGameResults[] = [

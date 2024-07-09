@@ -2,15 +2,16 @@
   <div class="points-container">
     <label id="points" for="points">Puntos: {{ points }}</label>
   </div>
-  <div id="time" class="points-container">
-    <app-timer
-      (timerEnded)="
-        endGame(
-          'Fin del juego! Presione el boton de jugar para iniciar de nuevo'
-        )
-      "
-    >
-    </app-timer>
+
+  <app-timer (timerEnded)="endGame()"> </app-timer>
+
+  <div>
+    <select id="difficulty" [(ngModel)]="difficulty">
+      <option class="option-diff" value="">Seeccione una dificultad</option>
+      <option value="easy">Facil</option>
+      <option value="medium">Medio</option>
+      <option value="hard">Dificl</option>
+    </select>
   </div>
 
   <div class="points-container" (click)="onButtonPlayClick()">

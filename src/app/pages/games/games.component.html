@@ -1,27 +1,5 @@
 <div>
-  <ul>
-    <li>
-      <button type="button" (click)="onButtonDificultyClick('Facil')">
-        Facil
-      </button>
-    </li>
-    <li>
-      <button type="button" (click)="onButtonDificultyClick('Medio')">
-        Medio
-      </button>
-    </li>
-    <li>
-      <button type="button" (click)="onButtonDificultyClick('Dificil')">
-        Dificl
-      </button>
-    </li>
-  </ul>
-</div>
-
-<div>
-  <app-sequence-game
-    [gameDificultyInput]="selectedDifficulty"
-  ></app-sequence-game>
+  <app-sequence-game></app-sequence-game>
 
   <div class="games-container">
     <app-memory-board></app-memory-board>
