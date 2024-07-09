@@ -17,7 +17,9 @@ export class MemoryCardComponent {
   isHidden: boolean = false;
 
   constructor(private memoryBoard: MemoryBoardComponent) {}
-
+  /**
+   * Voltea la tarjeta si no está volteada ni con pareja , y verifica si hay coincidencia cuando hay dos tarjetas volteadas.
+   */
   flipCard() {
     if (!this.isFlipped && !this.isMatched && this.memoryBoard.flippedCards.length < 2) {
       this.isFlipped = true;
@@ -27,11 +29,16 @@ export class MemoryCardComponent {
       }
     }
   }
-
+  /**
+   * Reinicia el estado de la tarjeta a no volteada y sin pareja.
+   */
   reset() {
     this.isFlipped = false;
     this.isMatched = false;
   }
+  /**
+   * Oculta la tarjeta.
+   */
   hideCard() {
     this.isHidden = true;
   }

@@ -17,7 +17,7 @@ export class MemoryService extends BaseService<IGameResults> {
   constructor(protected override http: HttpClient) {
     super(); 
   }
-
+//Get de imagenes random del api
   getRandomImages(count: number): Observable<string[]> {
     const url = `${this.urlApi}/photos/random?client_id=${this.accessKey}&count=${count}`;
     return this.http.get<any[]>(url).pipe(
@@ -25,7 +25,7 @@ export class MemoryService extends BaseService<IGameResults> {
     );
   }
 
-
+//Salva los resultados del juego
   public save(item: IGameResults) {
     this.add(item).subscribe({
       next: (response: any) => {

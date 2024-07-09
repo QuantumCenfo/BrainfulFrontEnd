@@ -14,7 +14,10 @@ export class TimerComponent {
   public elapsedTime: number = 0;
   private intervalId: any;
   private initialTimeMillis: number = 0;
-
+  /**
+ * Inicia un crono con un tiempo inicial dado y emite un evento cuando el tiempo llega a cero.
+ * @param timeLeft Tiempo inicial en segundos para el crono.
+ */
   timer(timeLeft: number): void {
     this.timeLeft = timeLeft;
     this.elapsedTime = 0;
@@ -32,11 +35,11 @@ export class TimerComponent {
       }
     }, 1000);
   }
-
+//detiene crono
   stopTimer(): void {
     clearInterval(this.intervalId);
   }
-
+//reseta los valores del crono
   resetTimer(): void {
     this.stopTimer();
     this.timeLeft = this.initialTime;

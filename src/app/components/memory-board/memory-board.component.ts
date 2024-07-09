@@ -22,25 +22,27 @@ import { Subscription } from 'rxjs';
   styleUrl: './memory-board.component.scss'
 })
 export class MemoryBoardComponent implements OnChanges {
-  elapsedTime: number = 0;
-  private user_id: number | undefined ;
   @Input() difficulty: number = 0; 
-  cards: string[] = []; 
   @Input() gameStarted: boolean = false;
+  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
+  elapsedTime: number = 0;
+  cards: string[] = []; 
   flippedCards: MemoryCardComponent[] = [];
   matchedCards: MemoryCardComponent[] = [];
-  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
   started = false;
   points: number = 0;
-  private routerSubscription: Subscription;
   gameId: number | undefined;
   public memoryService = inject(MemoryService);
-  
-  constructor(private imageService: MemoryService, private modalService: NgbModal,private router: Router,private route: ActivatedRoute) {
+  private routerSubscription: Subscription;
+  constructor(
+    private imageService: MemoryService, 
+    private modalService: NgbModal,
+    private router: Router,
+    private route: ActivatedRoute) {
     
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
-        // Reset timer when navigating to another page
+      
         this.resetTimer();
       }
     });
@@ -58,8 +60,11 @@ export class MemoryBoardComponent implements OnChanges {
       this.routerSubscription.unsubscribe();
     }
   }
+    /**
+   * Reinicia el temporizador
+   */
   resetTimer(): void {
-    const timerComponent = document.getElementById("timerComponent") as any; // Adjust with correct access method
+    const timerComponent = document.getElementById("timerComponent") as any; 
     if (timerComponent && timerComponent.resetTimer) {
       timerComponent.resetTimer();
     }
@@ -71,7 +76,9 @@ export class MemoryBoardComponent implements OnChanges {
     }
   }
   
- 
+ /**
+   * Reinicia el juego, restableciendo todos los estados y puntos.
+   */
   startOver(): void {;
     this.started = false;
     this.points = 0;
@@ -79,6 +86,9 @@ export class MemoryBoardComponent implements OnChanges {
     this.matchedCards = [];
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
   }
+    /**
+   * Finaliza el juego, mostrando un modal y permitiendo reiniciar o ir al menú.
+   */
   endGame(): void {
    
     this.startOver();
@@ -96,8 +106,9 @@ export class MemoryBoardComponent implements OnChanges {
       console.log(error);
     });
   }
-
-  // Inicia el juego y la secuencia del temporizador
+  /**
+   * Inicia el juego con la dificultad seleccionada y el temporizador correspondiente.
+   */
   startGame(): void {
     if (this.difficulty > 0) {
       this.gameStarted = true;
@@ -111,7 +122,7 @@ export class MemoryBoardComponent implements OnChanges {
       }else if(this.difficulty == 12){
         timer=90;
       }
-      this.timerComponent.timer(timer); // Inicia el temporizador con 30 segundos
+      this.timerComponent.timer(timer); 
     } else {
         Swal.fire({
           title: 'Oops...',
@@ -124,7 +135,9 @@ export class MemoryBoardComponent implements OnChanges {
       })
     }
   }
-   
+    /**
+   * Inicializa el juego cargando imágenes aleatorias según la dificultad.
+   */
   initializeGame() {
     this.imageService.getRandomImages(this.difficulty).subscribe(images => {
       this.cards = this.generateCardPairs(images);
@@ -149,7 +162,11 @@ export class MemoryBoardComponent implements OnChanges {
 
     return this.shuffleArray(cards);
   }
-
+ /**
+   * Mezcla un arreglo usando el algoritmo de Fisher-Yates.
+   * @param array Arreglo que se desea mezclar.
+   * @returns El arreglo mezclado.
+   */
   shuffleArray(array: any[]): any[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -157,12 +174,19 @@ export class MemoryBoardComponent implements OnChanges {
     }
     return array;
   }
+   /**
+   * Agrega una carta volteada al arreglo de cartas volteadas y verifica si hay coincidencia si hay dos cartas volteadas.
+   * @param card La carta que se ha volteado.
+   */
   addFlippedCard(card: MemoryCardComponent) {
     this.flippedCards.push(card);
     if (this.flippedCards.length === 2) {
       this.checkForMatch();
     }
   }
+   /**
+   * Verifica si las dos cartas volteadas coinciden y maneja la lógica de juego.
+   */
   checkForMatch() {
     const [card1, card2] = this.flippedCards;
     if (card1.cardImageUrl === card2.cardImageUrl) {
@@ -184,6 +208,9 @@ export class MemoryBoardComponent implements OnChanges {
     this.flippedCards = [];
   }
   
+  /**
+   * Verifica si el jugador ha ganado el juego, comparando las cartas emparejadas con el total de cartas.
+   */
   checkForWin() {
     if (this.matchedCards.length === this.cards.length) {
      
@@ -192,7 +219,10 @@ export class MemoryBoardComponent implements OnChanges {
       this.showVictoryAlert();
     }
   }
- 
+   /**
+   * Recolecta datos del juego y los guarda utilizando el servicio de memoria.
+   * @param elapsedTime Tiempo transcurrido en segundos.
+   */
   gatherDataAndSave(elapsedTime: number): void {
     const user_id: number | undefined = this.getUserIdFromLocalStorage();
     let stringDifficulty;
@@ -203,7 +233,10 @@ export class MemoryBoardComponent implements OnChanges {
     } else if (this.difficulty == 12) {
       stringDifficulty = "Dificil";
     }
-    
+     /**
+   * Obtiene el ID de usuario almacenado en el almacenamiento local.
+   * @returns El ID de usuario si está disponible, de lo contrario, `undefined`.
+   */
     const gameResults: IGameResults = {
       gameDate: new Date().toISOString(),
       levelDifficulty: stringDifficulty,
@@ -216,7 +249,7 @@ export class MemoryBoardComponent implements OnChanges {
     this.memoryService.save(gameResults);
   }
   
-  private getUserIdFromLocalStorage(): number | undefined {
+  getUserIdFromLocalStorage(): number | undefined {
     const authUser = localStorage.getItem('auth_user');
     if (authUser) {
       const user = JSON.parse(authUser);
@@ -224,7 +257,9 @@ export class MemoryBoardComponent implements OnChanges {
     }
     return undefined;
   }
-  
+    /**
+   * Muestra un alerta de victoria y permite al jugador jugar de nuevo o volver al menú de juegos.
+   */
   showVictoryAlert() {
     this.timerComponent.stopTimer();
     Swal.fire({
@@ -247,15 +282,15 @@ export class MemoryBoardComponent implements OnChanges {
       }
     });
   }
+   /**
+   * Reinicia el juego con una dificultad diferente, restableciendo todos los estados y puntos.
+   */
   startWithNewDifficulty(): void {
     this.started = false;
     this.points = 0;
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
-  
-   
     this.flippedCards = [];
     this.matchedCards = [];
-  
     if (this.difficulty == 6) { 
       this.difficulty = 9; 
     } else if (this.difficulty == 9) { 

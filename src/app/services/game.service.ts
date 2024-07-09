@@ -13,6 +13,7 @@ export class GameService extends BaseService<IGame> {
   get games$() {
     return this.gamesListSignal;
   }
+  //Get all games 
   getAllSignal() {
     this.findAll().subscribe({
       next: (response: any) => {

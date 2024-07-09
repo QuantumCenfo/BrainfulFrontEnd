@@ -43,7 +43,7 @@ export class GamesComponent {
       console.error('Game ID is undefined');
     }
   }
-  
+  //Rutas de juegos Aqui pongan las que falten
 
   getGameRoute(gameId: number): string | null {
     switch (gameId) {
@@ -55,7 +55,7 @@ export class GamesComponent {
         return null;
     }
   }
-
+//Trackea el id de todos los juegos
   trackById(index: number, item: IGame): number {
     return item.gameId!;
   }
