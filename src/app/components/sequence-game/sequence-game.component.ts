@@ -165,8 +165,8 @@ export class SequenceGameComponent implements OnInit {
       levelDifficult: "Facil",
       score: 20,
       time: 5,
-      gameId: 1,
-      userId: 1,
+      // gameId: 1,
+      // userId: 1,
     },
   ];
 }

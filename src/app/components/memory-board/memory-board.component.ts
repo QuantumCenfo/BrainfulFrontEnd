@@ -8,7 +8,7 @@ import { IGameResults } from '../../interfaces';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TryAgainModalComponent } from '../try-again-modal/try-again-modal.component';
-import { NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 
@@ -30,13 +30,21 @@ export class MemoryBoardComponent implements OnChanges {
   started = false;
   points: number = 0;
   private routerSubscription: Subscription;
+  gameId: number | undefined;
   
-  constructor(private imageService: MemoryService, private modalService: NgbModal,private router: Router) {
+  constructor(private imageService: MemoryService, private modalService: NgbModal,private router: Router,private route: ActivatedRoute) {
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         // Reset timer when navigating to another page
         this.resetTimer();
       }
+    });
+  }
+  ngOnInit() {
+    this.route.paramMap.subscribe(paramMap => {
+      const gameId = paramMap.get('gameId');
+      this.gameId = gameId ? +gameId : undefined;
+      console.log('Game ID:', this.gameId);
     });
   }
   ngOnDestroy(): void {

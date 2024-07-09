@@ -44,7 +44,6 @@ export interface IGame {
   gameId?: number;
   name?: string;
   description?: string;
-  levelDifficult?: string;
   typeExercise?: string;
 }
 
@@ -54,8 +53,8 @@ export interface IGameResults {
   levelDifficult?: string;
   score?: number;
   time?: number;
-  gameId?: number;
-  userId?: number;
+  gameId?: IGame ;
+  userId?: IUser;
 }
 export interface ICard {
   imageId: string;

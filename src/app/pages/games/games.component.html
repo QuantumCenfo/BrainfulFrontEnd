@@ -1,3 +1,31 @@
-<div class="games-container">
-  <app-memory-board ></app-memory-board>
+
+<div class="table-container table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th class="text-center" scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of gameList; trackBy: trackById">
+        <th scope="row">{{ item.gameId }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
+        <td>
+          <div class="d-flex justify-content-evenly align-items-center">
+            <button type="button" class="btn btn-secondary" (click)="navigateToGame(item)">
+              <p>Jugar</p>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+
+
+
+
