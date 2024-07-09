@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   selector: "app-timer",
@@ -8,28 +8,30 @@ import { Component, EventEmitter, Output } from "@angular/core";
   styleUrl: "./timer.component.scss",
 })
 export class TimerComponent {
-  //Decorador usado para enviar eventos de un component hijo a un compoennte padre
-
-  public intervalId: any;
-  public timeLeft: number = 0;
-
+  @Input() initialTime: number = 0;
   @Output() timerEnded = new EventEmitter<void>();
-  // Inicia el temporizador del juego
-  timer(timeLeft: number): void {
-    this.intervalId = setInterval(() => {
-      timeLeft--;
-      document.getElementById("time")!.innerHTML = "" + timeLeft;
-      console.log(timeLeft);
-      if (timeLeft === 0) {
-        this.stopTimer();
 
+  public timeLeft: number = 0;
+  private intervalId: any;
+
+  timer(timeLeft: number): void {
+    this.timeLeft = timeLeft;
+    this.intervalId = setInterval(() => {
+      this.timeLeft--;
+      console.log(this.timeLeft);
+      if (this.timeLeft === 0) {
+        this.stopTimer();
         this.timerEnded.emit();
       }
     }, 1000);
   }
 
-  // Detiene el temporizador del juego
   stopTimer(): void {
     clearInterval(this.intervalId);
+  }
+
+  resetTimer(): void {
+    this.stopTimer();
+    this.timeLeft = this.initialTime;
   }
 }
