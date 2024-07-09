@@ -161,8 +161,8 @@ export class SequenceGameComponent implements OnInit {
   public gameResults: IGameResults[] = [
     {
       resultId: 1,
-      gameDate: "2024-07-02 12:17:02.070000",
-      levelDifficult: "Facil",
+      // gameDate: "2024-07-02 12:17:02.070000",
+      // levelDifficult: "Facil",
       score: 20,
       time: 5,
       // gameId: 1,

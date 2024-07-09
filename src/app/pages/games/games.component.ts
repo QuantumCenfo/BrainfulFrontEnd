@@ -28,7 +28,7 @@ export class GamesComponent {
   constructor() {
     this.service.getAllSignal();
     effect(() => {
-      this.gameList = this.service.users$();
+      this.gameList = this.service.games$();
     });
   }
 

@@ -1,10 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+
+import { Component, inject, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MemoryCardComponent } from '../memory-card/memory-card.component';
 import { CommonModule } from '@angular/common';
 import { MemoryService } from '../../services/memory.service';
 import { FormsModule } from '@angular/forms';
 import { TimerComponent } from '../timer/timer.component';
-import { IGameResults } from '../../interfaces';
+import { IGame, IGameResults, IUser } from '../../interfaces';
 import Swal from 'sweetalert2';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TryAgainModalComponent } from '../try-again-modal/try-again-modal.component';
@@ -21,6 +22,8 @@ import { Subscription } from 'rxjs';
   styleUrl: './memory-board.component.scss'
 })
 export class MemoryBoardComponent implements OnChanges {
+  elapsedTime: number = 0;
+  private user_id: number | undefined ;
   @Input() difficulty: number = 0; 
   cards: string[] = []; 
   @Input() gameStarted: boolean = false;
@@ -31,8 +34,10 @@ export class MemoryBoardComponent implements OnChanges {
   points: number = 0;
   private routerSubscription: Subscription;
   gameId: number | undefined;
+  public memoryService = inject(MemoryService);
   
   constructor(private imageService: MemoryService, private modalService: NgbModal,private router: Router,private route: ActivatedRoute) {
+    
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         // Reset timer when navigating to another page
@@ -45,6 +50,7 @@ export class MemoryBoardComponent implements OnChanges {
       const gameId = paramMap.get('gameId');
       this.gameId = gameId ? +gameId : undefined;
       console.log('Game ID:', this.gameId);
+    
     });
   }
   ngOnDestroy(): void {
@@ -53,7 +59,6 @@ export class MemoryBoardComponent implements OnChanges {
     }
   }
   resetTimer(): void {
-    // Trigger reset in TimerComponent
     const timerComponent = document.getElementById("timerComponent") as any; // Adjust with correct access method
     if (timerComponent && timerComponent.resetTimer) {
       timerComponent.resetTimer();
@@ -85,7 +90,7 @@ export class MemoryBoardComponent implements OnChanges {
       if (result === 'tryAgain') {
         this.startGame();
       } else if (result === 'goToAnotherView') {
-        this.router.navigate(['app/reminders']);
+        this.router.navigate(['app/games']);
       }
     }).catch((error) => {
       console.log(error);
@@ -181,10 +186,45 @@ export class MemoryBoardComponent implements OnChanges {
   
   checkForWin() {
     if (this.matchedCards.length === this.cards.length) {
+     
+      const elapsedTime = this.timerComponent.elapsedTime; // Captura el tiempo transcurrido desde el timerComponent
+      this.gatherDataAndSave(elapsedTime);
       this.showVictoryAlert();
     }
   }
-
+ 
+  gatherDataAndSave(elapsedTime: number): void {
+    const user_id: number | undefined = this.getUserIdFromLocalStorage();
+    let stringDifficulty;
+    if (this.difficulty == 6) {
+      stringDifficulty = "Facil";
+    } else if (this.difficulty == 9) {
+      stringDifficulty = "Media";
+    } else if (this.difficulty == 12) {
+      stringDifficulty = "Dificil";
+    }
+    
+    const gameResults: IGameResults = {
+      gameDate: new Date().toISOString(),
+      levelDifficulty: stringDifficulty,
+      score: this.points,
+      time: elapsedTime,
+      gameId: { gameId: this.gameId } as IGame,
+      userId: {id:user_id} as IUser,
+    };
+    console.log("Game Results:", gameResults);
+    this.memoryService.save(gameResults);
+  }
+  
+  private getUserIdFromLocalStorage(): number | undefined {
+    const authUser = localStorage.getItem('auth_user');
+    if (authUser) {
+      const user = JSON.parse(authUser);
+      return user.id ? Number(user.id) : undefined;
+    }
+    return undefined;
+  }
+  
   showVictoryAlert() {
     this.timerComponent.stopTimer();
     Swal.fire({
@@ -203,7 +243,7 @@ export class MemoryBoardComponent implements OnChanges {
       if (result.isConfirmed) {
         this.startWithNewDifficulty();
       } else {
-        this.router.navigate(['app/reminders']);
+        this.router.navigate(['app/games']);
       }
     });
   }
@@ -226,3 +266,5 @@ export class MemoryBoardComponent implements OnChanges {
   
 
 }
+
+

@@ -50,7 +50,7 @@ export interface IGame {
 export interface IGameResults {
   resultId?: number;
   gameDate?: string;
-  levelDifficult?: string;
+  levelDifficulty?: string;
   score?: number;
   time?: number;
   gameId?: IGame ;
