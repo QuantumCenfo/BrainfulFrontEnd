@@ -99,6 +99,7 @@ export class SequenceGameComponent implements OnInit {
     ) {
       if (this.userClickPattern.length === this.gamePattern.length) {
         this.points = this.points + 10;
+        this.finalResult = this.points;
 
         document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
         setTimeout(() => {
@@ -172,8 +173,8 @@ export class SequenceGameComponent implements OnInit {
     this.level = 0;
     this.gamePattern = [];
     this.started = false;
+    this.points = 0;
 
-    this.difficulty = "";
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
   }
 
@@ -184,7 +185,7 @@ export class SequenceGameComponent implements OnInit {
     setTimeout(() => {
       document.body.classList.remove("game-over");
     }, 200);
-    this.startOver();
+
     this.timerComponent.stopTimer();
     const modalRef = this.modalService.open(TryAgainModalComponent);
     modalRef.componentInstance.message =
@@ -193,17 +194,20 @@ export class SequenceGameComponent implements OnInit {
     modalRef.result.then(
       (result) => {
         if (result === "tryAgain") {
-          if (this.points < 10) {
+          if (this.finalResult <= 30) {
             this.difficulty = "easy";
-            this.points = 0;
+
+            this.startOver();
             this.startGame();
-          } else if (this.points >= 20) {
+          } else if (this.finalResult > 30 || this.finalResult < 60) {
             this.difficulty = "medium";
-            this.points = 0;
+
+            this.startOver();
             this.startGame();
-          } else if (this.points >= 60) {
+          } else if (this.finalResult > 60) {
             this.difficulty = "hard";
-            this.points = 0;
+
+            this.startOver();
             this.startGame();
           }
         } else if (result === "goToAnotherView") {
