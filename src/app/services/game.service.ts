@@ -1,10 +1,29 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
-import { IGame } from "../interfaces";
+import { IGame, IGameResults } from "../interfaces";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: "root",
 })
 export class GameService extends BaseService<IGame> {
   protected override source: string = "games";
+  private gamesListSignal = signal<IGame[]>([]);
+
+  get games$() {
+    return this.gamesListSignal;
+  }
+  //Get all games 
+  getAllSignal() {
+    this.findAll().subscribe({
+      next: (response: any) => {
+        response.reverse();
+        this.gamesListSignal.set(response);
+      },
+      error: (error: any) => {
+        console.error('Error fetching games', error);
+      }
+    });
+  }
+  
 }

@@ -21,6 +21,8 @@ import { FormComponent } from "./pages/form/form.component";
 import { ContentsUsersComponent } from "./pages/contents-users/contents-users.component";
 import { ChallengesUsersComponent } from "./pages/challenges-users/challenges-users.component";
 import { ProfileComponent } from "./pages/profile/profile.component";
+import { MemoryBoardComponent } from "./components/memory-board/memory-board.component";
+import { SequenceGameComponent } from "./components/sequence-game/sequence-game.component";
 
 export const routes: Routes = [
   {
@@ -185,6 +187,23 @@ export const routes: Routes = [
           name: "profile",
           showInSidebar: false,
         },
+      },
+      {
+        path: "memory-game",
+        component: MemoryBoardComponent,
+        data: {
+          authorities: [IRole.superAdmin, IRole.user],
+          
+        },
+      },
+      {
+        path: "sequence-game",
+        component: SequenceGameComponent,
+        data: {
+          authorities: [IRole.superAdmin, IRole.user],
+          
+        },
+       
       },
     ],
   },
