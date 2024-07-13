@@ -51,6 +51,8 @@ export class GamesComponent {
         return 'app/sequence-game';
       case 2:
         return 'app/memory-game';
+      case 3:
+        return 'app/reaction-game';
       default:
         return null;
     }

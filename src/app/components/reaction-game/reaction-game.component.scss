@@ -1,0 +1,23 @@
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  button {
+    width: 100px;
+    height: 100px;
+  }
+  
+  button.default {
+    background-color: grey;
+  }
+  
+  button.green {
+    background-color: green;
+  }
+  
+  button.red {
+    background-color: red;
+  }  
