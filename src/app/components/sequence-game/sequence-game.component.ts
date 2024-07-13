@@ -237,7 +237,6 @@ export class SequenceGameComponent implements OnInit {
       this.points = 0;
       this.level = 0;
       this.nextSequence();
-      document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
 
       this.timerComponent.timer(30);
     }

@@ -24,6 +24,15 @@ body {
   font-size: 2rem;
 }
 
+.card {
+  background-color: #16c2d5;
+  border: solid 3px black;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+}
+
 .points-container {
   background-color: #ff9f1c;
   border: solid 3px #16c2d5;
@@ -32,6 +41,25 @@ body {
   margin: 20px;
   color: #ffffff;
   font-size: 2rem;
+}
+.brain-logo img {
+  width: 80%;
+  height: 80%;
+}
+.brain-logo {
+  position: absolute;
+  top: 63%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  height: 20%;
+  background-color: #16c2d5;
+  border-radius: 5%;
+  border: solid 3px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
 
 .color-container {
