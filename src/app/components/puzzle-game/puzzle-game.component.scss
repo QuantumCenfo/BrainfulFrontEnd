@@ -1,0 +1,130 @@
+.memory-board {
+    font-family: Dosis, "Dosis", sans-serif;
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next row */
+    justify-content: flex-start; /* Align items at the start of the container */
+    gap: 10px; 
+    max-width:800px; 
+    margin: auto; 
+  }
+  *{
+    font-family: Dosis, "Dosis", sans-serif;
+  }
+  body {
+    
+    text-align: center;
+    background-color: #b4dce6;
+  }
+  
+  #level-title {
+    font-family: Dosis, "Dosis", sans-serif;
+    font-size: 3rem;
+    margin: 5%;
+  
+  }
+ 
+  #points,
+  #btn-play {
+    padding: 15px;
+    font-size: 2rem;
+  }
+  select{
+    option{
+     
+      color: #ffffff;
+      
+      
+   
+    }
+    margin-top: 35px;
+    background-color: #ff9f1c;
+    border: solid 3px #16c2d5;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    font-family: Dosis, "Dosis", sans-serif;
+    color: #ffffff;
+  }
+  .d-flex{
+flex-wrap: wrap;
+  }
+  
+  .points-container {
+    background-color: #ff9f1c;
+    border: solid 3px #16c2d5;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px;
+    color: #ffffff;
+    font-size: 2rem;
+  }
+  
+  .timer-container {
+    background-color: #ff9f1c;
+    border: solid 3px #16c2d5;
+
+    border-radius: 20px;
+    margin: 20px;
+    color: #ffffff;
+    font-size: 2rem;
+  }
+
+  
+  .color-container {
+    // border: black 10px solid;
+    height: 700px;
+    width: 900px;
+  }
+  
+  .btn {
+    display: inline-block;
+    height: 330px;
+    width: 50%;
+  }
+  
+  .game-over {
+    background-color: red;
+    opacity: 0.8;
+  }
+
+  .games-container {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    gap: 80px;
+  }
+  
+  .puzzle-container-wrapper {
+    display: flex;
+    justify-content: space-around; /* Distribuye los elementos uno a la derecha y otro a la izquierda */
+    margin-top: 20px; /* Ajusta el margen superior según sea necesario */
+  }
+
+  .puzzle-container1 {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 4px;
+  }
+
+  .puzzle-container2 {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 2px;
+  }
+
+  .puzzle-container3 {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    grid-template-rows: repeat(5, 100px);
+    gap: 1px;
+  }
+  
+  .puzzle-piece {
+    width: 100px;
+    height: 100px;
+    background-size: 400px 400px; /* Ajustar según el tamaño de tu imagen */
+    cursor: pointer;
+  }
+  
+  

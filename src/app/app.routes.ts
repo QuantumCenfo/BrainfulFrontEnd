@@ -23,6 +23,7 @@ import { ChallengesUsersComponent } from "./pages/challenges-users/challenges-us
 import { ProfileComponent } from "./pages/profile/profile.component";
 import { MemoryBoardComponent } from "./components/memory-board/memory-board.component";
 import { SequenceGameComponent } from "./components/sequence-game/sequence-game.component";
+import { PuzzleComponent } from "./components/puzzle-game/puzzle-game.component";
 
 export const routes: Routes = [
   {
@@ -199,6 +200,15 @@ export const routes: Routes = [
       {
         path: "sequence-game",
         component: SequenceGameComponent,
+        data: {
+          authorities: [IRole.superAdmin, IRole.user],
+          
+        },
+       
+      },
+      {
+        path: "puzzle-game",
+        component: PuzzleComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
           

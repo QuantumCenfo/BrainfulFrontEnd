@@ -1,0 +1,111 @@
+<div class="memory-board-container">
+  <div class="d-flex">
+    <div class="points-container">
+      <label id="points" for="points">Puntos: {{ points }}</label>
+    </div>
+    <app-timer (timerEnded)="endGame()"></app-timer>
+    <div>
+      <select id="difficulty" [(ngModel)]="difficulty">
+        <option class="option-diff" value="0">Seleccione una dificultad</option>
+        <option value="9">Fácil</option>
+        <option value="16">Media</option>
+        <option value="25">Difícil</option>
+      </select>
+    </div>
+    <div class="points-container" (click)="startGame()">
+      <label id="btn-play" for="play">Jugar</label>
+    </div>
+  </div>
+
+  <div class="games-container">
+    <!-- Primer par de contenedores de rompecabezas -->
+    <ng-container *ngIf="difficulty == 9" class="puzzle-container-wrapper">
+      <div class="puzzle-container1">
+        <!-- Primer contenedor de rompecabezas -->
+        <div *ngFor="let piece of pieces"
+            [ngStyle]="{
+              'background-image': 'url(' + piece.src + ')',
+              'background-position': -piece.x + 'px ' + -piece.y + 'px',
+              'width': piece.width + 'px',
+              'height': piece.height + 'px'
+            }"
+            class="puzzle-piece"
+            (click)="onPieceClick(piece)">
+          </div>
+      </div>
+
+      <div class="puzzle-container1">
+        <!-- Segundo contenedor de rompecabezas -->
+        <div *ngFor="let piece of piecesBlack"
+            [ngStyle]="{
+              'background-image': 'url(' + piece.src + ')',
+              'background-position': -piece.x + 'px ' + -piece.y + 'px',
+              'width': piece.width + 'px',
+              'height': piece.height + 'px'
+            }"
+            class="puzzle-piece"
+            (click)="onPieceClick(piece)">
+          </div>
+      </div>
+    </ng-container>
+    
+
+    <!-- Segundo par de contenedores de rompecabezas -->
+    <ng-container *ngIf="difficulty == 16">
+      <div class="puzzle-container2">
+        <div *ngFor="let piece of pieces"
+            [ngStyle]="{
+              'background-image': 'url(' + piece.src + ')',
+              'background-position': -piece.x + 'px ' + -piece.y + 'px',
+              'width': piece.width + 'px',
+              'height': piece.height + 'px'
+            }"
+            class="puzzle-piece"
+            (click)="onPieceClick(piece)">
+          </div>
+      </div>
+
+      <div class="puzzle-container2">
+        <div *ngFor="let piece of piecesBlack"
+            [ngStyle]="{
+              'background-image': 'url(' + piece.src + ')',
+              'background-position': -piece.x + 'px ' + -piece.y + 'px',
+              'width': piece.width + 'px',
+              'height': piece.height + 'px'
+            }"
+            class="puzzle-piece"
+            (click)="onPieceClick(piece)">
+          </div>
+      </div>
+    </ng-container>
+
+    <!-- Tercer par de contenedores de rompecabezas -->
+    <ng-container *ngIf="difficulty == 25">
+      <div class="puzzle-container3">
+        <div *ngFor="let piece of pieces"
+            [ngStyle]="{
+              'background-image': 'url(' + piece.src + ')',
+              'background-position': -piece.x + 'px ' + -piece.y + 'px',
+              'width': piece.width + 'px',
+              'height': piece.height + 'px'
+            }"
+            class="puzzle-piece"
+            (click)="onPieceClick(piece)">
+          </div>
+      </div>
+
+      <div class="puzzle-container3">
+        <div *ngFor="let piece of piecesBlack"
+            [ngStyle]="{
+              'background-image': 'url(' + piece.src + ')',
+              'background-position': -piece.x + 'px ' + -piece.y + 'px',
+              'width': piece.width + 'px',
+              'height': piece.height + 'px'
+            }"
+            class="puzzle-piece"
+            (click)="onPieceClick(piece)">
+          </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
