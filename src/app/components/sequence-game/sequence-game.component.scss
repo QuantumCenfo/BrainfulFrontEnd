@@ -10,6 +10,20 @@ body {
   color: #fef2bf;
 }
 
+#points,
+#time,
+#btn-play {
+  color: #fef2bf;
+  font-size: 3rem;
+}
+
+.points-container {
+  background-color: #ff9f1c;
+  border: solid 3px #16c2d5;
+  padding: 10px;
+  border-radius: 20px;
+}
+
 .color-container {
   // border: black 10px solid;
   height: 700px;

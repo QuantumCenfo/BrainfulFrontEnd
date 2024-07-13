@@ -44,16 +44,19 @@ export interface IGame {
   gameId?: number;
   name?: string;
   description?: string;
-  levelDifficult?: string;
   typeExercise?: string;
 }
 
 export interface IGameResults {
   resultId?: number;
   gameDate?: string;
-  levelDifficult?: string;
+  levelDifficulty?: string;
   score?: number;
   time?: number;
-  gameId?: number;
-  userId?: number;
+  gameId?: IGame ;
+  userId?: IUser;
+}
+export interface ICard {
+  imageId: string;
+  state: "default" | "flipped" | "matched";
 }
