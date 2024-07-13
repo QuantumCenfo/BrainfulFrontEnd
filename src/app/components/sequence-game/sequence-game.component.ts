@@ -8,14 +8,15 @@ import {
   Output,
   ViewChild,
 } from "@angular/core";
-import { IGameResults } from "../../interfaces";
+import { IGame, IGameResults, IUser } from "../../interfaces";
 import { TimerComponent } from "../timer/timer.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import Swal from "sweetalert2";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TryAgainModalComponent } from "../try-again-modal/try-again-modal.component";
-import { Route, Router } from "@angular/router";
+import { ActivatedRoute, Route, Router } from "@angular/router";
+import { SimonSaysService } from "../../services/simon-says.service";
 
 @Component({
   selector: "app-sequence-game",
@@ -52,23 +53,22 @@ export class SequenceGameComponent implements OnInit {
   // Contador de puntos del jugador
   points: number = 0;
   finalResult: number = 0;
+  gameId: number | undefined = 0;
 
   public modalService: NgbModal = inject(NgbModal);
+  private simonSaysService = inject(SimonSaysService);
 
   public router: Router = inject(Router);
+  public route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap) => {
+      const gameId = paramMap.get("gameId");
+      this.gameId = gameId ? +gameId : undefined;
+      console.log("Game ID:", this.gameId);
+    });
     throw new Error("Method not implemented.");
   }
-
-  //Host listener decorator replaces jquery $(document).keypress
-  // @HostListener("window:keydown", ["$event"])
-  // handleKeyboardEvent(event: KeyboardEvent): void {
-  //   if (!this.started) {
-  //     this.nextSequence();
-  //     this.started = true;
-  //   }
-  // }
 
   // Método manejador de eventos de clic en el botón de inicio del juego
   onButtonPlayClick(): void {
@@ -188,6 +188,8 @@ export class SequenceGameComponent implements OnInit {
 
     this.timerComponent.stopTimer();
     const modalRef = this.modalService.open(TryAgainModalComponent);
+    this.gatherResults();
+
     modalRef.componentInstance.message =
       "Fin del juego! Presione el boton de jugar para iniciar de nuevo.";
 
@@ -242,15 +244,36 @@ export class SequenceGameComponent implements OnInit {
     }
   }
 
-  public gameResults: IGameResults[] = [
-    {
-      resultId: 1,
-      // gameDate: "2024-07-02 12:17:02.070000",
-      // levelDifficult: "Facil",
-      score: 20,
-      time: 5,
-      // gameId: 1,
-      // userId: 1,
-    },
-  ];
+  gatherResults(): void {
+    const user_id: number | undefined = this.getUserIdFromLocalStorage();
+
+    let stringDifficutly: string = "";
+    if (this.difficulty === "easy") {
+      stringDifficutly = "Facil";
+    } else if (this.difficulty === "medium") {
+      stringDifficutly = "Medio";
+    } else if (this.difficulty === "hard") {
+      stringDifficutly = "Dificil";
+    }
+
+    const gameResults: IGameResults = {
+      gameDate: new Date().toISOString(),
+      levelDifficulty: stringDifficutly,
+      score: this.finalResult,
+      gameId: { gameId: this.gameId } as IGame,
+      userId: { id: user_id } as IUser,
+    };
+    console.log("Game Results: ", gameResults);
+    this.simonSaysService.save(gameResults);
+  }
+
+  getUserIdFromLocalStorage(): number | undefined {
+    const authUser = localStorage.getItem("auth_user");
+    console.log("AuthUser: ", authUser);
+    if (authUser) {
+      const user = JSON.parse(authUser);
+      return user.id ? Number(user.id) : undefined;
+    }
+    return undefined;
+  }
 }
