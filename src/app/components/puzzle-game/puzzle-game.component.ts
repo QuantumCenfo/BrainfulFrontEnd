@@ -90,7 +90,7 @@ export class PuzzleComponent implements OnChanges {
   }
   
   startGame(): void {
-    this.startOver()
+    this.startOver();
     if (this.difficulty > 0) {
       this.gameStarted = true;
       this.points = 0;
@@ -157,7 +157,7 @@ export class PuzzleComponent implements OnChanges {
           this.pieceClick = "Incorrecto";
           document.getElementById("pieceClick")!.innerHTML = this.pieceClick;
           this.pieceActual = null;
-          this.points = this.points - 5;
+          this.points = Math.max(this.points - 5, 0);
           document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
           this.cdr.detectChanges();
         }
@@ -232,10 +232,10 @@ export class PuzzleComponent implements OnChanges {
     this.started = false;
     this.points = 0;
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
-    if (this.difficulty == 6) { 
-      this.difficulty = 9; 
-    } else if (this.difficulty == 9) { 
-      this.difficulty = 12;
+    if (this.difficulty == 9) { 
+      this.difficulty = 16; 
+    } else if (this.difficulty == 16) { 
+      this.difficulty = 25;
     }
     this.startGame();
   }
