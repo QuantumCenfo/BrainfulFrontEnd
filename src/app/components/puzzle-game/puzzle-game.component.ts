@@ -31,6 +31,7 @@ export class PuzzleComponent implements OnChanges {
   cards: string = ""; 
   started = false;
   points: number = 0;
+  pieceClick: string = "";
   gameId: number | undefined;
   public puzzleService = inject(PuzzleService);
   private routerSubscription: Subscription;
@@ -135,22 +136,26 @@ export class PuzzleComponent implements OnChanges {
       {
         if(piece.originalOrder == this.pieceActual.originalOrder)
         {
-            const indexPieceActual = this.pieces.findIndex(p => p.originalOrder === this.pieceActual!.originalOrder);
-            if (indexPieceActual !== -1) {
-              this.pieces[indexPieceActual] = piece;
-            }
-            const indexPieceBlack = this.piecesBlack.findIndex(p => p.originalOrder === piece.originalOrder);
-            if (indexPieceBlack !== -1) {
-              this.piecesBlack[indexPieceBlack] = this.pieceActual;
-            }
-            this.pieceActual = null;
-            this.points = this.points + 10;
-            document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
-            this.cdr.detectChanges();
-            this.checkForWin()
+          this.pieceClick = "Correcto";
+          document.getElementById("pieceClick")!.innerHTML = this.pieceClick;
+          const indexPieceActual = this.pieces.findIndex(p => p.originalOrder === this.pieceActual!.originalOrder);
+          if (indexPieceActual !== -1) {
+            this.pieces[indexPieceActual] = piece;
+          }
+          const indexPieceBlack = this.piecesBlack.findIndex(p => p.originalOrder === piece.originalOrder);
+          if (indexPieceBlack !== -1) {
+            this.piecesBlack[indexPieceBlack] = this.pieceActual;
+          }
+          this.pieceActual = null;
+          this.points = this.points + 10;
+          document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+          this.cdr.detectChanges();
+          this.checkForWin()
         }
         else
         {
+          this.pieceClick = "Incorrecto";
+          document.getElementById("pieceClick")!.innerHTML = this.pieceClick;
           this.pieceActual = null;
           this.points = this.points - 5;
           document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
