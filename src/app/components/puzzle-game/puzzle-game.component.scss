@@ -132,3 +132,43 @@ flex-wrap: wrap;
   }
   
   
+  @media (max-width: 1200px) {
+    .puzzle-container1 {
+      grid-template-columns: repeat(2, 140px);
+      grid-template-rows: repeat(2, 140px);
+    }
+  
+    .puzzle-container2 {
+      grid-template-columns: repeat(3, 110px);
+      grid-template-rows: repeat(3, 110px);
+    }
+  
+    .puzzle-container3 {
+      grid-template-columns: repeat(4, 90px);
+      grid-template-rows: repeat(4, 90px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .puzzle-container1 {
+      grid-template-columns: repeat(1, 140px);
+      grid-template-rows: repeat(1, 140px);
+    }
+  
+    .puzzle-container2 {
+      grid-template-columns: repeat(2, 110px);
+      grid-template-rows: repeat(2, 110px);
+    }
+  
+    .puzzle-container3 {
+      grid-template-columns: repeat(3, 90px);
+      grid-template-rows: repeat(3, 90px);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .puzzle-container3 {
+      grid-template-columns: repeat(2, 90px);
+      grid-template-rows: repeat(2, 90px);
+    }
+  }
