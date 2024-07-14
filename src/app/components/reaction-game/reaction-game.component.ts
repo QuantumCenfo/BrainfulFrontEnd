@@ -110,7 +110,9 @@ export class ReactionGameComponent implements OnInit {
       button.color = 'default';
       this.checkForSequence();
     } else if (button.color === 'red') {
-      this.score -= 5;
+      if (this.score > 0) {
+        this.score -= 5;
+      }
       button.color = 'default';
     }
   }

@@ -1,34 +1,32 @@
 <div>
-    <h1>Reaction Game</h1>
-    <div>
-      <label>
-        <input type="radio" name="difficulty" (click)="setDifficulty('easy')" [checked]="difficulty === 'easy'">
-        Fácil
-      </label>
-      <label>
-        <input type="radio" name="difficulty" (click)="setDifficulty('medium')" [checked]="difficulty === 'medium'">
-        Medio
-      </label>
-      <label>
-        <input type="radio" name="difficulty" (click)="setDifficulty('hard')" [checked]="difficulty === 'hard'">
-        Difícil
-      </label>
+  <div class="d-flex">
+
+    <div class="container">
+      <label class="label-difficulty"><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('easy')">Fácil</label>
+      <label class="label-difficulty"><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('medium')">Medio</label>
+      <label class="label-difficulty" ><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('hard')">Difícil</label>
     </div>
-  
-    <button (click)="startGame()" [disabled]="isGameRunning">Comenzar Juego</button>
-    <button (click)="resetGame()" [disabled]="!isGameRunning">Reiniciar Juego</button>
-  
-    <div>
-      <h2>Tiempo restante: {{ timeLeft }} segundos</h2>
-      <h2>Puntuación: {{ score }}</h2>
+    
+    <div class="container">
+      <label class="label-info">Segundos restantes: {{ timeLeft }}</label>
     </div>
-  
-    <div class="button-container">
-      <button *ngFor="let button of buttons" 
-              [ngClass]="button.color" 
-              (click)="onButtonClick(button)">
-        {{ button.color }}
-      </button>
+
+    <div class="container-score">
+      <label class="label-info">Puntuación: {{ score }}</label>
     </div>
+
+    <button class="btn" (click)="startGame()" [disabled]="isGameRunning">Comenzar Juego</button>
+
+    <button class="btn" (click)="resetGame()" [disabled]="!isGameRunning">Reiniciar Juego</button>
+
   </div>
-  
+
+  <div class="reaction-game">
+    <button  
+    *ngFor="let button of buttons" 
+    [ngClass]="button.color" 
+    (click)="onButtonClick(button)" 
+    class="button-game"></button>
+  </div>
+
+</div>
