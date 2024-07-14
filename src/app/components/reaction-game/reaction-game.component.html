@@ -2,9 +2,9 @@
   <div class="d-flex">
 
     <div class="container">
-      <label class="label-difficulty"><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('easy')">Fácil</label>
-      <label class="label-difficulty"><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('medium')">Medio</label>
-      <label class="label-difficulty" ><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('hard')">Difícil</label>
+      <label class="label-difficulty"><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('easy')" [checked]="difficulty === 'easy'">Fácil</label>
+      <label class="label-difficulty"><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('medium')" [checked]="difficulty === 'medium'">Medio</label>
+      <label class="label-difficulty" ><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('hard')" [checked]="difficulty === 'hard'">Difícil</label>
     </div>
     
     <div class="container">
