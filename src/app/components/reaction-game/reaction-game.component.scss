@@ -1,0 +1,131 @@
+.d-flex {
+  flex-wrap: wrap;
+}
+
+.container {
+  background-color: #ff9f1c;
+  border: solid 3px #16c2d5;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+  max-width: 325px;
+  max-height: 50px;
+}
+
+.container-score {
+  background-color: #ff9f1c;
+  border: solid 3px #16c2d5;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+  max-width: 225px;
+  max-height: 50px;
+}
+
+.container-time {
+  background-color: #ff9f1c;
+  border: solid 3px #16c2d5;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+  max-width: 225px;
+  max-height: 50px;
+}
+
+select{
+  option{
+   
+    color: #ffffff;
+    
+    
+ 
+  }
+  margin-top: 20px;
+  background-color: #ff9f1c;
+  border: solid 3px #16c2d5;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  font-family: Dosis, "Dosis", sans-serif;
+  color: #ffffff;
+  max-height: 50px;
+}
+
+.label-difficulty {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 3%;
+}
+
+.input-difficulty {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.label-info{
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-time{
+  display: inline-block;
+  justify-content: center;
+  padding: 10px;
+}
+
+.btn {
+  background-color: #ff9f1c;
+  border: solid 3px #16c2d5;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.reaction-game {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  flex-direction: row;
+  margin: auto; 
+  margin-top: 50px;
+}
+
+.button-game {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 18px;
+  border: 3px solid black;
+  background-image: url('../../../assets/icons/LogoCerebro.png');
+  background-size: cover;
+  background-position: center;
+}
+
+*{
+  font-family: Dosis, "Dosis", sans-serif;
+}
+
+button.default {
+  background-color: #16C2D5;
+}
+
+button.green {
+  background-color: green;
+}
+
+button.red {
+  background-color: red;
+}

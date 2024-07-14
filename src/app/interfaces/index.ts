@@ -61,6 +61,9 @@ export interface ICard {
   state: "default" | "flipped" | "matched";
 }
 
+export interface IButton {
+  color: 'default' | 'green' | 'red';
+}
 export interface PuzzlePiece {
   src: string;   // URL de la imagen
   originalOrder: number;  // Orden original de la pieza

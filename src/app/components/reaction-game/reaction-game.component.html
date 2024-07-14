@@ -1,0 +1,33 @@
+<div>
+  <div class="d-flex">
+
+    <select id="difficultySelect" [(ngModel)]="difficulty" (change)="onDifficultyChange($event)">
+      <option value="easy">Fácil</option>
+      <option value="medium">Medio</option>
+      <option value="hard">Difícil</option>
+    </select>
+    
+    
+    <div class="container-time">
+      <label class="label-time">{{ timeLeft }}</label>
+    </div>
+
+    <div class="container-score">
+      <label class="label-info">Puntos: {{ score }}</label>
+    </div>
+
+    <button class="btn" (click)="startGame()" [disabled]="isGameRunning">Comenzar Juego</button>
+
+    <!--<button class="btn" (click)="resetGame()" [disabled]="!isGameRunning">Reiniciar Juego</button> -->
+
+  </div>
+
+  <div class="reaction-game">
+    <button  
+    *ngFor="let button of buttons" 
+    [ngClass]="button.color" 
+    (click)="onButtonClick(button)" 
+    class="button-game"></button>
+  </div>
+
+</div>
