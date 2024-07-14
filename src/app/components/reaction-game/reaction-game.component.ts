@@ -1,25 +1,23 @@
 import { ReactionGameService } from './../../services/reaction-game.service';
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { IGame, IGameResults, IUser } from '../../interfaces';
+import { IGame, IGameResults, IUser, IButton } from '../../interfaces';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { Router, ActivatedRoute, NavigationStart, } from '@angular/router';
-
-interface Button {
-  color: 'default' | 'green' | 'red';
-} //meter en index.ts antes de enviar a QA
+import { TryAgainModalComponent } from '../try-again-modal/try-again-modal.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reaction-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './reaction-game.component.html',
   styleUrls: ['./reaction-game.component.scss']
 })
 export class ReactionGameComponent implements OnInit {
-  buttons: Button[] = [];
+  buttons: IButton[] = [];
   difficulty: 'easy' | 'medium' | 'hard' = 'easy';
   timeLeft: number = 0;
   score: number = 0;
@@ -46,6 +44,11 @@ export class ReactionGameComponent implements OnInit {
     });
   }
 
+  onDifficultyChange(event: Event): void {
+    const selectedDifficulty = (event.target as HTMLSelectElement).value;
+    this.setDifficulty(selectedDifficulty as 'easy' | 'medium' | 'hard');
+  }
+
   setDifficulty(level: 'easy' | 'medium' | 'hard'): void {
     this.difficulty = level;
     this.resetGame();
@@ -62,8 +65,11 @@ export class ReactionGameComponent implements OnInit {
         this.buttons = Array.from({ length: 9 }, () => ({ color: 'default' }));
         this.targetSequenceCount = 20;
         break;
+      default:
+        break;
     }
   }
+  
 
   startGame(): void {
     this.isGameRunning = true;
@@ -125,12 +131,23 @@ export class ReactionGameComponent implements OnInit {
   
     if (!this.hasWon) {
       this.gatherDataAndSave();
-      this.showLossAlert();
+      const modalRef = this.modalService.open(TryAgainModalComponent);
+      modalRef.componentInstance.message = 'Fin del juego! Presione el boton de jugar para iniciar de nuevo.';
+
+      modalRef.result.then((result) => {
+      if (result === 'tryAgain') {
+        this.startGame();
+      } else if (result === 'goToAnotherView') {
+        this.router.navigate(['app/games']);
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
     }
   }
   
 
-  onButtonClick(button: Button): void {
+  onButtonClick(button: IButton): void {
     if (!this.isGameRunning) return;
     if (button.color === 'green') {
       this.score += 10;
@@ -210,7 +227,18 @@ export class ReactionGameComponent implements OnInit {
       cancelButtonText: 'Volver al Menú de juegos',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.resetGame();
+        // Increase difficulty if applicable
+        switch (this.difficulty) {
+          case 'easy':
+            this.setDifficulty('medium');
+            break;
+          case 'medium':
+            this.setDifficulty('hard');
+            break;
+          default:
+            break;
+        }
+        this.startGame();
       } else {
         this.router.navigate(['app/games']);
       }

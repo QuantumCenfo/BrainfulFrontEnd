@@ -1,23 +1,24 @@
 <div>
   <div class="d-flex">
 
-    <div class="container">
-      <label class="label-difficulty"><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('easy')" [checked]="difficulty === 'easy'">Fácil</label>
-      <label class="label-difficulty"><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('medium')" [checked]="difficulty === 'medium'">Medio</label>
-      <label class="label-difficulty" ><input type="radio" name="difficulty" class="input-difficulty" (click)="setDifficulty('hard')" [checked]="difficulty === 'hard'">Difícil</label>
-    </div>
+    <select id="difficultySelect" [(ngModel)]="difficulty" (change)="onDifficultyChange($event)">
+      <option value="easy">Fácil</option>
+      <option value="medium">Medio</option>
+      <option value="hard">Difícil</option>
+    </select>
     
-    <div class="container">
-      <label class="label-info">Segundos restantes: {{ timeLeft }}</label>
+    
+    <div class="container-time">
+      <label class="label-time">{{ timeLeft }}</label>
     </div>
 
     <div class="container-score">
-      <label class="label-info">Puntuación: {{ score }}</label>
+      <label class="label-info">Puntos: {{ score }}</label>
     </div>
 
     <button class="btn" (click)="startGame()" [disabled]="isGameRunning">Comenzar Juego</button>
 
-    <button class="btn" (click)="resetGame()" [disabled]="!isGameRunning">Reiniciar Juego</button>
+    <!--<button class="btn" (click)="resetGame()" [disabled]="!isGameRunning">Reiniciar Juego</button> -->
 
   </div>
 

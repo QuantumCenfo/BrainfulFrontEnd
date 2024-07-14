@@ -60,3 +60,7 @@ export interface ICard {
   imageId: string;
   state: "default" | "flipped" | "matched";
 }
+
+export interface IButton {
+  color: 'default' | 'green' | 'red';
+}
