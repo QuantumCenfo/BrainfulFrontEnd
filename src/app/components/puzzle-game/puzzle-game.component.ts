@@ -9,6 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TryAgainModalComponent } from '../try-again-modal/try-again-modal.component';
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-puzzle-game',
@@ -37,7 +38,8 @@ export class PuzzleComponent implements OnChanges {
     private imageService: PuzzleService, 
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef) {
     
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -142,9 +144,19 @@ export class PuzzleComponent implements OnChanges {
               this.piecesBlack[indexPieceBlack] = this.pieceActual;
             }
             this.pieceActual = null;
+            this.points = this.points + 10;
+            document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+            this.cdr.detectChanges();
             this.checkForWin()
-            console.log(this.piecesBlack);
         }
+        else
+        {
+          this.pieceActual = null;
+          this.points = this.points - 5;
+          document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+          this.cdr.detectChanges();
+        }
+
       }
     } else {
       // Si no es la pieza "Negro", asignar como pieceActual
