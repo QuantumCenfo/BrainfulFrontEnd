@@ -120,8 +120,6 @@ export class SequenceGameComponent implements OnInit {
     console.log("Level: ", this.level);
     console.log("Dificultad: ", this.difficulty);
 
-    document.getElementById("level-title")!.innerText = "Nivel " + this.level;
-
     const randomNumber = Math.floor(Math.random() * 4);
     const randomChosenColour = this.buttonColours[randomNumber];
     this.gamePattern.push(randomChosenColour);
@@ -201,12 +199,12 @@ export class SequenceGameComponent implements OnInit {
 
             this.startOver();
             this.startGame();
-          } else if (this.finalResult > 30 || this.finalResult < 60) {
+          } else if (this.finalResult > 30 && this.finalResult < 60) {
             this.difficulty = "medium";
 
             this.startOver();
             this.startGame();
-          } else if (this.finalResult > 60) {
+          } else if (this.finalResult >= 60) {
             this.difficulty = "hard";
 
             this.startOver();
