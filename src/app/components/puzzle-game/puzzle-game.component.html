@@ -3,6 +3,9 @@
     <div class="points-container">
       <label id="points" for="points">Puntos: {{ points }}</label>
     </div>
+    <div class="points-container">
+    <label id="pieceClick" for="pieceClick"></label>
+  </div>
     <app-timer (timerEnded)="endGame()"></app-timer>
     <div>
       <select id="difficulty" [(ngModel)]="difficulty">
