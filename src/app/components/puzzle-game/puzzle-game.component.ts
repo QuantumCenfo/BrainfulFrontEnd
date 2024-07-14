@@ -82,6 +82,8 @@ export class PuzzleComponent implements OnChanges {
     this.gridSize = 0;
     this.started = false;
     this.points = 0;
+    this.pieceClick = "";
+    document.getElementById("pieceClick")!.innerHTML = this.pieceClick;
   }
 
   startOver(): void {
