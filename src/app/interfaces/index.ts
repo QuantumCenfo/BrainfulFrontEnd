@@ -60,3 +60,13 @@ export interface ICard {
   imageId: string;
   state: "default" | "flipped" | "matched";
 }
+
+export interface PuzzlePiece {
+  src: string;   // URL de la imagen
+  originalOrder: number;  // Orden original de la pieza
+  x: number;     // Posición X
+  y: number;     // Posición Y
+  width: number; // Ancho
+  height: number; // Alto
+  position: { x: number, y: number }; // Posición en la cuadrícula
+}

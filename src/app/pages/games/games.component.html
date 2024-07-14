@@ -1,31 +1,19 @@
-
-<div class="table-container table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th class="text-center" scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of gameList; trackBy: trackById">
-        <th scope="row">{{ item.gameId }}</th>
-        <td>{{ item.name }}</td>
-        <td>{{ item.description }}</td>
-        <td>
-          <div class="d-flex justify-content-evenly align-items-center">
-            <button type="button" class="btn btn-secondary" (click)="navigateToGame(item)">
-              <p>Jugar</p>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="carousel-container">
+  <button class="nav-button left" (click)="previousGame()">&lt;</button>
+  <div class="game-wrapper">
+    <div class="game-card previous" *ngIf="previousGameIndex !== null">
+      <h3>{{ gameList[previousGameIndex!]?.name }}</h3>
+      <p>{{ gameList[previousGameIndex!]?.description }}</p>
+    </div>
+    <div class="game-card current">
+      <h3>{{ displayedGames[0]?.name }}</h3>
+      <p>{{ displayedGames[0]?.description }}</p>
+      <button (click)="navigateToGame(displayedGames[0])">Jugar</button>
+    </div>
+    <div class="game-card next" *ngIf="nextGameIndex !== null">
+      <h3>{{ gameList[nextGameIndex!]?.name }}</h3>
+      <p>{{ gameList[nextGameIndex!]?.description }}</p>
+    </div>
+  </div>
+  <button class="nav-button right" (click)="nextGame()">&gt;</button>
 </div>
-
-
-
-
