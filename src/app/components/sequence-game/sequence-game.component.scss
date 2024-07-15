@@ -51,7 +51,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 15vw;
-  height: 15vw;
+  height: 10vw;
   max-width: 300px;
   max-height: 300px;
   background-color: #16c2d5;
@@ -67,7 +67,7 @@ body {
   // border: black 10px solid;
   position: relative;
   min-height: 50vh;
-  min-width: 50vw;
+  width: 50vw;
 }
 
 .btn {
