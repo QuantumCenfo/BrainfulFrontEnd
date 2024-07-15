@@ -1,32 +1,48 @@
-<div class="d-flex">
-  <div class="points-container">
-    <label id="points" for="points">Puntos: {{ points }}</label>
-  </div>
+<div class="games-container">
+  <div class="simon-container">
+    <div class="d-flex justify-content-center flex-wrap">
+      <div class="points-container">
+        <label id="points" for="points">Puntos: {{ points }}</label>
+      </div>
 
-  <app-timer (timerEnded)="endGame()"> </app-timer>
+      <app-timer (timerEnded)="endGame()"></app-timer>
 
-  <div>
-    <select id="difficulty" [(ngModel)]="difficulty">
-      <option class="option-diff" value="">Seleccione una dificultad</option>
-      <option value="easy">Facil</option>
-      <option value="medium">Medio</option>
-      <option value="hard">Dificil</option>
-    </select>
-  </div>
-
-  <div class="points-container" (click)="onButtonPlayClick()">
-    <label id="btn-play" for="play">Jugar</label>
-  </div>
-</div>
-
-<div class="d-flex justify-content-center">
-  <div class="color-container container">
-    <div (click)="onButtonClick('orange')" id="orange" class="btn orange"></div>
-    <div (click)="onButtonClick('blue')" id="blue" class="btn blue"></div>
-    <div (click)="onButtonClick('green')" id="green" class="btn green"></div>
-    <div (click)="onButtonClick('purple')" id="purple" class="btn purple"></div>
-    <div class="brain-logo">
-      <img src="../../../assets/icons/LogoCerebro.png" alt="Logo Image" />
+      <div>
+        <select id="difficulty" [(ngModel)]="difficulty">
+          <option class="option-diff" value="0">
+            Selecciones una dificultad
+          </option>
+          <option value="easy">Facil</option>
+          <option value="medium">Medio</option>
+          <option value="hard">Dificil</option>
+        </select>
+      </div>
+      <div class="points-container" (click)="startGame()">
+        <label id="btn-play" for="play">Jugar</label>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="color-container container">
+        <div
+          (click)="onButtonClick('orange')"
+          id="orange"
+          class="btn orange"
+        ></div>
+        <div (click)="onButtonClick('blue')" id="blue" class="btn blue"></div>
+        <div
+          (click)="onButtonClick('green')"
+          id="green"
+          class="btn green"
+        ></div>
+        <div
+          (click)="onButtonClick('purple')"
+          id="purple"
+          class="btn purple"
+        ></div>
+        <div class="brain-logo">
+          <img src="../../../assets/icons/LogoCerebro.png" alt="Logo Image" />
+        </div>
+      </div>
     </div>
   </div>
 </div>
