@@ -34,20 +34,54 @@ export class GamesComponent {
   }
 
   @ViewChild(MemoryBoardComponent) memoryBoard!: MemoryBoardComponent;
-  difficulty: number = 0;
   public gameList: IGame[] = [];
   private service = inject(GameService);
   private snackBar = inject(MatSnackBar);
   private router = inject(Router);
 
+  displayedGames: IGame[] = [];
+  currentIndex: number = 0;
+
   constructor() {
     this.service.getAllSignal();
     effect(() => {
       this.gameList = this.service.games$();
+      this.updateDisplayedGames();
     });
   }
 
-  navigateToGame(game: IGame) {
+  updateDisplayedGames(): void {
+    this.displayedGames = [this.gameList[this.currentIndex]];
+  }
+
+  nextGame(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.gameList.length;
+    this.updateDisplayedGames();
+  }
+
+  previousGame(): void {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.gameList.length) % this.gameList.length;
+    this.updateDisplayedGames();
+  }
+
+  get previousGameIndex(): number | null {
+    if (this.gameList.length > 1) {
+      return (
+        (this.currentIndex - 1 + this.gameList.length) % this.gameList.length
+      );
+    }
+    return null;
+  }
+
+  get nextGameIndex(): number | null {
+    if (this.gameList.length > 1) {
+      return (this.currentIndex + 1) % this.gameList.length;
+    }
+    return null;
+  }
+
+  navigateToGame(game: IGame): void {
     const gameId = game.gameId;
     if (gameId !== undefined) {
       const gameRoute = this.getGameRoute(gameId);
@@ -58,7 +92,6 @@ export class GamesComponent {
       console.error("Game ID is undefined");
     }
   }
-  //Rutas de juegos Aqui pongan las que falten
 
   getGameRoute(gameId: number): string | null {
     switch (gameId) {
@@ -66,11 +99,14 @@ export class GamesComponent {
         return "app/sequence-game";
       case 2:
         return "app/memory-game";
+      case 3:
+        return "app/reaction-game";
+      case 4:
+        return "app/puzzle-game";
       default:
         return null;
     }
   }
-  //Trackea el id de todos los juegos
   trackById(index: number, item: IGame): number {
     return item.gameId!;
   }
