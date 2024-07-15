@@ -25,6 +25,8 @@ import { MemoryBoardComponent } from "./components/memory-board/memory-board.com
 import { SequenceGameComponent } from "./components/sequence-game/sequence-game.component";
 import { ReactionGameComponent } from "./components/reaction-game/reaction-game.component";
 import { PuzzleComponent } from "./components/puzzle-game/puzzle-game.component";
+import { BarinfulLandingComponent } from "./pages/Brainful/barinful-landing/barinful-landing.component";
+import { QuantumLandingComponent } from "./quantum-landing/quantum-landing.component";
 
 export const routes: Routes = [
   {
@@ -195,7 +197,6 @@ export const routes: Routes = [
         component: MemoryBoardComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
       },
       {
@@ -203,27 +204,35 @@ export const routes: Routes = [
         component: SequenceGameComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
-       
       },
       {
         path: "puzzle-game",
         component: PuzzleComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
-       
       },
       {
         path: "reaction-game",
         component: ReactionGameComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
-       
+      },
+      {
+        path: "brainful",
+        component: BarinfulLandingComponent,
+        data: {
+          authorities: [IRole.superAdmin, IRole.user],
+        },
+      },
+      {
+        path: "quantumTech",
+        component: QuantumLandingComponent,
+        data: {
+          authorities: [IRole.superAdmin, IRole.user],
+        },
       },
     ],
   },
