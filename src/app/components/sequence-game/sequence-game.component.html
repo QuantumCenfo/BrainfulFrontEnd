@@ -1,29 +1,48 @@
-<div class="d-flex">
-  <div class="points-container">
-    <label id="points" for="points">Puntos: {{ points }}</label>
-  </div>
-  <div id="time" class="points-container">
-    <app-timer
-      (timerEnded)="
-        endGame(
-          'Fin del juego! Presione el boton de jugar para iniciar de nuevo'
-        )
-      "
-    >
-    </app-timer>
-  </div>
+<div class="games-container">
+  <div class="simon-container">
+    <div class="d-flex justify-content-center flex-wrap">
+      <div class="points-container">
+        <label id="points" for="points">Puntos: {{ points }}</label>
+      </div>
 
-  <div class="points-container" (click)="onButtonPlayClick()">
-    <label id="btn-play" for="play">Jugar</label>
-  </div>
-</div>
-<h1 id="level-title" class="text-center">Presione el boton de jugar.</h1>
+      <app-timer (timerEnded)="endGame()"></app-timer>
 
-<div class="d-flex justify-content-center">
-  <div class="color-container container">
-    <div (click)="onButtonClick('orange')" id="orange" class="btn orange"></div>
-    <div (click)="onButtonClick('blue')" id="blue" class="btn blue"></div>
-    <div (click)="onButtonClick('green')" id="green" class="btn green"></div>
-    <div (click)="onButtonClick('purple')" id="purple" class="btn purple"></div>
+      <div>
+        <select id="difficulty" [(ngModel)]="difficulty">
+          <option class="option-diff" value="0">
+            Selecciones una dificultad
+          </option>
+          <option value="easy">Facil</option>
+          <option value="medium">Medio</option>
+          <option value="hard">Dificil</option>
+        </select>
+      </div>
+      <div class="points-container" (click)="startGame()">
+        <label id="btn-play" for="play">Jugar</label>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="color-container container">
+        <div
+          (click)="onButtonClick('orange')"
+          id="orange"
+          class="btn orange"
+        ></div>
+        <div (click)="onButtonClick('blue')" id="blue" class="btn blue"></div>
+        <div
+          (click)="onButtonClick('green')"
+          id="green"
+          class="btn green"
+        ></div>
+        <div
+          (click)="onButtonClick('purple')"
+          id="purple"
+          class="btn purple"
+        ></div>
+        <div class="brain-logo">
+          <img src="../../../assets/icons/LogoCerebro.png" alt="Logo Image" />
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -13,11 +13,26 @@ import { Router } from "@angular/router";
 @Component({
   selector: "app-games",
   standalone: true,
-  imports: [FormsModule, CommonModule],
+
+  imports: [
+    SequenceGameComponent,
+    TimerComponent,
+    MemoryBoardComponent,
+    FormsModule,
+    CommonModule,
+    MemoryCardComponent,
+  ],
+
   templateUrl: "./games.component.html",
   styleUrls: ["./games.component.scss"],
 })
 export class GamesComponent {
+  selectedDifficulty: string = "";
+  onButtonDificultyClick(dificulty: string): void {
+    this.selectedDifficulty = dificulty;
+    console.log("Selected: ", this.selectedDifficulty);
+  }
+
   @ViewChild(MemoryBoardComponent) memoryBoard!: MemoryBoardComponent;
   public gameList: IGame[] = [];
   private service = inject(GameService);
@@ -45,13 +60,16 @@ export class GamesComponent {
   }
 
   previousGame(): void {
-    this.currentIndex = (this.currentIndex - 1 + this.gameList.length) % this.gameList.length;
+    this.currentIndex =
+      (this.currentIndex - 1 + this.gameList.length) % this.gameList.length;
     this.updateDisplayedGames();
   }
 
   get previousGameIndex(): number | null {
     if (this.gameList.length > 1) {
-      return (this.currentIndex - 1 + this.gameList.length) % this.gameList.length;
+      return (
+        (this.currentIndex - 1 + this.gameList.length) % this.gameList.length
+      );
     }
     return null;
   }
@@ -71,25 +89,24 @@ export class GamesComponent {
         this.router.navigate([gameRoute, { gameId: gameId }]);
       }
     } else {
-      console.error('Game ID is undefined');
+      console.error("Game ID is undefined");
     }
   }
 
   getGameRoute(gameId: number): string | null {
     switch (gameId) {
       case 1:
-        return 'app/sequence-game';
+        return "app/sequence-game";
       case 2:
-        return 'app/memory-game';
+        return "app/memory-game";
       case 3:
-        return 'app/reaction-game';
+        return "app/reaction-game";
       case 4:
         return "app/puzzle-game";
       default:
         return null;
     }
   }
-
   trackById(index: number, item: IGame): number {
     return item.gameId!;
   }

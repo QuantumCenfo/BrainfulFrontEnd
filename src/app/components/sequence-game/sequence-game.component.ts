@@ -1,28 +1,41 @@
 import {
   Component,
+  EventEmitter,
   HostListener,
   inject,
+  Input,
   OnInit,
+  Output,
   ViewChild,
 } from "@angular/core";
-import { IGameResults } from "../../interfaces";
+import { IGame, IGameResults, IUser } from "../../interfaces";
 import { TimerComponent } from "../timer/timer.component";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import Swal from "sweetalert2";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { TryAgainModalComponent } from "../try-again-modal/try-again-modal.component";
+import { ActivatedRoute, Route, Router } from "@angular/router";
+import { SimonSaysService } from "../../services/simon-says.service";
 
 @Component({
   selector: "app-sequence-game",
   standalone: true,
-  imports: [TimerComponent],
+  imports: [TimerComponent, CommonModule, FormsModule],
   templateUrl: "./sequence-game.component.html",
   styleUrl: "./sequence-game.component.scss",
 })
 export class SequenceGameComponent implements OnInit {
   title = "Simon Dice";
 
+  //private gameDificulty: string = "Facil";
+
+  @Input() difficulty: string = "";
+
   //Decorador usado para acceder a un componente hijo
   //Nos permite acceder a propiedades y metodos del componente hijo
-  @ViewChild(TimerComponent) timerComponent!: TimerComponent;
-
-  //public countdown = inject(TimerComponent);
+  @ViewChild(TimerComponent)
+  timerComponent!: TimerComponent;
 
   // Colores de los botones utilizados en el juego
   buttonColours: string[] = ["purple", "blue", "green", "orange"];
@@ -39,49 +52,55 @@ export class SequenceGameComponent implements OnInit {
 
   // Contador de puntos del jugador
   points: number = 0;
+  finalResult: number = 0;
+  gameId: number | undefined = 0;
 
-  // Tiempo restante en segundos
-  timeLeft: number = 60;
+  public modalService: NgbModal = inject(NgbModal);
+  private simonSaysService = inject(SimonSaysService);
 
-  // ID del intervalo del temporizador
-  intervalId: any;
+  public router: Router = inject(Router);
+  public route: ActivatedRoute = inject(ActivatedRoute);
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap) => {
+      const gameId = paramMap.get("gameId");
+      this.gameId = gameId ? +gameId : undefined;
+      console.log("Game ID:", this.gameId);
+    });
     throw new Error("Method not implemented.");
   }
-
-  //Host listener decorator replaces jquery $(document).keypress
-  // @HostListener("window:keydown", ["$event"])
-  // handleKeyboardEvent(event: KeyboardEvent): void {
-  //   if (!this.started) {
-  //     this.nextSequence();
-  //     this.started = true;
-  //   }
-  // }
 
   // Método manejador de eventos de clic en el botón de inicio del juego
   onButtonPlayClick(): void {
     if (!this.started) {
       this.startGame();
+      console.log(this.difficulty);
     }
   }
 
   // Método manejador de eventos de clic en los botones de colores
   onButtonClick(colour: string): void {
     this.userClickPattern.push(colour);
-    console.log(colour);
+
     //Play sound
+    this.playSound(colour);
+    console.log("Sound color: ", this.playSound(colour));
     this.animatePress(colour);
     this.checkAnswer(this.userClickPattern.length - 1);
   }
 
   // Verifica si la respuesta del usuario es correcta
   checkAnswer(currentLevel: number): void {
+    if (this.started === false) {
+      return;
+    }
     if (
       this.gamePattern[currentLevel] === this.userClickPattern[currentLevel]
     ) {
       if (this.userClickPattern.length === this.gamePattern.length) {
         this.points = this.points + 10;
+        this.finalResult = this.points;
+
         document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
         setTimeout(() => {
           this.nextSequence();
@@ -89,9 +108,8 @@ export class SequenceGameComponent implements OnInit {
       }
     } else {
       //play sound
-      this.endGame(
-        "Fin del juego! Presione el boton de jugar para iniciar de nuevo."
-      );
+      this.playSound("wrong");
+      this.endGame();
     }
   }
 
@@ -99,17 +117,37 @@ export class SequenceGameComponent implements OnInit {
   nextSequence(): void {
     this.userClickPattern = [];
     this.level++;
-
-    document.getElementById("level-title")!.innerText = "Nivel " + this.level;
+    console.log("Level: ", this.level);
+    console.log("Dificultad: ", this.difficulty);
 
     const randomNumber = Math.floor(Math.random() * 4);
     const randomChosenColour = this.buttonColours[randomNumber];
     this.gamePattern.push(randomChosenColour);
 
-    document.getElementById(randomChosenColour)!.classList.add("flash");
-    setTimeout(() => {
-      document.getElementById(randomChosenColour)!.classList.remove("flash");
-    }, 200);
+    if (this.difficulty === "easy") {
+      document.getElementById(randomChosenColour)!.classList.add("flash-facil");
+      setTimeout(() => {
+        document
+          .getElementById(randomChosenColour)!
+          .classList.remove("flash-facil");
+      }, 800);
+    } else if (this.difficulty === "medium") {
+      document.getElementById(randomChosenColour)!.classList.add("flash-medio");
+      setTimeout(() => {
+        document
+          .getElementById(randomChosenColour)!
+          .classList.remove("flash-medio");
+      }, 600);
+    } else if (this.difficulty === "hard") {
+      document
+        .getElementById(randomChosenColour)!
+        .classList.add("flash-dificil");
+      setTimeout(() => {
+        document
+          .getElementById(randomChosenColour)!
+          .classList.remove("flash-dificil");
+      }, 200);
+    }
 
     //PlaySound
   }
@@ -124,7 +162,7 @@ export class SequenceGameComponent implements OnInit {
 
   // Reproduce el sonido correspondiente al nombre del archivo
   playSound(name: string): void {
-    const audio = new Audio(`assets/sounds/${name}.mp3`);
+    const audio = new Audio("assets/sounds/" + name + ".mp3");
     audio.play;
   }
 
@@ -134,39 +172,106 @@ export class SequenceGameComponent implements OnInit {
     this.gamePattern = [];
     this.started = false;
     this.points = 0;
+
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
   }
 
   // Finaliza el juego y muestra un mensaje
-  endGame(message: string): void {
+  endGame(): void {
     document.body.classList.add("game-over");
-    document.getElementById("level-title")!.innerText = message;
+
     setTimeout(() => {
       document.body.classList.remove("game-over");
     }, 200);
-    this.startOver();
+
     this.timerComponent.stopTimer();
+    const modalRef = this.modalService.open(TryAgainModalComponent);
+    this.gatherResults();
+
+    modalRef.componentInstance.message =
+      "Fin del juego! Presione el boton de jugar para iniciar de nuevo.";
+
+    modalRef.result.then(
+      (result) => {
+        if (result === "tryAgain") {
+          if (this.finalResult <= 30) {
+            this.difficulty = "easy";
+
+            this.startOver();
+            this.startGame();
+          } else if (this.finalResult > 30 && this.finalResult < 60) {
+            this.difficulty = "medium";
+
+            this.startOver();
+            this.startGame();
+          } else if (this.finalResult >= 60) {
+            this.difficulty = "hard";
+
+            this.startOver();
+            this.startGame();
+          }
+        } else if (result === "goToAnotherView") {
+          this.router.navigate(["app/reminders"]);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   // Inicia el juego y la secuencia del temporizador
   startGame(): void {
-    this.started = true;
-    this.points = 0;
-    this.level = 0;
-    this.nextSequence();
+    if (this.difficulty === "") {
+      Swal.fire({
+        title: "Oops...",
+        text: "Seleccione una dificultad antes de comenzar el juego.",
+        icon: "warning",
+        iconColor: "white",
+        color: "white",
+        background: "#16c2d5",
+        confirmButtonColor: "#ff9f1c",
+      });
+    } else {
+      this.started = true;
+      this.points = 0;
+      this.level = 0;
+      this.nextSequence();
 
-    this.timerComponent.timer(30);
+      this.timerComponent.timer(30);
+    }
   }
 
-  public gameResults: IGameResults[] = [
-    {
-      resultId: 1,
-      // gameDate: "2024-07-02 12:17:02.070000",
-      // levelDifficult: "Facil",
-      score: 20,
-      time: 5,
-      // gameId: 1,
-      // userId: 1,
-    },
-  ];
+  gatherResults(): void {
+    const user_id: number | undefined = this.getUserIdFromLocalStorage();
+
+    let stringDifficutly: string = "";
+    if (this.difficulty === "easy") {
+      stringDifficutly = "Facil";
+    } else if (this.difficulty === "medium") {
+      stringDifficutly = "Medio";
+    } else if (this.difficulty === "hard") {
+      stringDifficutly = "Dificil";
+    }
+
+    const gameResults: IGameResults = {
+      gameDate: new Date().toISOString(),
+      levelDifficulty: stringDifficutly,
+      score: this.finalResult,
+      gameId: { gameId: this.gameId } as IGame,
+      userId: { id: user_id } as IUser,
+    };
+    console.log("Game Results: ", gameResults);
+    this.simonSaysService.save(gameResults);
+  }
+
+  getUserIdFromLocalStorage(): number | undefined {
+    const authUser = localStorage.getItem("auth_user");
+    console.log("AuthUser: ", authUser);
+    if (authUser) {
+      const user = JSON.parse(authUser);
+      return user.id ? Number(user.id) : undefined;
+    }
+    return undefined;
+  }
 }
