@@ -1,6 +1,7 @@
 <section class="games-carousel" id="games">
   <div class="carousel-container">
-    <div class="carousel-item" *ngFor="let game of games">
+    
+    <div class="red" *ngFor="let game of games">
       <img [src]="game.image">
       <h3>{{game.name}}</h3>
       <p>{{game.description}}</p>
