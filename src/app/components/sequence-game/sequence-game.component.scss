@@ -12,8 +12,24 @@ body {
   margin: 5%;
   color: #fef2bf;
 }
+.points {
+ 
+  padding: 10px;
 
-#points,
+  margin: 20px;
+  color: #000000;
+  font-size: 2rem;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5; /* o cualquier otro estilo que desees aplicar */
+}
+#points
+ {
+  padding: 15px;
+  font-size: 2rem;
+}
+
 #btn-play {
   color: #ffffff;
   padding: 15px;

@@ -26,6 +26,7 @@ import { Subscription } from "rxjs";
   styleUrl: "./memory-board.component.scss",
 })
 export class MemoryBoardComponent implements OnChanges {
+  isGameRunning: boolean = false;
   @Input() difficulty: number = 0;
   @Input() gameStarted: boolean = false;
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
@@ -92,6 +93,7 @@ export class MemoryBoardComponent implements OnChanges {
    * Finaliza el juego, mostrando un modal y permitiendo reiniciar o ir al menú.
    */
   endGame(): void {
+    this.isGameRunning = false;
     this.startOver();
     this.timerComponent.stopTimer();
     const modalRef = this.modalService.open(TryAgainModalComponent);
@@ -114,6 +116,7 @@ export class MemoryBoardComponent implements OnChanges {
    * Inicia el juego con la dificultad seleccionada y el temporizador correspondiente.
    */
   startGame(): void {
+    this.isGameRunning = true;
     if (this.difficulty > 0) {
       this.gameStarted = true;
       this.points = 0;
@@ -137,6 +140,7 @@ export class MemoryBoardComponent implements OnChanges {
         background: "#16c2d5",
         confirmButtonColor: "#ff9f1c",
       });
+      this.isGameRunning = false;
     }
   }
   /**

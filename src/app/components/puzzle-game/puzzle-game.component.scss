@@ -22,7 +22,18 @@
     margin: 5%;
   
   }
+  .points {
  
+    padding: 10px;
+ 
+    margin: 20px;
+    color: #000000;
+    font-size: 2rem;
+  }
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5; /* o cualquier otro estilo que desees aplicar */
+  }
   #points,
   #pieceClick,
   #btn-play {
@@ -60,6 +71,7 @@ flex-wrap: wrap;
     margin: 20px;
     color: #ffffff;
     font-size: 2rem;
+    
   }
 
   

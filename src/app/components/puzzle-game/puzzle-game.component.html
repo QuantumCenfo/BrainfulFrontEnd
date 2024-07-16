@@ -1,26 +1,35 @@
+
+    <div class="d-flex">
+      
+      <div class="d-flex">
+        <div>
+          
+          <select id="difficulty" [(ngModel)]="difficulty">
+            <option class="option-diff" value="0">Seleccione una dificultad</option>
+            <option value="9">Fácil</option>
+            <option value="16">Media</option>
+            <option value="25">Difícil</option>
+          </select>
+        </div>
+        <button class="points-container" (click)="startGame()"  [class.disabled]="isGameRunning">Jugar</button>
+        
+      </div>
+      <div class="d-flex">
+        <div class="points">
+          <label id="points" for="points">Puntos: {{ points }}</label>
+        </div>
+        <app-timer (timerEnded)="endGame()"></app-timer>
+      </div>
+
+      
+    </div>
+ 
+
+
+
+
 <div class="memory-board-container">
-  <div class="d-flex">
-
-    <div class="points-container">
-      <label id="points" for="points">Puntos: {{ points }}</label>
-    </div>
-    <div class="points-container">
-      <label id="pieceClick" for="pieceClick"></label>
-    </div>
-
-    <app-timer (timerEnded)="endGame()"></app-timer>
-    <div>
-      <select id="difficulty" [(ngModel)]="difficulty">
-        <option class="option-diff" value="0">Seleccione una dificultad</option>
-        <option value="9">Fácil</option>
-        <option value="16">Media</option>
-        <option value="25">Difícil</option>
-      </select>
-    </div>
-    <div class="points-container" (click)="startGame()">
-      <label id="btn-play" for="play">Jugar</label>
-    </div>
-  </div>
+ 
 
   <div class="games-container">
     <!-- Primer par de contenedores de rompecabezas -->
