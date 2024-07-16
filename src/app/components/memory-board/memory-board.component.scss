@@ -163,4 +163,34 @@ flex-wrap: wrap;
       opacity: 1;
     }
   }
+
+  @media (max-width: 1200px) {
+        .points-container:hover{
+          background-color:  #e78700;
+          border: solid 3px #16c2d5;
+          padding: 20px;
+          border-radius: 20px;
+          margin: 22px;
+          color: #ffffff;
+          font-size: 2rem;
+      }
+      .points-container{
+        background-color: #ff9f1c;
+        border: solid 3px #16c2d5;
+        padding: 20px;
+        border-radius: 20px;
+        margin: 22px;
+        color: #ffffff;
+        font-size: 2rem;
+    }
+    .memory-board {
+      font-family: Dosis, "Dosis", sans-serif;
+      display: flex;
+      flex-wrap: wrap; /* Allow cards to wrap to the next row */
+      justify-content: space-between; /* Align items at the start of the container */
+      gap: 10px; 
+      max-width:800px; 
+      margin: auto; 
+    }
+  }
   
