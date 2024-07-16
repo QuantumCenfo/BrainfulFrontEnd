@@ -45,7 +45,7 @@ export class SequenceGameComponent implements OnInit {
   // Patrón de colores ingresado por el usuario
   userClickPattern: string[] = [];
   // Indicador de si el juego ha comenzado
-  started = false;
+  isStarted: boolean = false;
 
   // Nivel actual del jugador
   level: number = 0;
@@ -72,7 +72,7 @@ export class SequenceGameComponent implements OnInit {
 
   // Método manejador de eventos de clic en el botón de inicio del juego
   onButtonPlayClick(): void {
-    if (!this.started) {
+    if (!this.isStarted) {
       this.startGame();
       console.log(this.difficulty);
     }
@@ -81,17 +81,18 @@ export class SequenceGameComponent implements OnInit {
   // Método manejador de eventos de clic en los botones de colores
   onButtonClick(colour: string): void {
     this.userClickPattern.push(colour);
+    console.log("color: ", colour);
 
     //Play sound
     this.playSound(colour);
-    console.log("Sound color: ", this.playSound(colour));
+
     this.animatePress(colour);
     this.checkAnswer(this.userClickPattern.length - 1);
   }
 
   // Verifica si la respuesta del usuario es correcta
   checkAnswer(currentLevel: number): void {
-    if (this.started === false) {
+    if (this.isStarted === false) {
       return;
     }
     if (
@@ -102,6 +103,7 @@ export class SequenceGameComponent implements OnInit {
         this.finalResult = this.points;
 
         document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+        document.getElementById("title")!.innerHTML = "Nivel: " + this.level;
         setTimeout(() => {
           this.nextSequence();
         }, 1000);
@@ -162,18 +164,20 @@ export class SequenceGameComponent implements OnInit {
 
   // Reproduce el sonido correspondiente al nombre del archivo
   playSound(name: string): void {
-    const audio = new Audio("assets/sounds/" + name + ".mp3");
-    audio.play;
+    const audio = new Audio("../../../assets/sounds/" + name + ".mp3");
+    audio.load();
+    audio.play();
   }
 
   // Reinicia el juego al estado inicial
   startOver(): void {
-    this.level = 0;
+    this.level = 1;
     this.gamePattern = [];
-    this.started = false;
+    this.isStarted = false;
     this.points = 0;
 
     document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+    document.getElementById("title")!.innerHTML = "Nivel: " + this.level;
   }
 
   // Finaliza el juego y muestra un mensaje
@@ -233,10 +237,11 @@ export class SequenceGameComponent implements OnInit {
         confirmButtonColor: "#ff9f1c",
       });
     } else {
-      this.started = true;
+      this.isStarted = true;
       this.points = 0;
       this.level = 0;
       this.nextSequence();
+      document.getElementById("title")!.innerHTML = "Nivel: " + this.level;
 
       this.timerComponent.timer(30);
     }
