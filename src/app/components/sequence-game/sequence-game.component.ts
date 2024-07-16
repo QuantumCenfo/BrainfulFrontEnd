@@ -222,7 +222,7 @@ export class SequenceGameComponent implements OnInit {
 
   // Inicia el juego y la secuencia del temporizador
   startGame(): void {
-    if (this.difficulty === "") {
+    if (this.difficulty == "") {
       Swal.fire({
         title: "Oops...",
         text: "Seleccione una dificultad antes de comenzar el juego.",

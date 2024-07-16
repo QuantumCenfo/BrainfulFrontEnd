@@ -25,16 +25,23 @@
   max-width: 225px;
   max-height: 50px;
 }
+#points {
+    padding: 15px;
+    font-size: 2rem;
+  }
+.points {
+ 
+  padding: 10px;
 
-.container-time {
-  background-color: #ff9f1c;
-  border: solid 3px #16c2d5;
-  border-radius: 20px;
   margin: 20px;
-  color: #ffffff;
+  color: #000000;
   font-size: 2rem;
-  max-width: 225px;
-  max-height: 50px;
+}
+.container-time {
+  padding: 10px;
+  margin: 20px;
+  color: #000000;
+  font-size: 2rem;
 }
 
 select{
@@ -45,7 +52,7 @@ select{
     
  
   }
-  margin-top: 20px;
+  margin-top: 35px;
   background-color: #ff9f1c;
   border: solid 3px #16c2d5;
   padding: 10px;
@@ -74,9 +81,18 @@ select{
 }
 
 .label-time{
-  display: inline-block;
-  justify-content: center;
+  color: #000000;;
+  font-size: 2rem;
+  padding: 15px;
+}
+
+
+.timer-container{
+
   padding: 10px;
+  margin: 20px;
+  color: #000000;
+  font-size: 2rem;
 }
 
 .btn {
