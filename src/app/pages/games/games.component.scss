@@ -76,6 +76,11 @@
 }
 
 @media (max-width: 800px) {
+  .carousel-container.game-card.current[_ngcontent-ng-c1279071869] {
+    transform: scale(1.2);
+    width: 220px;
+    height: 300px;
+}
     .game-card.previous,
     .game-card.next {
       display: none; /* Oculta previous y next en pantallas pequeñas */
