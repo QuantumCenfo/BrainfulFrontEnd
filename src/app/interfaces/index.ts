@@ -56,6 +56,28 @@ export interface IGameResults {
   gameId?: IGame ;
   userId?: IUser;
 }
+
+export interface IForm {
+  formId?: number;
+  date?: string;
+  age?: number;
+  exerciseDays?: string;
+  useDrugs?: boolean;
+  useAlcohol?: boolean;
+  gender?: string;
+  job?: string;
+  eduacationLevel?: string;
+  familyHistory?: string;
+  medicalCondition?: string;
+  mentalIllness?: string;
+  dietType?: string;
+  sleepHours?: number;
+  screenTime?: number;
+  stressManagement?: string;
+  user?: IUser;
+}
+
+
 export interface ICard {
   imageId: string;
   state: "default" | "flipped" | "matched";

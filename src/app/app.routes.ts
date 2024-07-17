@@ -27,6 +27,7 @@ import { ReactionGameComponent } from "./components/reaction-game/reaction-game.
 import { PuzzleComponent } from "./components/puzzle-game/puzzle-game.component";
 import { QuantumLandingComponent } from "./quantum-landing/quantum-landing.component";
 import { BarinfulLandingComponent } from "./pages/Brainful/barinful-landing/barinful-landing.component";
+import { RecomendationsComponent } from "./pages/recomendations/recomendations.component";
 
 export const routes: Routes = [
   {
@@ -158,6 +159,15 @@ export const routes: Routes = [
           authorities: [IRole.user],
 
           name: "Juegos",
+          showInSidebar: true,
+        },
+      },
+      {
+        path: "recomendations",
+        component: RecomendationsComponent,
+        data: {
+          authorities: [IRole.user],
+          name: "Recomendaciones",
           showInSidebar: true,
         },
       },
