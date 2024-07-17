@@ -1,9 +1,17 @@
-<div class="badge-container" *ngFor="let badge of badges">
-  <div class="badge-img">
-    <img src="{{ badge.image }}" alt="" />
+<div class="container">
+  @defer{
+
+  <app-badge-list [badgeList]="badgeService.badges$()" />
+  <div class="d-flex justify-content-center align-items-center">
+    <app-add-button (click)="showModal()"></app-add-button>
   </div>
-  <div class="badge-content">
-    <h3>{{ badge.title }}</h3>
-    <p>{{ badge.description }}</p>
-  </div>
+
+  }@loading ( after 100ms; minimum 1s) {
+  <app-loader />
+  }
 </div>
+
+<app-modal #formModal>
+  <app-badge-form (callParentEvent)="onFormEventCalled($event)">
+  </app-badge-form>
+</app-modal>

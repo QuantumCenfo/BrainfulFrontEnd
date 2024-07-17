@@ -78,5 +78,5 @@ export interface IBadge {
   badgeId?: number;
   title?: string;
   description?: string;
-  image?: string;
+  url?: string;
 }

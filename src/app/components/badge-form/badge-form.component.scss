@@ -1,0 +1,38 @@
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: linear-gradient(40deg, #7cecf9, #66b9c2);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+.text-area {
+  border-color: #ff9f1c;
+}
+
+.input-title {
+  background-color: #b5dee7;
+  border-bottom: #ff9f1c solid 3px;
+}
+
+.brain-logo {
+  min-width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}

@@ -1,0 +1,12 @@
+<div class="badge-container" *ngFor="let badge of badgeList">
+  <div class="badge-img">
+    <img src="{{ badge.url }}" alt="" />
+  </div>
+  <div class="badge-content">
+    <h3>{{ badge.title }}</h3>
+    <p>{{ badge.description }}</p>
+  </div>
+  <button class="btn-test">
+    <i class="fa-regular fa-trash-can"></i>
+  </button>
+</div>
