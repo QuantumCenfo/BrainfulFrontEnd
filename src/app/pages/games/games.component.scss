@@ -2,17 +2,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 85vh;
   font-family: Dosis, 'Dosis', sans-serif;
 
   .nav-button {
-    background-color: #ffa500;
+    background-color: #ff9f1c;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 24px;
-    border-radius: 50%;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .nav-button:hover {
+    background-color: #ee9211;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -31,7 +41,7 @@
   }
 
   .game-card {
-    background-color: #ffa500;
+    background-color: #ff9f1c;
     border-radius: 20px;
     padding: 20px;
     margin: 0 10px;
