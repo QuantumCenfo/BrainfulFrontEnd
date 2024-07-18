@@ -76,6 +76,14 @@ export interface IForm {
   stressManagement?: string;
   user?: IUser;
 }
+export interface IRecomendation {
+  recommendationId?: number;
+  date?: string;
+  description?: string;
+  recommendationType?: string;
+  form?: IForm;
+}
+
 
 
 export interface ICard {

@@ -120,15 +120,18 @@ export class FormComponent implements OnInit {
       iconColor: "white",
       color: "white",
       background: "#36cf4f",
-      confirmButtonColor: "#ff9f1c",
+      
       title: "Cuestionario guardado",
+      text: "Estamos generando tus recomendaciones",
       icon: "success",
-      confirmButtonText: "Ir a recomendaciones",
+      toast:true,
+      timer: 5000,
+      timerProgressBar: true,
+    
     
     }).then((result) => {
-      if (result.isConfirmed) {
         this.router.navigate(["app/recomendations"]);
-      } 
+     
     });
     }
 
