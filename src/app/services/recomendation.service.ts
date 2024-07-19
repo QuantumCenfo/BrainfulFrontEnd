@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
-import {IRecomendation, IUser } from '../interfaces';
+import {IRecomendation, IResponse, IUser } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseService } from './base-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,9 @@ private user: IUser = { email: '', authorities: [] };
 get recomendations$() {
   return this.recommendationSignal;
 }
+public override find(id: string | number): Observable<IResponse<IRecomendation>> {
+  return this.http.get<IResponse<IRecomendation>>(this.source + '/' +'user'+'/'+ id);
+}
 getUserIdFromLocalStorage(): number | undefined {
   const authUser = localStorage.getItem("auth_user");
   if (authUser) {
@@ -23,7 +27,7 @@ getUserIdFromLocalStorage(): number | undefined {
   }
   return undefined;
 }
-public getAll() {
+public geAllRecomendationsById() {
   const user_id: number | undefined = this.getUserIdFromLocalStorage();
   if (user_id !== undefined) {
     this.find(user_id).subscribe({

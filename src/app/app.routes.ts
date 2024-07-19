@@ -13,7 +13,7 @@ import { ChallengesComponent } from "./pages/challenges/challenges.component";
 import { BadgesComponent } from "./pages/badges/badges.component";
 import { ContentsComponent } from "./pages/contents/contents.component";
 import { BadgesUsersComponent } from "./pages/badges-users/badges-users.component";
-import { RecommendationsComponent } from "./pages/recommendations/recommendations.component";
+
 import { ForumsComponent } from "./pages/forums/forums.component";
 import { RemindersComponent } from "./pages/reminders/reminders.component";
 import { GamesComponent } from "./pages/games/games.component";
@@ -129,15 +129,7 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
-      {
-        path: "recommendations",
-        component: RecommendationsComponent,
-        data: {
-          authorities: [IRole.superAdmin],
-          name: "Recomendaciones",
-          showInSidebar: true,
-        },
-      },
+      
       {
         path: "forums",
         component: ForumsComponent,

@@ -120,7 +120,6 @@ export class FormComponent implements OnInit {
       iconColor: "white",
       color: "white",
       background: "#36cf4f",
-      
       title: "Cuestionario guardado",
       text: "Estamos generando tus recomendaciones",
       icon: "success",
