@@ -1,0 +1,19 @@
+<div class="container" *ngFor="let badge of badgeList">
+  <div class="badge-container">
+    <div class="badge-img">
+      <img src="{{ badge.url }}" alt="Imagen de insignia" />
+    </div>
+    <div class="">
+      <h3>{{ badge.title }}</h3>
+      <p>{{ badge.description }}</p>
+    </div>
+    <div class="btn-container d-flex justify-content-evenly">
+      <button class="btn btn-primary">
+        <i class="fa-regular fa-pen-to-square"></i>
+      </button>
+      <button class="btn btn-primary">
+        <i class="fa-regular fa-trash-can"></i>
+      </button>
+    </div>
+  </div>
+</div>

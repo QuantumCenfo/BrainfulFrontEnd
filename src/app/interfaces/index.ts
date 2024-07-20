@@ -53,7 +53,7 @@ export interface IGameResults {
   levelDifficulty?: string;
   score?: number;
   time?: number;
-  gameId?: IGame ;
+  gameId?: IGame;
   userId?: IUser;
 }
 
@@ -92,14 +92,21 @@ export interface ICard {
 }
 
 export interface IButton {
-  color: 'default' | 'green' | 'red';
+  color: "default" | "green" | "red";
 }
 export interface PuzzlePiece {
-  src: string;   // URL de la imagen
-  originalOrder: number;  // Orden original de la pieza
-  x: number;     // Posición X
-  y: number;     // Posición Y
+  src: string; // URL de la imagen
+  originalOrder: number; // Orden original de la pieza
+  x: number; // Posición X
+  y: number; // Posición Y
   width: number; // Ancho
   height: number; // Alto
-  position: { x: number, y: number }; // Posición en la cuadrícula
+  position: { x: number; y: number }; // Posición en la cuadrícula
+}
+
+export interface IBadge {
+  badgeId?: number;
+  title?: string;
+  description?: string;
+  url?: string;
 }

@@ -1,19 +1,25 @@
 <div class="games-container">
   <div class="simon-container">
-    <div class="d-flex  flex-wrap">
-      
-
+    <div class="d-flex flex-wrap">
       <div>
-        <select id="difficulty" [(ngModel)]="difficulty">
+        <select
+          id="difficulty"
+          [(ngModel)]="difficulty"
+          [class.disabled]="isStarted"
+        >
           <option class="option-diff" value=" ">
             Seleccione una dificultad
           </option>
-          <option value="easy">Facil</option>
+          <option value="easy">Fácil</option>
           <option value="medium">Medio</option>
-          <option value="hard">Dificil</option>
+          <option value="hard">Difícil</option>
         </select>
       </div>
-      <div class="points-container" (click)="startGame()">
+      <div
+        class="points-container"
+        (click)="startGame()"
+        [class.disabled]="isStarted"
+      >
         <label id="btn-play" for="play">Jugar</label>
       </div>
       <div class="points">
@@ -21,6 +27,12 @@
       </div>
 
       <app-timer (timerEnded)="endGame()"></app-timer>
+    </div>
+    <div class="text-center">
+      <h2 id="title">
+        Seleccione una dificultad y presione el boton de jugar para iniciar el
+        juego
+      </h2>
     </div>
     <div class="d-flex justify-content-center">
       <div class="color-container container">
@@ -40,9 +52,6 @@
           id="purple"
           class="btn purple"
         ></div>
-        <div class="brain-logo">
-          <img src="../../../assets/icons/LogoCerebro.png" alt="Logo Image" />
-        </div>
       </div>
     </div>
   </div>
