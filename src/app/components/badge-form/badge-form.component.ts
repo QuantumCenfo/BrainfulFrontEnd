@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
 import { IBadge } from "../../interfaces";
+import { ModalComponent } from "../modal/modal.component";
 
 @Component({
   selector: "app-badge-form",

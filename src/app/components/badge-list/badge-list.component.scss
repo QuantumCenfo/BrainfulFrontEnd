@@ -1,7 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
   font-family: Dosis, "Dosis", sans-serif;
 }
 
@@ -13,7 +17,7 @@
   margin: 50px;
   display: flex;
   align-items: center;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .badge-img {
@@ -42,4 +46,18 @@
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
+}
+
+.btn-container {
+  border: solid 1px black;
+  min-width: 300px;
+  min-height: 100px;
+}
+
+.btn-del {
+  color: #fff;
+  background-color: #ff9f1c;
+  border-radius: 10px;
+  border-color: #ff9f1c;
+  font-size: 30px;
 }

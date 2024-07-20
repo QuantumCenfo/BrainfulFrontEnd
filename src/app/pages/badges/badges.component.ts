@@ -10,6 +10,7 @@ import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { AddButtonComponent } from "../../components/add-button/add-button.component";
 import { BadgeFormComponent } from "../../components/badge-form/badge-form.component";
+import { TryAgainModalComponent } from "../../components/try-again-modal/try-again-modal.component";
 
 @Component({
   selector: "app-badges",

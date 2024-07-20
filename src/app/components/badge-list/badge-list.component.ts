@@ -1,14 +1,14 @@
 import { Component, inject, Input } from "@angular/core";
 import { IBadge } from "../../interfaces";
-import { BadgeService } from "../../services/badge.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { BadgeService } from "../../services/badge.service";
 import { CommonModule } from "@angular/common";
-import { ModalComponent } from "../modal/modal.component";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-badge-list",
   standalone: true,
-  imports: [CommonModule, ModalComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: "./badge-list.component.html",
   styleUrl: "./badge-list.component.scss",
 })
