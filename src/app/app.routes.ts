@@ -13,7 +13,7 @@ import { ChallengesComponent } from "./pages/challenges/challenges.component";
 import { BadgesComponent } from "./pages/badges/badges.component";
 import { ContentsComponent } from "./pages/contents/contents.component";
 import { BadgesUsersComponent } from "./pages/badges-users/badges-users.component";
-import { RecommendationsComponent } from "./pages/recommendations/recommendations.component";
+
 import { ForumsComponent } from "./pages/forums/forums.component";
 import { RemindersComponent } from "./pages/reminders/reminders.component";
 import { GamesComponent } from "./pages/games/games.component";
@@ -27,6 +27,7 @@ import { ReactionGameComponent } from "./components/reaction-game/reaction-game.
 import { PuzzleComponent } from "./components/puzzle-game/puzzle-game.component";
 import { QuantumLandingComponent } from "./quantum-landing/quantum-landing.component";
 import { BarinfulLandingComponent } from "./pages/Brainful/barinful-landing/barinful-landing.component";
+import { RecomendationsComponent } from "./pages/recomendations/recomendations.component";
 
 export const routes: Routes = [
   {
@@ -128,15 +129,7 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
-      {
-        path: "recommendations",
-        component: RecommendationsComponent,
-        data: {
-          authorities: [IRole.superAdmin],
-          name: "Recomendaciones",
-          showInSidebar: true,
-        },
-      },
+      
       {
         path: "forums",
         component: ForumsComponent,
@@ -158,6 +151,15 @@ export const routes: Routes = [
           authorities: [IRole.user],
 
           name: "Juegos",
+          showInSidebar: true,
+        },
+      },
+      {
+        path: "recomendations",
+        component: RecomendationsComponent,
+        data: {
+          authorities: [IRole.user],
+          name: "Recomendaciones",
           showInSidebar: true,
         },
       },

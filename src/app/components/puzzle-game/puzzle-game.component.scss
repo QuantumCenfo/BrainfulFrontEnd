@@ -142,7 +142,15 @@ flex-wrap: wrap;
     background-size: 400px 400px; /* Ajustar según el tamaño de tu imagen */
     cursor: pointer;
   }
-  
+  .points-container:hover {
+    background-color: #e78700;
+    border: solid 3px #16c2d5;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px;
+    color: #ffffff;
+    font-size: 2rem;
+  }
   
   @media (max-width: 1200px) {
     .games-container {
@@ -159,4 +167,22 @@ flex-wrap: wrap;
       grid-template-rows: auto;
       gap: 4px !important;
     }
+      .points-container:hover{
+        background-color:  #e78700;
+        border: solid 3px #16c2d5;
+        padding: 20px;
+        border-radius: 20px;
+        margin: 22px;
+        color: #ffffff;
+        font-size: 2rem;
+    }
+    .points-container{
+      background-color: #ff9f1c;
+      border: solid 3px #16c2d5;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 22px;
+      color: #ffffff;
+      font-size: 2rem;
+  }
   }
