@@ -8,7 +8,14 @@ p,
 span {
   font-family: Dosis, "Dosis", sans-serif;
 }
+.container2{
+  
+  padding: 70px;
+  border-radius: 10px;
+  width: 100%;
 
+  
+}
 .badge-container {
   background-color: #16c2d5;
   border-radius: 30px;
@@ -70,5 +77,13 @@ span {
 @media (max-width: 768px) {
   .badge-container {
     flex-direction: column;
+  }
+  .container2{
+  
+    padding: 8px;
+    border-radius: 10px;
+    width: 100%;
+  
+    
   }
 }
