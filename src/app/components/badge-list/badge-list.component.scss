@@ -18,6 +18,22 @@ span {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  view-timeline-name: --reveal;
+  animation-name: show;
+  animation-fill-mode: both;
+  animation-timeline: --reveal;
+  animation-range: entry 25% cover 50%;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .badge-img {
@@ -38,20 +54,9 @@ span {
   object-fit: fill;
 }
 
-.btn-test {
-  background-color: #f9f9f9;
-  color: #16c2d5;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
 .btn-container {
-  border: solid 1px black;
   min-width: 300px;
-  min-height: 100px;
+  min-height: 50px;
 }
 
 .btn-del {
@@ -60,4 +65,10 @@ span {
   border-radius: 10px;
   border-color: #ff9f1c;
   font-size: 30px;
+}
+
+@media (max-width: 768px) {
+  .badge-container {
+    flex-direction: column;
+  }
 }

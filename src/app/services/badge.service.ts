@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class BadgeService extends BaseService<IBadge> {
   protected override source: string = "badges";
 
-  private badgeSignal = signal<IBadge[]>([]);
+  public badgeSignal = signal<IBadge[]>([]);
 
   get badges$() {
     return this.badgeSignal;
@@ -41,20 +41,12 @@ export class BadgeService extends BaseService<IBadge> {
     });
   }
 
-  updateBadge(badge: IBadge) {
-    this.edit(badge.badgeId, badge).subscribe({
-      next: (res: any) => {
-        const updatedBadges = this.badgeSignal().map((b) =>
-          b.badgeId === badge.badgeId ? res : b
-        );
-        this.badgeSignal.set(updatedBadges);
-        console.log("Response: ", res);
-        console.log("Badge updated successfully");
-      },
-      error: (err: any) => {
-        console.error("Error updating badge", err);
-      },
-    });
+  updateBadge(badge: IBadge, imageFile: File) {
+    const formData = new FormData();
+    formData.append("badge", JSON.stringify(badge));
+    formData.append("image", imageFile);
+
+    return this.http.put(this.source + "/" + badge.badgeId, formData);
   }
 
   deleteBadge(badgeId: number) {
