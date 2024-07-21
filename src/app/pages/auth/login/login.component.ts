@@ -33,11 +33,11 @@ export class LoginComponent {
     if (!this.passwordModel.valid) {
       this.passwordModel.control.markAsTouched();
     }
-    if (this.emailModel.valid && this.passwordModel.valid) {
-      this.authService.login(this.loginForm).subscribe({
-        next: () => this.router.navigateByUrl('/app/badges'),
-        error: (err: any) => (this.loginError = err.error.description),
-      });
-    }
+      if (this.emailModel.valid && this.passwordModel.valid) {
+        this.authService.login(this.loginForm).subscribe({
+          next: () => this.router.navigateByUrl('/app/games'),
+          error: (err: any) => (this.loginError = err.error.description),
+        });
+      }
   }
 }
