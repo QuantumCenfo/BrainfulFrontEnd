@@ -8,12 +8,24 @@
       <p>{{ badge.description }}</p>
     </div>
     <div class="btn-container d-flex justify-content-evenly">
-      <button class="btn btn-primary">
+      <button
+        class="btn btn-primary"
+        (click)="showDetailModal(badge, showModal)"
+      >
         <i class="fa-regular fa-pen-to-square"></i>
       </button>
-      <button class="btn btn-primary">
+      <button class="btn btn-primary" (click)="delteBadge(badge.badgeId!)">
         <i class="fa-regular fa-trash-can"></i>
       </button>
     </div>
   </div>
 </div>
+
+<app-modal #showModal>
+  <app-badge-form
+    (callParentEvent)="onFormEventCalled($event)"
+    [badge]="selectedBadge"
+    [actualFile]="selectedFile"
+    [btn]="'Actualizar'"
+  />
+</app-modal>

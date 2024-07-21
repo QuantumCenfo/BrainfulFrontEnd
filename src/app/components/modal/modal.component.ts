@@ -7,7 +7,9 @@ import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
   imports: [],
   template: `
     <ng-template #modal>
-      <div class="d-flex align-item-center justify-content-end p-2">
+      <div
+        class="d-flex  align-items-start justify-content-start p-2 modal-content"
+      >
         <button
           type="button"
           (click)="hide()"
@@ -21,6 +23,7 @@ import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
       </div>
     </ng-template>
   `,
+  styleUrls: ["../badge-form/badge-form.component.scss"],
 })
 export class ModalComponent {
   @Input() size?: string;
