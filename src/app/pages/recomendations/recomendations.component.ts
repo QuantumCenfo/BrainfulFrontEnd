@@ -23,7 +23,7 @@ export class RecomendationsComponent {
   public areActionsAvailable: boolean = false;
   ngOnInit(): void {
     
-    this.recomendationService.geAllRecomendationsById();
+    this.recomendationService.getAllRecomendationsById();
     
   }
 

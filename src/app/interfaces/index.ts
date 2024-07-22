@@ -18,6 +18,26 @@ export interface IUser {
   updatedAt?: string;
   authorities?: IAuthority[];
 }
+export interface IPartcipationOutdoor {
+  participationOutdoorId?: number;
+  evidence?: string;
+  status?: string;
+  fechaPublicacion?: string;
+  fechaRevision?: string;
+  challengeOutdoor?: IChallengeOutdoor;
+  user?: IUser;
+}
+export interface IChallengeOutdoor {
+  outdoorChallengeId?: number;
+  requirement?: string;
+  description?: string;
+  name?: string;
+  startDate?: string;
+  endDate?: string;
+  id?: IUser;
+  badgeId?:IBadge
+}
+
 
 export interface IAuthority {
   authority: string;

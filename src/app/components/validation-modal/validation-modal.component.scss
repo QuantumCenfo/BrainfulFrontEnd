@@ -1,0 +1,105 @@
+.badge-img {
+    border: solid 2px #ff9f1c;
+    margin-top: 40px;
+    border-radius: 5px;
+    min-width: 100px;
+    min-height: 100px;
+    text-align: center;
+  }
+  .info {
+    padding: 12px;
+    color: rgb(255, 255, 255);
+    background-color: #00a4bd;
+    border: solid 2px #ff9f1c;
+    border-radius: 5px;
+    min-width: 100px;
+    min-height: 100px;
+    text-align: center;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  }
+  .image-validation {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border-style: solid;
+    border: solid 2px #ff9f1c;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+  }
+  .image-validation.enlarged {
+    transform: scale(2); /* Scale 2x both horizontally and vertically */
+  z-index: 1000;
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(2); /* Center and scale */
+  border-radius: 10px;
+  width: auto;
+  height: auto; 
+  max-width: 47%; 
+  max-height: 90%; 
+  }
+  .title {
+    font-size: 20px;
+    text-align: center;
+  }
+  .val-container {
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-container {
+    margin: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .image-container {
+    padding: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .val-container-child {
+    width: 100%;
+  }
+  .btn-denied {
+    border-style: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #ff9f1c;
+    margin: 13px;
+    width: 40%;
+  }
+  .btn-denied:hover {
+    border-style: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #d98613;
+    margin: 13px;
+    width: 40%;
+  }
+  .btn-accept p {
+    padding: 3px;
+  }
+  .btn-denied p {
+    padding: 3px;
+  }
+  .btn-accept {
+    border-style: none;
+    border-radius: 4px;
+    color: #ffffff;
+    margin: 13px;
+    background-color: #00a4bd;
+    width: 40%;
+  }
+  .btn-accept:hover {
+    border-style: none;
+    border-radius: 4px;
+    color: #ffffff;
+    margin: 13px;
+    background-color: #04879c;
+    width: 40%;
+  }
+  
