@@ -14,20 +14,24 @@
           </thead>
           <tbody>
             @for (participation of participationList; track $index) {
-              <tr>
-                <td class="label">{{ participation.participationOutdoorId }}</td>
-                <td class="label">{{ participation.challengeOutdoor?.name}}</td>
-                <td class="label">{{ participation.challengeOutdoor?.description  }}</td>
-                <td class="label">{{ participation.fechaPublicacion | date}}</td>
-                <td class="label">{{ participation.status }}</td>
-                <td class="label">{{ participation.user?.name  }}</td>
-                <td class="label">
-                      <button type="button"(click)="showDetail(participation, showModal)" class="btn btn-danger">
-                        <i class="fa-solid fa-file-circle-check"></i>
-                      </button>
-                </td>
-              </tr>
+              @if(participation.status === 'pendiente'){
+                <tr>
+                  <td class="label">{{ participation.participationOutdoorId }}</td>
+                  <td class="label">{{ participation.challengeOutdoor?.name}}</td>
+                  <td class="label">{{ participation.challengeOutdoor?.description  }}</td>
+                  <td class="label">{{ participation.fechaPublicacion | date}}</td>
+                  <td class="label">{{ participation.status }}</td>
+                  <td class="label">{{ participation.user?.name  }}</td>
+                  <td class="label">
+                        <button type="button"(click)="showDetail(participation, showModal)" class="btn btn-danger">
+                          <i class="fa-solid fa-file-circle-check"></i>
+                        </button>
+                  </td>
+                </tr>
+              }
+              
             }
+            
             
           
           </tbody>
