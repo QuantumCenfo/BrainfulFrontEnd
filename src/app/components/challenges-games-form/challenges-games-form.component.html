@@ -1,1 +1,92 @@
-<p>challenges-games-form works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p>{{ title }}</p>
+    </div>
+    <div class="col-12">
+      <input 
+        #title="ngModel" 
+        type="text" 
+        class="form-control" 
+        id="title" 
+        name="title" 
+        placeholder="Challenge Title"
+        [(ngModel)]="newChallengeGame.title" 
+        [ngClass]="{ 'is-invalid': title.invalid && title.touched, 'is-valid': title.valid && title.touched }" 
+        required 
+      />
+    </div>
+    <div class="col-12">
+      <textarea 
+        #description="ngModel" 
+        class="form-control" 
+        id="description" 
+        name="description" 
+        placeholder="Challenge Description"
+        [(ngModel)]="newChallengeGame.description" 
+        [ngClass]="{ 'is-invalid': description.invalid && description.touched, 'is-valid': description.valid && description.touched }" 
+        required 
+      ></textarea>
+    </div>
+    <div class="col-6">
+      <input 
+        #startDate="ngModel" 
+        type="date" 
+        class="form-control" 
+        id="startDate" 
+        name="startDate" 
+        placeholder="Start Date"
+        [(ngModel)]="newChallengeGame.startDate" 
+        [ngClass]="{ 'is-invalid': startDate.invalid && startDate.touched, 'is-valid': startDate.valid && startDate.touched }" 
+        required 
+      />
+    </div>
+    <div class="col-6">
+      <input 
+        #endDate="ngModel" 
+        type="date" 
+        class="form-control" 
+        id="endDate" 
+        name="endDate" 
+        placeholder="End Date"
+        [(ngModel)]="newChallengeGame.endDate" 
+        [ngClass]="{ 'is-invalid': endDate.invalid && endDate.touched, 'is-valid': endDate.valid && endDate.touched }" 
+        required 
+      />
+    </div>
+    <div class="col-6">
+      <select 
+        #badge="ngModel" 
+        class="form-control" 
+        id="badge" 
+        name="badge" 
+        [(ngModel)]="newChallengeGame.badge" 
+        required
+      >
+        <option *ngFor="let badge of badgeList" [value]="badge.badgeId">{{ badge.title }}</option>
+      </select>
+    </div>
+    <div class="col-6">
+      <select 
+        #game="ngModel" 
+        class="form-control" 
+        id="game" 
+        name="game" 
+        [(ngModel)]="newChallengeGame.game" 
+        required
+      >
+        <option *ngFor="let game of gameList" [value]="game.gameId">{{ game.name }}</option>
+      </select>
+    </div>
+    <div class="col-12 mt-3">
+      <button
+        type="button"
+        (click)="addChallenge()"
+        class="btn btn-primary d-flex align-items-center"
+      >
+        <i class="fa-solid fa-plus white me-2"></i>
+        <p class="mb-0"> {{ title }} </p>
+      </button>
+    </div>
+  </div>
+</div>
