@@ -67,7 +67,6 @@ export class SequenceGameComponent implements OnInit {
       this.gameId = gameId ? +gameId : undefined;
       console.log("Game ID:", this.gameId);
     });
-    throw new Error("Method not implemented.");
   }
 
   // Método manejador de eventos de clic en el botón de inicio del juego

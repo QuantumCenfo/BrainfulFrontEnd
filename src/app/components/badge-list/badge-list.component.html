@@ -4,10 +4,11 @@
       <div class="badge-img">
         <img src="{{ badge.url }}" alt="Imagen de insignia" />
       </div>
-      <div class="">
+      <div class="info-container">
         <h3>{{ badge.title }}</h3>
         <p>{{ badge.description }}</p>
       </div>
+
       <div class="btn-container d-flex justify-content-evenly">
         <button
           class="btn btn-primary"
@@ -22,10 +23,6 @@
     </div>
   </div>
 </div>
-
-
-
-
 
 <app-modal #showModal>
   <app-badge-form
