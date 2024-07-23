@@ -16,6 +16,6 @@
 </div>
 
 <app-modal #formModal>
-    <app-challenges-games-form (callParentEvent)="onFormEventCalled($event)">
+    <app-challenges-games-form (callParentEvent)="onFormEventCalled($event)" [badgeList]="badgeService.badges$()" [gameList]="gameService.games$()">
     </app-challenges-games-form>
   </app-modal>

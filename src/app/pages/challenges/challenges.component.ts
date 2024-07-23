@@ -11,6 +11,8 @@ import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 import { AddButtonComponent } from "../../components/add-button/add-button.component";
 import { TryAgainModalComponent } from "../../components/try-again-modal/try-again-modal.component";
+import { BadgeService } from '../../services/badge.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-challenges',
@@ -28,6 +30,8 @@ import { TryAgainModalComponent } from "../../components/try-again-modal/try-aga
 export class ChallengesComponent implements OnInit {
   public challengeGameService = inject(ChallengeGameService);
   public modalService = inject(NgbModal);
+  public badgeService = inject(BadgeService);
+  public gameService = inject(GameService);
   public route: ActivatedRoute = inject(ActivatedRoute);
   public authSerivce = inject(AuthService);
   public routeAuth: string[] = [];
@@ -35,11 +39,12 @@ export class ChallengesComponent implements OnInit {
   @ViewChild("formModal") formModal!: ModalComponent;
 
   ngOnInit(): void {
-    //this.challengeGameService.getAllInactiveChallenges();
-    //this.challengeGameService.getAllActiveChallenges();
+    this.badgeService.getAllBadges();
+    this.gameService.getAllSignal();
   }
 
   onFormEventCalled (params: IChallengeGame) {
+    console.log('Challenge Game Data to Save:', params);
     this.challengeGameService.save(params);
     this.modalService.dismissAll();
   }

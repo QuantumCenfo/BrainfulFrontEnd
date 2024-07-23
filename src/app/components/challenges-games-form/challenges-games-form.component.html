@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <p>{{ title }}</p>
+      <p>{{ titleComp }}</p>
     </div>
     <div class="col-12">
       <input 
@@ -27,6 +27,32 @@
         [ngClass]="{ 'is-invalid': description.invalid && description.touched, 'is-valid': description.valid && description.touched }" 
         required 
       ></textarea>
+    </div>
+    <div class="col-12">
+      <input 
+        #objectiveScore="ngModel" 
+        type="number" 
+        class="form-control" 
+        id="objectiveScore" 
+        name="objectiveScore" 
+        placeholder="Challenge objective score"
+        [(ngModel)]="newChallengeGame.objectiveScore" 
+        [ngClass]="{ 'is-invalid': objectiveScore.invalid && objectiveScore.touched, 'is-valid': objectiveScore.valid && objectiveScore.touched }" 
+        required 
+      />
+    </div>
+    <div class="col-12">
+      <input 
+        #objectiveTime="ngModel" 
+        type="number" 
+        class="form-control" 
+        id="objectiveTime" 
+        name="objectiveTime" 
+        placeholder="Challenge objective time"
+        [(ngModel)]="newChallengeGame.objectiveTime" 
+        [ngClass]="{ 'is-invalid': objectiveTime.invalid && objectiveTime.touched, 'is-valid': objectiveTime.valid && objectiveTime.touched }" 
+        required 
+      />
     </div>
     <div class="col-6">
       <input 
@@ -54,30 +80,36 @@
         required 
       />
     </div>
+    @if(newChallengeGame.badgeId){
     <div class="col-6">
       <select 
         #badge="ngModel" 
         class="form-control" 
         id="badge" 
         name="badge" 
-        [(ngModel)]="newChallengeGame.badge" 
+        [(ngModel)]="newChallengeGame.badgeId.badgeId"
+        (ngModelChange)="newChallengeGame.badgeId.badgeId = +$event" 
         required
       >
         <option *ngFor="let badge of badgeList" [value]="badge.badgeId">{{ badge.title }}</option>
       </select>
     </div>
+    }
+    @if(newChallengeGame.gameId){
     <div class="col-6">
       <select 
         #game="ngModel" 
         class="form-control" 
         id="game" 
         name="game" 
-        [(ngModel)]="newChallengeGame.game" 
+        [(ngModel)]="newChallengeGame.gameId.gameId"
+        (ngModelChange)="newChallengeGame.gameId.gameId = +$event"  
         required
       >
         <option *ngFor="let game of gameList" [value]="game.gameId">{{ game.name }}</option>
       </select>
     </div>
+    }
     <div class="col-12 mt-3">
       <button
         type="button"
@@ -85,7 +117,7 @@
         class="btn btn-primary d-flex align-items-center"
       >
         <i class="fa-solid fa-plus white me-2"></i>
-        <p class="mb-0"> {{ title }} </p>
+        <p class="mb-0"> {{ titleComp }} </p>
       </button>
     </div>
   </div>

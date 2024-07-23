@@ -120,6 +120,6 @@ export interface IChallengeGame {
   objectiveScore?: number;
   objectiveTime?: number;
   objectiveFrecuency?: number;
-  badge?: IBadge;
-  game?: IGame;
+  badgeId?: IBadge;
+  gameId?: IGame;
 }

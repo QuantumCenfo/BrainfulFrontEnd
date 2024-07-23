@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: "root",
 })
 export class ChallengeGameService extends BaseService<IChallengeGame> {
-  protected override source: string = "challengeGames";
+  protected override source: string = "challengeGame";
   private snackBar = inject(MatSnackBar);
   private challengeGameSignal = signal<IChallengeGame[]>([]);
   constructor(protected override http: HttpClient) {

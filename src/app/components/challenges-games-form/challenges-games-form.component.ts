@@ -1,8 +1,11 @@
+import { GameService } from './../../services/game.service';
+import { inject, OnInit } from '@angular/core';
 import { IChallengeGame, IBadge, IGame } from './../../interfaces/index';
 import { ChallengeGameService } from '../../services/challenge-game.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BadgeService } from '../../services/badge.service';
 
 @Component({
   selector: 'app-challenges-games-form',
@@ -14,25 +17,32 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './challenges-games-form.component.html',
   styleUrls: ['./challenges-games-form.component.scss']
 })
-export class ChallengesGamesFormComponent {
-  @Input() title: string = 'Create Challenge';
+export class ChallengesGamesFormComponent implements OnInit{
+  public badgeService = inject(BadgeService);
+  public gameService = inject(GameService);
+  public challengeGameService = inject(ChallengeGameService);
+
+  @Input() titleComp: string = 'Add Challenge';
   @Input() badgeList: IBadge[] = [];
   @Input() gameList: IGame[] = [];
   @Output() callParentEvent: EventEmitter<IChallengeGame> = new EventEmitter<IChallengeGame>();
 
-  newChallengeGame: IChallengeGame = {
-    badge: {
+  @Input() newChallengeGame: IChallengeGame = {
+    badgeId: {
       badgeId: 1
     },
-    game: {
+    gameId: {
       gameId: 1
     }
   };
 
-  constructor(private challengeGameService: ChallengeGameService) {}
+  ngOnInit(): void {
+    this.badgeService.getAllBadges();
+    this.gameService.getAllSignal();
+  }
 
   addChallenge() {
-    this.challengeGameService.save(this.newChallengeGame);
+    console.log('New Challenge Game Data:', this.newChallengeGame);
     this.callParentEvent.emit(this.newChallengeGame);
   }
 }
