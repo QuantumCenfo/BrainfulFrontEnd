@@ -1,6 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
 import { IPartcipationOutdoor } from '../interfaces';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,9 @@ export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoo
   protected override source: string = "participationsOutdoor";
 
   public participationOutdoorSignal = signal<IPartcipationOutdoor[]>([]);
-
+  constructor(public override http: HttpClient) {
+    super();
+  }
   get participations$() {
     return this.participationOutdoorSignal;
   }
@@ -26,6 +30,12 @@ export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoo
         console.error("Error fetching Participations", err);
       },
     });
+  }
+  updateParticipation(id: number, participation: IPartcipationOutdoor): Observable<IPartcipationOutdoor> {
+  
+    console.log(id);
+    console.log(participation);
+    return this.http.put<IPartcipationOutdoor>(`${this.source}/${id}`, participation);
   }
 
 
