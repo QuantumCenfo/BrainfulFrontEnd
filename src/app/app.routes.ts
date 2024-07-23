@@ -97,6 +97,7 @@ export const routes: Routes = [
       {
         path: "challenges",
         component: ChallengesComponent,
+        canActivate: [AdminRoleGuard],
         data: {
           authorities: [IRole.superAdmin],
           name: "Desafios",
@@ -106,6 +107,7 @@ export const routes: Routes = [
       {
         path: "badges",
         component: BadgesComponent,
+        canActivate: [AdminRoleGuard],
         data: {
           authorities: [IRole.superAdmin],
           name: "Insignias",
@@ -115,6 +117,7 @@ export const routes: Routes = [
       {
         path: "contents",
         component: ContentsComponent,
+        canActivate: [AdminRoleGuard],
         data: {
           authorities: [IRole.superAdmin],
           name: "Contenido Educativo",
@@ -130,7 +133,7 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
-      
+
       {
         path: "forums",
         component: ForumsComponent,
@@ -224,7 +227,6 @@ export const routes: Routes = [
         component: MemoryBoardComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
       },
       {
@@ -232,28 +234,22 @@ export const routes: Routes = [
         component: SequenceGameComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
-       
       },
       {
         path: "puzzle-game",
         component: PuzzleComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
-       
       },
       {
         path: "reaction-game",
         component: ReactionGameComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
       },
-      
     ],
   },
 ];

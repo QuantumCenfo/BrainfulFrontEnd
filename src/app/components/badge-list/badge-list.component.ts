@@ -1,4 +1,4 @@
-import { Component, inject, Input } from "@angular/core";
+import { Component, inject, input, Input, SimpleChanges } from "@angular/core";
 import { IBadge } from "../../interfaces";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BadgeService } from "../../services/badge.service";
@@ -7,6 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { ModalComponent } from "../modal/modal.component";
 import { BadgeFormComponent } from "../badge-form/badge-form.component";
 import Swal from "sweetalert2";
+import { UserBadgeService } from "../../services/user-badge.service";
 
 @Component({
   selector: "app-badge-list",
@@ -17,13 +18,21 @@ import Swal from "sweetalert2";
 })
 export class BadgeListComponent {
   @Input() badgeList: IBadge[] = [];
-  @Input() hasPermission: boolean = false;
 
   private badgeSerivce = inject(BadgeService);
+
   public modalService = inject(NgbModal);
+
+  @Input() isAllowed: boolean = false;
 
   public selectedBadge: IBadge = {};
   public selectedFile: File | null = null;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["isAllowed"]) {
+      console.log("isAllowed: ", this.isAllowed);
+    }
+  }
 
   showDetailModal(badge: IBadge, modal: any) {
     console.log("Badge: ", badge, "modal: ", modal);
