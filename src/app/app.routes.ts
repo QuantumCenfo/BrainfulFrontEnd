@@ -99,7 +99,7 @@ export const routes: Routes = [
         canActivate: [AdminRoleGuard],
         data: {
           authorities: [IRole.superAdmin],
-          name: "Desafios",
+          name: "Desafíos",
           showInSidebar: true,
         },
       },
@@ -120,7 +120,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRole.superAdmin],
           name: "Contenido Educativo",
-          showInSidebar: true,
+          showInSidebar: false,
         },
       },
       {
@@ -144,7 +144,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRole.user],
           name: "Recordatorios",
-          showInSidebar: true,
+          showInSidebar: false,
         },
       },
       {
@@ -158,7 +158,7 @@ export const routes: Routes = [
         },
       },
       {
-        path: "recomendations",
+        path: "recommendations",
         component: RecomendationsComponent,
         data: {
           authorities: [IRole.user],
@@ -181,7 +181,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRole.user],
           name: "ContenidoEducativo",
-          showInSidebar: true,
+          showInSidebar: false,
         },
       },
       {
@@ -189,8 +189,8 @@ export const routes: Routes = [
         component: ContentsUsersComponent,
         data: {
           authorities: [IRole.user],
-          name: "Habitos",
-          showInSidebar: true,
+          name: "Hábitos",
+          showInSidebar: false,
         },
       },
       {
@@ -198,7 +198,7 @@ export const routes: Routes = [
         component: ChallengesUsersComponent,
         data: {
           authorities: [IRole.user],
-          name: "Desafios",
+          name: "Desafíos",
           showInSidebar: true,
         },
       },
@@ -207,7 +207,7 @@ export const routes: Routes = [
         component: ProfileComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          name: "profile",
+          name: "Perfil",
           showInSidebar: false,
         },
       },
