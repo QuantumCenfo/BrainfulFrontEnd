@@ -135,3 +135,16 @@ export interface IUserBadge {
   user?: IUser;
   obtainedDate?: string
 }
+
+export interface IChallengeGame {
+  challengeId?: number;
+  title?: string;
+  description?: string;
+  startDate?: Date;
+  endDate?: Date;
+  objectiveScore?: number;
+  objectiveTime?: number;
+  objectiveFrecuency?: number;
+  badgeId?: IBadge;
+  gameId?: IGame;
+}
