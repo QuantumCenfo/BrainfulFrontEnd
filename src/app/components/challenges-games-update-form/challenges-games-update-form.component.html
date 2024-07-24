@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="col-12">
-        <p>{{title}}</p>
+        <p>{{titleComp}}</p>
       </div>
       <div class="col-6">
         <input #startDate="ngModel" type="date" class="form-control" id="startDate" name="startDate" 
@@ -31,7 +31,7 @@
           (click)="addEdit()"
           class="btn btn-primary d-flex align-items-center">
           <i class="fa-solid fa-pencil white me-2"></i>
-          <p class="mb-0"> {{title}} </p>
+          <p class="mb-0"> {{titleComp}} </p>
         </button>
       </div>
     </div>

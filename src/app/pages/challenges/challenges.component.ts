@@ -1,5 +1,6 @@
 import { ChallengesGamesFormComponent } from './../../components/challenges-games-form/challenges-games-form.component';
 import { ChallengeGameService } from './../../services/challenge-game.service';
+import { ChallengesGamesUpdateFormComponent } from "../../components/challenges-games-update-form/challenges-games-update-form.component";
 import { ChallengeGamesListComponent } from './../../components/challenges-games-list/challenges-games-list.component';
 import { Component, inject, Input, OnInit, ViewChild } from "@angular/core";
 import { IChallengeGame } from "../../interfaces";
@@ -17,13 +18,14 @@ import { GameService } from '../../services/game.service';
 @Component({
   selector: 'app-challenges',
   standalone: true,
-  imports: [ CommonModule,
+  imports: [CommonModule,
     ModalComponent,
     LoaderComponent,
     ChallengeGamesListComponent,
     RouterModule,
     AddButtonComponent,
-    ChallengesGamesFormComponent],
+    ChallengesGamesFormComponent,
+    ChallengesGamesUpdateFormComponent],
   templateUrl: './challenges.component.html',
   styleUrl: './challenges.component.scss'
 })

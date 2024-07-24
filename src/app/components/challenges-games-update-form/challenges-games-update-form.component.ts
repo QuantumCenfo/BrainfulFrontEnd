@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-challenges-games-form',
+  selector: 'app-challenges-games-update-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -14,13 +14,13 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './challenges-games-update-form.component.html',
   styleUrl: './challenges-games-update-form.component.scss'
 })
-export class ChallengesGamesFormComponent {
-  @Input() title: string = '';
+export class ChallengesGamesUpdateFormComponent {
+  @Input() titleComp: string = 'Update Dates';
   @Input() toUpdateDateChallengeGame: IChallengeGame = {
-    badge:{
+    badgeId:{
       badgeId:1
     },
-    game:{
+    gameId:{
       gameId:1
     }
   };
@@ -31,4 +31,6 @@ export class ChallengesGamesFormComponent {
   addEdit()  {
     this.callParentEvent.emit(this.toUpdateDateChallengeGame);
   }
+
+  
 }

@@ -43,6 +43,23 @@ h2 {
     height: 40px;
     background-color: #b3e5fc;
     border-radius: 0 0 15px 15px;
-    
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 10px;
+    gap: 10px;
+}
+
+  
+.edit-button-custom {
+    background-color: #b3e5fc;
+    border: none;
+    color: #333;
+    font-size: 20px;
+    cursor: pointer;
+}
+  
+.edit-button-custom:hover {
+    background-color: #81d4fa;
 }
   
