@@ -53,6 +53,7 @@ export class FormComponent implements OnInit {
         position: 'center',
         text: 'Por favor, completa todos los campos.',
         showConfirmButton: false,
+        showCancelButton: false,
         timer: 2000,
         timerProgressBar: true,
       });
@@ -129,7 +130,7 @@ export class FormComponent implements OnInit {
     
     
     }).then((result) => {
-        this.router.navigate(["app/recomendations"]);
+        this.router.navigate(["app/recommendations"]);
      
     });
     }
