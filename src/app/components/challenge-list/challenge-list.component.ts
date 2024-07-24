@@ -27,4 +27,10 @@ export class ChallengeListComponent {
   private outDoorService = inject(ChallengeOutdoorService);
 
   public modalService = inject(NgbModal);
+
+  showDetail(challengeOutdoor: IChallengeOutdoor, modal: any) {
+    this.currentOutDoorChallenge = { ...challengeOutdoor };
+    modal.show();
+    console.log(challengeOutdoor);
+  }
 }

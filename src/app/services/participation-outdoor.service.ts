@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
 import { IPartcipationOutdoor } from '../interfaces';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -36,6 +36,16 @@ export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoo
     console.log(id);
     console.log(participation);
     return this.http.put<IPartcipationOutdoor>(`${this.source}/${id}`, participation);
+  }
+  addParticipation(participation: IPartcipationOutdoor, imageFile: File) {
+    const formData = new FormData();
+
+    formData.append("participationOutdoor", JSON.stringify(participation));
+    formData.append("image", imageFile);
+
+    return this.http.post(this.source, formData, {
+      headers: new HttpHeaders({}),
+    });
   }
 
 

@@ -12,7 +12,7 @@
   
         <div class="btn-container d-flex justify-content-evenly">
           <button
-            class="btn btn-primary">
+            class="btn btn-primary" (click)="showDetail(outDoorChallenge, formModal)">
             <P>Completar Desafío</P>
           </button>
         </div>
@@ -36,7 +36,7 @@
   
   <app-modal #formModal>
     <app-outdoor-form 
-    [ourDoorChallenge]="currentOutDoorChallenge">
+    [outDoorChallenge]="currentOutDoorChallenge">
     </app-outdoor-form>
   </app-modal>
   
