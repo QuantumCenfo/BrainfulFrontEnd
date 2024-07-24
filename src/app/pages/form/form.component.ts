@@ -130,7 +130,7 @@ export class FormComponent implements OnInit {
     
     
     }).then((result) => {
-        this.router.navigate(["app/recomendations"]);
+        this.router.navigate(["app/recommendations"]);
      
     });
     }
