@@ -84,8 +84,6 @@ export interface IRecomendation {
   form?: IForm;
 }
 
-
-
 export interface ICard {
   imageId: string;
   state: "default" | "flipped" | "matched";
@@ -109,6 +107,12 @@ export interface IBadge {
   title?: string;
   description?: string;
   url?: string;
+}
+
+export interface IUserBadge {
+  userBadgeId?: number;
+  badge?: IBadge;
+  user?: IUser;
 }
 
 export interface IChallengeGame {

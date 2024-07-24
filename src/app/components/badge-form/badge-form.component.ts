@@ -1,8 +1,9 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, inject, Input, Output } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
 import { IBadge } from "../../interfaces";
 import { ModalComponent } from "../modal/modal.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-badge-form",
@@ -17,6 +18,8 @@ export class BadgeFormComponent {
     description: "",
     url: "",
   };
+  @Input() actualFile: File | null = null;
+  @Input() btn = "";
 
   file: File | null = null;
 
@@ -24,9 +27,11 @@ export class BadgeFormComponent {
     badge: IBadge;
     file: File | null;
   }>();
+  public modalService = inject(NgbModal);
 
   addEditBadge() {
     this.callParentEvent.emit({ badge: this.badge, file: this.file });
+    this.modalService.dismissAll();
   }
   onFileChange(event: any) {
     this.file = event.target.files[0];
