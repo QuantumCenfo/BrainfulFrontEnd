@@ -148,3 +148,11 @@ export interface IChallengeGame {
   badgeId?: IBadge;
   gameId?: IGame;
 }
+
+export interface IForum {
+  forumId?: number;
+  title?: string;
+  description?: string;
+  anonymous?: boolean;
+  user?: IUser;
+}

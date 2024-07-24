@@ -1,12 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from "@angular/core";
+import { IForum } from "../../interfaces";
+import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { ForumService } from "../../services/forum.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
+
 
 @Component({
-  selector: 'app-forums',
+  selector: "app-forums",
   standalone: true,
-  imports: [],
-  templateUrl: './forums.component.html',
-  styleUrl: './forums.component.scss'
+
+  imports: [
+    FormsModule,
+    CommonModule,
+  ],
+
+  templateUrl: "./forums.component.html",
+  styleUrls: ["./forums.component.scss"],
 })
 export class ForumsComponent {
+  isMyForumsView = false;
+  selectedDifficulty: string = "";
+  onButtonDificultyClick(dificulty: string): void {
+    this.selectedDifficulty = dificulty;
+    console.log("Selected: ", this.selectedDifficulty);
+  }
+
+  public forumList: IForum[] = [];
+  private service = inject(ForumService);
+  private snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+
+  displayedForums: IForum[] = [];
+  constructor() {
+    this.service.getAllSignal();
+    effect(() => {
+      this.forumList = this.service.forums$();
+      this.updateDisplayedForums();
+    });
+  }
+
+  updateDisplayedForums(): void {
+    this.displayedForums = this.forumList; // Actualiza displayedForums con los datos del servicio
+    console.log(this.displayedForums);
+  }
+
+  getUserIdFromLocalStorage(): number | undefined {
+    const authUser = localStorage.getItem('auth_user');
+    if (authUser) {
+      const user = JSON.parse(authUser);
+      return user.id ? Number(user.id) : undefined;
+    }
+    return undefined;
+  }
+
+  onMyForumsClick(): void {
+    if (this.isMyForumsView) {
+      this.loadAllForums();
+      this.isMyForumsView = false;
+    } else {
+      this.loadMyForums();
+      this.isMyForumsView = true;
+    }
+  }
+
+  loadAllForums(): void {
+    this.service.getAllSignal();
+  }
+
+  loadMyForums(): void {
+    const userId = this.getUserIdFromLocalStorage();
+    if (userId) {
+      this.service.getMySignal(userId);
+    } else {
+      console.error('User ID is not available in local storage');
+    }
+  }
 
 }
