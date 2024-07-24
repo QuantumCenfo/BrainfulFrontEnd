@@ -1,0 +1,48 @@
+.challenge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+  
+.challenge-card {
+    width: 250px;
+    height: 300px;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding-top: 20px;
+    margin: 20px;
+}
+  
+.challenge-card h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+  
+.challenge-card p {
+    flex: 1;
+    font-size: 1em;
+    color: #777;
+    margin: 10px 0;
+}
+  
+.challenge-card .footer-card {
+    height: 40px;
+    background-color: #b3e5fc;
+    border-radius: 0 0 15px 15px;
+    
+}
+  

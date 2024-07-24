@@ -1,6 +1,6 @@
 <div class="container">
     @defer {
-    <!-- <app-challenges-list [badgeList]="badgeService.badges$()" /> -->
+    <app-challenges-games-list [activeChallengeGameList]="challengeGameService.activeChallengeGame$()" [inactiveChallengeGameList]="challengeGameService.inactiveChallengeGame$()"/>
     <div class="d-flex justify-content-center align-items-center">
         <app-add-button (click)="showModal()"></app-add-button>
     </div>

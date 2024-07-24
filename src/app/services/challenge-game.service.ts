@@ -10,9 +10,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ChallengeGameService extends BaseService<IChallengeGame> {
   protected override source: string = "challengeGame";
   private snackBar = inject(MatSnackBar);
+  private activeChallengeGameSignal = signal<IChallengeGame[]>([]);
+  private inactiveChallengeGameSignal = signal<IChallengeGame[]>([]);
   private challengeGameSignal = signal<IChallengeGame[]>([]);
   constructor(protected override http: HttpClient) {
     super();  
+  }
+
+  get activeChallengeGame$() {
+    return this.activeChallengeGameSignal;
+  }
+
+  get inactiveChallengeGame$() {
+    return this.inactiveChallengeGameSignal;
   }
 
   get challengeGame$() {
@@ -20,10 +30,10 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
   }
 
   getAllActiveChallenges() {
-    this.findAll().subscribe({
-      next: (res: any) => {
+    this.http.get<IChallengeGame[]>(`${this.source}/active-challenges`).subscribe({
+      next: (res: IChallengeGame[]) => {
         res.reverse();
-        this.challengeGameSignal.set(res);
+        this.activeChallengeGameSignal.set(res);
         console.log("Active challenges fetched successfully");
         console.log("Response: ", res);
       },
@@ -34,11 +44,11 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
   }
 
   getAllInactiveChallenges() {
-    this.findAll().subscribe({
-      next: (res: any) => {
+    this.http.get<IChallengeGame[]>(`${this.source}/inactive-challenges`).subscribe({
+      next: (res: IChallengeGame[]) => {
         res.reverse();
-        this.challengeGameSignal.set(res);
-        console.log("Inactive challenges successfully");
+        this.inactiveChallengeGameSignal.set(res);
+        console.log("Inactive challenges fetched successfully");
         console.log("Response: ", res);
       },
       error: (err: any) => {
