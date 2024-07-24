@@ -27,7 +27,7 @@ getUserIdFromLocalStorage(): number | undefined {
   }
   return undefined;
 }
-public geAllRecomendationsById() {
+public getAllRecomendationsById() {
   const user_id: number | undefined = this.getUserIdFromLocalStorage();
   if (user_id !== undefined) {
     this.find(user_id).subscribe({

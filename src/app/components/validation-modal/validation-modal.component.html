@@ -1,0 +1,21 @@
+<div class="title">Validación de desafios</div>
+<div class="val-container">
+  <div class="val-container-child info">
+    <p>Nombre de desafío: {{ participation.challengeOutdoor?.name }}</p>
+    <p>Descripción de desafío: {{ participation.challengeOutdoor?.description }}</p>
+    <p>Evidencia esperada: {{ participation.challengeOutdoor?.requirement }}</p>
+  </div>
+
+  <div class="image-container">
+    <img class="image-validation" [src]="participation.evidence" [class.enlarged]="isImageEnlarged" (click)="toggleImageSize()">
+  </div>
+
+  <div class="btn-container">
+    <button type="button" class="btn-denied"(click)="deniedParticipation()">
+      <p>Rechazar Participación</p>
+    </button>
+    <button type="button" class="btn-accept" (click)="acceptParticipation()">
+      <p>Aceptar Participación</p>
+    </button>
+  </div>
+</div>

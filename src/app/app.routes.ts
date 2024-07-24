@@ -28,6 +28,7 @@ import { PuzzleComponent } from "./components/puzzle-game/puzzle-game.component"
 import { QuantumLandingComponent } from "./quantum-landing/quantum-landing.component";
 import { BarinfulLandingComponent } from "./pages/Brainful/barinful-landing/barinful-landing.component";
 import { RecomendationsComponent } from "./pages/recomendations/recomendations.component";
+import { ParticipationsComponent } from "./pages/participations/participations.component";
 
 export const routes: Routes = [
   {
@@ -154,6 +155,26 @@ export const routes: Routes = [
           authorities: [IRole.user],
 
           name: "Juegos",
+          showInSidebar: true,
+        },
+      },
+      {
+        path: "participationsOutdoor",
+        component: ParticipationsComponent,
+        data: {
+          authorities: [IRole.superAdmin],
+
+          name: "Participaciones",
+          showInSidebar: true,
+        },
+      },
+      {
+        path: "participationsOutdoor",
+        component: ParticipationsComponent,
+        data: {
+          authorities: [IRole.superAdmin],
+
+          name: "Participaciones",
           showInSidebar: true,
         },
       },
