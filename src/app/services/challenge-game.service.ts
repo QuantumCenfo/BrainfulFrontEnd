@@ -20,8 +20,8 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
   }
 
   getAllActiveChallenges() {
-    this.findAll().subscribe({
-      next: (res: any) => {
+    this.http.get<IChallengeGame[]>(`${this.source}/active-challenges`).subscribe({
+      next: (res: IChallengeGame[]) => {
         res.reverse();
         this.challengeGameSignal.set(res);
         console.log("Active challenges fetched successfully");
