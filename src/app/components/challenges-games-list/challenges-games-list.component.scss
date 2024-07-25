@@ -11,7 +11,9 @@ h2 {
     font-size: 1.5em;
     color: #333;
 }
-  
+  h2,h3{
+    font-family: Dosis, "Dosis", sans-serif;
+  }
 .challenge-card {
     width: 250px;
     height: 300px;
@@ -41,7 +43,7 @@ h2 {
   
 .challenge-card .footer-card {
     height: 40px;
-    background-color: #b3e5fc;
+    background-color: #16c2d5;
     border-radius: 0 0 15px 15px;
     display: flex;
     align-items: center;
@@ -52,7 +54,7 @@ h2 {
 
   
 .edit-button-custom {
-    background-color: #b3e5fc;
+    background-color: #16c2d5;
     border: none;
     color: #333;
     font-size: 20px;
@@ -60,6 +62,6 @@ h2 {
 }
   
 .edit-button-custom:hover {
-    background-color: #81d4fa;
+    background-color: #14b5c7;
 }
   

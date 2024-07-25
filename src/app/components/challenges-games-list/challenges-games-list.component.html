@@ -5,11 +5,14 @@
       <p>{{ challenge.description }}</p>
       <div class="footer-card">
         <span class="edit-text-custom">Editar fechas</span>
-        <button class="btn-primary-custom edit-button-custom" (click)="showModal(challenge)">
+        <button class="btn-primary-custom edit-button-custom" (click)="showModalUpdate(challenge)">
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
       </div>
     </div>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+  <app-add-button (click)="showModal()"></app-add-button>
 </div>
 <h2>Desafíos Inactivos</h2>
 <div class="challenge-list">
@@ -18,7 +21,7 @@
     <p>{{ challenge.description }}</p>
     <div class="footer-card">
         <span class="edit-text-custom">Editar fechas</span>
-        <button class="btn-primary-custom edit-button-custom" (click)="showModal(challenge)">
+        <button class="btn-primary-custom edit-button-custom" (click)="showModalUpdate(challenge)">
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
     </div>
@@ -26,8 +29,12 @@
 
 
 
-<app-modal #formModal>
-    <app-challenges-games-update-form (callParentEvent)="onFormEventCalled($event)" [toUpdateDateChallengeGame]="selectedChallengeGame">
+<app-modal #formModalUpdate>
+    <app-challenges-games-update-form (callParentEvent)="onFormUpdateEventCalled($event)" [toUpdateDateChallengeGame]="selectedChallengeGame">
     </app-challenges-games-update-form>
+</app-modal>
+<app-modal #formModal>
+  <app-challenges-games-form (callParentEvent)="onFormEventCalled($event)" [badgeList]="badgeService.badges$()" [gameList]="gameService.games$()">
+  </app-challenges-games-form>
 </app-modal>
   

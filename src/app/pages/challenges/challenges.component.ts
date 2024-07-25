@@ -38,7 +38,7 @@ export class ChallengesComponent implements OnInit {
   public authSerivce = inject(AuthService);
   public routeAuth: string[] = [];
   public hasPermission: boolean = false;
-  @ViewChild("formModal") formModal!: ModalComponent;
+ 
 
   ngOnInit(): void {
     this.badgeService.getAllBadges();
@@ -47,13 +47,5 @@ export class ChallengesComponent implements OnInit {
     this.challengeGameService.getAllInactiveChallenges();
   }
 
-  onFormEventCalled (params: IChallengeGame) {
-    console.log('Challenge Game Data to Save:', params);
-    this.challengeGameService.save(params);
-    this.modalService.dismissAll();
-  }
-
-  showModal() {
-    this.formModal.show();
-  }
+  
 }

@@ -3,6 +3,8 @@ import { IChallengeGame } from './../interfaces/index';
 import { inject, Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root",
@@ -13,6 +15,7 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
   private activeChallengeGameSignal = signal<IChallengeGame[]>([]);
   private inactiveChallengeGameSignal = signal<IChallengeGame[]>([]);
   private challengeGameSignal = signal<IChallengeGame[]>([]);
+  public router = inject(Router);
   constructor(protected override http: HttpClient) {
     super();  
   }
@@ -62,15 +65,35 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
     this.add(item).subscribe({
       next: (response: any) => {
         this.challengeGameSignal.update((results: IChallengeGame[]) => [response, ...results]);
+        Swal.fire({
+          iconColor: "white",
+          color: "white",
+          background: "#36cf4f",
+          confirmButtonColor: "#ff9f1c",
+          cancelButtonColor: "#16c2d5",
+          title: "Desafío guardado",
+          icon: "success",
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          showCancelButton: false,
+        });
+        this.router.navigate(['app/challenges']);
       },
       error: (error : any) => {
-        this.snackBar.open(error.error.description, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos',
+          iconColor: 'white',
+          color: 'white',
+          background:'#d54f16',
+          position: 'center',
+          text: 'Hubo un error guardando el desafío',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
         });
-        console.error('error', error);
-        console.error('error', error);
+        this.router.navigate(['app/challenges']);
       }
     })
   }
@@ -82,11 +105,35 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
           cg.challengeId === challengeGame.challengeId ? res : cg
         );
         this.challengeGameSignal.set(updatedChallengeGames);
-        console.log("Response: ", res);
-        console.log("Challenge game updated successfully");
+        Swal.fire({
+          iconColor: "white",
+          color: "white",
+          background: "#36cf4f",
+          confirmButtonColor: "#ff9f1c",
+          cancelButtonColor: "#16c2d5",
+          title: "Desafío actualizado",
+          icon: "success",
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          showCancelButton: false,
+        });
+        this.router.navigate(['app/challenges']);
       },
       error: (err: any) => {
-        console.error("Error updating challenge game", err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Lo sentimos',
+          iconColor: 'white',
+          color: 'white',
+          background:'#d54f16',
+          position: 'center',
+          text: 'Hubo un error actualizando el desafío',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        });
+        this.router.navigate(['app/challenges']);
       },
     });
   }
