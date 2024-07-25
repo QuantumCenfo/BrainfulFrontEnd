@@ -1,7 +1,7 @@
 import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
 import { IBadge } from "../interfaces";
-import { from } from "rxjs";
+import { catchError, from, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import Swal from "sweetalert2";
 
@@ -150,7 +150,20 @@ export class BadgeService extends BaseService<IBadge> {
           console.log("Badge deleted successfully");
         },
         error: (err: any) => {
-          console.error("Error deleting badge", err);
+          console.log("error")  
+            Swal.fire({
+              icon: 'warning',
+              title: 'Lo sentimos',
+              iconColor: 'white',
+              color: 'white',
+              background:'#d54f16',
+              position: 'center',
+              text: 'No puedes borrar una insignia que tenga un desafío asociado',
+              showConfirmButton: false,
+              timer: 10000,
+              timerProgressBar: true,
+            });
+            return throwError(() => new Error('Error al agregar la participación'));
         },
       });
     });
