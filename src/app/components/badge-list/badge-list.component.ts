@@ -19,7 +19,7 @@ import { UserBadgeService } from "../../services/user-badge.service";
 export class BadgeListComponent {
   @Input() badgeList: IBadge[] = [];
 
-  private badgeSerivce = inject(BadgeService);
+  private badgeService = inject(BadgeService);
 
   public modalService = inject(NgbModal);
 
@@ -41,44 +41,11 @@ export class BadgeListComponent {
   }
   onFormEventCalled(event: { badge: IBadge; file: File | null }) {
     console.log("PAram", event);
-    if (event.file) {
-      this.badgeSerivce.updateBadge(event.badge, event.file).subscribe({
-        next: (res: any) => {
-          const updatedBadge = this.badgeSerivce
-            .badgeSignal()
-            .map((b) => (b.badgeId === event.badge.badgeId ? event.badge : b));
-          this.badgeSerivce.badgeSignal.set(updatedBadge);
-          console.log("Response: ", res);
-
-          Swal.fire({
-            title: "¡Éxito!",
-            text: "La insignia ha sido actualizada",
-            icon: "success",
-            iconColor: "white",
-            color: "white",
-            background: "#16c2d5",
-            confirmButtonColor: "#ff9f1c",
-          });
-        },
-        error: (err: any) => {
-          console.log("Error: ", err);
-        },
-      });
-    } else {
-      Swal.fire({
-        title: "Oops...",
-        text: "Porfavor subir una imagen",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        confirmButtonColor: "#ff9f1c",
-      });
-    }
+    this.badgeService.handleUpdateBadge(event.badge, event.file!);
     this.modalService.dismissAll();
   }
 
   delteBadge(badgeID: number) {
-    this.badgeSerivce.deleteBadge(badgeID);
+    this.badgeService.deleteBadge(badgeID);
   }
 }

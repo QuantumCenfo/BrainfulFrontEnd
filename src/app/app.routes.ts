@@ -158,16 +158,7 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
-      {
-        path: "participationsOutdoor",
-        component: ParticipationsComponent,
-        data: {
-          authorities: [IRole.superAdmin],
-
-          name: "Participaciones",
-          showInSidebar: true,
-        },
-      },
+      
       {
         path: "participationsOutdoor",
         component: ParticipationsComponent,
