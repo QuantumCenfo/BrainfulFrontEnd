@@ -4,6 +4,7 @@
       <p>{{ titleComp }}</p>
     </div>
     <div class="col-12">
+      <label for="title">Título</label>
       <input 
         #title="ngModel" 
         type="text" 
@@ -17,6 +18,7 @@
       />
     </div>
     <div class="col-12">
+      <label for="description">Descripcion</label>
       <textarea 
         #description="ngModel" 
         class="form-control" 
@@ -29,6 +31,7 @@
       ></textarea>
     </div>
     <div class="col-12">
+      <label for="objectiveScore">Puntos Objetivo</label>
       <input 
         #objectiveScore="ngModel" 
         type="number" 
@@ -42,6 +45,7 @@
       />
     </div>
     <div class="col-12">
+      <label for="objectiveTime">Tiempo Objetivo (en segundos)</label>
       <input 
         #objectiveTime="ngModel" 
         type="number" 
@@ -55,6 +59,7 @@
       />
     </div>
     <div class="col-6">
+      <label for="startDate">Fecha de Inicio</label>
       <input 
         #startDate="ngModel" 
         type="date" 
@@ -68,6 +73,7 @@
       />
     </div>
     <div class="col-6">
+      <label for="endDate">Fecha de Fin</label>
       <input 
         #endDate="ngModel" 
         type="date" 
@@ -82,6 +88,7 @@
     </div>
     @if(newChallengeGame.badgeId){
     <div class="col-6">
+      <label for="badge">Insigna a Obtener</label>
       <select 
         #badge="ngModel" 
         class="form-control" 
@@ -97,6 +104,7 @@
     }
     @if(newChallengeGame.gameId){
     <div class="col-6">
+      <label for="game">Juego para el desafío</label>
       <select 
         #game="ngModel" 
         class="form-control" 

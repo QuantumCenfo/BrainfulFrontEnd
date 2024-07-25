@@ -17,6 +17,7 @@ import { ChallengesGamesUpdateFormComponent } from '../challenges-games-update-f
 export class ChallengeGamesListComponent {
   @Input() activeChallengeGameList: IChallengeGame[] = [];
   @Input() inactiveChallengeGameList: IChallengeGame[] = [];
+  public selectedChallengeGame: IChallengeGame = {};
   public challengeGameService = inject(ChallengeGameService);
   public modalService = inject(NgbModal);
   @ViewChild("formModal") formModal!: ModalComponent;
@@ -25,7 +26,8 @@ export class ChallengeGamesListComponent {
     
   }
 
-  showModal() {
+  showModal(item: IChallengeGame) {
+    this.selectedChallengeGame = {...item};
     this.formModal.show();
   }
 
