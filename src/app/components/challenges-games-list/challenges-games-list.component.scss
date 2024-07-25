@@ -1,13 +1,13 @@
 .challenge-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
 }
 
 h2 {
     text-align: center;
     margin: 0;
+    padding: 20px;
     font-size: 1.5em;
     color: #333;
 }

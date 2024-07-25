@@ -23,7 +23,7 @@ export class ChallengesGamesFormComponent implements OnInit{
   public gameService = inject(GameService);
   public challengeGameService = inject(ChallengeGameService);
 
-  @Input() titleComp: string = 'Add Challenge';
+  @Input() titleComp: string = 'Añadir Desafío';
   @Input() badgeList: IBadge[] = [];
   @Input() gameList: IGame[] = [];
   @Output() callParentEvent: EventEmitter<IChallengeGame> = new EventEmitter<IChallengeGame>();
