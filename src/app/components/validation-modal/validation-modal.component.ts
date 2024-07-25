@@ -112,7 +112,7 @@ export class ValidationModalComponent {
       return;
     }
     const updatedParticipation = {
-      status: 'rechazado',
+      status: 'rechazada',
       fechaRevision: new Date().toISOString().split('T')[0] 
     };
     if (this.participation.user?.email && this.participation.user?.name) {

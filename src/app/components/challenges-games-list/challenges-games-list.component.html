@@ -1,1 +1,33 @@
-<p>challenges-games-list works!</p>
+<h2>Desafíos Activos</h2>
+<div class="challenge-list">
+    <div class="challenge-card" *ngFor="let challenge of activeChallengeGameList">
+      <h3>{{ challenge.title }}</h3>
+      <p>{{ challenge.description }}</p>
+      <div class="footer-card">
+        <span class="edit-text-custom">Editar fechas</span>
+        <button class="btn-primary-custom edit-button-custom" (click)="showModal(challenge)">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+      </div>
+    </div>
+</div>
+<h2>Desafíos Inactivos</h2>
+<div class="challenge-list">
+<div class="challenge-card" *ngFor="let challenge of inactiveChallengeGameList">
+    <h3>{{ challenge.title }}</h3>
+    <p>{{ challenge.description }}</p>
+    <div class="footer-card">
+        <span class="edit-text-custom">Editar fechas</span>
+        <button class="btn-primary-custom edit-button-custom" (click)="showModal(challenge)">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+    </div>
+</div>
+
+
+
+<app-modal #formModal>
+    <app-challenges-games-update-form (callParentEvent)="onFormEventCalled($event)" [toUpdateDateChallengeGame]="selectedChallengeGame">
+    </app-challenges-games-update-form>
+</app-modal>
+  
