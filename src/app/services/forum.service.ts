@@ -8,17 +8,18 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class ForumService extends BaseService<IForum> {
   protected override source: string = "forums";
-  private forumsListSignal = signal<IForum[]>([]);
+  private forumsSignal = signal<IForum[]>([]);
+  private snackBar = inject(MatSnackBar);
 
   get forums$() {
-    return this.forumsListSignal;
+    return this.forumsSignal;
   }
   //Get all games 
   getAllSignal() {
     this.findAll().subscribe({
       next: (response: any) => {
         response.reverse();
-        this.forumsListSignal.set(response);
+        this.forumsSignal.set(response);
       },
       error: (error: any) => {
         console.error('Error fetching games', error);
@@ -30,7 +31,7 @@ export class ForumService extends BaseService<IForum> {
     this.http.get<IResponse<IForum[]>>(`${this.source}/UserId/${userId}`).subscribe({
       next: (response: any) => {
         response.reverse();
-        this.forumsListSignal.set(response);
+        this.forumsSignal.set(response);
       },
       error: (error: any) => {
         console.error('Error fetching forums', error);
@@ -38,5 +39,35 @@ export class ForumService extends BaseService<IForum> {
     });
   }
   
-  
+  deleteForum(forumId: number) {
+    this.del(forumId).subscribe({
+      next: () => {
+        const deletedForum = this.forumsSignal().filter(
+          (forum: IForum) => forum.forumId !== forumId
+        );
+        this.forumsSignal.set(deletedForum);
+      },
+      error: (err: any) => {
+        console.error("Error deleting badge", err);
+      },
+    });
+  }
+
+  public save(item: IForum) {
+    console.log(item);
+    this.add(item).subscribe({
+      next: (response: any) => {
+        this.forumsSignal.update((forums: IForum[]) => [response, ...forums]);
+      },
+      error: (error : any) => {
+        this.snackBar.open(error.error.description, 'Close', {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar']
+        });
+        console.error('error', error);
+      }
+    })
+  } 
+
 }
