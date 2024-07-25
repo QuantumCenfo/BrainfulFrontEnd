@@ -1,6 +1,7 @@
 import { ChallengesGamesFormComponent } from './../../components/challenges-games-form/challenges-games-form.component';
 import { ChallengeGameService } from './../../services/challenge-game.service';
-import { ChallengesGamesListComponent } from './../../components/challenges-games-list/challenges-games-list.component';
+import { ChallengesGamesUpdateFormComponent } from "../../components/challenges-games-update-form/challenges-games-update-form.component";
+import { ChallengeGamesListComponent } from './../../components/challenges-games-list/challenges-games-list.component';
 import { Component, inject, Input, OnInit, ViewChild } from "@angular/core";
 import { IChallengeGame } from "../../interfaces";
 import { CommonModule } from "@angular/common";
@@ -17,13 +18,14 @@ import { GameService } from '../../services/game.service';
 @Component({
   selector: 'app-challenges',
   standalone: true,
-  imports: [ CommonModule,
+  imports: [CommonModule,
     ModalComponent,
     LoaderComponent,
-    ChallengesGamesListComponent,
+    ChallengeGamesListComponent,
     RouterModule,
     AddButtonComponent,
-    ChallengesGamesFormComponent],
+    ChallengesGamesFormComponent,
+    ChallengesGamesUpdateFormComponent],
   templateUrl: './challenges.component.html',
   styleUrl: './challenges.component.scss'
 })
@@ -41,6 +43,8 @@ export class ChallengesComponent implements OnInit {
   ngOnInit(): void {
     this.badgeService.getAllBadges();
     this.gameService.getAllSignal();
+    this.challengeGameService.getAllActiveChallenges();
+    this.challengeGameService.getAllInactiveChallenges();
   }
 
   onFormEventCalled (params: IChallengeGame) {

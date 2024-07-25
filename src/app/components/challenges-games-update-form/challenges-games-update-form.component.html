@@ -1,9 +1,10 @@
 <div class="container">
     <div class="row">
       <div class="col-12">
-        <p>{{title}}</p>
+        <p>{{titleComp}}</p>
       </div>
       <div class="col-6">
+        <label for="startDate">Fecha de Inicio</label>
         <input #startDate="ngModel" type="date" class="form-control" id="startDate" name="startDate" 
           placeholder="Product name"
           [(ngModel)]="toUpdateDateChallengeGame.startDate" 
@@ -15,7 +16,8 @@
         />
       </div>
       <div class="col-6">
-        <input #endDate="ngModel" type="text" class="form-control" id="endDate" name="endDate" 
+        <label for="endDate">Fecha de Fin</label>
+        <input #endDate="ngModel" type="date" class="form-control" id="endDate" name="endDate" 
           placeholder="Product description"
           [(ngModel)]="toUpdateDateChallengeGame.endDate" 
           [ngClass]="{ 
@@ -31,7 +33,7 @@
           (click)="addEdit()"
           class="btn btn-primary d-flex align-items-center">
           <i class="fa-solid fa-pencil white me-2"></i>
-          <p class="mb-0"> {{title}} </p>
+          <p class="mb-0"> {{titleComp}} </p>
         </button>
       </div>
     </div>
