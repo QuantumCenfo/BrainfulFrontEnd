@@ -41,9 +41,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    // Validar campos en blanco
     if (this.demenciaForm.invalid) {
-     
       Swal.fire({
         icon: 'error',
         title: 'Campos En blanco',
@@ -53,19 +51,16 @@ export class FormComponent implements OnInit {
         position: 'center',
         text: 'Por favor, completa todos los campos.',
         showConfirmButton: false,
+        showCancelButton: false,
         timer: 2000,
         timerProgressBar: true,
       });
-
-      // Marcar todos los campos como tocados para mostrar errores visuales
       Object.keys(this.demenciaForm.controls).forEach(field => {
         const control = this.demenciaForm.get(field);
         control?.markAsTouched({ onlySelf: true });
       });
       return;
     }
-
-    // Validar números negativos
     if (this.hasNegativeNumbers()) {
       Swal.fire({
         icon: 'error',
@@ -95,7 +90,6 @@ export class FormComponent implements OnInit {
     } else if (this.demenciaForm.value.drugs == "No") {
       drugsBool = false;
     } 
-   
     const form: IForm = {
       date: new Date().toISOString(),
       age: this.demenciaForm.value.age,
@@ -114,26 +108,8 @@ export class FormComponent implements OnInit {
       useDrugs: drugsBool,
       user: { id: user_id } as IUser,
     };
-    console.log("Form Results:", form);
     this.formService.save(form);
-    Swal.fire({
-      iconColor: "white",
-      color: "white",
-      background: "#36cf4f",
-      title: "Cuestionario guardado",
-      text: "Estamos generando tus recomendaciones",
-      icon: "success",
-      toast:true,
-      timer: 5000,
-      timerProgressBar: true,
-    
-    
-    }).then((result) => {
-        this.router.navigate(["app/recomendations"]);
-     
-    });
     }
-
   }
 
   isFieldInvalid(field: string) {

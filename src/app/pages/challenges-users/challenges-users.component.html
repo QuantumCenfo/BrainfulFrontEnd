@@ -1,1 +1,11 @@
-<p>challenges-users works!</p>
+<div class="container">
+    @defer{
+  
+    <app-challenge-list [outdoorChallengeList]="challengeOutDoorService.challengeOutdoors$()" [gameChallengeList]="challengeGameService.challengeGame$()" />
+  
+  
+    }@loading ( after 100ms; minimum 1s) {
+    <app-loader />
+    }
+  </div>
+  

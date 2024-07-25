@@ -1,1 +1,14 @@
-<p>forums works!</p>
+<!-- forums.component.html -->
+<div class="header-container">
+  <button class="my-forums-button" (click)="onMyForumsClick()">{{ isMyForumsView ? 'Todos los foros' : 'Mis foros' }}</button>
+  </div>
+  <div class="forum-container">
+    <div *ngFor="let forum of displayedForums" class="forum-card">
+      <h2 class="forum-title">{{ forum.title }}</h2>
+      <p class="forum-description">{{ forum.description }}</p>
+    </div>
+  </div>
+  <div class="add-button-container">
+    <button class="add-button">+</button>
+  </div>
+  

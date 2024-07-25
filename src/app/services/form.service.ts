@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
 import { IForm } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +21,32 @@ public save(item: IForm) {
   this.add(item).subscribe({
     next: (response: any) => {
       this.formsListSignal.update((results: IForm[]) => [response, ...results]);
-    },
-    error: (error : any) => {
-      this.snackBar.open(error.error.description, 'Close', {
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar']
+      Swal.fire({
+        iconColor: "white",
+        color: "white",
+        background: "#36cf4f",
+        confirmButtonColor: "#ff9f1c",
+        cancelButtonColor: "#16c2d5",
+        title: "Recomendacion Guardada",
+        icon: "success",
+        timer: 10000,
+        showConfirmButton: false,
+        showCancelButton: false,
       });
-      console.error('error', error);
-      console.error('error', error);
+    },
+    error: (error: any) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lo sentimos',
+        iconColor: 'white',
+        color: 'white',
+        background:'#d54f16',
+        position: 'center',
+        text: 'El servicio de recomendaciones no esta disponible en este momento.Intentelo más tarde',
+        showConfirmButton: false,
+        timer: 10000,
+        timerProgressBar: true,
+      });
     }
   })
 } 

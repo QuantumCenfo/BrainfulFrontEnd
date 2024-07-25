@@ -7,17 +7,27 @@ export interface IResponse<T> {
   data: T;
 }
 
-export interface IUser {
-  id?: number;
-  name?: string;
-  lastname?: string;
-  email?: string;
-  password?: string;
-  active?: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-  authorities?: IAuthority[];
+
+export interface IPartcipationOutdoor {
+  participationOutdoorId?: number;
+  evidence?: string;
+  status?: string;
+  fechaPublicacion?: string;
+  fechaRevision?: string;
+  challengeOutdoor?: IChallengeOutdoor;
+  user?: IUser;
 }
+export interface IChallengeOutdoor {
+  outdoorChallengeId?: number;
+  requirement?: string;
+  description?: string;
+  name?: string;
+  startDate?: string;
+  endDate?: string;
+  id?: IUser;
+  badgeId?:IBadge
+}
+
 
 export interface IAuthority {
   authority: string;
@@ -108,9 +118,41 @@ export interface IBadge {
   description?: string;
   url?: string;
 }
-
+export interface IUser {
+  id?: number;
+  name?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
+  active?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  authorities?: IAuthority[];
+}
 export interface IUserBadge {
   userBadgeId?: number;
   badge?: IBadge;
+  user?: IUser;
+  obtainedDate?: string
+}
+
+export interface IChallengeGame {
+  challengeId?: number;
+  title?: string;
+  description?: string;
+  startDate?: Date;
+  endDate?: Date;
+  objectiveScore?: number;
+  objectiveTime?: number;
+  objectiveFrecuency?: number;
+  badgeId?: IBadge;
+  gameId?: IGame;
+}
+
+export interface IForum {
+  forumId?: number;
+  title?: string;
+  description?: string;
+  anonymous?: boolean;
   user?: IUser;
 }
