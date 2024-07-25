@@ -3,6 +3,7 @@ import { BaseService } from "./base-service";
 import { IBadge } from "../interfaces";
 import { from } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: "root",
@@ -41,12 +42,83 @@ export class BadgeService extends BaseService<IBadge> {
     });
   }
 
+  handleAddBadge(badge: IBadge, imageFile: File) {
+    if (imageFile) {
+      this.addBadge(badge, imageFile).subscribe({
+        next: (res: any) => {
+          this.badgeSignal.update((badges: any) => [res, ...badges]);
+          console.log("Response: ", res);
+          console.log("Badge added successfully");
+          Swal.fire({
+            title: "¡Éxito!",
+            text: "La insignia ha sido agregada",
+            icon: "success",
+            iconColor: "white",
+            color: "white",
+            background: "#16c2d5",
+            confirmButtonColor: "#ff9f1c",
+          });
+        },
+        error: (err: any) => {
+          console.log("Error: ", err);
+        },
+      });
+    } else {
+      Swal.fire({
+        title: "Oops...",
+        text: "Porfavor suba una imagen",
+        icon: "warning",
+        iconColor: "white",
+        color: "white",
+        background: "#16c2d5",
+        confirmButtonColor: "#ff9f1c",
+      });
+    }
+  }
+
   updateBadge(badge: IBadge, imageFile: File) {
     const formData = new FormData();
     formData.append("badge", JSON.stringify(badge));
     formData.append("image", imageFile);
 
     return this.http.put(this.source + "/" + badge.badgeId, formData);
+  }
+
+  handleUpdateBadge(badge: IBadge, imageFile: File) {
+    if (imageFile) {
+      this.updateBadge(badge, imageFile).subscribe({
+        next: (res: any) => {
+          const updatedBadge = this.badgeSignal().map((b: IBadge) =>
+            b.badgeId === badge.badgeId ? badge : b
+          );
+          this.badgeSignal.set(updatedBadge);
+          console.log("Response: ", res);
+          console.log("Badge updated successfully");
+          Swal.fire({
+            title: "¡Éxito!",
+            text: "La insignia ha sido actualizada",
+            icon: "success",
+            iconColor: "white",
+            color: "white",
+            background: "#16c2d5",
+            confirmButtonColor: "#ff9f1c",
+          });
+        },
+        error: (err: any) => {
+          console.log("Error: ", err);
+        },
+      });
+    } else {
+      Swal.fire({
+        title: "Oops...",
+        text: "Porfavor subir una imagen",
+        icon: "warning",
+        iconColor: "white",
+        color: "white",
+        background: "#16c2d5",
+        confirmButtonColor: "#ff9f1c",
+      });
+    }
   }
 
   deleteBadge(badgeId: number) {

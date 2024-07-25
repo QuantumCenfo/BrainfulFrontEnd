@@ -43,40 +43,7 @@ export class BadgesComponent implements OnInit {
   }
 
   onFormEventCalled(event: { badge: IBadge; file: File | null }) {
-    if (event.file) {
-      this.badgeService.addBadge(event.badge, event.file).subscribe({
-        next: (res: any) => {
-          this.badgeService.badgeSignal.update((badges: any) => [
-            res,
-            ...badges,
-          ]);
-          console.log("Response: ", res);
-          console.log("Badge added successfully");
-          Swal.fire({
-            title: "¡Éxito!",
-            text: "La insignia ha sido agregada",
-            icon: "success",
-            iconColor: "white",
-            color: "white",
-            background: "#16c2d5",
-            confirmButtonColor: "#ff9f1c",
-          });
-        },
-        error: (err: any) => {
-          console.log("Error: ", err);
-        },
-      });
-    } else {
-      Swal.fire({
-        title: "Oops...",
-        text: "Porfavor suba una imagen",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        confirmButtonColor: "#ff9f1c",
-      });
-    }
+    this.badgeService.handleAddBadge(event.badge, event.file!);
   }
 
   showModal() {
