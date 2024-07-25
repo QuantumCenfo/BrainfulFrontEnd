@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
   styleUrl: './challenges-games-update-form.component.scss'
 })
 export class ChallengesGamesUpdateFormComponent {
-  @Input() titleComp: string = 'Update Dates';
+  @Input() titleComp: string = 'Actualizar Fechas';
   @Input() toUpdateDateChallengeGame: IChallengeGame = {
     badgeId:{
       badgeId:1
