@@ -1,14 +1,31 @@
-<!-- forums.component.html -->
 <div class="header-container">
   <button class="my-forums-button" (click)="onMyForumsClick()">{{ isMyForumsView ? 'Todos los foros' : 'Mis foros' }}</button>
-  </div>
-  <div class="forum-container">
-    <div *ngFor="let forum of displayedForums" class="forum-card">
-      <h2 class="forum-title">{{ forum.title }}</h2>
-      <p class="forum-description">{{ forum.description }}</p>
+</div>
+
+<div class="forum-container">
+  <div *ngFor="let forum of displayedForums" class="forum-card">
+    <!-- Contenedor de información del usuario -->
+    <div class="forum-description">
+     <!--  <img *ngIf="forum.user.image" [src]="forum.user?.image" alt="User Photo" class="user-photo"> -->
+      <p *ngIf="forum.user?.name && forum.user?.lastname" class="user-name">
+        {{ forum.user?.name }} {{ forum.user?.lastname }}
+      </p>
     </div>
+    
+    <h2 class="forum-title">{{ forum.title }}</h2>
+    <p class="forum-description">{{ forum.description }}</p>
+    <button *ngIf="isForumOwnedByUser(forum) && forum.forumId !== undefined" class="delete-button" (click)="onDeleteForum(forum.forumId!)">🗑️</button>
   </div>
-  <div class="add-button-container">
-    <button class="add-button">+</button>
-  </div>
-  
+</div>
+
+<div class="add-button-container" (click)="formModal.show()">
+  <button class="add-button">+</button>
+</div>
+
+<app-modal #formModal>
+  <app-forum-form
+    (callParentEvent)="onFormEventCalled($event)"
+    [title]="'Agregar'"
+  >
+  </app-forum-form>
+</app-modal>

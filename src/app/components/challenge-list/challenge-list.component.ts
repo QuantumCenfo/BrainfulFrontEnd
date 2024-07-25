@@ -42,15 +42,6 @@ export class ChallengeListComponent {
             res,
             ...participations,
           ]);
-          Swal.fire({
-            title: "¡Éxito!",
-            text: "La participacion ha sido ingresada",
-            icon: "success",
-            iconColor: "white",
-            color: "white",
-            background: "#16c2d5",
-            confirmButtonColor: "#ff9f1c",
-          });
         },
         error: (err: any) => {
           console.log("Error: ", err);
