@@ -8,6 +8,9 @@
         <button class="btn-primary-custom edit-button-custom" (click)="showModalUpdate(challenge)">
           <i class="fa-regular fa-pen-to-square"></i>
         </button>
+        <button class="btn-primary-custom edit-button-custom" (click)="delteChallengeGame(challenge.challengeId!)">
+          <i class="fa-regular fa-trash-can"></i>
+        </button>
       </div>
     </div>
 </div>
@@ -23,6 +26,9 @@
         <span class="edit-text-custom">Editar fechas</span>
         <button class="btn-primary-custom edit-button-custom" (click)="showModalUpdate(challenge)">
           <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+        <button class="btn-primary-custom edit-button-custom" (click)="delteChallengeGame(challenge.challengeId!)">
+          <i class="fa-regular fa-trash-can"></i>
         </button>
     </div>
 </div>

@@ -54,4 +54,8 @@ export class ChallengeGamesListComponent {
   showModal() {
     this.formModal.show();
   }
+
+  delteChallengeGame(challengeGameId: number) {
+    this.challengeGameService.deleteChallengeGame(challengeGameId);
+  }
 }

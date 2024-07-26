@@ -77,8 +77,9 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
           timerProgressBar: true,
           showConfirmButton: false,
           showCancelButton: false,
+        }).then(() => {
+          window.location.reload();
         });
-        this.router.navigate(['app/challenges']);
       },
       error: (error : any) => {
         Swal.fire({
@@ -92,8 +93,9 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
+        }).then(() => {
+          window.location.reload();
         });
-        this.router.navigate(['app/challenges']);
       }
     })
   }
@@ -117,8 +119,9 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
           timerProgressBar: true,
           showConfirmButton: false,
           showCancelButton: false,
+        }).then(() => {
+          window.location.reload();
         });
-        this.router.navigate(['app/challenges']);
       },
       error: (err: any) => {
         Swal.fire({
@@ -132,9 +135,35 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
+        }).then(() => {
+          window.location.reload();
         });
-        this.router.navigate(['app/challenges']);
       },
+    });
+  }
+
+  deleteChallengeGame(badgeId: number) {
+    Swal.fire({
+      title: "Seguro que desea eliminar la medalla?",
+      text: "No podrá recuperar la información",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, eliminar",
+    }).then((res) => {
+      this.del(badgeId).subscribe({
+        next: () => {
+          const deletedChallengeGame = this.challengeGameSignal().filter(
+            (badge: IChallengeGame) => badge.badgeId !== badgeId
+          );
+          this.challengeGameSignal.set(deletedChallengeGame);
+
+          console.log("Badge deleted successfully");
+        }
+      });
+    }).then(() => {
+      window.location.reload();
     });
   }
 
