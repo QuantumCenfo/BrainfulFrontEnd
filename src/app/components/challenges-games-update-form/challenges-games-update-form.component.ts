@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
   styleUrl: './challenges-games-update-form.component.scss'
 })
 export class ChallengesGamesUpdateFormComponent {
-  @Input() titleComp: string = 'Update Dates';
+  @Input() titleComp: string = 'Actualizar Fechas';
   @Input() toUpdateDateChallengeGame: IChallengeGame = {
     badgeId:{
       badgeId:1
@@ -63,7 +63,7 @@ export class ChallengesGamesUpdateFormComponent {
   isPastDate(date: Date): boolean {
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    today.setDate(today.getDate() - 1); // Ajuste para zonas horarias
+    today.setDate(today.getDate()); // Ajuste para zonas horarias
 
     const inputDate = new Date(date);
     inputDate.setUTCHours(0, 0, 0, 0);
@@ -80,12 +80,12 @@ export class ChallengesGamesUpdateFormComponent {
     Swal.fire({
       icon: 'error',
       title: title,
-      text: text,
       iconColor: 'white',
       color: 'white',
-      background: '#d54f16',
+      background:'#d54f16',
       position: 'center',
-      showConfirmButton: true,
+      text: text,
+      showConfirmButton: false,
       timer: 3000,
       timerProgressBar: true,
     });

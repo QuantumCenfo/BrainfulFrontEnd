@@ -1,15 +1,12 @@
 <div class="container">
     @defer {
     <app-challenges-games-list [activeChallengeGameList]="challengeGameService.activeChallengeGame$()" [inactiveChallengeGameList]="challengeGameService.inactiveChallengeGame$()"/>
+    <app-challenges-outdoors-list [activeChallengeOutdoorList]="challengeOutdoorService.activeChallengeOutdoor$()" [inactiveChallengeOutdoorList]="challengeOutdoorService.inactiveChallengeOutdoor$()"/>
     <div class="d-flex justify-content-center align-items-center">
-        <app-add-button (click)="showModal()"></app-add-button>
+            <!-- <app-add-button (click)="showModal()"></app-add-button> -->
     </div>
     }@loading ( after 100ms; minimum 1s) {
     <app-loader />
     }
 </div>
 
-<app-modal #formModal>
-    <app-challenges-games-form (callParentEvent)="onFormEventCalled($event)" [badgeList]="badgeService.badges$()" [gameList]="gameService.games$()">
-    </app-challenges-games-form>
-  </app-modal>

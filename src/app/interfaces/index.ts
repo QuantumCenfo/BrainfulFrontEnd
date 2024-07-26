@@ -24,7 +24,6 @@ export interface IChallengeOutdoor {
   name?: string;
   startDate?: string;
   endDate?: string;
-  id?: IUser;
   badgeId?:IBadge
 }
 
