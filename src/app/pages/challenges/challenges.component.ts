@@ -1,5 +1,7 @@
-import { ChallengesGamesFormComponent } from './../../components/challenges-games-form/challenges-games-form.component';
+import { ChallengeOutdoorsListComponent } from '../../components/challenges-outdoors-list/challenges-outdoors-list.component';
+import { ChallengesGamesFormComponent } from '../../components/challenges-games-form/challenges-games-form.component';
 import { ChallengeGameService } from './../../services/challenge-game.service';
+import { ChallengeOutdoorService } from '../../services/challenge-outdoor.service';
 import { ChallengesGamesUpdateFormComponent } from "../../components/challenges-games-update-form/challenges-games-update-form.component";
 import { ChallengeGamesListComponent } from './../../components/challenges-games-list/challenges-games-list.component';
 import { Component, inject, Input, OnInit, ViewChild } from "@angular/core";
@@ -25,12 +27,14 @@ import { GameService } from '../../services/game.service';
     RouterModule,
     AddButtonComponent,
     ChallengesGamesFormComponent,
-    ChallengesGamesUpdateFormComponent],
+    ChallengesGamesUpdateFormComponent,
+    ChallengeOutdoorsListComponent],
   templateUrl: './challenges.component.html',
   styleUrl: './challenges.component.scss'
 })
 export class ChallengesComponent implements OnInit {
   public challengeGameService = inject(ChallengeGameService);
+  public challengeOutdoorService = inject(ChallengeOutdoorService);
   public modalService = inject(NgbModal);
   public badgeService = inject(BadgeService);
   public gameService = inject(GameService);
@@ -45,6 +49,8 @@ export class ChallengesComponent implements OnInit {
     this.gameService.getAllSignal();
     this.challengeGameService.getAllActiveChallenges();
     this.challengeGameService.getAllInactiveChallenges();
+    this.challengeOutdoorService.getAllActiveChallenges();
+    this.challengeOutdoorService.getAllInactiveChallenges();
   }
 
   
