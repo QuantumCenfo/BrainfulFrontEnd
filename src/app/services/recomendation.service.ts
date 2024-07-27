@@ -53,6 +53,13 @@ export class RecomendationService extends BaseService<IRecomendation> {
   public delete(recommendation: IRecomendation) {
     Swal.fire({
       title: "Seguro que desea eliminar la recomendación?",
+      icon: "warning",
+      iconColor: "white",
+      color: "white",
+      background: "#d54f16",
+      position: "center",
+      confirmButtonColor: "#ff9f1c",
+      cancelButtonColor: "#16c2d5",
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: "Si, eliminar",

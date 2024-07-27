@@ -1,7 +1,7 @@
 <div class="container">
     @defer{
   
-    <app-challenge-list [outdoorChallengeList]="challengeOutDoorService.challengeOutdoors$()" [gameChallengeList]="challengeGameService.challengeGame$()" />
+    <app-challenge-list [outdoorChallengeList]="challengeOutDoorService.activeChallengeOutdoor$()" [gameChallengeList]="challengeGameService.activeChallengeGame$()" />
   
   
     }@loading ( after 100ms; minimum 1s) {
