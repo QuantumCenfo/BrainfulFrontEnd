@@ -129,7 +129,7 @@ export const routes: Routes = [
         component: BadgesUsersComponent,
         data: {
           authorities: [IRole.user],
-          name: "Insignias",
+          name: "Mis Insignias",
           showInSidebar: true,
         },
       },
@@ -183,7 +183,7 @@ export const routes: Routes = [
         component: FormComponent,
         data: {
           authorities: [IRole.user],
-          name: "Questionario",
+          name: "Cuestionario",
           showInSidebar: true,
         },
       },
