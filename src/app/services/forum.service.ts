@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
-import { IForum, IResponse } from "../interfaces";
+import { IComment, IForum, IResponse } from "../interfaces";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -14,6 +15,7 @@ export class ForumService extends BaseService<IForum> {
   get forums$() {
     return this.forumsSignal;
   }
+ 
   //Get all games 
   getAllSignal() {
     this.findAll().subscribe({
@@ -26,7 +28,7 @@ export class ForumService extends BaseService<IForum> {
       }
     });
   }
-
+  
   getMySignal(userId: number) {
     this.http.get<IResponse<IForum[]>>(`${this.source}/UserId/${userId}`).subscribe({
       next: (response: any) => {

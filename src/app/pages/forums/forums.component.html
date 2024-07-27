@@ -3,10 +3,10 @@
 </div>
 
 <div class="forum-container">
-  <div *ngFor="let forum of displayedForums" class="forum-card">
+  <div *ngFor="let forum of displayedForums" class="forum-card" (click)="viewForumDetail(forum)">
     <!-- Contenedor de información del usuario -->
-    <div class="forum-description">
-     <!--  <img *ngIf="forum.user.image" [src]="forum.user?.image" alt="User Photo" class="user-photo"> -->
+    <div class="forum-description" *ngIf="!forum.anonymous">
+      <!-- <img *ngIf="forum.user.image" [src]="forum.user?.image" alt="User Photo" class="user-photo"> -->
       <p *ngIf="forum.user?.name && forum.user?.lastname" class="user-name">
         {{ forum.user?.name }} {{ forum.user?.lastname }}
       </p>
@@ -14,7 +14,7 @@
     
     <h2 class="forum-title">{{ forum.title }}</h2>
     <p class="forum-description">{{ forum.description }}</p>
-    <button *ngIf="isForumOwnedByUser(forum) && forum.forumId !== undefined" class="delete-button" (click)="onDeleteForum(forum.forumId!)">🗑️</button>
+    <button *ngIf="isForumOwnedByUser(forum) && forum.forumId !== undefined" class="delete-button" (click)="onDeleteForum(forum.forumId!); $event.stopPropagation()">🗑️</button>
   </div>
 </div>
 
