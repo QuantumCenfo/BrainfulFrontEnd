@@ -55,8 +55,9 @@ export class BadgeService extends BaseService<IBadge> {
             icon: "success",
             iconColor: "white",
             color: "white",
+            showConfirmButton: false,
             background: "#16c2d5",
-            confirmButtonColor: "#ff9f1c",
+            timer: 2000,
           });
         },
         error: (err: any) => {
@@ -71,7 +72,7 @@ export class BadgeService extends BaseService<IBadge> {
         iconColor: "white",
         color: "white",
         background: "#16c2d5",
-        confirmButtonColor: "#ff9f1c",
+        timer: 2000,
       });
     }
   }
@@ -88,9 +89,15 @@ export class BadgeService extends BaseService<IBadge> {
     Swal.fire({
       title: "Esta seguro que desea actualizar la medalla?",
       icon: "question",
+
+      iconColor: "white",
+      color: "white",
+      background: "#d54f16",
+      position: "center",
+      confirmButtonColor: "#ff9f1c",
+      cancelButtonColor: "#16c2d5",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      showConfirmButton: true,
       confirmButtonText: "Si, actualizar",
     }).then((res) => {
       if (imageFile) {
@@ -135,10 +142,15 @@ export class BadgeService extends BaseService<IBadge> {
       title: "Seguro que desea eliminar la medalla?",
       text: "No podrá recuperar la información",
       icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      iconColor: "white",
+      color: "white",
+      background: "#d54f16",
+      position: "center",
+      confirmButtonColor: "#ff9f1c",
+      cancelButtonColor: "#16c2d5",
       confirmButtonText: "Si, eliminar",
+      showCancelButton: true,
+      showConfirmButton: true,
     }).then((res) => {
       this.del(badgeId).subscribe({
         next: () => {
@@ -146,8 +158,16 @@ export class BadgeService extends BaseService<IBadge> {
             (badge: IBadge) => badge.badgeId !== badgeId
           );
           this.badgeSignal.set(deletedBadge);
-
-          console.log("Badge deleted successfully");
+          Swal.fire({
+            title: "¡Éxito!",
+            text: "La insignia ha sido eliminada",
+            icon: "success",
+            iconColor: "white",
+            color: "white",
+            background: "#16c2d5",
+            timer: 2000,
+            showConfirmButton: false,
+          });
         },
         error: (err: any) => {
           console.error("Error deleting badge", err);

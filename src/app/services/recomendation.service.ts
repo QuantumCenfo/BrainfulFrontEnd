@@ -32,7 +32,7 @@ export class RecomendationService extends BaseService<IRecomendation> {
     }
     return undefined;
   }
-  public geAllRecomendationsById() {
+  public getAllRecomendationsById() {
     const user_id: number | undefined = this.getUserIdFromLocalStorage();
     if (user_id !== undefined) {
       this.find(user_id).subscribe({
@@ -53,6 +53,13 @@ export class RecomendationService extends BaseService<IRecomendation> {
   public delete(recommendation: IRecomendation) {
     Swal.fire({
       title: "Seguro que desea eliminar la recomendación?",
+      icon: "warning",
+      iconColor: "white",
+      color: "white",
+      background: "#d54f16",
+      position: "center",
+      confirmButtonColor: "#ff9f1c",
+      cancelButtonColor: "#16c2d5",
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: "Si, eliminar",
