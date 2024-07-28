@@ -183,18 +183,45 @@ ol, ul {
   }
   
 }
+
 .modal-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  position: fixed;
   pointer-events: auto;
-  background-color: #d54f16;
-  background-clip: padding-box;
-  border: 0px solid #77290b;
+  width: auto;
+  height: auto;
+  margin-bottom: 400px;
+  margin-left: 100px;
+  background-color: #B5DEE7;
   border-radius: 6px;
-  outline: 0;
-  color: #ffffff;
+
+  @media (max-width: 1200px) {
+    width: 400px;
+    height: 600px;
+    margin-left: 50px;
+    margin-bottom: 300px;
+  }
+
+  @media (max-width: 992px) {
+    width: 350px;
+    height: 550px;
+    margin-left: 25px;
+    margin-bottom: 200px;
+  }
+
+  @media (max-width: 765px) {
+    width: 500px;
+    height: 100px;
+    margin-left: 10px;
+    margin-bottom: 100px;
+  }
+
+  @media (max-width: 576px) {
+    width: 90%;
+    height: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 50px;
+  }
 }
 .btn-primary {
   color: #fff;

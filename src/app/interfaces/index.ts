@@ -12,11 +12,18 @@ export interface IUser {
   name?: string;
   lastname?: string;
   email?: string;
+  image?: string;
   password?: string;
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  role?: IUserRole;
+  birthDate?: string;
   authorities?: IAuthority[];
+}
+
+export interface IUserRole {
+  name : string,
 }
 
 export interface IAuthority {

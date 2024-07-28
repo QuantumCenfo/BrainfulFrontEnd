@@ -27,12 +27,29 @@ export class UserListComponent {
   private service = inject(UserService);
   private snackBar = inject(MatSnackBar);
   public currentUser: IUser = {
-    email: '',
-    lastname: '',
-    password: '',
-    name: ''
+    authorities: [],
+    birthDate: "",
+    createdAt: "",
+    email: "",
+    id: 0,
+    image: "",
+    lastname: "",
+    name: "",
+    password: "",
+    role: {name: ''},
+    updatedAt: "",
   };
   
+  public selectedImg: File|null=null
+
+
+  public userService = inject(UserService)
+
+  onFormEventCalled(event: { user: IUser; file: File | null }) {
+    this.userService.handleUpdateUser(event.user, event.file!);
+  }
+
+
   constructor() {
     this.service.getAllSignal();
     effect(() => {      
@@ -42,6 +59,7 @@ export class UserListComponent {
 
   showDetail(user: IUser, modal: any) {
     this.currentUser = {...user}; 
+    console.log(user)
     modal.show();
   }
 
