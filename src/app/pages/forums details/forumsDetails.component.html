@@ -1,0 +1,51 @@
+<div class="forum-container" *ngIf="forum">
+  <div class="forum-card">
+    <!-- Mostrar esta sección solo si el foro no es anónimo -->
+    <div class="forum-description" *ngIf="!forum.anonymous">
+      <p *ngIf="forum.user?.name && forum.user?.lastname" class="user-name">
+        {{ forum?.user?.name }} {{ forum?.user?.lastname }}
+      </p>
+    </div>
+    <h2 class="forum-title">{{ forum.title }}</h2>
+    <p class="forum-description">{{ forum.description }}</p>
+
+    <div class="forum-comments">
+      <button class="add-comment-button" (click)="formModal.show()">Añadir comentario</button>
+
+      <div class="forum-container">
+        <div *ngFor="let comment of commentsList" class="comment-card">
+          <!-- Contenedor de información del usuario -->
+          <div class="forum-description" *ngIf="!comment.anonymous">
+            <!-- <img *ngIf="forum.user.image" [src]="forum.user?.image" alt="User Photo" class="user-photo"> -->
+            <p *ngIf="comment.user?.name && comment.user?.lastname" class="user-name">
+              {{ comment.user?.name }} {{ comment.user?.lastname }}
+            </p>
+          </div>
+
+          <p class="forum-description">{{ comment.content }}</p>
+          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="update-button" (click)="openUpdateModal(comment)">✏️</button>
+          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="delete-button" (click)="onDeleteForum(comment.commentId!); $event.stopPropagation()" >🗑️</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal #formModal>
+  <app-forum-detail
+    (callParentEvent)="onFormEventCalled($event)"
+    [title]="'Agregar'"
+    [forum]="forum"
+  >
+  </app-forum-detail>
+</app-modal>
+
+<app-modal #formModalUpdate>
+  <app-forum-detail
+    (callParentEvent)="onFormEventCalledUpdate($event)"
+    [title]="'Modificar'"
+    [forum]="forum"
+    [toUpdateComent]="selectedComment"
+  >
+  </app-forum-detail>
+</app-modal>

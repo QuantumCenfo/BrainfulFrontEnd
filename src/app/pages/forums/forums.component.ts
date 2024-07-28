@@ -49,7 +49,6 @@ export class ForumsComponent {
 
   updateDisplayedForums(): void {
     this.displayedForums = this.forumList; // Actualiza displayedForums con los datos del servicio
-    console.log(this.displayedForums);
   }
 
   getUserIdFromLocalStorage(): number | undefined {
@@ -96,6 +95,10 @@ export class ForumsComponent {
   onFormEventCalled (params: IForum) {
     this.service.save(params);
     this.modalService.dismissAll();
+  }
+
+  viewForumDetail(forum: IForum): void {
+    this.router.navigate(['/app/forums-details', forum.forumId])
   }
 
 }

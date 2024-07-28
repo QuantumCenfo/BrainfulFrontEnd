@@ -29,6 +29,7 @@ import { QuantumLandingComponent } from "./quantum-landing/quantum-landing.compo
 import { BarinfulLandingComponent } from "./pages/Brainful/barinful-landing/barinful-landing.component";
 import { RecomendationsComponent } from "./pages/recomendations/recomendations.component";
 import { ParticipationsComponent } from "./pages/participations/participations.component";
+import { ForumsDetailsComponent } from "./pages/forums details/forumsDetails.component";
 
 export const routes: Routes = [
   {
@@ -138,6 +139,11 @@ export const routes: Routes = [
         path: "forums",
         component: ForumsComponent,
         data: { authorities: [IRole.user], name: "Foros", showInSidebar: true },
+      },
+      {
+        path: "forums-details/:id",
+        component: ForumsDetailsComponent,
+        data: { authorities: [IRole.user], name: "Foro detallado", showInSidebar: false },
       },
       {
         path: "reminders",

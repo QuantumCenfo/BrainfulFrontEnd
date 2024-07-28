@@ -155,3 +155,11 @@ export interface IForum {
   anonymous?: boolean;
   user?: IUser;
 }
+
+export interface IComment {
+  commentId?: number;
+  content?: string;
+  anonymous?: boolean;
+  user?: IUser;
+  forum?: IForum;
+}
