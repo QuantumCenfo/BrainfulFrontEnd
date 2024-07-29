@@ -118,6 +118,7 @@ export class BadgeService extends BaseService<IBadge> {
                 color: "white",
                 background: "#16c2d5",
                 timer: 2000,
+                showConfirmButton: false,
               });
             },
             error: (err: any) => {
