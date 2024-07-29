@@ -19,7 +19,6 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrl: './puzzle-game.component.scss'
 })
 export class PuzzleComponent implements OnChanges {
-  isGameRunning: boolean = false;
   @Input() difficulty: number = 0; 
   @Input() gameStarted: boolean = false;
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
@@ -32,7 +31,7 @@ export class PuzzleComponent implements OnChanges {
   cards: string = ""; 
   started = false;
   points: number = 0;
-  
+  pieceClick: string = "";
   gameId: number | undefined;
   public puzzleService = inject(PuzzleService);
   private routerSubscription: Subscription;
@@ -83,8 +82,8 @@ export class PuzzleComponent implements OnChanges {
     this.gridSize = 0;
     this.started = false;
     this.points = 0;
-  
-   
+    this.pieceClick = "";
+    document.getElementById("pieceClick")!.innerHTML = this.pieceClick;
   }
 
   startOver(): void {
@@ -93,7 +92,6 @@ export class PuzzleComponent implements OnChanges {
   }
   
   startGame(): void {
-    this.isGameRunning = true;
     this.startOver();
     if (this.difficulty > 0) {
       this.gameStarted = true;
@@ -121,7 +119,6 @@ export class PuzzleComponent implements OnChanges {
         background: '#16c2d5',
         confirmButtonColor: '#ff9f1c',
       });
-      this.isGameRunning = false;
     }
   }
   
@@ -141,24 +138,8 @@ export class PuzzleComponent implements OnChanges {
       {
         if(piece.originalOrder == this.pieceActual.originalOrder)
         {
-          
-          Swal.fire({
-            iconColor: 'white',
-            color: 'white',
-            background:'#36cf4f',
-            toast: true,
-            position: 'bottom',
-            icon: 'success',
-            title: 'Pieza correcta',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            }
-          });
-         
+          this.pieceClick = "Correcto";
+          document.getElementById("pieceClick")!.innerHTML = this.pieceClick;
           const indexPieceActual = this.pieces.findIndex(p => p.originalOrder === this.pieceActual!.originalOrder);
           if (indexPieceActual !== -1) {
             this.pieces[indexPieceActual] = piece;
@@ -175,23 +156,8 @@ export class PuzzleComponent implements OnChanges {
         }
         else
         {
-          Swal.fire({
-            iconColor: 'white',
-            color: 'white',
-            background:'#d54f16',
-            toast: true,
-            position: 'bottom',
-            icon: 'error',
-            title: 'Pieza incorrecta',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer);
-              toast.addEventListener('mouseleave', Swal.resumeTimer);
-            }
-          });
-         
+          this.pieceClick = "Incorrecto";
+          document.getElementById("pieceClick")!.innerHTML = this.pieceClick;
           this.pieceActual = null;
           this.points = Math.max(this.points - 5, 0);
           document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
@@ -309,7 +275,6 @@ export class PuzzleComponent implements OnChanges {
 
 
   endGame(): void {
-    this.isGameRunning = false;
     this.startOver();
     this.timerComponent.stopTimer();
     const modalRef = this.modalService.open(TryAgainModalComponent);

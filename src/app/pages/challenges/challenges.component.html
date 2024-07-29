@@ -1,12 +1,1 @@
-<div class="container">
-    @defer {
-    <app-challenges-games-list [activeChallengeGameList]="challengeGameService.activeChallengeGame$()" [inactiveChallengeGameList]="challengeGameService.inactiveChallengeGame$()"/>
-    <app-challenges-outdoors-list [activeChallengeOutdoorList]="challengeOutdoorService.activeChallengeOutdoor$()" [inactiveChallengeOutdoorList]="challengeOutdoorService.inactiveChallengeOutdoor$()"/>
-    <div class="d-flex justify-content-center align-items-center">
-            <!-- <app-add-button (click)="showModal()"></app-add-button> -->
-    </div>
-    }@loading ( after 100ms; minimum 1s) {
-    <app-loader />
-    }
-</div>
-
+<p>challenges works!</p>

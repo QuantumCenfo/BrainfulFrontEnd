@@ -1,6 +1,4 @@
-<div
-  class="page-container d-flex align-items-center justify-content-center vh-100"
->
+<div class="page-container d-flex align-items-center justify-content-center vh-100">
   <div class="login-container">
     <div class="d-flex align-items-center justify-content-center h-100">
       <div class="login-card">
@@ -14,11 +12,7 @@
               />
           </div>
           <div class="login-main">
-            <form
-              (ngSubmit)="handleLogin($event)"
-              autocomplete="off"
-              #frm="ngForm"
-            >
+            <form (ngSubmit)="handleLogin($event)" autocomplete="off" #frm="ngForm">
               <div class="mb-3 text-white">
                 <h4>¿Es tu primera vez?</h4>
                 <a href="/signup">Registrarte</a>
@@ -28,46 +22,26 @@
                 <label for="email" class="form-label mb-2 text-white">
                   Email
                 </label>
-                <input
-                  #email="ngModel"
-                  type="text"
-                  class="form-control border-bottom-only"
-                  id="email"
-                  name="email"
-                  placeholder="ejemplo@gmail.com"
-                  [(ngModel)]="loginForm.email"
-                  [ngClass]="{
+                <input #email="ngModel" type="text" class="form-control border-bottom-only" id="email" name="email"
+                  placeholder="ejemplo@gmail.com" [(ngModel)]="loginForm.email" [ngClass]="{
                     'is-invalid': email.invalid && email.touched,
                     'is-valid': email.valid && email.touched
-                  }"
-                  required
-                />
+                  }" required />
                 <div *ngIf="email.invalid" class="invalid-feedback">
                   Ingresa un email valido
                 </div>
               </div>
 
               <div class="form-group mb-4">
-                <label for="password" class="form-label mb-2 text-white"
-                  >Contraseña</label
-                >
+                <label for="password" class="form-label mb-2 text-white">Contraseña</label>
                 <div class="form-input position-relative">
-                  <input
-                    #password="ngModel"
-                    type="password"
-                    class="form-control border-bottom-only"
-                    id="password"
-                    name="password"
-                    placeholder="*****"
-                    [(ngModel)]="loginForm.password"
-                    [ngClass]="{
-                      'is-invalid': password.invalid && password.touched,
-                      'is-valid': password.valid && password.touched
-                    }"
-                    required
-                  />
+                  <input #password="ngModel" type="password" class="form-control border-bottom-only" id="password" name="password"
+                  placeholder="*****" [(ngModel)]="loginForm.password" [ngClass]="{
+                    'is-invalid': password.invalid && password.touched,
+                    'is-valid': password.valid && password.touched
+                  }" required />
                   <div *ngIf="password.invalid" class="invalid-feedback">
-                    Ingresa una contraseña valida
+                    Ingresa una contraseña valido
                   </div>
                 </div>
               </div>
@@ -77,9 +51,9 @@
                   Ingresar
                 </button>
                 @if(loginError) {
-                <p class="text-danger">{{ loginError }}</p>
+                  <p class="text-danger">{{loginError}}</p>
                 }
-              </div>
+              </div>             
             </form>
           </div>
         </div>

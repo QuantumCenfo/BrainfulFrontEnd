@@ -25,23 +25,16 @@
   max-width: 225px;
   max-height: 50px;
 }
-#points {
-    padding: 15px;
-    font-size: 2rem;
-  }
-.points {
- 
-  padding: 10px;
 
-  margin: 20px;
-  color: #000000;
-  font-size: 2rem;
-}
 .container-time {
-  padding: 10px;
+  background-color: #ff9f1c;
+  border: solid 3px #16c2d5;
+  border-radius: 20px;
   margin: 20px;
-  color: #000000;
+  color: #ffffff;
   font-size: 2rem;
+  max-width: 225px;
+  max-height: 50px;
 }
 
 select{
@@ -52,7 +45,7 @@ select{
     
  
   }
-  margin-top: 35px;
+  margin-top: 20px;
   background-color: #ff9f1c;
   border: solid 3px #16c2d5;
   padding: 10px;
@@ -81,18 +74,9 @@ select{
 }
 
 .label-time{
-  color: #000000;;
-  font-size: 2rem;
-  padding: 15px;
-}
-
-
-.timer-container{
-
+  display: inline-block;
+  justify-content: center;
   padding: 10px;
-  margin: 20px;
-  color: #000000;
-  font-size: 2rem;
 }
 
 .btn {

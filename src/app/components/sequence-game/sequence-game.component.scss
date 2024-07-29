@@ -6,36 +6,17 @@ body {
   text-align: center;
   background-color: #b4dce6;
 }
-h2 {
-  font-family: Dosis, "Dosis", sans-serif;
-  font-size: 2rem;
-}
 
 #level-title {
   font-size: 3rem;
   margin: 5%;
   color: #fef2bf;
 }
-.points {
-  padding: 10px;
 
-  margin: 20px;
-  color: #000000;
-  font-size: 2rem;
-}
-.disabled {
-  pointer-events: none;
-  opacity: 0.5; /* o cualquier otro estilo que desees aplicar */
-}
-#points {
-  padding: 15px;
-  font-size: 2rem;
-}
-
+#points,
 #btn-play {
   color: #ffffff;
   padding: 15px;
-  cursor: pointer;
 }
 .upper-cont {
   display: flex;
@@ -59,6 +40,27 @@ h2 {
   margin: 20px;
   color: #ffffff;
   font-size: 2rem;
+}
+.brain-logo img {
+  width: 80%;
+  height: 80%;
+}
+.brain-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15vw;
+  height: 10vw;
+  max-width: 300px;
+  max-height: 300px;
+  background-color: #16c2d5;
+  border-radius: 5%;
+  border: solid 3px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
 
 .color-container {
@@ -136,7 +138,6 @@ h2 {
 }
 
 select {
-  cursor: pointer;
   option {
     color: #ffffff;
   }
