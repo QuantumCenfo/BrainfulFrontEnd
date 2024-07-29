@@ -13,7 +13,7 @@
       <button class="add-comment-button" (click)="formModal.show()">Añadir comentario</button>
 
       <div class="forum-container">
-        <div *ngFor="let comment of commentsList" class="comment-card">
+        <div *ngFor="let comment of displayedComments" class="comment-card">
           <!-- Contenedor de información del usuario -->
           <div class="forum-description" *ngIf="!comment.anonymous">
             <!-- <img *ngIf="forum.user.image" [src]="forum.user?.image" alt="User Photo" class="user-photo"> -->
@@ -23,8 +23,12 @@
           </div>
 
           <p class="forum-description">{{ comment.content }}</p>
-          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="update-button" (click)="openUpdateModal(comment)">✏️</button>
-          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="delete-button" (click)="onDeleteForum(comment.commentId!); $event.stopPropagation()" >🗑️</button>
+          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="update-button" (click)="openUpdateModal(comment)">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
+          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="delete-button" (click)="onDeleteForum(comment.commentId!); $event.stopPropagation()" >
+            <i class="fa-regular fa-trash-can"></i>
+          </button>
         </div>
       </div>
     </div>

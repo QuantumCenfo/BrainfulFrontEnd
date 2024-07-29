@@ -16,7 +16,7 @@ import { CategoriasFormComponent } from "../../components/forum-form/forum-form.
   standalone: true,
   imports: [
     FormsModule,
-    LoaderComponent,
+    LoaderComponent, 
     CommonModule,
     ModalComponent,
     CategoriasFormComponent
@@ -39,6 +39,8 @@ export class ForumsComponent {
   private router = inject(Router);
 
   displayedForums: IForum[] = [];
+
+
   constructor() {
     this.service.getAllSignal();
     effect(() => {

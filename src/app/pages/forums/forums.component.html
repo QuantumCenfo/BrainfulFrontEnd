@@ -14,7 +14,9 @@
     
     <h2 class="forum-title">{{ forum.title }}</h2>
     <p class="forum-description">{{ forum.description }}</p>
-    <button *ngIf="isForumOwnedByUser(forum) && forum.forumId !== undefined" class="delete-button" (click)="onDeleteForum(forum.forumId!); $event.stopPropagation()">🗑️</button>
+    <button *ngIf="isForumOwnedByUser(forum) && forum.forumId !== undefined" class="delete-button" (click)="onDeleteForum(forum.forumId!); $event.stopPropagation()">
+      <i class="fa-regular fa-trash-can"></i>
+    </button>
   </div>
 </div>
 
