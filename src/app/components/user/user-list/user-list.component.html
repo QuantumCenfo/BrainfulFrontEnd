@@ -1,39 +1,48 @@
-<div class="table">
-  <tbody class="table-user">
-    @for (item of userList; track item.id) {
+<div class="table-container table-responsive">
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <div class="users">
-          <div class="image">
-            <img [src]="item.image" alt="User Image" class="user-img"/>
-          </div>
-          <td class="pUser">
-            {{item.name}}
-          </td>
-          <td class="pUser">{{item.lastname}}</td>
-          <td class="pUser">{{item.role?.name}}</td>
-
-          <td>
-            <div class="buttonUsers">
-              <button type="button" (click)="showDetail(item, formModal)" class="btn btn-secondary userBoton">
-                <i class="fa-regular fa-pen-to-square"></i>
-              </button>
-              <button type="button" (click)="deleteUser(item)" class="btn btn-danger userBoton">
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
-            </div>
-          </td>
-        </div>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">email</th>
+        <th scope="col">Created</th>
+        <th scope="col">Updated</th>
+        <th class="text-center" scope="col">Actions</th>
       </tr>
-    }
-  </tbody>
+    </thead>
+    <tbody>
+      @for (item of userList; track item.id) {
+      <tr>
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.name}}</td>
+        <td>{{item.lastname}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.createdAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td>{{item.updatedAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td>
+          <div class="d-flex justify-content-evenly align-items-center">
+            <button type="button" (click)="showDetail(item, formModal)" class="btn btn-secondary">
+              <i class="fa-solid fa-eye white"
+              ></i>
+            </button>
+            <button type="button" (click)="deleteUser(item)" class="btn btn-danger">
+              <i class="fa-solid fa-trash white"
+              ></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
 </div>
 
 <app-modal size="lg" #formModal>
-  <app-user-form
-    [user]="currentUser"
-    [title]="'Update User'"
-    (callParentEvent)="onFormEventCalled($event)"
-    [imageFile]="selectedImg"
+  <app-user-form 
+  [user]="currentUser" 
+  [action]="'edit'"
+  [title]="'Update User'"
   >
-  </app-user-form>
+</app-user-form>
 </app-modal>

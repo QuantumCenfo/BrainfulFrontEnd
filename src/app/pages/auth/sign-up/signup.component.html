@@ -1,15 +1,18 @@
 <div class="register-container">
   <div class="register-card">
     <div class="logo-container">
+      <a class="logo text-center" routerLink="/">
         <img
           class="company-logo"
           src="../../../../assets/icons/brainfulLogoG.png"
           alt="Logo"
         />
+      </a>
     </div>
     <div class="login-link">
       <h4>¿Ya tienes cuenta?</h4>
       <a href="/login">Ingresa</a>
+
     </div>
     <div class="register-main">
       <form (ngSubmit)="handleSignup($event)" autocomplete="off" #frm="ngForm">
@@ -100,8 +103,11 @@
           </div>
         </div>
         <button class="btn btn-primary btn-block w-100" type="submit">Registrarse</button>
-        <p *ngIf="signUpError" class="text-danger">{{signUpError}}</p>
-        <p *ngIf="validSignup" class="text-success">Usuario registrado!</p>
+        @if(signUpError) {
+        <p class="text-danger">{{signUpError}}</p>
+        } @else if (validSignup){
+        <p class="text-success">Usuario registrado!</p>
+        }
       </form>
     </div>
   </div>
