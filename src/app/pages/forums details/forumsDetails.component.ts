@@ -24,7 +24,8 @@ export class ForumsDetailsComponent {
   private Commentservice = inject(CommentService);
   private route = inject(ActivatedRoute);
   public modalService: NgbModal = inject(NgbModal);
-  
+  displayedComments: IComment[] = [];
+
   @ViewChild('formModalUpdate', { static: false }) formModalUpdate!: ModalComponent;
 
   constructor() {
@@ -39,8 +40,14 @@ export class ForumsDetailsComponent {
       if (forumId) {
         this.setForum(parseInt(forumId)); // Llama al método para establecer el foro
       }
+      this.updateDisplayedForums();
     });
   }
+
+  updateDisplayedForums(): void {
+    this.displayedComments = this.commentsList; // Actualiza displayedForums con los datos del servicio
+  }
+
 
   private setForum(forumId: number | undefined): void {
     this.forum = this.forumList.find(forum => forum.forumId === forumId);
@@ -81,3 +88,4 @@ export class ForumsDetailsComponent {
     this.Commentservice.delete(forumId);
   }
 }
+ 

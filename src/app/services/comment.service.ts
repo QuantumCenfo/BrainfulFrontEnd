@@ -3,6 +3,7 @@ import { BaseService } from "./base-service";
 import { IComment, IForum, IResponse } from "../interfaces";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Observable } from "rxjs";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: "root",
@@ -15,66 +16,145 @@ export class CommentService extends BaseService<IComment> {
   get comments$() {
     return this.commentsSignal;
   }
- 
-  //Get all games 
+
+  //Get all games
   getCommentsSignal(forumId: string) {
-    this.http.get<IResponse<IComment[]>>(`${this.source}/${forumId}`).subscribe({
-      next: (response: any) => {
-        response.reverse();
-        this.commentsSignal.set(response);
-      },
-      error: (error: any) => {
-        console.error('Error fetching forums', error);
-      }
-    });
+    this.http
+      .get<IResponse<IComment[]>>(`${this.source}/${forumId}`)
+      .subscribe({
+        next: (response: any) => {
+          response.reverse();
+          this.commentsSignal.set(response);
+        },
+        error: (error: any) => {
+          console.error("Error fetching forums", error);
+        },
+      });
   }
 
   public save(item: IComment) {
-    console.log(item);
     this.add(item).subscribe({
       next: (response: any) => {
-        this.commentsSignal.update((forums: IComment[]) => [response, ...forums]);
-      },
-      error: (error : any) => {
-        this.snackBar.open(error.error.description, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
+        this.commentsSignal.update((forums: IComment[]) => [
+          response,
+          ...forums,
+        ]);
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "El comentario ha sido agregado",
+          icon: "success",
+          iconColor: "white",
+          color: "white",
+          showConfirmButton: false,
+          background: "#16c2d5",
+          timer: 2000,
         });
-        console.error('error', error);
-      }
-    })
-  } 
+      },
+      error: (error: any) => {
+        this.snackBar.open(error.error.description, "Close", {
+          horizontalPosition: "right",
+          verticalPosition: "top",
+          panelClass: ["error-snackbar"],
+        });
+        console.error("error", error);
+        Swal.fire({
+          title: "Oops...",
+          text: "Ha ocurrido un error agregando el comentario",
+          icon: "warning",
+          iconColor: "white",
+          color: "white",
+          background: "#16c2d5",
+          timer: 2000,
+        });
+      },
+    });
+  }
 
   public update(item: IComment) {
     this.edit(item.commentId, item).subscribe({
       next: () => {
-        const updatedItems = this.commentsSignal().map(comment => comment.commentId === item.commentId ? item : comment);
-        this.commentsSignal.set(updatedItems);
-      },
-      error: (error : any) => {
-        this.snackBar.open(error.error.description, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
-        console.error('error', error);
-      }
-    })
-  }
-
-  delete(forumId: number) {
-    this.del(forumId).subscribe({
-      next: () => {
-        const deletedForum = this.commentsSignal().filter(
-          (forum: IForum) => forum.forumId !== forumId
+        const updatedItems = this.commentsSignal().map((comment) =>
+          comment.commentId === item.commentId ? item : comment
         );
-        this.commentsSignal.set(deletedForum);
+        this.commentsSignal.set(updatedItems);
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "El comentario ha sido modificado",
+          icon: "success",
+          iconColor: "white",
+          color: "white",
+          showConfirmButton: false,
+          background: "#16c2d5",
+          timer: 2000,
+        });
       },
-      error: (err: any) => {
-        console.error("Error deleting badge", err);
+      error: (error: any) => {
+        this.snackBar.open(error.error.description, "Close", {
+          horizontalPosition: "right",
+          verticalPosition: "top",
+          panelClass: ["error-snackbar"],
+        });
+        console.error("error", error);
+        Swal.fire({
+          title: "Oops...",
+          text: "Ha ocurrido un error modificando el comentario",
+          icon: "warning",
+          iconColor: "white",
+          color: "white",
+          background: "#16c2d5",
+          timer: 2000,
+        });
       },
     });
   }
 
+  delete(commentId: number) {
+    Swal.fire({
+      title: "¿Estás seguro que deseas eliminar el comentario?",
+      text: "No podrás revertir esto",
+      icon: "warning",
+      iconColor: "white",
+      color: "white",
+      background: "#d54f16",
+      position: "center",
+      confirmButtonColor: "#ff9f1c",
+      cancelButtonColor: "#16c2d5",
+      confirmButtonText: "Si, eliminar",
+      showCancelButton: true,
+      showConfirmButton: true,
+    }).then((res) => {
+      if (res.isConfirmed) {
+        this.del(commentId).subscribe({
+          next: () => {
+            const deletedForum = this.commentsSignal().filter(
+              (comment: IComment) => comment.commentId !== commentId
+            );
+            this.commentsSignal.set(deletedForum);
+            Swal.fire({
+              title: "¡Éxito!",
+              text: "El comentario ha sido eliminado",
+              icon: "success",
+              iconColor: "white",
+              color: "white",
+              showConfirmButton: false,
+              background: "#16c2d5",
+              timer: 2000,
+            });
+          },
+          error: (err: any) => {
+            console.error("Error deleting badge", err);
+            Swal.fire({
+              title: "Oops...",
+              text: "Ha ocurrido un error eliminando el comentario",
+              icon: "warning",
+              iconColor: "white",
+              color: "white",
+              background: "#16c2d5",
+              timer: 2000,
+            });
+          },
+        });
+      }
+    });
+  }
 }
