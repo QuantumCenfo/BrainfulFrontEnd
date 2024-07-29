@@ -3,14 +3,17 @@ import { BaseService } from "./base-service";
 import { IComment, IForum, IResponse } from "../interfaces";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Observable } from "rxjs";
-
-@Injectable({
+import Swal from "sweetalert2";
+ 
+@Injectable({ 
   providedIn: "root",
 })
 export class ForumService extends BaseService<IForum> {
   protected override source: string = "forums";
   private forumsSignal = signal<IForum[]>([]);
   private snackBar = inject(MatSnackBar);
+  
+
 
   get forums$() {
     return this.forumsSignal;
@@ -48,18 +51,49 @@ export class ForumService extends BaseService<IForum> {
           (forum: IForum) => forum.forumId !== forumId
         );
         this.forumsSignal.set(deletedForum);
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "El foro ha sido eliminado",
+          icon: "success",
+          iconColor: "white",
+          color: "white",
+          showConfirmButton: false,
+          background: "#16c2d5",
+          timer: 2000,
+        });
       },
       error: (err: any) => {
-        console.error("Error deleting badge", err);
+        console.error("Error deleting forum", err);
+        Swal.fire({
+          title: "Oops...",
+          text: "Ha ocurrido un error eliminando el foro",
+          icon: "warning",
+          iconColor: "white",
+          color: "white",
+          background: "#16c2d5",
+          timer: 2000,
+        });
       },
     });
   }
 
   public save(item: IForum) {
-    console.log(item);
+    item.anonymous = item.anonymous == null ? false : item.anonymous;
     this.add(item).subscribe({
       next: (response: any) => {
+        console.log(this.forumsSignal())
         this.forumsSignal.update((forums: IForum[]) => [response, ...forums]);
+        console.log(this.forumsSignal())
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "El foro ha sido agregado",
+          icon: "success",
+          iconColor: "white",
+          color: "white",
+          showConfirmButton: false,
+          background: "#16c2d5",
+          timer: 2000,
+        });
       },
       error: (error : any) => {
         this.snackBar.open(error.error.description, 'Close', {
@@ -68,8 +102,18 @@ export class ForumService extends BaseService<IForum> {
           panelClass: ['error-snackbar']
         });
         console.error('error', error);
+        Swal.fire({
+          title: "Oops...",
+          text: "Ha ocurrido un error agregando el foro",
+          icon: "warning",
+          iconColor: "white",
+          color: "white",
+          background: "#16c2d5",
+          timer: 2000,
+        });
       }
     })
+    
   } 
 
 }
