@@ -22,10 +22,28 @@ export interface IChallengeOutdoor {
   requirement?: string;
   description?: string;
   name?: string;
+
+  lastname?: string;
+  email?: string;
+  image?: string;
+  password?: string;
+  active?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  role?: IUserRole;
+  birthDate?: string;
+  authorities?: IAuthority[];
+}
+
+export interface IUserRole {
+  name : string,
+}
+=======
   startDate?: string;
   endDate?: string;
   badgeId?:IBadge
 }
+
 
 
 export interface IAuthority {

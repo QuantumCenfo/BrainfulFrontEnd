@@ -1,0 +1,108 @@
+<div class="register-container">
+    <div class="register-card">
+      <div class="logo-container">
+          <img
+            class="company-logo"
+            src="../../../../assets/icons/brainfulLogoG.png"
+            alt="Logo"
+          />
+      </div>
+      <div class="register-main">
+        <form (ngSubmit)="handleSignup($event)" autocomplete="off" #frm="ngForm">
+          <div class="form-layout">
+            <div class="form-fields">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name" class="form-label">Nombre</label>
+                  <input
+                    #name="ngModel"
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    placeholder=""
+                    [(ngModel)]="user.name"
+                    [ngClass]="{
+                      'is-invalid': name.invalid && name.touched,
+                      'is-valid': name.valid && name.touched
+                    }"
+                    required
+                  />
+                  <div *ngIf="name.invalid" class="invalid-feedback">
+                    Ingresa un nombre valido
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastname" class="form-label">Apellidos</label>
+                  <input
+                    #lastname="ngModel"
+                    type="text"
+                    class="form-control"
+                    id="lastname"
+                    name="lastname"
+                    placeholder=""
+                    [(ngModel)]="user.lastname"
+                    [ngClass]="{
+                      'is-invalid': lastname.invalid && lastname.touched,
+                      'is-valid': lastname.valid && lastname.touched
+                    }"
+                    required
+                  />
+                  <div *ngIf="lastname.invalid" class="invalid-feedback">
+                    Ingresa un nombre invalido
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  #email="ngModel"
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="ejemplo@gmail.com"
+                  [(ngModel)]="user.email"
+                  [ngClass]="{
+                    'is-invalid': email.invalid && email.touched,
+                    'is-valid': email.valid && email.touched
+                  }"
+                  required
+                />
+                <div *ngIf="email.invalid" class="invalid-feedback">
+                  Ingresa un email valido
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password" class="form-label">Contraseña</label>
+                <input
+                  #password="ngModel"
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="*****"
+                  [(ngModel)]="user.password"
+                  [ngClass]="{
+                    'is-invalid': password.invalid && password.touched,
+                    'is-valid': password.valid && password.touched
+                  }"
+                  required
+                />
+                <div *ngIf="password.invalid" class="invalid-feedback">
+                  Ingresa una contraseña valida
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block w-100" type="submit">Registrarse</button>
+          @if(signUpError) {
+          <p class="text-danger">{{signUpError}}</p>
+          } @else if (validSignup){
+          <p class="text-success">Usuario registrado!</p>
+          }
+        </form>
+      </div>
+    </div>
+  </div>
+  

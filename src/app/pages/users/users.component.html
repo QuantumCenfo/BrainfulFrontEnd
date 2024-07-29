@@ -1,22 +1,16 @@
 <div class="container-fluid">
   <div>
-    <h2>Users</h2>
-  </div>
-  <div>
     @defer {
-    <div class="d-flex justify-content-end pb-2">
-      <button type="button" class="btn btn-primary d-flex align-items-center" (click)="formModal.show()">
-        <i class="fa-solid fa-plus white"></i>
-        <p class="mb-0">Add user</p>
-      </button>
-    </div>
-    <app-user-list></app-user-list>
-    } @loading (after 100ms; minimum 1s){
-    <app-loader></app-loader>
+      <app-user-list></app-user-list>
+    } @loading (after 100ms; minimum 1s) {
+      <app-loader></app-loader>
     }
   </div>
+<button class="add-user-btn" (click)="openAddUser()">
+<i class="fa-solid fa-plus"></i>
+</button>
 </div>
 
 <app-modal size="lg" #formModal>
-  <app-user-form [title]="'Add User'"></app-user-form>
+  <app-user-form-add></app-user-form-add>
 </app-modal>
