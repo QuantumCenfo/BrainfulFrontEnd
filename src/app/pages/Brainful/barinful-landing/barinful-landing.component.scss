@@ -5,6 +5,7 @@ body {
 }
 
 header {
+  font-weight: normal;
   background-color: #FFFFFF;
   color: #000000;
   display: flex;
@@ -19,6 +20,7 @@ header .logo img {
 }
 
 header nav a {
+  font-weight: normal;
   color: #000000;
   text-decoration: none;
   margin-left: 1rem;
@@ -63,7 +65,7 @@ header nav a:hover {
 
 .games-carousel {
   background-color: rgba(202, 240, 248, 0.5);
-  padding: 2rem;
+  padding: 109px;
 }
 
 .carousel-item {
@@ -77,7 +79,8 @@ header nav a:hover {
 
 .faq {
   background-color: #CAF0F8;
-  padding: 2rem;
+  padding: 95px;
+
 }
 
 .accordion-item {
@@ -143,7 +146,7 @@ h2 {
   max-width: 700px;
   padding: 20px;
   gap: 1rem; 
-  margin-left: 550px;
+  margin-left: 573px;
 }
 
 .formContact label {
@@ -193,7 +196,12 @@ footer {
   text-align: center;
   padding: 1rem;
 }
-
+@media (max-width: 1180px) {
+  .games-carousel {
+    background-color: rgba(202, 240, 248, 0.5);
+    padding: 70px;
+}
+}
 @media (max-width: 768px) {
   header {
       flex-direction: column;
@@ -230,12 +238,20 @@ footer {
   }
 
   .formContact {
-      margin-left: 20px;
+      margin-left: 0px;
   }
 
   .contact h2 {
       margin-left: 0px;
   }
+  .games-carousel{
+    background-color: rgba(202, 240, 248, 0.5);
+    padding: 40px;
+}
+.faq {
+  background-color: #CAF0F8;
+  padding: 46px;
+}
 }
 
 @media (min-width: 765px) and (max-width: 1024px) {
@@ -274,7 +290,7 @@ footer {
 }
 
 .formContact {
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
 .contact h2 {

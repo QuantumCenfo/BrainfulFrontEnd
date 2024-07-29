@@ -142,12 +142,13 @@
 
 @media (max-width: 765px) {
   .table-user {
+    padding: 0px;
       width: 100%;
       padding-top: 10px;
   }
 
   .users {
-      flex-direction: column;
+      flex-direction: row;
       padding: 10px;
   }
 
@@ -168,7 +169,7 @@
   }
 
   .userBoton {
-      padding: 15px 30px;
+      padding: 8px 8px;
       font-size: 16px;
       text-align: left;
   }

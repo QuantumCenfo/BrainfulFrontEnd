@@ -36,6 +36,7 @@ export class UserService extends BaseService<IUser> {
     return this.add(user).pipe(
       tap((response: any) => {
         this.userListSignal.update(users => [response, ...users]);
+        
       }),
       catchError(error => {
         console.error('Error saving user', error);
@@ -63,13 +64,14 @@ export class UserService extends BaseService<IUser> {
           console.log('Response: ', res);
           console.log('Image added successfully');
           Swal.fire({
-            title: '¡Éxito!',
-            text: 'El usuario fue registrado',
-            icon: 'success',
-            iconColor: 'white',
-            color: 'white',
-            background: '#16c2d5',
-            confirmButtonColor: '#ff9f1c',
+            title: "¡Éxito!",
+            text: "El usuario ha sido agregado",
+            icon: "success",
+            iconColor: "white",
+            color: "white",
+            showConfirmButton: false,
+            background: "#16c2d5",
+            timer: 2000,
           });
         },
         error: (err: any) => {
@@ -110,12 +112,18 @@ export class UserService extends BaseService<IUser> {
 
   handleUpdateUser(user: IUser, imageFile: File) {
     Swal.fire({
-      title: '¿Está seguro que desea actualizar el usuario?',
-      icon: 'question',
+      title: "Esta seguro que desea actualizar el usuario?",
+      icon: "question",
+
+      iconColor: "white",
+      color: "white",
+      background: "#d54f16",
+      position: "center",
+      confirmButtonColor: "#ff9f1c",
+      cancelButtonColor: "#16c2d5",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, actualizar',
+      showConfirmButton: true,
+      confirmButtonText: "Si, actualizar",
     }).then(result => {
       if (result.isConfirmed) {
         this.updateUser(user, imageFile).subscribe({
@@ -125,13 +133,14 @@ export class UserService extends BaseService<IUser> {
             console.log('Response: ', res);
             console.log('User updated successfully');
             Swal.fire({
-              title: '¡Éxito!',
-              text: 'El usuario ha sido actualizado',
-              icon: 'success',
-              iconColor: 'white',
-              color: 'white',
-              background: '#16c2d5',
+              title: "¡Éxito!",
+              text: "El usuario ha sido actualizado",
+              icon: "success",
+              iconColor: "white",
+              color: "white",
+              background: "#16c2d5",
               timer: 2000,
+              showConfirmButton:false
             });
           },
           error: (err: any) => {

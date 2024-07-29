@@ -1,13 +1,17 @@
 <form autocomplete="off" #frm="ngForm" class="user-form" (ngSubmit)="handleAction(frm)">
   <div class="form-content">
-    <label class="custom-file-upload">
+    <div class="form-group file-input mb-3">
+      <label for="url"
+      ><i class="fa-solid fa-arrow-up-from-bracket fa-2xl"></i
+    >
       <input
         type="file"
-        class="profile-image"
+        class="file form-control"
         (change)="onFileChange($event)"
         required
       />
     </label>
+    </div>
     <div class="form-fields">
       <div class="form-row">
         <div class="form-group">
@@ -29,12 +33,7 @@
           [(ngModel)]="user.email" 
           required>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="birthdate">Fecha de Nacimiento</label>
-          <input type="date" id="birthdate" name="birthdate" [(ngModel)]="user.birthDate">
-        </div>
-      </div>
+     
       <button type="button" (click)="editUser()"  class="update-btn">Aceptar</button>
     </div>
   </div>
