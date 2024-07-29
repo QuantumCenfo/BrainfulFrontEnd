@@ -1,32 +1,23 @@
 <form autocomplete="off" #frm="ngForm" class="user-form" (ngSubmit)="handleAction(frm)">
-  <h2 class="logo">
-    <img src="../../../../assets/icons/brainfulLogoG.png" alt="Brainful">
-  </h2>
   <div class="form-content">
-    
-   
-  <div class="form-group file-input mb-3">
+    <div class="form-group file-input mb-3">
       <label for="url"
       ><i class="fa-solid fa-arrow-up-from-bracket fa-2xl"></i
-        
     >
-    <input
-    type="file"
-    class="file form-control"
-    (change)="onFileChange($event)"
-    required
-    />
-  </label>
-     
-  </div>
-     
- 
+      <input
+        type="file"
+        class="file form-control"
+        (change)="onFileChange($event)"
+        required
+      />
+    </label>
+    </div>
     <div class="form-fields">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Nombre</label>
           <input #name="ngModel" type="text" id="name" name="name" 
-            [(ngModel)]="user.name" 
+          [(ngModel)]="user.name"
             required>
         </div>
         <div class="form-group">
@@ -42,12 +33,8 @@
           [(ngModel)]="user.email" 
           required>
       </div>
-      
-      <div class="form-group">
-        <label for="role">Rol</label>
-        <input #role="ngModel" type="text" id="role" name="role" [(ngModel)]="roleName">
-      </div>
-      <button type="button" (click)="addUser()"  class="update-btn">Aceptar</button>
+     
+      <button type="button" (click)="editUser()"  class="update-btn">Aceptar</button>
     </div>
   </div>
 </form>

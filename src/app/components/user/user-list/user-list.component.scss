@@ -1,0 +1,176 @@
+.table-user {
+  padding-top: 20px;
+  width: 80%;
+  margin: 0 auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  tr {
+      display: table;
+      width: 100%;
+  }
+
+  td {
+      padding: 10px;
+      text-align: left;
+  }
+}
+
+.users {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #16C2D5;
+  border-radius: 20px;
+  padding: 20px;
+
+  @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+  }
+}
+
+.pUser {
+  color: #fff;
+  padding-left: 20px;
+  padding-top: 20px;
+  font-size: 18px;
+  width: auto;
+  text-align: left;
+
+  @media (min-width: 768px) {
+      padding-left: 40px;
+      padding-top: 40px;
+      font-size: 20px;
+      width: 300px;
+      text-align: left;
+  }
+}
+
+.image {
+  border: 1px solid;
+  border-radius: 50%;
+  background-color: #7CECF9;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+      height: 100px;
+      width: 100px;
+  }
+}
+
+.user-img {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.buttonUsers {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: auto;
+  height: auto;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+      flex-direction: row;
+      width: 100px;
+      height: 50px;
+  }
+}
+
+.userBoton {
+  background-color: #FFA62B;
+  border: 1px solid #16C2D5;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 765px) {
+      margin-left: 10px;
+  }
+}
+
+.userBoton:hover {
+  background-color: #db8d1e;
+}
+
+@media (min-width: 765px) and (max-width: 1024px) {
+  .table-user {
+      width: 90%;
+      padding-top: 15px;
+  }
+
+  .users {
+      flex-direction: column;
+      padding: 15px;
+  }
+
+  .pUser {
+      padding-left: 30px;
+      padding-top: 30px;
+      font-size: 18px;
+  }
+
+  .image {
+      height: 90px;
+      width: 90px;
+  }
+
+  .buttonUsers {
+      width: 100%;
+      flex-direction: row;
+  }
+
+  .userBoton {
+      padding: 20px 40px;
+      font-size: 18px;
+      text-align: left;
+  }
+}
+
+@media (max-width: 765px) {
+  .table-user {
+    padding: 0px;
+      width: 100%;
+      padding-top: 10px;
+  }
+
+  .users {
+      flex-direction: row;
+      padding: 10px;
+  }
+
+  .pUser {
+      padding-left: 10px;
+      padding-top: 10px;
+      font-size: 16px;
+  }
+
+  .image {
+      height: 70px;
+      width: 70px;
+  }
+
+  .buttonUsers {
+      width: 100%;
+      flex-direction: column;
+  }
+
+  .userBoton {
+      padding: 8px 8px;
+      font-size: 16px;
+      text-align: left;
+  }
+}

@@ -1,10 +1,11 @@
 body {
-    font-family: 'Dosis', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
+  font-family: 'Dosis', sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
 header {
+  font-weight: normal;
   background-color: #FFFFFF;
   color: #000000;
   display: flex;
@@ -19,208 +20,280 @@ header .logo img {
 }
 
 header nav a {
+  font-weight: normal;
   color: #000000;
   text-decoration: none;
   margin-left: 1rem;
   transition: text-decoration 0.3s; 
 }
 
+.fButton {
+  margin-left: 1650px;
+}
+
 header nav a:hover {
   text-decoration: underline; 
 }
-.nav-links{
+
+.nav-links {
   display: flex;
   margin-right: 30px;
   font-size: 18px;
   font-weight: bold;
-
 }
-  
-  .description {
-    background-color: #CAF0F8;
-    color: #000000;
-    text-align: center;
-    padding: 2rem;
-  }
-  
-  .description img {
-    max-width: 400px; 
-    height: auto;
-  }
- .descripBrainful{
+
+.description {
+  background-color: #CAF0F8;
+  color: #000000;
+  text-align: center;
+  padding: 2rem;
+}
+
+.description img {
+  max-width: 400px; 
+  height: auto;
+}
+
+.descripBrainful {
   width: 700px;
   align-items: center;
-  margin-left: 550px;
+  margin-left: 500px;
   font-size: 1.2rem;
   text-indent: 2em;
   text-align: justify;
- }
-  
+}
+
+.games-carousel {
+  background-color: rgba(202, 240, 248, 0.5);
+  padding: 109px;
+}
+
+.carousel-item {
+  background-color: #FF9F1C;
+  padding: 1rem;
+  margin: 1rem;
+  width: 1200px;
+  margin-left: 100px;
+  text-align: center;
+}
+
+.faq {
+  background-color: #CAF0F8;
+  padding: 95px;
+
+}
+
+.accordion-item {
+  margin-bottom: 1rem;
+  width: 900px;
+  margin-left: 400px;
+}
+
+.accordion-header {
+  background-color: #FF9F1C;
+  color: #FFFFFF;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.accordion-content {
+  background-color: #9EE7F6;
+  padding: 1rem;
+  display: none;
+}
+
+.accordion-content.open {
+  display: block;
+}
+
+.contact {
+  background-color: rgba(202, 240, 248, 0.5);
+  padding: 2rem;
+}
+
+.contactForm {
+  margin-left: -40px;
+}
+
+.contact h2 {
+  color: #000000;
+  margin-bottom: 1rem;
+  text-align: center;
+  margin-left: 0px;
+}
+
+h2 {
+  font-family: Dosis, "Dosis", sans-serif;
+}
+
+.red {
+  color: #000000;
+  background-color: #FF9F1C;
+  padding: 1rem;
+  margin: 1rem;
+  width: 1200px;
+  margin-left: 230px;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.formContact {
+  display: flex;
+  flex-direction: column;
+  background-color: #98F0FA;
+  border-radius: 10px; 
+  width: 100%;
+  max-width: 700px;
+  padding: 20px;
+  gap: 1rem; 
+  margin-left: 573px;
+}
+
+.formContact label {
+  display: flex;
+  flex-direction: column;
+  color: #000000;
+}
+
+.formContact input,
+.formContact textarea {
+  background-color: #FFFFFF;
+  border: none; 
+  border-bottom: 2px solid #FF9F1C; 
+  padding: 0.5rem;
+  margin-top: 0.5rem; 
+}
+
+.formContact input[type="email"] {
+  border-bottom: 2px solid #FF9F1C; 
+  background-color: #98F0FA;
+}
+
+.formContact textarea {
+  border: 3px solid #FF9F1C; 
+  border-radius: 7px; 
+  resize: vertical; 
+}
+
+.formContact button {
+  align-self: center;
+  background-color: #FF9F1C;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px; 
+}
+
+.formContact button:hover {
+  background-color: #13A1B3;
+}
+
+footer {
+  background-color: #16C2D5;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 1rem;
+}
+@media (max-width: 1180px) {
   .games-carousel {
     background-color: rgba(202, 240, 248, 0.5);
-    padding: 2rem;
-  }
-  
-  .carousel-item {
-    background-color: #FF9F1C;
-    padding: 1rem;
-    margin: 1rem;
-    width: 1200px;
-    margin-left: 300px;
-    text-align: center;
-  }
-  
-  .faq {
-    background-color: #CAF0F8;
-    padding: 2rem;
-  }
-  
-  .accordion-item {
-    margin-bottom: 1rem;
-    width: 900px;
-    margin-left: 450px;
-  }
-  
-  .accordion-header {
-    background-color: #FF9F1C;
-    color: #FFFFFF;
-    padding: 1rem;
-    cursor: pointer;
-  }
-  
-  .accordion-content {
-    background-color: #9EE7F6;
-    padding: 1rem;
-    display: none;
-  }
-  
-  .accordion-content.open {
-    display: block;
-  }
-  
-  .contact {
-    background-color: rgba(202, 240, 248, 0.5);
-    padding: 2rem;
-  }
-  
-  .contact h2 {
-    color: #000000;
-    margin-bottom: 1rem;
-    text-align: center;
-    margin-left: 0px;
-  }
-  h2 {
-    font-family: Dosis, "Dosis", sans-serif;
-  }
-  .red{
-    color: #FFFFFF;
-    background-color: #FF9F1C;
-    padding: 1rem;
-    margin: 1rem;
-    width: 1200px;
-    margin-left: 300px;
-    text-align: center;
-    border-radius:20px;
-  }
-  
-  .formContact {
-    display: flex;
-    flex-direction: column;
-    background-color: #98F0FA;
-    border-radius: 10px; 
-    width: 100%;
-    max-width: 700px;
-    padding: 20px;
-    gap: 1rem; 
-    margin-left: 550px;
-  }
-  
-  .formContact label {
-    display: flex;
-    flex-direction: column;
-    color: #000000;
-  }
-  
-  .formContact input,
-  .formContact textarea {
-    background-color: #FFFFFF;
-    border: none; 
-    border-bottom: 2px solid #FF9F1C; 
-    padding: 0.5rem;
-    margin-top: 0.5rem; 
-  }
-  
-  .formContact input[type="email"] {
-    border-bottom: 2px solid #FF9F1C; 
-    background-color: #98F0FA;
+    padding: 70px;
+}
+}
+@media (max-width: 768px) {
+  header {
+      flex-direction: column;
   }
 
-  .formContact textarea {
-    border: 3px solid #FF9F1C; 
-    border-radius: 7px; 
-    resize: vertical; 
-  }
-  
-  .formContact button {
-    align-self: center;
-    background-color: #FF9F1C;
-    color: #FFFFFF;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 5px; 
-  }
-  
-  .formContact button:hover {
-    background-color: #13A1B3;
-  }
-  
-  footer {
-    background-color: #16C2D5;
-    color: #FFFFFF;
-    text-align: center;
-    padding: 1rem;
-  }
-  
-  @media (max-width: 768px) {
-    header {
-      flex-direction: column;
-    }
-    
-    .nav-links {
+  .nav-links {
       margin-top: 1rem;
       flex-direction: column;
       height: 170px;
       justify-content: space-between;
-      margin-right: 200px;
+      margin-right: 280px;
       font-size: 15px;
       font-weight: bold;
-    }
-    .descripBrainful{
+  }
+
+  .descripBrainful {
       width: 300px;
       margin-left: 0px;
-    }
+  }
 
-    .description img{
+  .description img {
       margin-left: -10px;
       width: 350px;
-    }
+  }
 
-    .red{
-      margin-left: 0px;
+  .red {
+      margin-left: 10px;
       width: 300px;
-    }
+  }
 
-    .accordion-item{
+  .accordion-item {
       margin-left: 0px;
       width: 330px;
-    }
-
-    .formContact{
-      margin-left: -20px;
-    }
-    .contact h2{
-      margin-left: 0px;
-    }
   }
+
+  .formContact {
+      margin-left: 0px;
+  }
+
+  .contact h2 {
+      margin-left: 0px;
+  }
+  .games-carousel{
+    background-color: rgba(202, 240, 248, 0.5);
+    padding: 40px;
+}
+.faq {
+  background-color: #CAF0F8;
+  padding: 46px;
+}
+}
+
+@media (min-width: 765px) and (max-width: 1024px) {
+  header {
+    flex-direction: column;
+}
+
+.nav-links {
+    margin-top: 1rem;
+    flex-direction: column;
+    height: 170px;
+    justify-content: space-between;
+    margin-right: 580px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.descripBrainful {
+    width: 650px;
+    margin-left: 0px;
+}
+
+.description img {
+    margin-left: -10px;
+    width: 350px;
+}
+
+.red {
+    margin-left: 10px;
+    width: 680px;
+}
+
+.accordion-item {
+    margin-left: 0px;
+    width: 670px;
+}
+
+.formContact {
+    margin-left: 30px;
+}
+
+.contact h2 {
+    margin-left: 0px;
+}
+}

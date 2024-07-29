@@ -1,1 +1,30 @@
-<p>profile works!</p>
+<div class="row info-container">
+    <div class="col-12 col-md-6 mx-auto">
+      <div class="profile-card">
+        <div class="image-placeholder">
+        <img *ngIf="profileService.user$()?.image" [src]="profileService.user$().image" alt="User Image" class="user-img"/>
+      </div>
+        <div class="info-item">
+          <label>Nombre:</label>
+          <p>{{profileService.user$().name}}</p>
+        </div>
+        <div class="info-item">
+          <label>Apellido:</label>
+          <p>{{profileService.user$().lastname}}</p>
+        </div>
+        <div class="info-item">
+          <label>Email:</label>
+          <p>{{profileService.user$().email}}</p>
+        </div>
+        <button class="modify-button" (click)="ediUser()">Modificar</button>
+      </div>
+    </div>
+  </div>
+
+ <app-modal size="lg" #ediModal>
+  <app-profile-edit-modal
+    [title]="'Update User'"
+    (callParentEvent)="onFormEventCalled($event)"
+  >
+  </app-profile-edit-modal>
+</app-modal>

@@ -26,6 +26,13 @@ export interface IChallengeOutdoor {
   endDate?: string;
   badgeId?:IBadge
 }
+export interface IComment {
+  commentId?: number;
+  content?: string;
+  anonymous?: boolean;
+  user?: IUser;
+  forum?: IForum;
+}
 
 
 export interface IAuthority {
@@ -122,12 +129,19 @@ export interface IUser {
   name?: string;
   lastname?: string;
   email?: string;
+  image?: string;
   password?: string;
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  role?: IUserRole;
+  birthDate?: string;
   authorities?: IAuthority[];
 }
+export interface IUserRole {
+  name : string,
+}
+
 export interface IUserBadge {
   userBadgeId?: number;
   badge?: IBadge;
@@ -154,12 +168,4 @@ export interface IForum {
   description?: string;
   anonymous?: boolean;
   user?: IUser;
-}
-
-export interface IComment {
-  commentId?: number;
-  content?: string;
-  anonymous?: boolean;
-  user?: IUser;
-  forum?: IForum;
 }

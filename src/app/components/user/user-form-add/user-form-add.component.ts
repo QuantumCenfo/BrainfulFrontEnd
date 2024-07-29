@@ -1,20 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { IUser } from '../../../interfaces';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-user-form-add',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  templateUrl: './user-form-add.component.html',
+  styleUrls: ['./user-form-add.component.scss']
 })
-export class SigUpComponent {  
-  public signUpError!: String;
+export class UserFormAdd {
+  public signUpError!: string;
   public validSignup!: boolean;
   @ViewChild('name') nameModel!: NgModel;
   @ViewChild('lastname') lastnameModel!: NgModel;
@@ -41,29 +40,11 @@ export class SigUpComponent {
     }
     if (this.emailModel.valid && this.passwordModel.valid) {
       this.authService.signup(this.user).subscribe({
-        next: () => {
-          this.validSignup = true;
-          Swal.fire({
-            icon: 'success',
-            title: 'Registro Exitoso',
-            text: '¡Usuario registrado con éxito!',
-            showConfirmButton: false,
-            timer: 2000
-          }).then(() => {
-            this.router.navigate(['/login']);
-          });
-        },
-        error: (err: any) => {
-          this.signUpError = err.description;
-          Swal.fire({
-            icon: 'error',
-            title: 'Error de Registro',
-            text: 'Hubo un error al registrar el usuario. Inténtalo nuevamente.',
-            showConfirmButton: false,
-            timer: 2000
-          });
-        }
+        next: () => this.validSignup = true,
+        error: (err: any) => (this.signUpError = err.description),
       });
     }
   }
+
+
 }
