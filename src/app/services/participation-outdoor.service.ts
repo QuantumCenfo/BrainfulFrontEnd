@@ -39,11 +39,22 @@ export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoo
     return this.http.put<IPartcipationOutdoor>(`${this.source}/${id}`, participation);
   }
   addParticipation(participation: IPartcipationOutdoor, imageFile: File) {
+    
     const formData = new FormData();
     formData.append("participationOutdoor", JSON.stringify(participation));
     formData.append("image", imageFile);
-
+    Swal.fire({
+      title: "¡Éxito!",
+            text: "La participación ha sido agregada",
+            icon: "success",
+            iconColor: "white",
+            color: "white",
+            showConfirmButton: false,
+            background: "#16c2d5",
+            timer: 2000,
+    });
     return this.http.post(this.source, formData, {
+      
       headers: new HttpHeaders({}),
       
     }).pipe(

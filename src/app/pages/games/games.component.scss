@@ -15,6 +15,7 @@
     border-radius: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+
   .nav-button:hover {
     background-color: #ee9211;
     color: white;
@@ -86,7 +87,10 @@
     }
   }
 }
-
+h3{
+  font-size: 20px;
+  font-family: Dosis, "Dosis", sans-serif;
+}
 @media (max-width: 800px) {
   .carousel-container.game-card.current[_ngcontent-ng-c1279071869] {
     transform: scale(1.2);
