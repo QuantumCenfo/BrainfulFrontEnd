@@ -13,7 +13,7 @@
       <button class="add-comment-button" (click)="formModal.show()">Añadir comentario</button>
 
       <div class="forum-container">
-        <div *ngFor="let comment of commentsList" class="comment-card">
+        <div *ngFor="let comment of displayedComments" class="comment-card">
           <!-- Contenedor de información del usuario -->
           <div class="forum-description" *ngIf="!comment.anonymous">
             <!-- <img *ngIf="forum.user.image" [src]="forum.user?.image" alt="User Photo" class="user-photo"> -->
