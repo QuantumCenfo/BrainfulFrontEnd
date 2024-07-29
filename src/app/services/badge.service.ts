@@ -100,39 +100,41 @@ export class BadgeService extends BaseService<IBadge> {
       showConfirmButton: true,
       confirmButtonText: "Si, actualizar",
     }).then((res) => {
-      if (imageFile) {
-        this.updateBadge(badge, imageFile).subscribe({
-          next: (res: any) => {
-            const updatedBadge = this.badgeSignal().map((b: IBadge) =>
-              b.badgeId === badge.badgeId ? badge : b
-            );
-            this.badgeSignal.set(updatedBadge);
-            console.log("Response: ", res);
-            console.log("Badge updated successfully");
-            Swal.fire({
-              title: "¡Éxito!",
-              text: "La insignia ha sido actualizada",
-              icon: "success",
-              iconColor: "white",
-              color: "white",
-              background: "#16c2d5",
-              timer: 2000,
-            });
-          },
-          error: (err: any) => {
-            console.log("Error: ", err);
-          },
-        });
-      } else {
-        Swal.fire({
-          title: "Oops...",
-          text: "Porfavor subir una imagen",
-          icon: "warning",
-          iconColor: "white",
-          color: "white",
-          background: "#16c2d5",
-          confirmButtonColor: "#ff9f1c",
-        });
+      if (res.isConfirmed) {
+        if (imageFile) {
+          this.updateBadge(badge, imageFile).subscribe({
+            next: (res: any) => {
+              const updatedBadge = this.badgeSignal().map((b: IBadge) =>
+                b.badgeId === badge.badgeId ? badge : b
+              );
+              this.badgeSignal.set(updatedBadge);
+              console.log("Response: ", res);
+              console.log("Badge updated successfully");
+              Swal.fire({
+                title: "¡Éxito!",
+                text: "La insignia ha sido actualizada",
+                icon: "success",
+                iconColor: "white",
+                color: "white",
+                background: "#16c2d5",
+                timer: 2000,
+              });
+            },
+            error: (err: any) => {
+              console.log("Error: ", err);
+            },
+          });
+        } else {
+          Swal.fire({
+            title: "Oops...",
+            text: "Porfavor subir una imagen",
+            icon: "warning",
+            iconColor: "white",
+            color: "white",
+            background: "#16c2d5",
+            confirmButtonColor: "#ff9f1c",
+          });
+        }
       }
     });
   }
@@ -152,40 +154,44 @@ export class BadgeService extends BaseService<IBadge> {
       showCancelButton: true,
       showConfirmButton: true,
     }).then((res) => {
-      this.del(badgeId).subscribe({
-        next: () => {
-          const deletedBadge = this.badgeSignal().filter(
-            (badge: IBadge) => badge.badgeId !== badgeId
-          );
-          this.badgeSignal.set(deletedBadge);
-          Swal.fire({
-            title: "¡Éxito!",
-            text: "La insignia ha sido eliminada",
-            icon: "success",
-            iconColor: "white",
-            color: "white",
-            background: "#16c2d5",
-            timer: 2000,
-            showConfirmButton: false,
-          });
-        },
-        error: (err: any) => {
-          console.log("error")  
+      if (res.isConfirmed) {
+        this.del(badgeId).subscribe({
+          next: () => {
+            const deletedBadge = this.badgeSignal().filter(
+              (badge: IBadge) => badge.badgeId !== badgeId
+            );
+            this.badgeSignal.set(deletedBadge);
             Swal.fire({
-              icon: 'warning',
-              title: 'Lo sentimos',
-              iconColor: 'white',
-              color: 'white',
-              background:'#d54f16',
-              position: 'center',
-              text: 'No puedes borrar una insignia que tenga un desafío asociado',
+              title: "¡Éxito!",
+              text: "La insignia ha sido eliminada",
+              icon: "success",
+              iconColor: "white",
+              color: "white",
+              background: "#16c2d5",
+              timer: 2000,
+              showConfirmButton: false,
+            });
+          },
+          error: (err: any) => {
+            console.log("error");
+            Swal.fire({
+              icon: "warning",
+              title: "Lo sentimos",
+              iconColor: "white",
+              color: "white",
+              background: "#d54f16",
+              position: "center",
+              text: "No puedes borrar una insignia que tenga un desafío asociado",
               showConfirmButton: false,
               timer: 10000,
               timerProgressBar: true,
             });
-            return throwError(() => new Error('Error al agregar la participación'));
-        },
-      });
+            return throwError(
+              () => new Error("Error al agregar la participación")
+            );
+          },
+        });
+      }
     });
   }
 }
