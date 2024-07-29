@@ -23,8 +23,12 @@
           </div>
 
           <p class="forum-description">{{ comment.content }}</p>
-          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="update-button" (click)="openUpdateModal(comment)">✏️</button>
-          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="delete-button" (click)="onDeleteForum(comment.commentId!); $event.stopPropagation()" >🗑️</button>
+          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="update-button" (click)="openUpdateModal(comment)">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
+          <button *ngIf="isForumOwnedByUser(comment) && comment.commentId !== undefined" class="delete-button" (click)="onDeleteForum(comment.commentId!); $event.stopPropagation()" >
+            <i class="fa-regular fa-trash-can"></i>
+          </button>
         </div>
       </div>
     </div>
