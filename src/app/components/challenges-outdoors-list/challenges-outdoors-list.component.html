@@ -1,0 +1,38 @@
+<h2>Desafíos Externos Activos</h2>
+<div class="challenge-list">
+    <div class="challenge-card" *ngFor="let challenge of activeChallengeOutdoorList">
+      <h3>{{ challenge.name }}</h3>
+      <p>{{ challenge.description }}</p>
+      <div class="footer-card">
+        <span class="edit-text-custom">Editar fechas</span>
+        <button class="btn-primary-custom edit-button-custom" (click)="showModalUpdate(challenge)">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+      </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+  <app-add-button (click)="showModal()"></app-add-button>
+</div>
+<h2>Desafíos Externos Inactivos</h2>
+<div class="challenge-list">
+<div class="challenge-card" *ngFor="let challenge of inactiveChallengeOutdoorList">
+    <h3>{{ challenge.name }}</h3>
+    <p>{{ challenge.description }}</p>
+    <div class="footer-card">
+        <span class="edit-text-custom">Editar fechas</span>
+        <button class="btn-primary-custom edit-button-custom" (click)="showModalUpdate(challenge)">
+          <i class="fa-regular fa-pen-to-square"></i>
+        </button>
+    </div>
+</div>
+
+
+<app-modal #formModalUpdate>
+  <app-challenges-outdoors-update-form (callParentEvent)="onFormUpdateEventCalled($event)" [toUpdateDateChallengeOutdoor]="selectedChallengeOutdoor">
+  </app-challenges-outdoors-update-form>
+</app-modal>
+<app-modal #formModal>
+<app-challenges-outdoors-form (callParentEvent)="onFormEventCalled($event)" [badgeList]="badgeService.badges$()">
+</app-challenges-outdoors-form>
+</app-modal>

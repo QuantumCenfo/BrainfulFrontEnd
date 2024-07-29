@@ -1,1 +1,20 @@
-<p>badges works!</p>
+<div class="container">
+  @defer{
+
+  <app-badge-list [badgeList]="badgeService.badges$()" />
+  <div class="d-flex justify-content-center align-items-center">
+    <app-add-button (click)="showModal()"></app-add-button>
+  </div>
+
+  }@loading ( after 100ms; minimum 1s) {
+  <app-loader />
+  }
+</div>
+
+<app-modal #formModal>
+  <app-badge-form
+    (callParentEvent)="onFormEventCalled($event)"
+    [btn]="'Agregar'"
+  >
+  </app-badge-form>
+</app-modal>

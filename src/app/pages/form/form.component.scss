@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+}
+
+h1{
+    font-family: Dosis, "Dosis", sans-serif; 
+}
+
+.container{
+    background-color: #00a4bd;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.container2{
+
+    padding: 70px;
+    border-radius: 10px;
+    width: 100%;
+ 
+    
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 45%;
+}
+
+label {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+
+input, select, textarea, button {
+    font-size: 15px;
+    padding: 10px;
+    border-style: solid;
+    border-color: #ff9f1c ;
+    border-radius: 5px;
+}
+.invalid input,
+.invalid select {
+  border-color: red;
+}
+input, select, textarea {
+    width: 100%;
+}
+
+button {
+  
+    background-color: #ff9f1c;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: center;
+    width: 100px;
+    margin-left: 330px;
+}
+
+button:hover {
+    background-color:  #ee9211;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: center;
+    width: 100px;
+    margin-left: 330px;
+    border-style: solid;
+    border-color: #ee9211;
+}
+
+textarea {
+    height: 80px;
+}
+
+@media (max-width: 600px) {
+    .form-group {
+        width: 100%;
+    }
+    button {
+  
+        background-color: #ff9f1c;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+        align-self: center;
+        width: 100px;
+        margin-left: 85px;
+    }
+}

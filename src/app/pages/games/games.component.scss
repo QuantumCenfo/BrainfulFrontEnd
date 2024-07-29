@@ -2,17 +2,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  font-family: Dosis, 'Dosis', sans-serif;
+  height: 85vh;
+  font-family: Dosis, "Dosis", sans-serif;
 
   .nav-button {
-    background-color: #ffa500;
+    background-color: #ff9f1c;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 24px;
-    border-radius: 50%;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .nav-button:hover {
+    background-color: #ee9211;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
@@ -31,7 +41,7 @@
   }
 
   .game-card {
-    background-color: #ffa500;
+    background-color: #ff9f1c;
     border-radius: 20px;
     padding: 20px;
     margin: 0 10px;
@@ -39,15 +49,17 @@
     width: 200px;
     height: 150px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out,
+      height 0.3s ease-in-out;
 
     &.current {
       transform: scale(1.2);
-      width: 250px;
+      width: 200px;
       height: 300px;
     }
 
-    &.previous, &.next {
+    &.previous,
+    &.next {
       transform: scale(0.8);
       height: 250px;
     }
@@ -57,7 +69,7 @@
     }
 
     button {
-      background-color: #B5DEE7;
+      background-color: #b5dee7;
       color: black;
       border: none;
       padding: 10px 20px;
@@ -76,23 +88,28 @@
 }
 
 @media (max-width: 800px) {
-    .game-card.previous,
-    .game-card.next {
-      display: none; /* Oculta previous y next en pantallas pequeñas */
-    }
-  
-    .left,
-    .right {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  
-    .left {
-      left: 10px;
-    }
-  
-    .right {
-      right: 10px;
-    }
+  .carousel-container.game-card.current[_ngcontent-ng-c1279071869] {
+    transform: scale(1.2);
+    width: 220px;
+    height: 300px;
   }
+  .game-card.previous,
+  .game-card.next {
+    display: none; /* Oculta previous y next en pantallas pequeñas */
+  }
+
+  .left,
+  .right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .left {
+    left: 10px;
+  }
+
+  .right {
+    right: 10px;
+  }
+}

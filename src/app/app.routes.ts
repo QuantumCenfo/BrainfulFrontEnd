@@ -13,7 +13,7 @@ import { ChallengesComponent } from "./pages/challenges/challenges.component";
 import { BadgesComponent } from "./pages/badges/badges.component";
 import { ContentsComponent } from "./pages/contents/contents.component";
 import { BadgesUsersComponent } from "./pages/badges-users/badges-users.component";
-import { RecommendationsComponent } from "./pages/recommendations/recommendations.component";
+
 import { ForumsComponent } from "./pages/forums/forums.component";
 import { RemindersComponent } from "./pages/reminders/reminders.component";
 import { GamesComponent } from "./pages/games/games.component";
@@ -27,6 +27,9 @@ import { ReactionGameComponent } from "./components/reaction-game/reaction-game.
 import { PuzzleComponent } from "./components/puzzle-game/puzzle-game.component";
 import { QuantumLandingComponent } from "./quantum-landing/quantum-landing.component";
 import { BarinfulLandingComponent } from "./pages/Brainful/barinful-landing/barinful-landing.component";
+import { RecomendationsComponent } from "./pages/recomendations/recomendations.component";
+import { ParticipationsComponent } from "./pages/participations/participations.component";
+import { ForumsDetailsComponent } from "./pages/forums details/forumsDetails.component";
 
 export const routes: Routes = [
   {
@@ -95,15 +98,17 @@ export const routes: Routes = [
       {
         path: "challenges",
         component: ChallengesComponent,
+        canActivate: [AdminRoleGuard],
         data: {
           authorities: [IRole.superAdmin],
-          name: "Desafios",
+          name: "Desafíos",
           showInSidebar: true,
         },
       },
       {
         path: "badges",
         component: BadgesComponent,
+        canActivate: [AdminRoleGuard],
         data: {
           authorities: [IRole.superAdmin],
           name: "Insignias",
@@ -113,10 +118,11 @@ export const routes: Routes = [
       {
         path: "contents",
         component: ContentsComponent,
+        canActivate: [AdminRoleGuard],
         data: {
           authorities: [IRole.superAdmin],
           name: "Contenido Educativo",
-          showInSidebar: true,
+          showInSidebar: false,
         },
       },
       {
@@ -124,23 +130,20 @@ export const routes: Routes = [
         component: BadgesUsersComponent,
         data: {
           authorities: [IRole.user],
-          name: "Insignias",
+          name: "Mis Insignias",
           showInSidebar: true,
         },
       },
-      {
-        path: "recommendations",
-        component: RecommendationsComponent,
-        data: {
-          authorities: [IRole.superAdmin],
-          name: "Recomendaciones",
-          showInSidebar: true,
-        },
-      },
+
       {
         path: "forums",
         component: ForumsComponent,
         data: { authorities: [IRole.user], name: "Foros", showInSidebar: true },
+      },
+      {
+        path: "forums-details/:id",
+        component: ForumsDetailsComponent,
+        data: { authorities: [IRole.user], name: "Foro detallado", showInSidebar: false },
       },
       {
         path: "reminders",
@@ -148,7 +151,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRole.user],
           name: "Recordatorios",
-          showInSidebar: true,
+          showInSidebar: false,
         },
       },
       {
@@ -161,12 +164,32 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
+      
+      {
+        path: "participationsOutdoor",
+        component: ParticipationsComponent,
+        data: {
+          authorities: [IRole.superAdmin],
+
+          name: "Participaciones",
+          showInSidebar: true,
+        },
+      },
+      {
+        path: "recommendations",
+        component: RecomendationsComponent,
+        data: {
+          authorities: [IRole.user],
+          name: "Recomendaciones",
+          showInSidebar: true,
+        },
+      },
       {
         path: "form",
         component: FormComponent,
         data: {
           authorities: [IRole.user],
-          name: "Questionario",
+          name: "Cuestionario",
           showInSidebar: true,
         },
       },
@@ -176,7 +199,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRole.user],
           name: "ContenidoEducativo",
-          showInSidebar: true,
+          showInSidebar: false,
         },
       },
       {
@@ -184,8 +207,8 @@ export const routes: Routes = [
         component: ContentsUsersComponent,
         data: {
           authorities: [IRole.user],
-          name: "Habitos",
-          showInSidebar: true,
+          name: "Hábitos",
+          showInSidebar: false,
         },
       },
       {
@@ -193,7 +216,7 @@ export const routes: Routes = [
         component: ChallengesUsersComponent,
         data: {
           authorities: [IRole.user],
-          name: "Desafios",
+          name: "Desafíos",
           showInSidebar: true,
         },
       },
@@ -202,7 +225,7 @@ export const routes: Routes = [
         component: ProfileComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          name: "profile",
+          name: "Perfil",
           showInSidebar: false,
         },
       },
@@ -211,7 +234,6 @@ export const routes: Routes = [
         component: MemoryBoardComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
       },
       {
@@ -219,28 +241,22 @@ export const routes: Routes = [
         component: SequenceGameComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
-       
       },
       {
         path: "puzzle-game",
         component: PuzzleComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
-       
       },
       {
         path: "reaction-game",
         component: ReactionGameComponent,
         data: {
           authorities: [IRole.superAdmin, IRole.user],
-          
         },
       },
-      
     ],
   },
 ];

@@ -1,0 +1,124 @@
+.forum-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Espacio entre los rectángulos */
+  padding-top: 10px; /* Espacio superior para separar de la parte superior de la página */
+  align-items: center; /* Centrar horizontalmente los foros */
+}
+
+.forum-card {
+  background-color: #FF9F1C; /* Color de fondo del foro */
+  border-radius: 15px; /* Bordes redondeados */
+  padding: 15px;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 1000px; /* Ancho máximo fijo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+  overflow: hidden; /* Ocultar el desbordamiento */
+  position: relative; /* Necesario para posicionar el pseudoelemento */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el foro */
+}
+
+.comment-card {
+  background-color: #16C2D5; /* Color de fondo del foro */
+  border-radius: 15px; /* Bordes redondeados */
+  padding: 15px;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  min-height: 80px;
+  max-width: 1000px; /* Ancho máximo fijo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+  overflow: hidden; /* Ocultar el desbordamiento */
+  position: relative; /* Necesario para posicionar el pseudoelemento */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el foro */
+}
+
+
+.forum-title {
+  font-size: 3rem; /* Tamaño grande del título */
+  color: #fff; /* Color blanco para el texto del título */
+  margin: 0;
+}
+
+.forum-description {
+  font-size: 1rem; /* Tamaño más pequeño para la descripción */
+  color: #f0f0f0; /* Color gris claro para la descripción */
+  margin: 5px 0 0; /* Margen superior solo para separar del título */
+  padding-right: 30px; /* Espacio a la derecha del texto */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.user-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+  color: #fff;
+}
+
+.forum-title {
+  font-size: 24px;
+  color: #fff;
+}
+
+.forum-content {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.add-comment-button {
+  background-color: #CAF0F8; /* Color de fondo del botón */
+  color: black; /* Color del texto */
+  border: none;
+  border-radius: 30px; /* Bordes redondeados */
+  margin-top: 20px;
+  margin-bottom: 15px;
+  padding: 10px 20px; /* Espaciado interno del botón */
+  font-size: 1rem; /* Tamaño del texto */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+.add-comment-button:hover {
+  background-color: #43b4ce; /* Color de fondo cuando se pasa el ratón */
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #fff; /* Color del ícono */
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  bottom: 15px; /* Mover el botón a la parte inferior */
+  right: 10px; /* Alinear el botón a la derecha */
+  transition: transform 0.3s ease; /* Transición suave para el tamaño */
+}
+
+.delete-button:hover {
+  transform: scale(1.5); /* Aumentar el tamaño del ícono al pasar el ratón */
+}
+
+.update-button {
+  background: none;
+  border: none;
+  color: #fff; /* Color del ícono */
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: absolute;
+  bottom: 50px; /* Mover el botón a la parte inferior */
+  right: 10px; /* Alinear el botón a la derecha */
+  transition: transform 0.3s ease; /* Transición suave para el tamaño */
+}
+
+.update-button:hover {
+  transform: scale(1.5); /* Aumentar el tamaño del ícono al pasar el ratón */
+}

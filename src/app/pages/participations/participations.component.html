@@ -1,0 +1,27 @@
+
+<div class="container-fluid">
+    <div>
+    
+    </div>
+    <div>
+      @defer {
+        
+        <div>
+            <app-participation-outdoor-list [participationList]="participationsService.participations$()">
+            </app-participation-outdoor-list>
+         
+        </div>
+      } @loading (after 100ms; minimum 1s) {
+        <app-loader/>
+      }
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
