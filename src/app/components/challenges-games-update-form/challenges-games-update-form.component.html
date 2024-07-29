@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p>{{titleComp}}</p>
+      </div>
+      <div class="col-6">
+        <label for="startDate">Fecha de Inicio</label>
+        <input #startDate="ngModel" type="date" class="form-control" class="input" id="startDate" name="startDate" 
+          placeholder="Product name"
+          [(ngModel)]="toUpdateDateChallengeGame.startDate" 
+          [ngClass]="{ 
+            'is-invalid': startDate.invalid && startDate.touched,
+            'is-valid': startDate.valid && startDate.touched
+          }" 
+          required 
+        />
+      </div>
+      <div class="col-6">
+        <label for="endDate">Fecha de Fin</label>
+        <input #endDate="ngModel" type="date" class="form-control" class="input" id="endDate" name="endDate" 
+          placeholder="Product description"
+          [(ngModel)]="toUpdateDateChallengeGame.endDate" 
+          [ngClass]="{ 
+            'is-invalid': endDate.invalid && endDate.touched,
+            'is-valid': endDate.valid && endDate.touched
+          }" 
+          required 
+        />
+      </div>
+      <div class="col-6 mt-3">
+        <button
+          type="button"
+          (click)="addEdit()"
+          class="btn btn-primary d-flex align-items-center">
+          <i class="fa-solid fa-pencil white me-2"></i>
+          <p class="mb-0"> {{titleComp}} </p>
+        </button>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="container fs-5 modal-content">
+  <div>
+    <img
+      src="../../../assets/icons/LogoCerebro.png"
+      alt="Brainful logo"
+      class="brain-logo"
+    />
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form autocomplete="off">
+        <div class="form-group">
+          <label class="mb-3" for="title">Title</label>
+          <input
+            #title="ngModel"
+            type="text"
+            class="form-control mb-3 input-title"
+            id="title"
+            name="title"
+            [(ngModel)]="badge.title"
+            [ngClass]="{
+              'is-invalid': title.invalid && title.touched,
+              'is-valid': title.valid && title.touched
+            }"
+            required
+          />
+        </div>
+        <div class="form-group mb-3 text-area-input">
+          <label class="mb-3" for="description">Descripción</label>
+          <textarea
+            #description="ngModel"
+            name="description"
+            id="description"
+            rows="4"
+            cols="50"
+            class="form-control text-area"
+            [(ngModel)]="badge.description"
+            [ngClass]="{
+              'is-invalid': description.invalid && description.touched,
+              'is-valid': description.valid && description.touched
+            }"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group file-input mb-3">
+          <label for="url"
+            ><i class="fa-solid fa-arrow-up-from-bracket fa-2xl"></i
+          ></label>
+          <input
+            #url="ngModel"
+            type="file"
+            class="form-control file"
+            id="url"
+            name="url"
+            (change)="onFileChange($event)"
+            [(ngModel)]="badge.url"
+            required
+          />
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-5">
+          <button
+            type="button"
+            (click)="addEditBadge()"
+            class="btn btn-primary"
+          >
+            {{ btn }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

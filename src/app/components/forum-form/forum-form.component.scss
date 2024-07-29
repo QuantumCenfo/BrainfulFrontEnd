@@ -1,0 +1,94 @@
+
+.file {
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.file-input label {
+  display: block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: linear-gradient(40deg, #7cecf9, #66b9c2);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+}
+
+.text-area {
+  width: 100%;
+  border-color: #ff9f1c;
+}
+
+.input-title {
+  background-color: #f8f8f800;
+  border: 0px;
+  border-bottom: #ff9f1c solid 2px;
+}
+
+.brain-logo {
+  min-width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+
+  width: 100%;
+  pointer-events: auto;
+  background-color: #caf0f8;
+  background-clip: padding-box;
+  border: 0px solid #77290b;
+  border-radius: 3px;
+  outline: 0;
+  color: #000000;
+  align-items: center;
+  justify-content: start;
+}
+.modal-footer {
+  background-color: #caf0f8;
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border-top: 0px solid #dee2e6;
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+}
+.modal-header {
+  background-color: #caf0f8;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1rem;
+  border-bottom: 0px solid #dee2e6;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+  font-size: 30px;
+}
+.modal-body {
+  background-color: #caf0f8;
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem;
+  font-size: 18px;
+}
+
+
