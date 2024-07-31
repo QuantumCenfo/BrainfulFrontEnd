@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoor> {
-  protected override source: string = "participationsOutdoor";
+  public override source: string = "participationsOutdoor";
 
   public participationOutdoorSignal = signal<IPartcipationOutdoor[]>([]);
   constructor(public override http: HttpClient) {
@@ -34,7 +34,7 @@ export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoo
   }
   updateParticipation(id: number, participation: IPartcipationOutdoor): Observable<IPartcipationOutdoor> {
   
-    console.log(id);
+   
     console.log(participation);
     return this.http.put<IPartcipationOutdoor>(`${this.source}/${id}`, participation);
   }
