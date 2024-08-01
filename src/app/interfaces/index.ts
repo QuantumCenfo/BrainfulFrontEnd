@@ -7,7 +7,6 @@ export interface IResponse<T> {
   data: T;
 }
 
-
 export interface IPartcipationOutdoor {
   participationOutdoorId?: number;
   evidence?: string;
@@ -24,7 +23,7 @@ export interface IChallengeOutdoor {
   name?: string;
   startDate?: string;
   endDate?: string;
-  badgeId?:IBadge
+  badgeId?: IBadge;
 }
 export interface IComment {
   commentId?: number;
@@ -33,7 +32,6 @@ export interface IComment {
   user?: IUser;
   forum?: IForum;
 }
-
 
 export interface IAuthority {
   authority: string;
@@ -139,14 +137,18 @@ export interface IUser {
   authorities?: IAuthority[];
 }
 export interface IUserRole {
-  name : string,
+  id?: number;
+  name: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface IUserBadge {
   userBadgeId?: number;
   badge?: IBadge;
   user?: IUser;
-  obtainedDate?: string
+  obtainedDate?: string;
 }
 
 export interface IChallengeGame {

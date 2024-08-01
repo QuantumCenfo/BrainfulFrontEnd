@@ -1,39 +1,113 @@
-<div class="table">
-  <tbody class="table-user">
-    @for (item of userList; track item.id) {
-      <tr>
-        <div class="users">
-          <div class="image">
-            <img [src]="item.image" alt="User Image" class="user-img"/>
-          </div>
-          <td class="pUser">
-            {{item.name}}
-          </td>
-          <td class="pUser">{{item.lastname}}</td>
-          <td class="pUser">{{item.role?.name}}</td>
+<div class="container2">
+  <input
+    type="text"
+    (keyup)="applyFilter($event)"
+    class="input-filter mb-3"
+    placeholder="Buscar"
+  />
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+      <td mat-cell *matCellDef="let user" class="btn-container">
+        <button class="btn btn-primary" (click)="showDetail(user, showModal)">
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button class="btn btn-danger" (click)="deleteUser(user.id!)">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef>Foto</th>
+      <td mat-cell *matCellDef="let row">
+        <img
+          *ngIf="row.image; else elseBlockImg"
+          [src]="row.image"
+          alt="Foto de perfil"
+          width="75px"
+          height="75px"
+        />
+        <ng-template #elseBlockImg>
+          <img
+            src="../../../../assets/icons/default user.jpeg"
+            alt="Foto de perfil"
+            width="75px"
+            height="75px"
+          />
+        </ng-template>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+      <td mat-cell *matCellDef="let user">{{ user.lastname }}</td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Correo</th>
+      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+    </ng-container>
+    <ng-container matColumnDef="birthDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Edad</th>
+      <td mat-cell *matCellDef="let user">
+        {{ calculateAge(user.birthDate) }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Rol</th>
+      <td mat-cell *matCellDef="let user">
+        <ng-container *ngIf="user.role?.name === 'USER'; else elseBlockUser">
+          Usuario
+        </ng-container>
+        <ng-template #elseBlockUser>Administrador</ng-template>
+      </td>
+    </ng-container>
 
-          <td>
-            <div class="buttonUsers">
-              <button type="button" (click)="showDetail(item, formModal)" class="btn btn-secondary userBoton">
-                <i class="fa-regular fa-pen-to-square"></i>
-              </button>
-              <button type="button" (click)="deleteUser(item)" class="btn btn-danger userBoton">
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
-            </div>
-          </td>
-        </div>
-      </tr>
-    }
-  </tbody>
-</div>
-
-<app-modal size="lg" #formModal>
-  <app-user-form
-    [user]="currentUser"
-    [title]="'Update User'"
-    (callParentEvent)="onFormEventCalled($event)"
-    [imageFile]="selectedImg"
+    <tr
+      mat-header-row
+      *matHeaderRowDef="[
+        'image',
+        'name',
+        'lastname',
+        'email',
+        'birthDate',
+        'role',
+        'actions'
+      ]"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: [
+          'image',
+          'name',
+          'lastname',
+          'email',
+          'birthDate',
+          'role',
+          'actions'
+        ]
+      "
+    ></tr>
+  </table>
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 50]"
+    (page)="pageEvent($event)"
   >
-  </app-user-form>
-</app-modal>
+  </mat-paginator>
+
+  <app-modal size="lg" #showModal>
+    <app-user-form
+      (callParentEvent)="onFormEventCalled($event)"
+      [title]="'Editar Usuario'"
+      [user]="selectedUser"
+      [action]="'Editar'"
+      [roles]="rolService.roles$()"
+    ></app-user-form>
+  </app-modal>
+</div>

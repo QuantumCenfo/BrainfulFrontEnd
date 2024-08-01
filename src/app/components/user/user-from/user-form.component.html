@@ -1,53 +1,179 @@
-<form autocomplete="off" #frm="ngForm" class="user-form" (ngSubmit)="handleAction(frm)">
-  <h2 class="logo">
-    <img src="../../../../assets/icons/brainfulLogoG.png" alt="Brainful">
-  </h2>
-  <div class="form-content">
-    
-   
-  <div class="form-group file-input mb-3">
-      <label for="url"
-      ><i class="fa-solid fa-arrow-up-from-bracket fa-2xl"></i
-        
-    >
-    <input
-    type="file"
-    class="file form-control"
-    (change)="onFileChange($event)"
-    required
+<div class="container edit-container">
+  <div class="img-container">
+    <img
+      src="../../../../assets/icons/LogoCerebro.png"
+      width="175px"
+      height="100px"
+      alt="Brainful logo"
     />
-  </label>
-     
   </div>
-     
- 
-    <div class="form-fields">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="name">Nombre</label>
-          <input #name="ngModel" type="text" id="name" name="name" 
-            [(ngModel)]="user.name" 
-            required>
-        </div>
-        <div class="form-group">
-          <label for="lastname">Apellidos</label>
-          <input #lastname="ngModel" type="text" id="lastname" name="lastname" 
-            [(ngModel)]="user.lastname" 
-            required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input #email="ngModel" type="email" id="email" name="email" 
-          [(ngModel)]="user.email" 
-          required>
-      </div>
-      
-      <div class="form-group">
-        <label for="role">Rol</label>
-        <input #role="ngModel" type="text" id="role" name="role" [(ngModel)]="roleName">
-      </div>
-      <button type="button" (click)="addUser()"  class="update-btn">Aceptar</button>
+  <h2>
+    {{ title }}
+  </h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <label class="mb-3" for="name"
+        >Nombre<span style="color: red">*</span></label
+      >
+      <input
+        type="text"
+        #name="ngModel"
+        class="form-control mb-3"
+        id="name"
+        name="name"
+        [(ngModel)]="user.name"
+        [ngClass]="{
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+        }"
+        required
+      />
+    </div>
+    <div class="col-md-6">
+      <label class="mb-3" for="lastName"
+        >Apellido<span style="color: red">*</span></label
+      >
+      <input
+        type="text"
+        name="lastName"
+        id="lastName"
+        #lastName="ngModel"
+        class="form-control mb-3"
+        [(ngModel)]="user.lastname"
+        [ngClass]="{
+          'is-invalid': lastName.invalid && lastName.touched,
+          'is-valid': lastName.valid && lastName.touched
+        }"
+        required
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label class="mb-3" for="correo"
+        >Correo<span style="color: red">*</span></label
+      >
+      <input
+        type="text"
+        name="correo"
+        id="correo"
+        #correo="ngModel"
+        class="form-control mb-3"
+        [(ngModel)]="user.email"
+        [ngClass]="{
+          'is-invalid': correo.invalid && correo.touched,
+          'is-valid': correo.valid && correo.touched
+        }"
+        required
+      />
+    </div>
+    <div class="col-md-6" *ngIf="action == 'Agregar'">
+      <label for="birthDate" class="form-label"
+        >Fecha de Nacimiento <span style="color: red">*</span>
+      </label>
+      <input
+        type="date"
+        #birthDate="ngModel"
+        class="form-control"
+        id="birthDate"
+        name="birthDate"
+        [(ngModel)]="user.birthDate"
+        [ngClass]="{
+          'is-invalid': birthDate.invalid && birthDate.touched,
+          'is-valid': birthDate.valid && birthDate.touched
+        }"
+        required
+      />
+    </div>
+    <!-- <div class="col-md-6" *ngIf="action == 'Agregar'">
+      <label for="password" class="form-label"
+        >Contraseña <span style="color: red">*</span>
+      </label>
+      <input
+        type="password"
+        #password="ngModel"
+        class="form-control"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        [ngClass]="{
+          'is-invalid': password.invalid && password.touched,
+          'is-valid': password.valid && password.touched
+        }"
+        required
+      />
+    </div> -->
+    <!-- <div class="col-md-12">
+    <label class="mb-3" for="password">Contraseña Actual</label>
+    <input
+      type="password"
+      name="password"
+      id="password"
+      #password="ngModel"
+      class="form-control mb-3"
+      [(ngModel)]="user.password"
+      [ngClass]="{
+        'is-invalid': password.invalid && password.touched,
+        'is-valid': password.valid && password.touched
+      }"
+      required
+    />
+  </div> -->
+
+    <div class="col-md-6">
+      <label class="mb-3" for="rol">Rol<span style="color: red">*</span></label>
+      <select
+        name="rol"
+        id="rol"
+        #rol="ngModel"
+        class="mb-3 form-select"
+        [(ngModel)]="user.role"
+        [ngClass]="{
+          'is-invalid': rol.invalid && rol.touched,
+          'is-valid': rol.valid && rol.touched
+        }"
+        required
+      >
+        <!-- <option value="">Seleccione un rol</option> -->
+        <option *ngFor="let rol of roles" [ngValue]="rol">
+          {{ rol.name }}
+        </option>
+      </select>
+      <!-- <input
+          type="text"
+          name="rol"
+          id="rol"
+          #rol="ngModel"
+          class="form-control mb-3"
+          [(ngModel)]="roleName"
+          [ngClass]="{
+            'is-invalid': rol.invalid && rol.touched,
+            'is-valid': rol.valid && rol.touched
+          }"
+          required
+        /> -->
+    </div>
+
+    <div class="col-md-12">
+      <label class="mb-3" for="image">Foto</label>
+      <input
+        type="file"
+        name="image"
+        id="image"
+        #image="ngModel"
+        class="form-control mb-3"
+        (change)="onFileChange($event)"
+        [(ngModel)]="user.image"
+        [ngClass]="{
+          'is-invalid': image.invalid && image.touched,
+          'is-valid': image.valid && image.touched
+        }"
+      />
+    </div>
+    <div class="d-flex justify-content-center align-items-center mt-5">
+      <button type="button" (click)="addUser()" class="btn btn-primary">
+        {{ action }}
+      </button>
     </div>
   </div>
-</form>
+</div>

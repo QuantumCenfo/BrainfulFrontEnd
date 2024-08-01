@@ -3,7 +3,10 @@
 
   <app-badge-list [badgeList]="badgeService.badges$()" />
   <div class="d-flex justify-content-center align-items-center">
-    <app-add-button (click)="showModal()"></app-add-button>
+    <app-add-button
+      (click)="showModal()"
+      [text]="'Agregar Insignia'"
+    ></app-add-button>
   </div>
 
   }@loading ( after 100ms; minimum 1s) {
