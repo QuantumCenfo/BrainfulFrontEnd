@@ -40,6 +40,6 @@ describe('ParticipationOutdoorService', () => {
     expect(req.request.method).toBe('PUT');
     expect(req.request.body).toEqual(mockParticipation);
     
-    req.flush(mockParticipation); // Simulate server response
+    req.flush(mockParticipation); 
   });
 });

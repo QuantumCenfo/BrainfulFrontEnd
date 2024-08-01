@@ -10,7 +10,7 @@ describe('TryAgainModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TryAgainModalComponent], // Import the standalone component directly
+      imports: [TryAgainModalComponent], 
       providers: [NgbActiveModal]
     }).compileComponents();
   });

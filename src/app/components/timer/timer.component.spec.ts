@@ -9,7 +9,7 @@ describe('TimerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TimerComponent] // Import the standalone component
+      imports: [TimerComponent] 
     }).compileComponents();
   });
 
@@ -20,35 +20,35 @@ describe('TimerComponent', () => {
   });
 
   it('should start the timer and emit timerEnded when time is up', fakeAsync(() => {
-    spyOn(component.timerEnded, 'emit'); // Spy on the timerEnded event
-    component.initialTime = 3; // Set an initial time of 3 seconds
+    spyOn(component.timerEnded, 'emit');
+    component.initialTime = 3; 
     component.timer(component.initialTime);
     
-    tick(3000); // Simulate 3 seconds passing
+    tick(3000); 
     
-    expect(component.timeLeft).toBe(0); // Time left should be 0
-    expect(component.elapsedTime).toBe(3); // Elapsed time should be 3 seconds
-    expect(component.timerEnded.emit).toHaveBeenCalled(); // timerEnded should be emitted
+    expect(component.timeLeft).toBe(0); 
+    expect(component.elapsedTime).toBe(3); 
+    expect(component.timerEnded.emit).toHaveBeenCalled(); 
   }));
 
   it('should stop the timer', fakeAsync(() => {
     component.initialTime = 5;
     component.timer(component.initialTime);
     
-    component.stopTimer(); // Stop the timer immediately
-    tick(3000); // Simulate 3 seconds passing
+    component.stopTimer(); 
+    tick(3000); 
     
-    expect(component.timeLeft).toBe(component.initialTime); // Time left should be unchanged
+    expect(component.timeLeft).toBe(component.initialTime); 
   }));
 
   it('should reset the timer', fakeAsync(() => {
     component.initialTime = 5;
     component.timer(component.initialTime);
     
-    tick(2000); // Simulate 2 seconds passing
-    component.resetTimer(); // Reset the timer
+    tick(2000); 
+    component.resetTimer(); 
     
-    expect(component.timeLeft).toBe(component.initialTime); // Time left should be reset to initial time
-    expect(component.elapsedTime).toBe(0); // Elapsed time should be reset
+    expect(component.timeLeft).toBe(component.initialTime);
+    expect(component.elapsedTime).toBe(0); 
   }));
 });

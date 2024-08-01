@@ -27,7 +27,7 @@ describe('ParticipationOutdoorListComponent', () => {
         ModalComponent,
         ValidationModalComponent,
         HttpClientTestingModule, 
-        ParticipationOutdoorListComponent // Import standalone component here
+        ParticipationOutdoorListComponent 
       ],
       providers: [
         { provide: NgbModal, useValue: mockModalService },
