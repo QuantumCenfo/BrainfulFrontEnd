@@ -16,13 +16,36 @@
         >
           <div class="badge-front">
             <img
+              *ngIf="badge.url; else elseBlockImg"
               [src]="badge.url"
               alt="Badge image"
-              width="100px"
-              height="100px"
+              width="85px"
+              height="85px"
             />
+            <ng-template #elseBlockImg>
+              <img
+                src="../../../assets/icons/medal.png"
+                alt="Badge image"
+                width="85px"
+                height="85px"
+              />
+            </ng-template>
           </div>
           <div class="badge-back">
+            <div class="btn-container">
+              <button
+                class="btn btn-primary"
+                (click)="showDetailModal(badge, showModal)"
+              >
+                <i class="fa-solid fa-pencil"></i>
+              </button>
+              <button
+                class="btn btn-primary"
+                (click)="delteBadge(badge.badgeId!)"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
             <div class="card-back-content">
               <h3>{{ badge.title }}</h3>
               <p>{{ badge.description }}</p>

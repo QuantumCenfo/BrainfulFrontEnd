@@ -1,13 +1,10 @@
 <div class="container">
   @defer{
+  <div class="d-flex justify-content-start align-items-center">
+    <app-add-button (click)="showModal()" [text]="'Agregar'"></app-add-button>
+  </div>
 
   <app-badge-list [badgeList]="badgeService.badges$()" />
-  <div class="d-flex justify-content-center align-items-center">
-    <app-add-button
-      (click)="showModal()"
-      [text]="'Agregar Insignia'"
-    ></app-add-button>
-  </div>
 
   }@loading ( after 100ms; minimum 1s) {
   <app-loader />

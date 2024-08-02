@@ -57,6 +57,7 @@ body {
   margin: 0;
   font-family: Dosis, "Dosis", sans-serif;
 }
+
 .btn-primary {
   color: #fff;
   background-color: #ff9f1c;
@@ -339,5 +340,11 @@ ul {
   font-family: Dosis, "Dosis", sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

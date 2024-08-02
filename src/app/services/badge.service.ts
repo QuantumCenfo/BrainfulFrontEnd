@@ -35,7 +35,9 @@ export class BadgeService extends BaseService<IBadge> {
     const formData = new FormData();
 
     formData.append("badge", JSON.stringify(badge));
-    formData.append("image", imageFile);
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
 
     return this.http.post(this.source, formData, {
       headers: new HttpHeaders({}),
@@ -43,44 +45,34 @@ export class BadgeService extends BaseService<IBadge> {
   }
 
   handleAddBadge(badge: IBadge, imageFile: File) {
-    if (imageFile) {
-      this.addBadge(badge, imageFile).subscribe({
-        next: (res: any) => {
-          this.badgeSignal.update((badges: any) => [res, ...badges]);
-          console.log("Response: ", res);
-          console.log("Badge added successfully");
-          Swal.fire({
-            title: "¡Éxito!",
-            text: "La insignia ha sido agregada",
-            icon: "success",
-            iconColor: "white",
-            color: "white",
-            showConfirmButton: false,
-            background: "#16c2d5",
-            timer: 2000,
-          });
-        },
-        error: (err: any) => {
-          console.log("Error: ", err);
-        },
-      });
-    } else {
-      Swal.fire({
-        title: "Oops...",
-        text: "Porfavor suba una imagen",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        timer: 2000,
-      });
-    }
+    this.addBadge(badge, imageFile).subscribe({
+      next: (res: any) => {
+        this.badgeSignal.update((badges: any) => [res, ...badges]);
+        console.log("Response: ", res);
+        console.log("Badge added successfully");
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "La insignia ha sido agregada",
+          icon: "success",
+          iconColor: "white",
+          color: "white",
+          showConfirmButton: false,
+          background: "#16c2d5",
+          timer: 2000,
+        });
+      },
+      error: (err: any) => {
+        console.log("Error: ", err);
+      },
+    });
   }
 
   updateBadge(badge: IBadge, imageFile: File) {
     const formData = new FormData();
     formData.append("badge", JSON.stringify(badge));
-    formData.append("image", imageFile);
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
 
     return this.http.put(this.source + "/" + badge.badgeId, formData);
   }
@@ -101,41 +93,29 @@ export class BadgeService extends BaseService<IBadge> {
       confirmButtonText: "Si, actualizar",
     }).then((res) => {
       if (res.isConfirmed) {
-        if (imageFile) {
-          this.updateBadge(badge, imageFile).subscribe({
-            next: (res: any) => {
-              const updatedBadge = this.badgeSignal().map((b: IBadge) =>
-                b.badgeId === badge.badgeId ? badge : b
-              );
-              this.badgeSignal.set(updatedBadge);
-              console.log("Response: ", res);
-              console.log("Badge updated successfully");
-              Swal.fire({
-                title: "¡Éxito!",
-                text: "La insignia ha sido actualizada",
-                icon: "success",
-                iconColor: "white",
-                color: "white",
-                background: "#16c2d5",
-                timer: 2000,
-                showConfirmButton: false,
-              });
-            },
-            error: (err: any) => {
-              console.log("Error: ", err);
-            },
-          });
-        } else {
-          Swal.fire({
-            title: "Oops...",
-            text: "Porfavor subir una imagen",
-            icon: "warning",
-            iconColor: "white",
-            color: "white",
-            background: "#16c2d5",
-            confirmButtonColor: "#ff9f1c",
-          });
-        }
+        this.updateBadge(badge, imageFile).subscribe({
+          next: (res: any) => {
+            const updatedBadge = this.badgeSignal().map((b: IBadge) =>
+              b.badgeId === badge.badgeId ? badge : b
+            );
+            this.badgeSignal.set(updatedBadge);
+            console.log("Response: ", res);
+            console.log("Badge updated successfully");
+            Swal.fire({
+              title: "¡Éxito!",
+              text: "La insignia ha sido actualizada",
+              icon: "success",
+              iconColor: "white",
+              color: "white",
+              background: "#16c2d5",
+              timer: 2000,
+              showConfirmButton: false,
+            });
+          },
+          error: (err: any) => {
+            console.log("Error: ", err);
+          },
+        });
       }
     });
   }

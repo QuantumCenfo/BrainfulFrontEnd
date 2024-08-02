@@ -107,7 +107,9 @@ export class UserService extends BaseService<IUser> {
   updateUser(user: IUser, imageFile: File): Observable<IUser> {
     const formData = new FormData();
     formData.append("user", JSON.stringify(user));
-    formData.append("image", imageFile);
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
 
     return this.http.put(this.source + "/" + user.id, formData);
   }
