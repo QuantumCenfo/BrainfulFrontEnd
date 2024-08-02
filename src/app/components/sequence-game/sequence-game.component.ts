@@ -109,7 +109,7 @@ export class SequenceGameComponent implements OnInit {
       }
     } else {
       //play sound
-      this.playSound("wrong");
+      this.playSound("Wrong2");
       this.endGame();
     }
   }
@@ -222,7 +222,9 @@ export class SequenceGameComponent implements OnInit {
       }
     );
   }
-
+  exitGames(){
+    this.router.navigate(['/app/games'])
+  }
   // Inicia el juego y la secuencia del temporizador
   startGame(): void {
     if (this.difficulty == "") {

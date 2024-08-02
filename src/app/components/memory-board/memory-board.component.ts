@@ -201,13 +201,16 @@ export class MemoryBoardComponent implements OnChanges {
       card1.isMatched = true;
       card2.isMatched = true;
       this.matchedCards.push(card1, card2);
+      this.playSound("Correct");
       this.points = this.points + 10;
       this.checkForWin();
     } else {
       setTimeout(() => {
+        this.playSound("Wrong2");
         card1.isFlipped = false;
         card2.isFlipped = false;
         if (this.points > 0) {
+          
           this.points = this.points - 5;
         }
       }, 1000);
@@ -305,5 +308,10 @@ export class MemoryBoardComponent implements OnChanges {
   }
   exitGames(){
     this.router.navigate(['/app/games'])
+  }
+  playSound(name: string): void {
+    const audio = new Audio("../../../assets/sounds/" + name + ".mp3");
+    audio.load();
+    audio.play();
   }
 }
