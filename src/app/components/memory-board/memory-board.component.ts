@@ -87,7 +87,7 @@ export class MemoryBoardComponent implements OnChanges {
     this.points = 0;
     this.flippedCards = [];
     this.matchedCards = [];
-    document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+    
   }
   /**
    * Finaliza el juego, mostrando un modal y permitiendo reiniciar o ir al menú.
@@ -117,9 +117,9 @@ export class MemoryBoardComponent implements OnChanges {
    */
   startGame(): void {
     this.isGameRunning = true;
+    this.points = 0;
     if (this.difficulty > 0) {
       this.gameStarted = true;
-      this.points = 0;
       this.initializeGame();
       let timer = 0;
       if (this.difficulty == 6) {
@@ -294,7 +294,6 @@ export class MemoryBoardComponent implements OnChanges {
   startWithNewDifficulty(): void {
     this.started = false;
     this.points = 0;
-    document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
     this.flippedCards = [];
     this.matchedCards = [];
     if (this.difficulty == 6) {
@@ -303,5 +302,8 @@ export class MemoryBoardComponent implements OnChanges {
       this.difficulty = 12;
     }
     this.startGame();
+  }
+  exitGames(){
+    this.router.navigate(['/app/games'])
   }
 }
