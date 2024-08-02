@@ -1,5 +1,5 @@
 import { Component, inject, input, Input, SimpleChanges } from "@angular/core";
-import { IBadge } from "../../interfaces";
+import { IBadge, IUserBadge } from "../../interfaces";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BadgeService } from "../../services/badge.service";
 import { CommonModule } from "@angular/common";
@@ -19,6 +19,7 @@ import { UserBadgeService } from "../../services/user-badge.service";
 export class BadgeListComponent {
   @Input() badgeList: IBadge[] = [];
   @Input() isAllowed: boolean = false;
+  @Input() userBadge: IUserBadge[] = [];
   flippedIndexes: number[] = []; // Array to track flipped cards
 
   colors = ["#9816D5", "#2f9ca8", "#65b32a", "#FF9F1C"];

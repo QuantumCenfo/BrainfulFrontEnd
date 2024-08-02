@@ -4,7 +4,10 @@
     <app-add-button (click)="showModal()" [text]="'Agregar'"></app-add-button>
   </div>
 
-  <app-badge-list [badgeList]="badgeService.badges$()" />
+  <app-badge-list
+    [isAllowed]="isAllowed"
+    [badgeList]="badgeService.badges$()"
+  />
 
   }@loading ( after 100ms; minimum 1s) {
   <app-loader />

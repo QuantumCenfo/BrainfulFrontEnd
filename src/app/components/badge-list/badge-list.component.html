@@ -33,18 +33,20 @@
           </div>
           <div class="badge-back">
             <div class="btn-container">
-              <button
-                class="btn btn-primary"
-                (click)="showDetailModal(badge, showModal)"
-              >
-                <i class="fa-solid fa-pencil"></i>
-              </button>
-              <button
-                class="btn btn-primary"
-                (click)="delteBadge(badge.badgeId!)"
-              >
-                <i class="fa-solid fa-trash"></i>
-              </button>
+              <ng-container *ngIf="isAllowed">
+                <button
+                  class="btn btn-primary"
+                  (click)="showDetailModal(badge, showModal)"
+                >
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button
+                  class="btn btn-primary"
+                  (click)="delteBadge(badge.badgeId!)"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </ng-container>
             </div>
             <div class="card-back-content">
               <h3>{{ badge.title }}</h3>
