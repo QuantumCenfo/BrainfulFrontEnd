@@ -1,57 +1,47 @@
-.table {
-    margin-top: 100px;
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-    vertical-align: top;
-    background-color: rgb(255, 255, 255);
-    
+table {
+  margin-top: 100px;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  vertical-align: top;
+  background-color: #a1d1ec;
 }
-tbody, td, tfoot, th, thead, tr {
-    border-color: #ff9f1c; 
-    border-style: solid;
-    border-width: 3px;
+
+.container2 {
+  padding: 70px;
+  border-radius: 10px;
+  width: 100%;
 }
+
 .btn-danger {
-    color: #fff;
-    background-color: #ff9f1c;
-    border-color: #ff9f1c;
+  color: #fff;
+  background-color: #ff9f1c;
+  border-color: #ff9f1c;
 }
 .btn-danger:hover {
-    color: #fff;
-    background-color: #ee9211;
-    border-color: #ee9211;
+  color: #fff;
+  background-color: #ee9211;
+  border-color: #ee9211;
 }
 table {
-    border-collapse: collapse;
-    
-    overflow: hidden;
-  }
-  
-  th, td {
-    padding: 1em;
-   
-    border-bottom: 2px solid white; 
-  }
-  
-  .css-mine {
-    margin-top: 2em;
-    clear: both;
-  }
-  
-  body {
-    margin: 1.5em;
-  }
-  .label{
-   font-weight: normal;
-    text-align: center;
-    font-family: Dosis, "Dosis", sans-serif;
-  }
+  border-collapse: collapse;
 
-  
-  @media (max-width: 1200px) {
-    th, td {
-      padding: 4px;
-      border-bottom: 2px solid white; 
-    }
-  }
+  overflow: hidden;
+}
+
+.css-mine {
+  margin-top: 2em;
+  clear: both;
+}
+
+body {
+  margin: 1.5em;
+}
+.label {
+  font-weight: normal;
+  text-align: center;
+  font-family: Dosis, "Dosis", sans-serif;
+}
+mat-paginator {
+  background-color: #a1d1ec;
+}
