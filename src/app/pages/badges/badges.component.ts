@@ -12,6 +12,7 @@ import { AddButtonComponent } from "../../components/add-button/add-button.compo
 import { BadgeFormComponent } from "../../components/badge-form/badge-form.component";
 import { TryAgainModalComponent } from "../../components/try-again-modal/try-again-modal.component";
 import Swal from "sweetalert2";
+import { UserBadgeService } from "../../services/user-badge.service";
 
 @Component({
   selector: "app-badges",
@@ -32,14 +33,23 @@ import Swal from "sweetalert2";
 export class BadgesComponent implements OnInit {
   public badgeService = inject(BadgeService);
   public modalService = inject(NgbModal);
+  public userBadgeService = inject(UserBadgeService);
   public route: ActivatedRoute = inject(ActivatedRoute);
-  public authSerivce = inject(AuthService);
-  public routeAuth: string[] = [];
-  public hasPermission: boolean = false;
+  public authService = inject(AuthService);
+  public routeAuthorites: string[] = [];
+  public isAllowed: boolean = false;
   @ViewChild("formModal") formModal!: ModalComponent;
 
   ngOnInit(): void {
     this.badgeService.getAllBadges();
+
+    this.authService.getUserAuthorities();
+    this.route.data.subscribe((data) => {
+      this.routeAuthorites = data["authorities"] ? data["authorities"] : [];
+      this.isAllowed = this.authService.areActionsAvailable(
+        this.routeAuthorites
+      );
+    });
   }
 
   onFormEventCalled(event: { badge: IBadge; file: File | null }) {

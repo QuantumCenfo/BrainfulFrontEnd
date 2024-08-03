@@ -1,48 +1,128 @@
-<div class="table-container">
-    <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col" class="label">#</th>
-              <th scope="col"class="label">Nombre del desafío</th>
-              <th scope="col" class="label">Descripción del desafío</th>
-              <th scope="col" class="label">Fecha de publicación</th>
-              <th scope="col"class="label">Estado</th>
-              <th scope="col"class="label">Nombre de usuario</th>
-              <th scope="col"class="label">Accciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (participation of participationList; track $index) {
-              @if(participation.status === 'pendiente'){
-                <tr>
-                  <td class="label">{{ participation.participationOutdoorId }}</td>
-                  <td class="label">{{ participation.challengeOutdoor?.name}}</td>
-                  <td class="label">{{ participation.challengeOutdoor?.description  }}</td>
-                  <td class="label">{{ participation.fechaPublicacion | date}}</td>
-                  <td class="label">{{ participation.status }}</td>
-                  <td class="label">{{ participation.user?.name  }}</td>
-                  <td class="label">
-                        <button type="button"(click)="showDetail(participation, showModal)" class="btn btn-danger">
-                          <i class="fa-solid fa-file-circle-check"></i>
-                        </button>
-                  </td>
-                </tr>
-              }
-              
-            }
-            
-            
-          
-          </tbody>
-        </table>
-      </div>
+<!-- <div class="table-container">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" class="label">#</th>
+          <th scope="col" class="label">Nombre del desafío</th>
+          <th scope="col" class="label">Descripción del desafío</th>
+          <th scope="col" class="label">Fecha de publicación</th>
+          <th scope="col" class="label">Estado</th>
+          <th scope="col" class="label">Nombre de usuario</th>
+          <th scope="col" class="label">Accciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (participation of participationList; track $index) {
+        @if(participation.status === 'pendiente'){
+        <tr>
+          <td class="label">{{ participation.participationOutdoorId }}</td>
+          <td class="label">{{ participation.challengeOutdoor?.name }}</td>
+          <td class="label">
+            {{ participation.challengeOutdoor?.description }}
+          </td>
+          <td class="label">{{ participation.fechaPublicacion | date }}</td>
+          <td class="label">{{ participation.status }}</td>
+          <td class="label">{{ participation.user?.name }}</td>
+          <td class="label">
+            <button
+              type="button"
+              (click)="showDetail(participation, showModal)"
+              class="btn btn-danger"
+            >
+              <i class="fa-solid fa-file-circle-check"></i>
+            </button>
+          </td>
+        </tr>
+        } }
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<div class="container2">
+  <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre del desafío</th>
+      <td mat-cell *matCellDef="let row">{{ row.challengeOutdoor?.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Descripción del desafío</th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.challengeOutdoor?.description }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="fechaPublicacion">
+      <th mat-header-cell *matHeaderCellDef>Fecha de publicación</th>
+      <td mat-cell *matCellDef="let row">{{ row.fechaPublicacion }}</td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+    </ng-container>
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef>Nombre de usuario</th>
+      <td mat-cell *matCellDef="let row">{{ row.user?.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let row">{{ row.participationOutdoorId }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          type="button"
+          (click)="showDetail(row, showModal)"
+          class="btn btn-danger"
+        >
+          <i class="fa-solid fa-file-circle-check"></i>
+        </button>
+      </td>
+    </ng-container>
+    <tr
+      mat-header-row
+      *matHeaderRowDef="[
+        'id',
+        'name',
+        'description',
+        'fechaPublicacion',
+        'status',
+        'user',
+        'actions'
+      ]"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: [
+          'id',
+          'name',
+          'description',
+          'fechaPublicacion',
+          'status',
+          'user',
+          'actions'
+        ]
+      "
+    ></tr>
+  </table>
+
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 50]"
+    (page)="pageEvent($event)"
+  >
+  </mat-paginator>
 </div>
+
 <app-modal #showModal>
-  <app-validation-modal size="lg" #validateModal
-  [participation]="currentParticipation" 
-  [title]="'Update User'"
+  <app-validation-modal
+    size="lg"
+    #validateModal
+    [participation]="currentParticipation"
+    [title]="'Update User'"
   />
 </app-modal>
-
-

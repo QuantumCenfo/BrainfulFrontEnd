@@ -1,21 +1,31 @@
-import { Component, inject, Input } from '@angular/core';
-import { IChallengeGame, IChallengeOutdoor, IPartcipationOutdoor } from '../../interfaces';
-import { ChallengeGameService } from '../../services/challenge-game.service';
-import { NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ChallengeOutdoorService } from '../../services/challenge-outdoor.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ModalComponent } from '../modal/modal.component';
-import { OutdoorFormComponent } from '../outdoor-form/outdoor-form.component';
-import Swal from 'sweetalert2';
-import { ParticipationOutdoorService } from '../../services/participation-outdoor.service';
+import { Component, inject, Input } from "@angular/core";
+import {
+  IChallengeGame,
+  IChallengeOutdoor,
+  IPartcipationOutdoor,
+} from "../../interfaces";
+import { ChallengeGameService } from "../../services/challenge-game.service";
+import { NgbModal, NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { ChallengeOutdoorService } from "../../services/challenge-outdoor.service";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { ModalComponent } from "../modal/modal.component";
+import { OutdoorFormComponent } from "../outdoor-form/outdoor-form.component";
+import Swal from "sweetalert2";
+import { ParticipationOutdoorService } from "../../services/participation-outdoor.service";
 
 @Component({
-  selector: 'app-challenge-list',
+  selector: "app-challenge-list",
   standalone: true,
-  imports: [CommonModule, FormsModule, NgbModule,ModalComponent,OutdoorFormComponent],
-  templateUrl: './challenge-list.component.html',
-  styleUrl: './challenge-list.component.scss'
+  imports: [
+    CommonModule,
+    FormsModule,
+    NgbModule,
+    ModalComponent,
+    OutdoorFormComponent,
+  ],
+  templateUrl: "./challenge-list.component.html",
+  styleUrl: "./challenge-list.component.scss",
 })
 export class ChallengeListComponent {
   @Input() outdoorChallengeList: IChallengeOutdoor[] = [];
@@ -23,9 +33,9 @@ export class ChallengeListComponent {
   private participationServices = inject(ParticipationOutdoorService);
   private outDoorChallenge = inject(ChallengeOutdoorService);
   private gameChallengService = inject(ChallengeGameService);
-  public currentOutDoorChallenge: IChallengeOutdoor = {
-  };
+  public currentOutDoorChallenge: IChallengeOutdoor = {};
 
+  colors = ["#9816D5", "#2f9ca8", "#65b32a", "#FF9F1C"];
 
   public modalService = inject(NgbModal);
 
@@ -34,19 +44,23 @@ export class ChallengeListComponent {
     modal.show();
     console.log(challengeOutdoor);
   }
-  onFormEventCalled(event: { participation: IPartcipationOutdoor; file: File | null }) {
+  onFormEventCalled(event: {
+    participation: IPartcipationOutdoor;
+    file: File | null;
+  }) {
     if (event.file) {
-      this.participationServices.addParticipation(event.participation, event.file).subscribe({
-        next: (res: any) => {
-          this.participationServices.participationOutdoorSignal.update((participations: any) => [
-            res,
-            ...participations,
-          ]);
-        },
-        error: (err: any) => {
-          console.log("Error: ", err);
-        },
-      });
+      this.participationServices
+        .addParticipation(event.participation, event.file)
+        .subscribe({
+          next: (res: any) => {
+            this.participationServices.participationOutdoorSignal.update(
+              (participations: any) => [res, ...participations]
+            );
+          },
+          error: (err: any) => {
+            console.log("Error: ", err);
+          },
+        });
     } else {
       Swal.fire({
         title: "Oops...",
@@ -58,5 +72,40 @@ export class ChallengeListComponent {
         confirmButtonColor: "#ff9f1c",
       });
     }
+  }
+
+  getBoxShadow(index: number): string {
+    const color = this.colors[index % this.colors.length];
+    return this.generateBoxShadow(color);
+  }
+  getColor(index: number): string {
+    return this.colors[index % this.colors.length];
+  }
+
+  generateBoxShadow(color: string): string {
+    const darkerColor = this.lightenColor(color, -20); // You can adjust the lightness
+    return `2px 0px 0px 3px ${darkerColor}`;
+  }
+
+  generateGradient(color: string): string {
+    const lightColor = this.lightenColor(color, 30); // You can adjust the lightness
+    return `linear-gradient(45deg, ${color} 0%, ${lightColor} 57%, ${color} 100%)`;
+  }
+
+  lightenColor(color: string, percent: number): string {
+    const num = parseInt(color.slice(1), 16),
+      amt = Math.round(2.55 * percent),
+      R = (num >> 16) + amt,
+      G = ((num >> 8) & 0x00ff) + amt,
+      B = (num & 0x0000ff) + amt;
+    return `#${(
+      0x1000000 +
+      (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+      (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+      (B < 255 ? (B < 1 ? 0 : B) : 255)
+    )
+      .toString(16)
+      .slice(1)
+      .toUpperCase()}`;
   }
 }
