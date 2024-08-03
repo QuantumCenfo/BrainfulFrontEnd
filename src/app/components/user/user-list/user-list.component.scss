@@ -14,6 +14,7 @@
   padding: 70px;
   border-radius: 10px;
   width: 100%;
+  overflow-x: auto;
 }
 .input-filter {
   font-size: 14px;
@@ -54,3 +55,5 @@ table {
 mat-paginator {
   background-color: #a1d1ec;
 }
+
+
