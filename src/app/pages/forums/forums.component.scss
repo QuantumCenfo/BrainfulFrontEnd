@@ -5,19 +5,23 @@
 }
 
 .my-forums-button {
-  background-color: #CAF0F8; /* Color de fondo del botón */
-  color: black; /* Color del texto */
+  background-color: #FF9F1C;
+  color: #fff;
   border: none;
-  border-radius: 30px; /* Bordes redondeados */
-  padding: 20px 30px; /* Espaciado interno del botón */
-  font-size: 1rem; /* Tamaño del texto */
-  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
-  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+  border-radius: 11px;
+  width: 120px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 15px;
 }
 
 .my-forums-button:hover {
-  background-color: #43b4ce; /* Color de fondo cuando se pasa el ratón */
+  background-color: #ee971e; /* Color de fondo cuando se pasa el ratón */
 }
 
 .forum-container {
@@ -88,18 +92,18 @@
 }
 
 .add-button {
-  background-color: #FF9F1C; /* Color de fondo del botón */
-  color: #fff; /* Color blanco para el símbolo + */
+  background-color: #FF9F1C;
+  color: #fff;
   border: none;
-  border-radius: 50%; /* Hacer el botón circular */
-  width: 50px; /* Ancho del botón */
-  height: 50px; /* Alto del botón */
-  font-size: 2rem; /* Tamaño del símbolo + */
-  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+  border-radius: 11px;
+  width: 141px;
+  height: 52px;
+  font-size: 20px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin-bottom: 15px;
 }
 

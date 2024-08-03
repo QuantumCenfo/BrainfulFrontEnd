@@ -1,14 +1,14 @@
-span,
+h3,h1,h2,span,
 p,
 label {
   font-size: 20px;
   font-family: Dosis, "Dosis", sans-serif;
 }
 h3 {
-  font-weight: 500;
+  font-weight: normal;
 }
 * {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: normal;
 }
 .container2 {
@@ -18,12 +18,13 @@ h3 {
 }
 
 .badge-container-externos {
+  font-size: 22px;
   width: 50vw;
   perspective: 1000px;
   min-height: 150px;
   padding: 15px;
   transition: transform 250ms;
-  background-color: #16c2d5;
+  background-color: #00a4bd;
   transform-style: preserve-3d;
   display: flex;
   flex-direction: row;
@@ -32,12 +33,13 @@ h3 {
   gap: 50px;
 }
 .badge-container-digitales {
+  font-size: 22px;
   width: 50vw;
   perspective: 1000px;
   min-height: 150px;
   padding: 15px;
   transition: transform 250ms;
-  background-color: #16c2d5;
+  background-color: #00a4bd;
   transform-style: preserve-3d;
   display: flex;
   flex-direction: row;
@@ -45,7 +47,10 @@ h3 {
   justify-content: space-between;
   gap: 50px;
 }
-
+.d-flex {
+  color: white;
+  display: flex !important;
+}
 .badge-card {
   width: 135px;
   min-height: 150px;
