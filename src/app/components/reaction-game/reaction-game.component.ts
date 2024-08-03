@@ -150,10 +150,12 @@ export class ReactionGameComponent implements OnInit {
   onButtonClick(button: IButton): void {
     if (!this.isGameRunning) return;
     if (button.color === 'green') {
+      this.playSound("Correct");
       this.score += 10;
       button.color = 'default';
       this.checkForSequence();
     } else if (button.color === 'red') {
+      this.playSound("Wrong2");
       if (this.score > 0) {
         this.score -= 5;
       }
@@ -244,7 +246,11 @@ export class ReactionGameComponent implements OnInit {
       }
     });
   }
-
+  playSound(name: string): void {
+    const audio = new Audio("../../../assets/sounds/" + name + ".mp3");
+    audio.load();
+    audio.play();
+  }
   showLossAlert() {
     Swal.fire({
       iconColor: 'white',
@@ -264,5 +270,8 @@ export class ReactionGameComponent implements OnInit {
         this.router.navigate(['app/games']);
       }
     });
+  }
+  exitGames(){
+    this.router.navigate(['/app/games'])
   }
 }

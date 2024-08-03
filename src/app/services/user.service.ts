@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class UserService extends BaseService<IUser> {
-  protected override source: string = 'users';
+  public override source: string = 'users';
   private userListSignal = signal<IUser[]>([]);
   get users$() {
     return this.userListSignal;

@@ -22,6 +22,26 @@
     margin: 5%;
   
   }
+  .points-exit {
+    background-color: #b32b16;
+    border: solid 0px #16c2d5;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px;
+    color: #ffffff;
+    font-size: 2rem;
+
+  }
+  .points-exit:hover {
+    cursor: pointer;
+    background-color: #a42714;
+    border: solid 0px #16c2d5;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px;
+    color: #ffffff;
+    font-size: 2rem;
+  }
   .points {
  
     padding: 10px;
@@ -41,7 +61,6 @@
     font-size: 2rem;
   }
 
-
   select{
     option{
      
@@ -52,20 +71,51 @@
     }
     margin-top: 35px;
     background-color: #ff9f1c;
-    border: solid 3px #16c2d5;
+    border: solid 0px #16c2d5;
     padding: 10px;
     font-size: 20px;
     border-radius: 10px;
     font-family: Dosis, "Dosis", sans-serif;
     color: #ffffff;
   }
+  select:hover{
+    option{
+     
+      color: #ffffff;
+      
+      
+   
+    }
+    cursor: pointer;
+    margin-top: 35px;
+    background-color: #eb9318;
+    border: solid 0px #16c2d5;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    font-family: Dosis, "Dosis", sans-serif;
+    color: #ffffff;
+    
+  }
   .d-flex{
 flex-wrap: wrap;
   }
   
   .points-container {
-    background-color: #ff9f1c;
-    border: solid 3px #16c2d5;
+    background-color: #22bf14;
+    border: solid 0px #16c2d5;
+    padding: 10px;
+    border-radius: 20px;
+    margin: 20px;
+    color: #ffffff;
+    font-size: 2rem;
+    box-shadow: 0 0 21px 0 rgba(89, 102, 122, 0.1);
+    
+  }
+  .points-container:hover {
+    cursor: pointer;
+    background-color: #1fb012;
+    border: solid 0px #16c2d5;
     padding: 10px;
     border-radius: 20px;
     margin: 20px;
@@ -73,7 +123,6 @@ flex-wrap: wrap;
     font-size: 2rem;
     
   }
-
   
   .timer-container {
     background-color: #ff9f1c;
@@ -142,17 +191,29 @@ flex-wrap: wrap;
     background-size: 400px 400px; /* Ajustar según el tamaño de tu imagen */
     cursor: pointer;
   }
-  .points-container:hover {
-    background-color: #e78700;
-    border: solid 3px #16c2d5;
-    padding: 10px;
-    border-radius: 20px;
-    margin: 20px;
-    color: #ffffff;
-    font-size: 2rem;
-  }
+ 
   
   @media (max-width: 1200px) {
+    .points-exit {
+      background-color: #b32b16;
+      border: solid 0px #16c2d5;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 22px;
+      color: #ffffff;
+      font-size: 2rem;
+      transform: translateX(0px);
+    }
+    .points-exit:hover {
+      cursor: pointer;
+      background-color: #a42714;
+      border: solid 0px #16c2d5;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 22px;
+      color: #ffffff;
+      font-size: 2rem;
+    }
     .games-container {
       display: flex;
       flex-direction: column; /* Coloca los contenedores uno debajo del otro */
@@ -167,22 +228,24 @@ flex-wrap: wrap;
       grid-template-rows: auto;
       gap: 4px !important;
     }
-      .points-container:hover{
-        background-color:  #e78700;
-        border: solid 3px #16c2d5;
+    .points-container:hover {
+      cursor: pointer;
+      background-color: #1fb012;
+      border: solid 0px #16c2d5;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 22px;
+      color: #ffffff;
+      font-size: 2rem;
+      
+    }
+      .points-container{
+        background-color: #22bf14;
+        border: solid 0px #16c2d5;
         padding: 20px;
         border-radius: 20px;
         margin: 22px;
         color: #ffffff;
         font-size: 2rem;
     }
-    .points-container{
-      background-color: #ff9f1c;
-      border: solid 3px #16c2d5;
-      padding: 20px;
-      border-radius: 20px;
-      margin: 22px;
-      color: #ffffff;
-      font-size: 2rem;
-  }
   }
