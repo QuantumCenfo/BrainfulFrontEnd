@@ -1,9 +1,8 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
-import { IComment, IForum, IResponse } from "../interfaces";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Observable } from "rxjs";
-import Swal from "sweetalert2";
+import { IForum, IResponse } from "../interfaces";
+import { HttpClient } from "@angular/common/http";
+import { SweetAlertService } from "./sweet-alert-service.service";
 
 @Injectable({
   providedIn: "root",
@@ -12,12 +11,17 @@ export class ForumService extends BaseService<IForum> {
   protected override source: string = "forums";
   private forumsSignal = signal<IForum[]>([]);
 
+  constructor(
+    public override http: HttpClient,
+    private sweetAlertService: SweetAlertService
+  ) {
+    super();
+  }
 
   get forums$() {
     return this.forumsSignal;
   }
 
-  //Get all games
   getAllSignal() {
     this.findAll().subscribe({
       next: (response: any) => {
@@ -25,7 +29,8 @@ export class ForumService extends BaseService<IForum> {
         this.forumsSignal.set(response);
       },
       error: (error: any) => {
-        console.error("Error fetching games", error);
+        console.error("Error fetching forums", error);
+        this.sweetAlertService.showError("Error fetching forums", " ");
       },
     });
   }
@@ -40,25 +45,16 @@ export class ForumService extends BaseService<IForum> {
         },
         error: (error: any) => {
           console.error("Error fetching forums", error);
+          this.sweetAlertService.showError("Error fetching forums", "#16c2d5");
         },
       });
   }
 
   deleteForum(forumId: number) {
-    Swal.fire({
-      title: "¿Estás seguro que deseas eliminar el foro?",
-      text: "No podrás revertir esto",
-      icon: "warning",
-      iconColor: "white",
-      color: "white",
-      background: "#d54f16",
-      position: "center",
-      confirmButtonColor: "#ff9f1c",
-      cancelButtonColor: "#16c2d5",
-      confirmButtonText: "Si, eliminar",
-      showCancelButton: true,
-      showConfirmButton: true,
-    }).then((res) => {
+    this.sweetAlertService.showQuestion(
+      "¿Estás seguro que deseas eliminar el foro?",
+      "No podrás revertir esto",
+    ).then((res) => {
       if (res.isConfirmed) {
         this.del(forumId).subscribe({
           next: () => {
@@ -66,28 +62,11 @@ export class ForumService extends BaseService<IForum> {
               (forum: IForum) => forum.forumId !== forumId
             );
             this.forumsSignal.set(deletedForum);
-            Swal.fire({
-              title: "¡Éxito!",
-              text: "El foro ha sido eliminado",
-              icon: "success",
-              iconColor: "white",
-              color: "white",
-              showConfirmButton: false,
-              background: "#16c2d5",
-              timer: 2000,
-            });
+            this.sweetAlertService.showSuccess("El foro ha sido eliminado", " ");
           },
           error: (err: any) => {
             console.error("Error deleting forum", err);
-            Swal.fire({
-              title: "Oops...",
-              text: "Ha ocurrido un error eliminando el foro",
-              icon: "warning",
-              iconColor: "white",
-              color: "white",
-              background: "#16c2d5",
-              timer: 2000,
-            });
+            this.sweetAlertService.showError("Ha ocurrido un error eliminando el foro", " ");
           },
         });
       }
@@ -98,32 +77,12 @@ export class ForumService extends BaseService<IForum> {
     item.anonymous = item.anonymous == null ? false : item.anonymous;
     this.add(item).subscribe({
       next: (response: any) => {
-        console.log(this.forumsSignal());
         this.forumsSignal.update((forums: IForum[]) => [response, ...forums]);
-        console.log(this.forumsSignal());
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "El foro ha sido agregado",
-          icon: "success",
-          iconColor: "white",
-          color: "white",
-          showConfirmButton: false,
-          background: "#16c2d5",
-          timer: 2000,
-        });
+        this.sweetAlertService.showSuccess("El foro ha sido agregado", " ");
       },
       error: (error: any) => {
-
-        console.error("error", error);
-        Swal.fire({
-          title: "Oops...",
-          text: "Ha ocurrido un error agregando el foro",
-          icon: "warning",
-          iconColor: "white",
-          color: "white",
-          background: "#16c2d5",
-          timer: 2000,
-        });
+        console.error("Error adding forum", error);
+        this.sweetAlertService.showError("Ha ocurrido un error agregando el foro", " ");
       },
     });
   }

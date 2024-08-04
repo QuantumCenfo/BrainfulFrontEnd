@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IComment, IForum } from '../../interfaces';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-forum-detail',
@@ -19,6 +20,7 @@ export class CommentDetailComponent {
   @Input() forum: IForum | undefined;
   @Input() toUpdateComent: IComment = {};
   @Output() callParentEvent: EventEmitter<IComment> = new EventEmitter<IComment>();
+  private alertService = inject(SweetAlertService);
   public badWordsDictionary: Set<string> = new Set([
     'puto',
     'puta',
@@ -116,28 +118,19 @@ export class CommentDetailComponent {
       }
       else
       {
-        Swal.fire({
-          title: "Oops...",
-          text: "Este comentario podría contener palabras inapropiadas. Por favor, revisa el contenido antes de proceder.",
-          icon: "warning",
-          iconColor: "white",
-          color: "white",
-          background: "#16c2d5",
-          timer: 5000,
-        });
+        this.alertService.showError(
+      "Este comentario podría contener palabras inapropiadas. Por favor, revisa el contenido antes de proceder.",
+          
+        );
       }
     }
     else
     {
-      Swal.fire({
-        title: "Oops...",
-        text: "Falta de agregar el contenido del comentario",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        timer: 2000,
-      });
+      this.alertService.showError(
+        "Falta de agregar el contenido del comentario",
+            
+          );
+      
     }
   }
 

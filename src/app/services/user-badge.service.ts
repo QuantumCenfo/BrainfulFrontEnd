@@ -15,6 +15,7 @@ export class UserBadgeService extends BaseService<IUserBadge> {
   get userBadges$() {
     return this.userBadgeSignal;
   }
+  
   public save(userBadge: IUserBadge) {
     this.add(userBadge).subscribe({
       next: (response: any) => {

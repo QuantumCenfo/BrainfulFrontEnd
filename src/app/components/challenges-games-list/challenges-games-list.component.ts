@@ -31,8 +31,8 @@ export class ChallengeGamesListComponent {
   ngOnInit(): void {
     this.badgeService.getAllBadges();
     this.gameService.getAllSignal();
-    this.challengeGameService.getAllActiveChallenges();
-    this.challengeGameService.getAllInactiveChallenges();
+    this.challengeGameService.getAllChallengesByStatus('active');
+    this.challengeGameService.getAllChallengesByStatus('inactive');
   }
 
   showModalUpdate(item: IChallengeGame) {
