@@ -7,9 +7,7 @@
           [(ngModel)]="difficulty"
           [class.disabled]="isStarted"
         >
-          <option class="option-diff" value=" ">
-            Seleccione una dificultad
-          </option>
+          <option class="option-diff" value="">Seleccione una dificultad</option>
           <option value="easy">Fácil</option>
           <option value="medium">Medio</option>
           <option value="hard">Difícil</option>
@@ -22,6 +20,7 @@
       >
         <label id="btn-play" for="play">Jugar</label>
       </div>
+      <button class="points-exit" (click)="exitGames()" >Salir</button>
       <div class="points">
         <label id="points" for="points">Puntos: {{ points }}</label>
       </div>

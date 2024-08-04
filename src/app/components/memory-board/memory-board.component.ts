@@ -87,7 +87,7 @@ export class MemoryBoardComponent implements OnChanges {
     this.points = 0;
     this.flippedCards = [];
     this.matchedCards = [];
-    document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
+    
   }
   /**
    * Finaliza el juego, mostrando un modal y permitiendo reiniciar o ir al menú.
@@ -117,9 +117,9 @@ export class MemoryBoardComponent implements OnChanges {
    */
   startGame(): void {
     this.isGameRunning = true;
+    this.points = 0;
     if (this.difficulty > 0) {
       this.gameStarted = true;
-      this.points = 0;
       this.initializeGame();
       let timer = 0;
       if (this.difficulty == 6) {
@@ -201,13 +201,16 @@ export class MemoryBoardComponent implements OnChanges {
       card1.isMatched = true;
       card2.isMatched = true;
       this.matchedCards.push(card1, card2);
+      this.playSound("Correct");
       this.points = this.points + 10;
       this.checkForWin();
     } else {
       setTimeout(() => {
+        this.playSound("Wrong2");
         card1.isFlipped = false;
         card2.isFlipped = false;
         if (this.points > 0) {
+          
           this.points = this.points - 5;
         }
       }, 1000);
@@ -294,7 +297,6 @@ export class MemoryBoardComponent implements OnChanges {
   startWithNewDifficulty(): void {
     this.started = false;
     this.points = 0;
-    document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
     this.flippedCards = [];
     this.matchedCards = [];
     if (this.difficulty == 6) {
@@ -303,5 +305,13 @@ export class MemoryBoardComponent implements OnChanges {
       this.difficulty = 12;
     }
     this.startGame();
+  }
+  exitGames(){
+    this.router.navigate(['/app/games'])
+  }
+  playSound(name: string): void {
+    const audio = new Audio("../../../assets/sounds/" + name + ".mp3");
+    audio.load();
+    audio.play();
   }
 }

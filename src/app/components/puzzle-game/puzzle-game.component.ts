@@ -141,7 +141,7 @@ export class PuzzleComponent implements OnChanges {
       {
         if(piece.originalOrder == this.pieceActual.originalOrder)
         {
-          
+          this.playSound("Correct");
           Swal.fire({
             iconColor: 'white',
             color: 'white',
@@ -168,6 +168,7 @@ export class PuzzleComponent implements OnChanges {
             this.piecesBlack[indexPieceBlack] = this.pieceActual;
           }
           this.pieceActual = null;
+        
           this.points = this.points + 10;
           document.getElementById("points")!.innerHTML = "Puntos: " + this.points;
           this.cdr.detectChanges();
@@ -175,6 +176,7 @@ export class PuzzleComponent implements OnChanges {
         }
         else
         {
+          this.playSound("Wrong2");
           Swal.fire({
             iconColor: 'white',
             color: 'white',
@@ -214,7 +216,11 @@ export class PuzzleComponent implements OnChanges {
       this.showVictoryAlert();
     }
   }
-  
+  playSound(name: string): void {
+    const audio = new Audio("../../../assets/sounds/" + name + ".mp3");
+    audio.load();
+    audio.play();
+  }
   
   createPuzzlePieces(imageSrc: string) {
     const pieceWidth = 400 / this.gridSize; // Ajustar según el tamaño de tu imagen
@@ -349,7 +355,9 @@ export class PuzzleComponent implements OnChanges {
       }
     });
   }
-
+  exitGames(){
+    this.router.navigate(['/app/games'])
+  }
 }
 
 

@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
   providedIn: "root",
 })
 export class ChallengeGameService extends BaseService<IChallengeGame> {
-  protected override source: string = "challengeGame";
+  public override source: string = "challengeGame";
   private snackBar = inject(MatSnackBar);
   private activeChallengeGameSignal = signal<IChallengeGame[]>([]);
   private inactiveChallengeGameSignal = signal<IChallengeGame[]>([]);
-  private challengeGameSignal = signal<IChallengeGame[]>([]);
+  public challengeGameSignal = signal<IChallengeGame[]>([]);
   public router = inject(Router);
   constructor(protected override http: HttpClient) {
     super();  
@@ -144,7 +144,7 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
 
   deleteChallengeGame(badgeId: number) {
     Swal.fire({
-      title: "Seguro que desea eliminar la medalla?",
+      title: "Seguro que desea eliminar el desafio?",
       text: "No podrá recuperar la información",
       icon: "warning",
       showCancelButton: true,
@@ -159,7 +159,7 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
           );
           this.challengeGameSignal.set(deletedChallengeGame);
 
-          console.log("Badge deleted successfully");
+          console.log("Desafio borrado successfully");
         }
       });
     }).then(() => {

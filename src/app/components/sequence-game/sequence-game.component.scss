@@ -52,20 +52,55 @@ h2 {
 }
 
 .points-container {
-  background-color: #ff9f1c;
-  border: solid 3px #16c2d5;
+  background-color: #22bf14;
+  border: solid 0px #16c2d5;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+  box-shadow: 0 0 21px 0 rgba(89, 102, 122, 0.1);
+  
+}
+.points-container:hover {
+  cursor: pointer;
+  background-color: #1fb012;
+  border: solid 0px #16c2d5;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+  
+}
+.points-exit {
+  background-color: #b32b16;
+  border: solid 0px #16c2d5;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+
+}
+.points-exit:hover {
+  cursor: pointer;
+  background-color: #a42714;
+  border: solid 0px #16c2d5;
   padding: 10px;
   border-radius: 20px;
   margin: 20px;
   color: #ffffff;
   font-size: 2rem;
 }
-
 .color-container {
   // border: black 10px solid;
   position: relative;
   min-height: 50vh;
   width: 50vw;
+  border: black 8px solid;
+  border-radius: 29px;
+   padding: 0px;
 }
 
 .btn {
@@ -83,29 +118,41 @@ h2 {
 .purple {
   background-color: purple;
   border-bottom-right-radius: 20px;
-  border-right: 5px solid black;
-  border-bottom: 5px solid black;
+  // border-right: 5px solid black;
+  // border-bottom: 5px solid black;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .green {
   background-color: green;
   border-bottom-left-radius: 20px;
-  border-left: 5px solid black;
-  border-bottom: 5px solid black;
+  // border-left: 5px solid black;
+  // border-bottom: 5px solid black;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .blue {
   background-color: blue;
   border-top-right-radius: 20px;
-  border-right: 5px solid black;
-  border-top: 5px solid black;
+  // border-right: 5px solid black;
+  // border-top: 5px solid black;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
 }
 
 .orange {
   background-color: orange;
   border-top-left-radius: 20px;
-  border-top: 5px solid black;
-  border-left: 5px solid black;
+  // border-top: 5px solid black;
+  // border-left: 5px solid black;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .pressed {
@@ -142,10 +189,29 @@ select {
   }
   margin-top: 35px;
   background-color: #ff9f1c;
-  border: solid 3px #16c2d5;
+  border: solid 0px #16c2d5;
   padding: 10px;
   font-size: 20px;
   border-radius: 10px;
   font-family: Dosis, "Dosis", sans-serif;
   color: #ffffff;
+}
+select:hover{
+  option{
+   
+    color: #ffffff;
+    
+    
+ 
+  }
+  cursor: pointer;
+  margin-top: 35px;
+  background-color: #eb9318;
+  border: solid 0px #16c2d5;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  font-family: Dosis, "Dosis", sans-serif;
+  color: #ffffff;
+  
 }

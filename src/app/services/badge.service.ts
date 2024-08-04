@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
   providedIn: "root",
 })
 export class BadgeService extends BaseService<IBadge> {
-  protected override source: string = "badges";
+  public override source: string = "badges";
 
   public badgeSignal = signal<IBadge[]>([]);
 
