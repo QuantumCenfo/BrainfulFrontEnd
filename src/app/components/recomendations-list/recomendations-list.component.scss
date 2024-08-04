@@ -14,9 +14,10 @@ table {
     background-color: #16c2d5;
 }
 th,td{
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
 mat-paginator {
+  font-size: 16px;
   background-color: #a1d1ec;
 }
 .placeholder {

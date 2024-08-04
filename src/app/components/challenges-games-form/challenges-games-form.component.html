@@ -42,6 +42,7 @@
       <label for="objectiveScore">Puntos Objetivo</label>
       <div class="col-12">
         <input 
+        placeholder="0"
           #objectiveScore="ngModel" 
           type="number" 
           class="form-control"
@@ -56,6 +57,7 @@
       <label for="objectiveTime">Tiempo Restante Objetivo (en segundos)</label>
       <div class="col-12">
         <input 
+        placeholder="0"
           #objectiveTime="ngModel" 
           type="number" 
           class="form-control" 
@@ -101,24 +103,26 @@
       <label for="badge">Insigna a Obtener</label>
       <div class="col-12">
         <select 
-          #badge="ngModel" 
-          class="form-control" 
+        class="mb-3 form-select"
           id="badge" 
           name="badge" 
           [(ngModel)]="newChallengeGame.badgeId.badgeId"
           (ngModelChange)="newChallengeGame.badgeId.badgeId = +$event" 
-          required
-        >
+          required>
+         
           <option *ngFor="let badge of badgeList" [value]="badge.badgeId">{{ badge.title }}</option>
         </select>
       </div>
+      
+      
+      
       }
       @if(newChallengeGame.gameId){
       <label for="game">Juego para el desafío</label>
       <div class="col-12">
         <select 
           #game="ngModel" 
-          class="form-control" 
+          class="mb-3 form-select"
           id="game" 
           name="game" 
           [(ngModel)]="newChallengeGame.gameId.gameId"
