@@ -1,5 +1,5 @@
 import { Component, inject, Input } from "@angular/core";
-import { IBadge, IUserBadge } from "../../interfaces";
+import { IUserBadge } from "../../interfaces";
 import { UserBadgeService } from "../../services/user-badge.service";
 import { CommonModule } from "@angular/common";
 
@@ -14,9 +14,7 @@ export class UserBadgeListComponent {
   @Input() badgeList: IUserBadge[] = [{}];
 
   colors = ["#9816D5", "#2f9ca8", "#65b32a", "#FF9F1C"];
-  flippedIndexes: number[] = []; // Array to track flipped cards
-
-  private userBadgeService = inject(UserBadgeService);
+  flippedIndexes: number[] = []; 
 
   getBoxShadow(index: number): string {
     const color = this.colors[index % this.colors.length];

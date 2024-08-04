@@ -1,7 +1,7 @@
 <div class="container2">
   <div class="container test-center">
     <h1 class="center-text">Desafíos Externos</h1>
-    <div class="row">
+    <div class="">
       <div
         class="col-md-12 col-sm-12 badge-container-externos mx-5 shadow p-3 mb-5 bg-body-tertiary rounded-3"
         *ngFor="let outDoorChallenge of outdoorChallengeList; let i = index"
@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <div class="d-flex row">
+        <div class="d-flex row ">
           <h3>{{ outDoorChallenge.name }}</h3>
           <p>{{ outDoorChallenge.description }}</p>
         </div>
@@ -58,12 +58,16 @@
               />
             </div>
           </div>
-          <div class="d-flex justify-content-evenly">
-            <div>
+          <div class="d-flex row ">
               <h3>{{ gameChallenge.title }}</h3>
               <p>{{ gameChallenge.description }}</p>
-            </div>
           </div>
+          <button
+          class="btn btn-primary"
+          (click)="goToGames()"
+        >
+          <p>Intentar Desafío</p>
+        </button>
         </div>
       </div>
     </div>

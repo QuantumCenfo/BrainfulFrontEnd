@@ -13,6 +13,7 @@ import { ModalComponent } from "../modal/modal.component";
 import { OutdoorFormComponent } from "../outdoor-form/outdoor-form.component";
 import Swal from "sweetalert2";
 import { ParticipationOutdoorService } from "../../services/participation-outdoor.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-challenge-list",
@@ -37,7 +38,9 @@ export class ChallengeListComponent {
 
   colors = ["#9816D5", "#2f9ca8", "#65b32a", "#FF9F1C"];
 
-  public modalService = inject(NgbModal);
+
+  
+    private router: Router = new Router;
 
   showDetail(challengeOutdoor: IChallengeOutdoor, modal: any) {
     this.currentOutDoorChallenge = { ...challengeOutdoor };
@@ -108,4 +111,8 @@ export class ChallengeListComponent {
       .slice(1)
       .toUpperCase()}`;
   }
+  goToGames(){
+    this.router.navigate(["app/games"]);
+  }
+  
 }

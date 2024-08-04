@@ -29,9 +29,9 @@ option {
 .file-input label {
   display: block;
   position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
   background: linear-gradient(40deg, #7cecf9, #66b9c2);
   box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
   display: flex;
@@ -42,7 +42,25 @@ option {
   cursor: pointer;
   transition: transform 0.2s ease-out;
 }
-
+.justify-content-center {
+  justify-content: left !important;
+}
+.button-submit{
+  background-color: #ff9f1c;
+  border-radius: 10px;
+  width: 100px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 18px;
+    padding: 10px;
+    margin: 16px;
+    color: #ffffff;
+    transition: all 0.3s;
+    text-align: center;
+}
+.modal-body{
+  background-color: #caf0f8 !important;;
+}
 .text-area {
   border-color: #ff9f1c;
 }
@@ -52,7 +70,9 @@ option {
   border: 0px;
   border-bottom: #ff9f1c solid 2px;
 }
-
+textarea {
+  border-color: #ff9f1c;
+}
 .brain-logo {
   min-width: 100px;
   height: 100px;
@@ -87,7 +107,19 @@ option {
   border-bottom-right-radius: calc(0.3rem - 1px);
   border-bottom-left-radius: calc(0.3rem - 1px);
 }
+label {
+  margin: 20px;
+ font-size: 16px;
 
+}
+input, optgroup, select, textarea {
+    
+  width: 200%;
+  margin: 0px;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
 .modal-body {
   transform: translateX(-150px);
   background-color: #caf0f8;

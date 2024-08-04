@@ -1,4 +1,8 @@
-<h2>Desafíos Activos</h2>
+<h1>Desfíos Digitales</h1>
+<div class="d-flex justify-content-center align-items-center">
+  <app-add-button [text]="'Agregar'"  (click)="showModal()"></app-add-button>
+</div>
+<p>Desafíos Activos</p>
 <div class="challenge-list">
     <div class="challenge-card" *ngFor="let challenge of activeChallengeGameList">
       <h3>{{ challenge.title }}</h3>
@@ -14,10 +18,8 @@
       </div>
     </div>
 </div>
-<div class="d-flex justify-content-center align-items-center">
-  <app-add-button (click)="showModal()"></app-add-button>
-</div>
-<h2>Desafíos Inactivos</h2>
+
+<p>Desafíos Inactivos</p>
 <div class="challenge-list">
 <div class="challenge-card" *ngFor="let challenge of inactiveChallengeGameList">
     <h3>{{ challenge.title }}</h3>

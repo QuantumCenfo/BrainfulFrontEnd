@@ -1,12 +1,77 @@
 .container2 {
-  padding: 70px;
+  padding-top: 15px;
   border-radius: 10px;
   width: 100%;
+
+  
+}
+*{
+  font-size: 18px;
 }
 table {
   width: 100%;
-  background-color: #a1d1ec;
+  font-size: 20px;
+    background-color: #16c2d5;
+}
+th,td{
+  color: rgb(255, 255, 255);
 }
 mat-paginator {
+  font-size: 16px;
   background-color: #a1d1ec;
+}
+.placeholder {
+  padding: 70px;
+  text-align: center;
+  font-size: 26px;
+  margin-top: 20px;
+  color: #000000;
+}
+
+@media (max-width: 1024px) {
+  .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  
+  table {
+    width: 100%;
+    font-size: 18px;
+      background-color: #16c2d5;
+  }
+*{
+  font-size: 20px;
+}
+}
+
+@media (max-width: 768px) {
+  .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+ 
+  }
+  
+  table {
+    width: 100%;
+    font-size: 20px;
+      background-color: #16c2d5;
+  }
+}
+
+@media (max-width: 480px) {
+   .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+    overflow-x:auto
+  }
+  
+  table {
+    width: 100%;
+    font-size: 20px;
+      background-color: #16c2d5;
+  }
+ 
 }

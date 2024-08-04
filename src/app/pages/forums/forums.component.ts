@@ -35,7 +35,6 @@ export class ForumsComponent {
   public forumList: IForum[] = [];
   private service = inject(ForumService);
   public modalService: NgbModal = inject(NgbModal);
-  private snackBar = inject(MatSnackBar);
   private router = inject(Router);
 
   displayedForums: IForum[] = [];

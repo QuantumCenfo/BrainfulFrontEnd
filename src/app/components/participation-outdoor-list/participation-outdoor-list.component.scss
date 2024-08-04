@@ -2,13 +2,14 @@ table {
   margin-top: 100px;
   width: 100%;
   margin-bottom: 1rem;
-
   vertical-align: top;
-  background-color: #a1d1ec;
+  background-color: #16c2d5;
 }
-
+*{
+  font-size: 18px;
+}
 .container2 {
-  padding: 70px;
+  padding: 5px;
   border-radius: 10px;
   width: 100%;
 }
@@ -23,12 +24,21 @@ table {
   background-color: #ee9211;
   border-color: #ee9211;
 }
-table {
-  border-collapse: collapse;
-
-  overflow: hidden;
+.placeholder {
+  text-align: center;
+  font-size: 26px;
+  margin-top: 20px;
+  color: #000000;
 }
 
+table {
+  font-size: 20px;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+th,td{
+  color: rgb(255, 255, 255);
+}
 .css-mine {
   margin-top: 2em;
   clear: both;
@@ -43,5 +53,56 @@ body {
   font-family: Dosis, "Dosis", sans-serif;
 }
 mat-paginator {
-  background-color: #a1d1ec;
+  font-size: 16px;
+
+  background-color: #16c2d5;
+}
+
+@media (max-width: 1024px) {
+  .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+    overflow-x:auto
+  }
+  
+  table {
+    width: 100%;
+    font-size: 18px;
+      background-color: #16c2d5;
+  }
+*{
+  font-size: 20px;
+}
+}
+
+@media (max-width: 768px) {
+  .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+    overflow-x:auto
+  }
+  
+  table {
+    width: 100%;
+    font-size: 20px;
+      background-color: #16c2d5;
+  }
+}
+
+@media (max-width: 480px) {
+   .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+    overflow-x:auto
+  }
+  
+  table {
+    width: 100%;
+    font-size: 20px;
+    background-color: #16c2d5;
+  }
+ 
 }

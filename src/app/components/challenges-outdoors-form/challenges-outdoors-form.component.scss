@@ -1,21 +1,35 @@
 .input {
+
     background-color: #f8f8f800;
     border: 0px;
-    border-bottom: #ff9f1c solid 2px;
+    border-bottom: #ff9f1c solid 1px;
+}
+
+.number {
+    border: 1px;
+    border-style: solid;
+    border-color: #ff9f1c;
 }
 
 label {
-    margin: 10px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    padding-left: 4px;
+    margin: 20px;
+   font-size: 16px;
+
 }
 
 textarea {
     border-color: #ff9f1c;
 }
-
+ input, optgroup, select, textarea {
+    
+    width: 100%;
+    margin: 0px;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
 select {
+    
     border-color: #ff9f1c;
 }
 
@@ -25,3 +39,4 @@ select {
     margin: 0 auto;
     display: flex;
 }
+  

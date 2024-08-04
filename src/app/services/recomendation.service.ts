@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 export class RecomendationService extends BaseService<IRecomendation> {
   protected override source: string = "recommendations";
   private recommendationSignal = signal<IRecomendation[]>([]);
-  private snackBar = inject(MatSnackBar);
+ 
   private user: IUser = { email: "", authorities: [] };
 
   get recomendations$() {
@@ -74,11 +74,7 @@ export class RecomendationService extends BaseService<IRecomendation> {
             this.recommendationSignal.set(updatedItems);
           },
           error: (error: any) => {
-            this.snackBar.open(error.error.description, "Close", {
-              horizontalPosition: "right",
-              verticalPosition: "top",
-              panelClass: ["error-snackbar"],
-            });
+           
             console.error("error", error);
           },
         });

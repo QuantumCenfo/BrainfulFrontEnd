@@ -65,6 +65,9 @@ body {
   border-radius: 10px;
   border-color: #ff9f1c;
 }
+.btn-primary  p{
+  margin: 0px;
+}
 
 .error-snackbar .mdc-snackbar__surface {
   background-color: rgb(197, 49, 49) !important;
@@ -94,10 +97,10 @@ body {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
 }
 .page-wrapper.compact-wrapper .page-body-wrapper .page-body {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 51px);
   margin-top: 94px;
   margin-left: 265px;
-  background-color: #dddddd;
+  background-color: #b5dee7;
 }
 .page-wrapper.compact-wrapper
   .page-body-wrapper

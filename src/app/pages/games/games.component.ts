@@ -36,7 +36,6 @@ export class GamesComponent {
   @ViewChild(MemoryBoardComponent) memoryBoard!: MemoryBoardComponent;
   public gameList: IGame[] = [];
   private service = inject(GameService);
-  private snackBar = inject(MatSnackBar);
   private router = inject(Router);
 
   displayedGames: IGame[] = [];

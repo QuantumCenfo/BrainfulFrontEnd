@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class ChallengeOutdoorService extends BaseService<IChallengeOutdoor> {
   protected override source: string = "challengeOutdoor";
-  private snackBar = inject(MatSnackBar);
+
   private challengeOutdoorSignal = signal<IChallengeOutdoor[]>([]);
   private activeChallengeOutdoorSignal = signal<IChallengeOutdoor[]>([]);
   private inactiveChallengeOutdoorSignal = signal<IChallengeOutdoor[]>([]);

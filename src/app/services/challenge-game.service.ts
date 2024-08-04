@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ChallengeGameService extends BaseService<IChallengeGame> {
   public override source: string = "challengeGame";
-  private snackBar = inject(MatSnackBar);
+
   private activeChallengeGameSignal = signal<IChallengeGame[]>([]);
   private inactiveChallengeGameSignal = signal<IChallengeGame[]>([]);
   public challengeGameSignal = signal<IChallengeGame[]>([]);
