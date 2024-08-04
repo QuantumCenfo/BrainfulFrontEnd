@@ -9,7 +9,6 @@ import Swal from "sweetalert2";
 })
 export class FormService extends BaseService<IForm> {
   protected override source: string = "forms";
-  private snackBar = inject(MatSnackBar);
   private formsListSignal = signal<IForm[]>([]);
 
   get forms$() {

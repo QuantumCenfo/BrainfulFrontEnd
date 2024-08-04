@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PuzzleService extends BaseService<IGameResults> {
   protected override source: string = "gameResults";
-  private snackBar = inject(MatSnackBar);
+
   private urlApi = 'https://api.unsplash.com';
   private accessKey = 'gnof3h7Xoxkw_ZN6GY0ErzH6BFoKCRe-choP-c8WR2g';
   private resultsListSignal = signal<IGameResults[]>([]);
@@ -32,11 +32,7 @@ getRandomImages(count: number): Observable<string[]> {
         this.resultsListSignal.update((results: IGameResults[]) => [response, ...results]);
       },
       error: (error : any) => {
-        this.snackBar.open(error.error.description, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
+       
         console.error('error', error);
       }
     })

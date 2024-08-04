@@ -1,4 +1,4 @@
-import { Component, inject, Input } from "@angular/core";
+import { Component, inject, Input, OnInit } from "@angular/core";
 import { IPartcipationOutdoor } from "../../interfaces";
 import { ParticipationOutdoorService } from "../../services/participation-outdoor.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -28,27 +28,34 @@ import { MatTableDataSource, MatTableModule } from "@angular/material/table";
   templateUrl: "./participation-outdoor-list.component.html",
   styleUrl: "./participation-outdoor-list.component.scss",
 })
-export class ParticipationOutdoorListComponent {
+export class ParticipationOutdoorListComponent implements OnInit {
   @Input() participationList: IPartcipationOutdoor[] = [];
   public selectedItem: IPartcipationOutdoor = {};
 
   dataSource = new MatTableDataSource<IPartcipationOutdoor>([]);
-
+  filteredDataSource = new MatTableDataSource<IPartcipationOutdoor>();
   public currentParticipation: IPartcipationOutdoor = {};
   private participationService = inject(ParticipationOutdoorService);
 
   public modalService = inject(NgbModal);
+
+  ngOnInit(): void {
+    this.dataSource.data = this.participationList;
+    this.filterDataSource();
+  }
+
   showDetail(participation: IPartcipationOutdoor, modal: any) {
     this.currentParticipation = { ...participation };
     modal.show();
   }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.dataSource.data = this.participationList;
-  }
   pageEvent(event: PageEvent) {
     console.log("Event", event);
+  }
+
+  filterDataSource() {
+    this.filteredDataSource.data = this.dataSource.data.filter(
+      (row: IPartcipationOutdoor) => row.status === "pendiente"
+    );
   }
 }

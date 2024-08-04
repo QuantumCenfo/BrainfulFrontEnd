@@ -9,7 +9,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class UserBadgeService extends BaseService<IUserBadge> {
   protected override source: string = "userbadge";
-  private snackBar = inject(MatSnackBar);
+
   private userBadgeSignal = signal<IUserBadge[]>([]);
 
   get userBadges$() {
@@ -21,11 +21,7 @@ export class UserBadgeService extends BaseService<IUserBadge> {
         this.userBadgeSignal.update((results: IUserBadge[]) => [response, ...results]);
       },
       error: (error : any) => {
-        this.snackBar.open(error.error.description, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
+      
         console.error('error', error);
         console.error('error', error);
       }

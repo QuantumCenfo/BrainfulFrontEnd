@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 export class CommentService extends BaseService<IComment> {
   protected override source: string = "comments";
   private commentsSignal = signal<IComment[]>([]);
-  private snackBar = inject(MatSnackBar);
+
 
   get comments$() {
     return this.commentsSignal;
@@ -51,11 +51,6 @@ export class CommentService extends BaseService<IComment> {
         });
       },
       error: (error: any) => {
-        this.snackBar.open(error.error.description, "Close", {
-          horizontalPosition: "right",
-          verticalPosition: "top",
-          panelClass: ["error-snackbar"],
-        });
         console.error("error", error);
         Swal.fire({
           title: "Oops...",
@@ -89,11 +84,7 @@ export class CommentService extends BaseService<IComment> {
         });
       },
       error: (error: any) => {
-        this.snackBar.open(error.error.description, "Close", {
-          horizontalPosition: "right",
-          verticalPosition: "top",
-          panelClass: ["error-snackbar"],
-        });
+        
         console.error("error", error);
         Swal.fire({
           title: "Oops...",

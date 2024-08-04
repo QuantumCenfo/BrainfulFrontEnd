@@ -1,41 +1,4 @@
-<!-- <div class="table-container">
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" class="label">#</th>
-          <th scope="col" class="label">Fecha de recomendación</th>
-          <th scope="col" class="label">Descripción</th>
-          <th scope="col" class="label">Tipo</th>
-          <th scope="col" class="label">Fecha de cuestionario</th>
-          <th scope="col" class="label">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (recomendation of recomendationList; track $index) {
-        <tr>
-          <td class="label">{{ recomendation.recommendationId }}</td>
-          <td class="label">{{ recomendation.date | date }}</td>
-          <td class="label">{{ recomendation.description }}</td>
-          <td class="label">{{ recomendation.recommendationType }}</td>
-          <td class="label">{{ recomendation.form?.date | date }}</td>
-          <td class="label">
-            <button
-              type="button"
-              (click)="deleteRecomendation(recomendation)"
-              class="btn btn-danger"
-            >
-              <i class="fa-solid fa-trash white"></i>
-            </button>
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
-  </div>
-</div> -->
-
-<div class="container2">
+<div *ngIf="recomendationList.length > 0; else emptyPlaceholder" class="container2">
   <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>#</th>
@@ -90,3 +53,6 @@
     ></tr>
   </table>
 </div>
+<ng-template #emptyPlaceholder>
+  <div class="placeholder">No tienes recomendaciones en este momento</div>
+</ng-template>

@@ -11,12 +11,22 @@
 table {
   width: 100%;
   font-size: 20px;
-    background-color: #00a4bd;
+    background-color: #16c2d5;
 }
-
+th,td{
+  color: rgb(0, 0, 0);
+}
 mat-paginator {
   background-color: #a1d1ec;
 }
+.placeholder {
+  padding: 70px;
+  text-align: center;
+  font-size: 26px;
+  margin-top: 20px;
+  color: #000000;
+}
+
 @media (max-width: 1024px) {
   .container2 {
     padding-top: 15px;
@@ -27,7 +37,7 @@ mat-paginator {
   table {
     width: 100%;
     font-size: 18px;
-      background-color: #00a4bd;
+      background-color: #16c2d5;
   }
 *{
   font-size: 20px;

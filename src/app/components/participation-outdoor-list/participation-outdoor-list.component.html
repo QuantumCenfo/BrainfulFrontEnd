@@ -1,56 +1,13 @@
-<!-- <div class="table-container">
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" class="label">#</th>
-          <th scope="col" class="label">Nombre del desafío</th>
-          <th scope="col" class="label">Descripción del desafío</th>
-          <th scope="col" class="label">Fecha de publicación</th>
-          <th scope="col" class="label">Estado</th>
-          <th scope="col" class="label">Nombre de usuario</th>
-          <th scope="col" class="label">Accciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (participation of participationList; track $index) {
-        @if(participation.status === 'pendiente'){
-        <tr>
-          <td class="label">{{ participation.participationOutdoorId }}</td>
-          <td class="label">{{ participation.challengeOutdoor?.name }}</td>
-          <td class="label">
-            {{ participation.challengeOutdoor?.description }}
-          </td>
-          <td class="label">{{ participation.fechaPublicacion | date }}</td>
-          <td class="label">{{ participation.status }}</td>
-          <td class="label">{{ participation.user?.name }}</td>
-          <td class="label">
-            <button
-              type="button"
-              (click)="showDetail(participation, showModal)"
-              class="btn btn-danger"
-            >
-              <i class="fa-solid fa-file-circle-check"></i>
-            </button>
-          </td>
-        </tr>
-        } }
-      </tbody>
-    </table>
-  </div>
-</div> -->
-
 <div class="container2">
-  <table mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table *ngIf="filteredDataSource.data.length > 0" [dataSource]="filteredDataSource" class="mat-elevation-z8">
+    <!-- Table columns definition -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Nombre del desafío</th>
       <td mat-cell *matCellDef="let row">{{ row.challengeOutdoor?.name }}</td>
     </ng-container>
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef>Descripción del desafío</th>
-      <td mat-cell *matCellDef="let row">
-        {{ row.challengeOutdoor?.description }}
-      </td>
+      <td mat-cell *matCellDef="let row">{{ row.challengeOutdoor?.description }}</td>
     </ng-container>
     <ng-container matColumnDef="fechaPublicacion">
       <th mat-header-cell *matHeaderCellDef>Fecha de publicación</th>
@@ -110,12 +67,17 @@
   </table>
 
   <mat-paginator
-    [length]="dataSource.data.length"
+    *ngIf="filteredDataSource.data.length > 0"
+    [length]="filteredDataSource.data.length"
     [pageSize]="5"
     [pageSizeOptions]="[5, 10, 50]"
     (page)="pageEvent($event)"
   >
   </mat-paginator>
+
+  <div *ngIf="filteredDataSource.data.length === 0" class="placeholder">
+    No hay participaciones pendientes en este momento.
+  </div>
 </div>
 
 <app-modal #showModal>

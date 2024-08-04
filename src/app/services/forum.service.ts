@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 export class ForumService extends BaseService<IForum> {
   protected override source: string = "forums";
   private forumsSignal = signal<IForum[]>([]);
-  private snackBar = inject(MatSnackBar);
+
 
   get forums$() {
     return this.forumsSignal;
@@ -113,11 +113,7 @@ export class ForumService extends BaseService<IForum> {
         });
       },
       error: (error: any) => {
-        this.snackBar.open(error.error.description, "Close", {
-          horizontalPosition: "right",
-          verticalPosition: "top",
-          panelClass: ["error-snackbar"],
-        });
+
         console.error("error", error);
         Swal.fire({
           title: "Oops...",
