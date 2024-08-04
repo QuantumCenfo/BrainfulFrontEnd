@@ -109,7 +109,6 @@
           [(ngModel)]="newChallengeGame.badgeId.badgeId"
           (ngModelChange)="newChallengeGame.badgeId.badgeId = +$event" 
           required>
-         
           <option *ngFor="let badge of badgeList" [value]="badge.badgeId">{{ badge.title }}</option>
         </select>
       </div>
