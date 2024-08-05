@@ -1,19 +1,22 @@
 table {
-  margin-top: 100px;
   width: 100%;
   margin-bottom: 1rem;
   vertical-align: top;
   background-color: #16c2d5;
+  font-size: 20px;
+  border-collapse: collapse;
+  overflow: hidden;
 }
 *{
   font-size: 18px;
 }
+
 .container2 {
-  padding: 5px;
+  padding: 70px;
   border-radius: 10px;
   width: 100%;
+  overflow-x: auto;
 }
-
 .btn-danger {
   color: #fff;
   background-color: #ff9f1c;
@@ -31,11 +34,8 @@ table {
   color: #000000;
 }
 
-table {
-  font-size: 20px;
-  border-collapse: collapse;
-  overflow: hidden;
-}
+
+
 th,td{
   color: rgb(255, 255, 255);
 }
@@ -43,7 +43,17 @@ th,td{
   margin-top: 2em;
   clear: both;
 }
-
+th{
+  font-size: 20px;
+}
+.input-filter {
+  border:2px;
+  border-style: solid;
+  border-color: #16c2d5;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
 body {
   margin: 1.5em;
 }

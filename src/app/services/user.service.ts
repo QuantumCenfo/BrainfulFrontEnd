@@ -74,9 +74,11 @@ export class UserService extends BaseService<IUser> {
       next: (res: any) => {
         this.userListSignal.update((users: any) => [res, ...users]);
         console.log("Response: ", res);
-        this.sweetAlertService.showSuccess("El usuario ha sido agregado");
-          window.location.reload();
-    
+        this.sweetAlertService.showSuccess("El usuario ha sido creado").then (()=> {
+          window.location.reload()
+        }
+      
+      )
       },
       error: (err: any) => {
         this.sweetAlertService.showError("Hubo un problema al agregar el usuario");
@@ -117,8 +119,10 @@ export class UserService extends BaseService<IUser> {
             );
             this.userListSignal.set(updatedUsers);
             console.log("Response: ", res);
-            this.sweetAlertService.showSuccess("El usuario ha sido actualizado");
-            window.location.reload();
+            this.sweetAlertService.showSuccess("El usuario ha sido actualizado").then (()=> {
+              window.location.reload()
+            }
+          )
           },
           error: (err: any) => {
             console.log("Error: ", err);

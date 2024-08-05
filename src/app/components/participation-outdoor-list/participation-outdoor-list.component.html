@@ -1,4 +1,11 @@
 <div class="container2">
+  <input
+  *ngIf="filteredDataSource.data.length > 0"
+  type="text"
+  (keyup)="applyFilter($event)"
+  class="input-filter mb-3"
+  placeholder="Buscar"
+/>
   <table mat-table *ngIf="filteredDataSource.data.length > 0" [dataSource]="filteredDataSource" class="mat-elevation-z8">
     <!-- Table columns definition -->
     <ng-container matColumnDef="name">

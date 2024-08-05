@@ -2,7 +2,15 @@
     <div class="col-12 col-md-6 mx-auto">
       <div class="profile-card">
         <div class="image-placeholder">
-        <img *ngIf="userService.user$()?.image" [src]="userService.user$().image" alt="User Image" class="user-img"/>
+        <img *ngIf="userService.user$()?.image else elseBlockImg " [src]="userService.user$().image" alt="User Image" class="user-img"/>
+        <ng-template #elseBlockImg>
+          <img
+            src="../../../../assets/icons/default user.jpeg"
+            alt="Foto de perfil"
+            width="100px"
+            height="100px"
+          />
+        </ng-template>
       </div>
         <div class="info-item">
           <label>Nombre:</label>

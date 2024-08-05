@@ -101,7 +101,7 @@ export class UserListComponent implements OnInit {
     if (userId !== this.currentUserId) { 
       this.userService.deleteUser(userId);
     } else {
-      this.alertService.showError('Lo sentimos','No puedes borrar el usuario actualmente loggeado').then(() => {
+      this.alertService.showError('Lo sentimos','No puedes borrar el usuario actualmente autenticado').then(() => {
         window.location.reload();
       });
     }
