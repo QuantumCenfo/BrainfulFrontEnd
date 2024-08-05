@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { IForm, IUser } from '../../interfaces';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-form',
@@ -19,6 +20,7 @@ export class FormComponent implements OnInit {
   demenciaForm: FormGroup;
   public formService = inject(FormService);
   public router = inject(Router)
+  public alertService = inject(SweetAlertService);
   constructor() {
     this.demenciaForm = new FormGroup({
       age: new FormControl('', [Validators.required]),
@@ -42,19 +44,7 @@ export class FormComponent implements OnInit {
 
   onSubmit() {
     if (this.demenciaForm.invalid) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos En blanco',
-        iconColor: 'white',
-        color: 'white',
-        background:'#d54f16',
-        position: 'center',
-        text: 'Por favor, completa todos los campos.',
-        showConfirmButton: false,
-        showCancelButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      this.alertService.showError('Campos En blanco', 'Por favor, completa todos los campos.');
       Object.keys(this.demenciaForm.controls).forEach(field => {
         const control = this.demenciaForm.get(field);
         control?.markAsTouched({ onlySelf: true });
@@ -62,18 +52,7 @@ export class FormComponent implements OnInit {
       return;
     }
     if (this.hasNegativeNumbers()) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Números negativos',
-        iconColor: 'white',
-        color: 'white',
-        background:'#d54f16',
-        position: 'center',
-        text: 'Por favor, introduce valores mayores o iguales a cero en los campos numéricos.',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-      });
+      this.alertService.showError('Números negativos', 'Por favor, introduce valores mayores o iguales a cero en los campos numéricos.');
      
       return;
     }else{

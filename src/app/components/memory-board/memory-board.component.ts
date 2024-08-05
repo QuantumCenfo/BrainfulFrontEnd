@@ -17,6 +17,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TryAgainModalComponent } from "../try-again-modal/try-again-modal.component";
 import { ActivatedRoute, NavigationStart, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { SweetAlertService } from "../../services/sweet-alert-service.service";
 
 @Component({
   selector: "app-memory-board",
@@ -39,6 +40,8 @@ export class MemoryBoardComponent implements OnChanges {
   gameId: number | undefined;
   public memoryService = inject(MemoryService);
   private routerSubscription: Subscription;
+  public alertService = inject(SweetAlertService);
+
   constructor(
     private imageService: MemoryService,
     private modalService: NgbModal,
@@ -131,15 +134,7 @@ export class MemoryBoardComponent implements OnChanges {
       }
       this.timerComponent.timer(timer);
     } else {
-      Swal.fire({
-        title: "Oops...",
-        text: "Seleccione una dificultad antes de comenzar el juego.",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        confirmButtonColor: "#ff9f1c",
-      });
+      this.alertService.showdifficultyWarning('Ooops...','Seleccione una dificultad antes de comenzar el juego.');
       this.isGameRunning = false;
     }
   }

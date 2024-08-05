@@ -49,4 +49,10 @@ export class SweetAlertService {
   showQuestion(title: string, text?: string) {
     return this.showAlert(title, 'question', '#d54f16', 'white','white', '#ff9f1c', '#16c2d5', 6000, true, true,text);
   }
+  showdifficultyWarning(title: string, text?: string) {
+    return this.showAlert(title, 'warning', '#16c2d5', 'white','white', '#ff9f1c', '#16c2d5', 3000, true, false, text);
+  }
+  showVictory(title: string, text?: string) {
+    return this.showAlert(title, 'success', '#16c2d5', 'white','white', '#ff9f1c', '#16c2d5', 6000, true, true,text);
+  }
 }

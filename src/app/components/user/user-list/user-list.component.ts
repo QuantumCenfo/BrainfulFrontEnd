@@ -16,6 +16,7 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from "@angular/material/p
 import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { AuthService } from "../../../services/auth.service"; // Import your auth service
+import { SweetAlertService } from "../../../services/sweet-alert-service.service";
 
 @Component({
   selector: "app-user-list",
@@ -48,7 +49,8 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   public selectedUser: IUser = {};
   public selectedImg: File | null = null;
-  public currentUserId: number | null = null; // Store current user's ID
+  public currentUserId: number | null = null; 
+  public alertService = inject(SweetAlertService);
 
   dataSource = new MatTableDataSource<IUser>([]);
 
@@ -99,18 +101,7 @@ export class UserListComponent implements OnInit {
     if (userId !== this.currentUserId) { 
       this.userService.deleteUser(userId);
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Lo sentimos',
-        iconColor: 'white',
-        color: 'white',
-        background:'#d54f16',
-        position: 'center',
-        text: 'No puedes borrar el usuario actualmente loggeado',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-      }).then(() => {
+      this.alertService.showError('Lo sentimos','No puedes borrar el usuario actualmente loggeado').then(() => {
         window.location.reload();
       });
     }
