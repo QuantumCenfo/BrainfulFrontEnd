@@ -60,7 +60,6 @@ h2 {
   color: #ffffff;
   font-size: 2rem;
   box-shadow: 0 0 21px 0 rgba(89, 102, 122, 0.1);
-  
 }
 .points-container:hover {
   cursor: pointer;
@@ -71,7 +70,6 @@ h2 {
   margin: 20px;
   color: #ffffff;
   font-size: 2rem;
-  
 }
 .points-exit {
   background-color: #b32b16;
@@ -81,7 +79,6 @@ h2 {
   margin: 20px;
   color: #ffffff;
   font-size: 2rem;
-
 }
 .points-exit:hover {
   cursor: pointer;
@@ -100,7 +97,7 @@ h2 {
   width: 50vw;
   border: black 8px solid;
   border-radius: 29px;
-   padding: 0px;
+  padding: 0px;
 }
 
 .btn {
@@ -196,13 +193,9 @@ select {
   font-family: Dosis, "Dosis", sans-serif;
   color: #ffffff;
 }
-select:hover{
-  option{
-   
+select:hover {
+  option {
     color: #ffffff;
-    
-    
- 
   }
   cursor: pointer;
   margin-top: 35px;
@@ -213,5 +206,25 @@ select:hover{
   border-radius: 10px;
   font-family: Dosis, "Dosis", sans-serif;
   color: #ffffff;
-  
+}
+
+.marcador {
+  background-color: #eb9318;
+  border: solid 0px #16c2d5;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.marcador:hover {
+  cursor: pointer;
+  background-color: #d38517;
+  border: solid 0px #16c2d5;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px;
+  color: #ffffff;
+  font-size: 2rem;
 }
