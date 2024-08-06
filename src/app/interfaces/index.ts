@@ -169,3 +169,12 @@ export interface IForum {
   anonymous?: boolean;
   user?: IUser;
 }
+
+export interface IContent {
+  contentId?: number;
+  title?: string;
+  description?: string;
+  typeMedia?: string;
+  url?: string;
+  publishDate?: Date;
+}
