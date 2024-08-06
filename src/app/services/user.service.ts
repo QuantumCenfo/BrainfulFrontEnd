@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
   providedIn: "root",
 })
 export class UserService extends BaseService<IUser> {
-  public override source: string = "users";
+  protected override source: string = "users";
   private userListSignal = signal<IUser[]>([]);
 
   get users$() {
@@ -85,25 +85,6 @@ export class UserService extends BaseService<IUser> {
     });
   }
 
-  // updateUser(user: IUser, imageFile: File) {
-  //   const userCopy: { [key: string]: any } = { ...user };
-
-  //   delete userCopy["enabled"];
-  //   delete userCopy["username"];
-  //   delete userCopy["authorities"];
-  //   delete userCopy["accountNonExpired"];
-  //   delete userCopy["accountNonLocked"];
-  //   delete userCopy["credentialsNonExpired"];
-
-  //   const formData = new FormData();
-  //   formData.append("user", JSON.stringify(userCopy));
-  //   if (imageFile) {
-  //     formData.append("image", imageFile);
-  //   }
-
-  //   return this.http.put(`${this.source}/${user.id}`, formData);
-  // }
-
   updateUser(user: IUser, imageFile: File): Observable<IUser> {
     const formData = new FormData();
     formData.append("user", JSON.stringify(user));
@@ -137,7 +118,7 @@ export class UserService extends BaseService<IUser> {
             );
             this.userListSignal.set(updatedUsers);
             console.log("Response: ", res);
-            console.log("User updated successfully");
+
             Swal.fire({
               title: "¡Éxito!",
               text: "El usuario ha sido actualizado",

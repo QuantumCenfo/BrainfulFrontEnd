@@ -1,6 +1,63 @@
-.modal-body {
-  -webkit-box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.21);
-  box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.21);
+* {
+  font-family: Dosis, "Dosis", sans-serif;
+}
+h2 {
+  font-family: Dosis, "Dosis", sans-serif;
+}
+
+.modal-content {
+  font-family: Dosis, "Dosis", sans-serif;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   background-color: #caf0f8;
-  min-height: 50%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-header,
+.modal-footer {
+  background-color: #caf0f8;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #ffffff;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+.btn-primary {
+  background-color: #0077b6;
+  border-color: #0077b6;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #023e8a;
+  border-color: #023e8a;
+}
+
+.btn-secondary {
+  background-color: #adb5bd;
+  border-color: #adb5bd;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,4 +1,4 @@
-<div class="container edit-container">
+<div class="container edit-container fs-5">
   <div class="img-container">
     <img
       src="../../../../assets/icons/LogoCerebro.png"
@@ -49,32 +49,55 @@
       />
     </div>
 
-    <div class="col-md-6">
-      <label class="mb-3" for="correo"
-        >Correo<span style="color: red">*</span></label
-      >
-      <input
-        type="text"
-        name="correo"
-        id="correo"
-        #correo="ngModel"
-        class="form-control mb-3"
-        [(ngModel)]="user.email"
-        [ngClass]="{
-          'is-invalid': correo.invalid && correo.touched,
-          'is-valid': correo.valid && correo.touched
-        }"
-        required
-      />
-    </div>
+    <ng-container *ngIf="title === 'Editar Usuario'; else elseBlockBOD">
+      <div class="col-md-12">
+        <label class="mb-3" for="correo"
+          >Correo<span style="color: red">*</span></label
+        >
+        <input
+          type="text"
+          name="correo"
+          id="correo"
+          #correo="ngModel"
+          class="form-control mb-3"
+          [(ngModel)]="user.email"
+          [ngClass]="{
+            'is-invalid': correo.invalid && correo.touched,
+            'is-valid': correo.valid && correo.touched
+          }"
+          required
+        />
+      </div>
+    </ng-container>
+    <ng-template #elseBlockBOD>
+      <div class="col-md-6">
+        <label class="mb-3" for="correo"
+          >Correo<span style="color: red">*</span></label
+        >
+        <input
+          type="text"
+          name="correo"
+          id="correo"
+          #correo="ngModel"
+          class="form-control mb-3"
+          [(ngModel)]="user.email"
+          [ngClass]="{
+            'is-invalid': correo.invalid && correo.touched,
+            'is-valid': correo.valid && correo.touched
+          }"
+          required
+        />
+      </div>
+    </ng-template>
+
     <div class="col-md-6" *ngIf="action == 'Agregar'">
-      <label for="birthDate" class="form-label"
+      <label for="birthDate" class="form-label mb-3"
         >Fecha de Nacimiento <span style="color: red">*</span>
       </label>
       <input
         type="date"
         #birthDate="ngModel"
-        class="form-control"
+        class="form-control mb-3"
         id="birthDate"
         name="birthDate"
         [(ngModel)]="user.birthDate"
@@ -85,90 +108,38 @@
         required
       />
     </div>
-    <!-- <div class="col-md-6" *ngIf="action == 'Agregar'">
-      <label for="password" class="form-label"
-        >Contraseña <span style="color: red">*</span>
-      </label>
-      <input
-        type="password"
-        #password="ngModel"
-        class="form-control"
-        id="password"
-        name="password"
-        [(ngModel)]="user.password"
-        [ngClass]="{
-          'is-invalid': password.invalid && password.touched,
-          'is-valid': password.valid && password.touched
-        }"
-        required
-      />
-    </div> -->
-    <!-- <div class="col-md-12">
-    <label class="mb-3" for="password">Contraseña Actual</label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      #password="ngModel"
-      class="form-control mb-3"
-      [(ngModel)]="user.password"
-      [ngClass]="{
-        'is-invalid': password.invalid && password.touched,
-        'is-valid': password.valid && password.touched
-      }"
-      required
-    />
-  </div> -->
-
-    <div class="col-md-6">
-      <label class="mb-3" for="rol">Rol<span style="color: red">*</span></label>
-      <select
-        name="rol"
-        id="rol"
-        #rol="ngModel"
-        class="mb-3 form-select"
-        [(ngModel)]="user.role"
-        [ngClass]="{
-          'is-invalid': rol.invalid && rol.touched,
-          'is-valid': rol.valid && rol.touched
-        }"
-        required
-      >
-        <!-- <option value="">Seleccione un rol</option> -->
-        <option *ngFor="let rol of roles" [ngValue]="rol">
-          {{ rol.name }}
-        </option>
-      </select>
-      <!-- <input
-          type="text"
-          name="rol"
-          id="rol"
-          #rol="ngModel"
-          class="form-control mb-3"
-          [(ngModel)]="roleName"
-          [ngClass]="{
-            'is-invalid': rol.invalid && rol.touched,
-            'is-valid': rol.valid && rol.touched
-          }"
-          required
-        /> -->
-    </div>
 
     <div class="col-md-12">
-      <label class="mb-3" for="image">Foto</label>
-      <input
-        type="file"
-        name="image"
-        id="image"
-        #image="ngModel"
-        class="form-control mb-3"
-        (change)="onFileChange($event)"
-        [(ngModel)]="user.image"
-        [ngClass]="{
-          'is-invalid': image.invalid && image.touched,
-          'is-valid': image.valid && image.touched
-        }"
-      />
+      <label class="mb-3" for="rol">Rol<span style="color: red">*</span></label>
+
+      <select
+        [(ngModel)]="roleId"
+        #role="ngModel"
+        name="role"
+        id="role"
+        class="form-select form-control mb-3"
+      >
+        <option value="" selected>Seleccione un rol</option>
+        <option *ngFor="let role of roles" [value]="role.id">
+          {{ role.name }}
+        </option>
+      </select>
+    </div>
+
+    <label for="image" class="mb-3">Foto</label>
+    <div class="file-input mb-3">
+      <label for="image"
+        ><i class="fa-solid fa-arrow-up-from-bracket fa-2xl"></i>
+        <input
+          #image="ngModel"
+          type="file"
+          class="form-control file"
+          id="iamge"
+          name="image"
+          (change)="onFileChange($event)"
+          [(ngModel)]="user.image"
+        />
+      </label>
     </div>
     <div class="d-flex justify-content-center align-items-center mt-5">
       <button type="button" (click)="addUser()" class="btn btn-primary">

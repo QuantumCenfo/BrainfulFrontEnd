@@ -43,7 +43,7 @@ export class SigUpComponent {
       this.passwordModel.control.markAsTouched();
     }
     if (this.emailModel.valid && this.passwordModel.valid) {
-      this.authService.signup(this.user).subscribe({
+      this.authService.signup(this.user, this.imageFile!).subscribe({
         next: () => {
           this.validSignup = true;
           Swal.fire({

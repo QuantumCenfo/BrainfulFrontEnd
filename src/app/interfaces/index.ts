@@ -132,7 +132,7 @@ export interface IUser {
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;
-  role?: IUserRole;
+  role?: IUserRole | null;
   birthDate?: string;
   authorities?: IAuthority[];
 }

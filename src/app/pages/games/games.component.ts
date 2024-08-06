@@ -9,6 +9,8 @@ import { MemoryCardComponent } from "../../components/memory-card/memory-card.co
 import { GameService } from "../../services/game.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
+import { ModalComponent } from "../../components/modal/modal.component";
+import { InstructionsComponent } from "../../components/instructions/instructions.component";
 
 @Component({
   selector: "app-games",
@@ -21,6 +23,8 @@ import { Router } from "@angular/router";
     FormsModule,
     CommonModule,
     MemoryCardComponent,
+    ModalComponent,
+    InstructionsComponent,
   ],
 
   templateUrl: "./games.component.html",
@@ -34,6 +38,7 @@ export class GamesComponent {
   }
 
   @ViewChild(MemoryBoardComponent) memoryBoard!: MemoryBoardComponent;
+  @ViewChild("showGame") showGame!: ModalComponent;
   public gameList: IGame[] = [];
   private service = inject(GameService);
   private router = inject(Router);
@@ -110,20 +115,7 @@ export class GamesComponent {
     return item.gameId!;
   }
 
-  public gamesList: IGame[] = [
-    {
-      gameId: 1,
-      name: "Simon Dice Dificultad Facil",
-      description:
-        "Juego de Simon dice. Seguir la secuencia de colores que se presenta.",
-      typeExercise: "Ejercicio Cognitivo",
-    },
-    {
-      gameId: 2,
-      name: "Simon Dice Dificultad Media",
-      description:
-        "Juego de Simon dice. Preisone el boton verde lo mas rapido posible..",
-      typeExercise: "Ejercicio Cognitivo",
-    },
-  ];
+  openInstructions() {
+    this.showGame.show();
+  }
 }

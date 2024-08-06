@@ -1,4 +1,11 @@
-import { Component, inject, Input } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  ViewChild,
+} from "@angular/core";
 import {
   IChallengeGame,
   IChallengeOutdoor,
@@ -14,6 +21,7 @@ import { OutdoorFormComponent } from "../outdoor-form/outdoor-form.component";
 import Swal from "sweetalert2";
 import { ParticipationOutdoorService } from "../../services/participation-outdoor.service";
 import { Router } from "@angular/router";
+import { CarouselComponent } from "../carousel/carousel.component";
 
 @Component({
   selector: "app-challenge-list",
@@ -24,6 +32,7 @@ import { Router } from "@angular/router";
     NgbModule,
     ModalComponent,
     OutdoorFormComponent,
+    CarouselComponent,
   ],
   templateUrl: "./challenge-list.component.html",
   styleUrl: "./challenge-list.component.scss",
@@ -31,6 +40,7 @@ import { Router } from "@angular/router";
 export class ChallengeListComponent {
   @Input() outdoorChallengeList: IChallengeOutdoor[] = [];
   @Input() gameChallengeList: IChallengeGame[] = [];
+
   private participationServices = inject(ParticipationOutdoorService);
   private outDoorChallenge = inject(ChallengeOutdoorService);
   private gameChallengService = inject(ChallengeGameService);
@@ -38,9 +48,32 @@ export class ChallengeListComponent {
 
   colors = ["#9816D5", "#2f9ca8", "#65b32a", "#FF9F1C"];
 
+  private router: Router = new Router();
 
-  
-    private router: Router = new Router;
+  currentOutdoorIndex: number = 0;
+  currentGameIndex: number = 0;
+
+  onNextOutdoorChallenge() {
+    const next = this.currentOutdoorIndex + 1;
+    this.currentOutdoorIndex =
+      next === this.outdoorChallengeList.length ? 0 : next;
+  }
+
+  onPrevOutdoorChallenge() {
+    const prev = this.currentOutdoorIndex - 1;
+    this.currentOutdoorIndex =
+      prev === -1 ? this.outdoorChallengeList.length - 1 : prev;
+  }
+
+  onNextGameChallenge() {
+    const next = this.currentGameIndex + 1;
+    this.currentGameIndex = next === this.gameChallengeList.length ? 0 : next;
+  }
+  onPrevGameChallenge() {
+    const prev = this.currentGameIndex - 1;
+    this.currentGameIndex =
+      prev === -1 ? this.gameChallengeList.length - 1 : prev;
+  }
 
   showDetail(challengeOutdoor: IChallengeOutdoor, modal: any) {
     this.currentOutDoorChallenge = { ...challengeOutdoor };
@@ -111,8 +144,7 @@ export class ChallengeListComponent {
       .slice(1)
       .toUpperCase()}`;
   }
-  goToGames(){
+  goToGames() {
     this.router.navigate(["app/games"]);
   }
-  
 }

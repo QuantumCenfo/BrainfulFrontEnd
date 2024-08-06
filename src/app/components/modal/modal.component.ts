@@ -7,17 +7,18 @@ import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
   imports: [],
   template: `
     <ng-template #modal>
-      <div class=" modal-body px-0">
-        <div class="d-flex  align-items-center justify-content-end p-2">
-          <button
-            type="button"
-            (click)="hide()"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+      <div class="modal-content rounded-3">
+        <div class="modal-header p-3">
+          <h5 class="modal-title">{{ title }}</h5>
         </div>
-        <ng-content> </ng-content>
+        <div class="modal-body p-4">
+          <ng-content></ng-content>
+        </div>
+        <div class="modal-footer p-3">
+          <button type="button" class="btn btn-secondary" (click)="hide()">
+            Cerrar
+          </button>
+        </div>
       </div>
     </ng-template>
   `,

@@ -8,8 +8,20 @@
     <div class="game-card current">
       <h3>{{ displayedGames[0]?.name }}</h3>
       <p>{{ displayedGames[0]?.description }}</p>
-      <button (click)="navigateToGame(displayedGames[0])">Jugar</button>
+
+      <div class="d-flex justify-content-around align-items-end btn-container">
+        <button
+          class="btn btn-primary game-btn"
+          (click)="navigateToGame(displayedGames[0])"
+        >
+          Jugar
+        </button>
+        <button class="btn btn-primary game-btn" (click)="openInstructions()">
+          <i class="fa-solid fa-info"></i>
+        </button>
+      </div>
     </div>
+
     <div class="game-card next" *ngIf="nextGameIndex !== null">
       <h3>{{ gameList[nextGameIndex!]?.name }}</h3>
       <p>{{ gameList[nextGameIndex!]?.description }}</p>
@@ -17,3 +29,7 @@
   </div>
   <button class="nav-button right" (click)="nextGame()">&gt;</button>
 </div>
+
+<app-modal #showGame>
+  <app-instructions [game]="displayedGames[0]?.name || ''"></app-instructions>
+</app-modal>

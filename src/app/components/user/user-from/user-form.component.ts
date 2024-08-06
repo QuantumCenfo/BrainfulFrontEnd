@@ -17,11 +17,12 @@ import { FormsModule, NgForm } from "@angular/forms";
 import { UserService } from "../../../services/user.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RolService } from "../../../services/rol.service";
+import { MatSelect, MatSelectModule } from "@angular/material/select";
 
 @Component({
   selector: "app-user-form",
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatSelectModule],
   templateUrl: "./user-form.component.html",
   styleUrl: "./user-form.component.scss",
 })
@@ -34,7 +35,7 @@ export class UserFormComponent {
     email: "",
     image: "",
     password: "brain123",
-    role: { id: 0, name: "" } as IUserRole,
+    role: { id: undefined } as IUserRole,
   };
 
   public modalService = inject(NgbModal);
@@ -55,13 +56,14 @@ export class UserFormComponent {
     type: IFeedbackStatus.default,
     message: "",
   };
-  get roleName(): string {
-    return this.user.role ? this.user.role.name : "";
+
+  get roleId(): number | null {
+    return this.user.role?.id || null;
   }
 
-  set roleName(value: string) {
+  set roleId(value: number) {
     if (this.user.role) {
-      this.user.role.name = value;
+      this.user.role.id = value;
     }
   }
 

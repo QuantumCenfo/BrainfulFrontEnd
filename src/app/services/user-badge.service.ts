@@ -18,18 +18,19 @@ export class UserBadgeService extends BaseService<IUserBadge> {
   public save(userBadge: IUserBadge) {
     this.add(userBadge).subscribe({
       next: (response: any) => {
-        this.userBadgeSignal.update((results: IUserBadge[]) => [response, ...results]);
+        this.userBadgeSignal.update((results: IUserBadge[]) => [
+          response,
+          ...results,
+        ]);
       },
-      error: (error : any) => {
-      
-        console.error('error', error);
-        console.error('error', error);
-      }
-    })
-  } 
- 
+      error: (error: any) => {
+        console.error("error", error);
+      },
+    });
+  }
+
   getUserBadges(userId: number) {
-    this.findAll().subscribe({
+    this.find(userId).subscribe({
       next: (res: any) => {
         res.reverse();
         this.userBadgeSignal.set(res);

@@ -1,11 +1,13 @@
-<div class="container-fluid">
-  @defer {
+<div class="container">
+  @defer{
   <div class="d-flex justify-content-end align-items-end">
     <app-add-button [text]="'Agregar'" (click)="openAddUser()"></app-add-button>
   </div>
+
   <app-user-list [userList]="userService.users$()"></app-user-list>
 
-  }@loading( after 100ms; minimum 1s) {
+  }@loading (after 100ms; minimum 1s) {
+
   <app-loader />
   }
 </div>
@@ -15,5 +17,6 @@
     [action]="'Agregar'"
     [roles]="rolService.roles$()"
     (callParentEvent)="onFormEventCalled($event)"
+    [title]="'Agregar Usuario'"
   ></app-user-form>
 </app-modal>

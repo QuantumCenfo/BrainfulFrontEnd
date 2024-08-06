@@ -1,115 +1,126 @@
-<div class="container">
-    <div>
-      <img
-        src="../../../assets/icons/LogoCerebro.png"
-        alt="Brainful logo"
-        class="brain-logo"
+<div class="container outdoor-container">
+  <div>
+    <img
+      width="175px"
+      height="100px"
+      src="../../../assets/icons/LogoCerebro.png"
+      alt="Brainful logo"
+    />
+  </div>
+  <h2>Desafió Externo</h2>
+
+  <div class="row">
+    <label for="name">Título Desafío</label>
+    <div class="col-md-12">
+      <input
+        #name="ngModel"
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Título del Desafío"
+        [(ngModel)]="newChallengeOutdoor.name"
+        [ngClass]="{
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+        }"
+        required
       />
     </div>
-    <div class="row">
-      <!--<div class="col-12">
-        <h2>{{ titleComp }}</h2>
-      </div>-->
-      <div class="row">
-        <label for="name">Título Desafío</label>
-        <div class="col-12">
-          <input 
-            #name="ngModel" 
-            type="text" 
-            class="form-control"
-            class="input" 
-            id="name" 
-            name="name" 
-            placeholder="Título del Desafío"
-            [(ngModel)]="newChallengeOutdoor.name" 
-            [ngClass]="{ 'is-invalid': name.invalid && name.touched, 'is-valid': name.valid && name.touched }" 
-            required 
-          />
-        </div>
-        <label for="description">Descripción</label>
-        <div class="col-12">
-          <textarea 
-            #description="ngModel" 
-            class="form-control"
-            id="description" 
-            name="description" 
-            placeholder="Descripción del desafío"
-            [(ngModel)]="newChallengeOutdoor.description" 
-            [ngClass]="{ 'is-invalid': description.invalid && description.touched, 'is-valid': description.valid && description.touched }" 
-            required 
-          ></textarea>
-        </div>
-        <label for="requirement">Requerimientos del desafío</label>
-        <div class="col-12">
-          <input 
-            #requirement="ngModel" 
-            type="text" 
-            class="form-control"
-            class="input" 
-            id="requirement" 
-            name="requirement" 
-            placeholder="Requerimientos"
-            [(ngModel)]="newChallengeOutdoor.requirement" 
-            [ngClass]="{ 'is-invalid': requirement.invalid && requirement.touched, 'is-valid': requirement.valid && requirement.touched }" 
-            required 
-          />
-        </div>
-        <label for="startDate">Fecha de Inicio</label>
-        <div class="col-12">
-          <input 
-            #startDate="ngModel" 
-            type="date" 
-            class="form-control"
-            class="input"  
-            id="startDate" 
-            name="startDate" 
-            placeholder="Start Date"
-            [(ngModel)]="newChallengeOutdoor.startDate" 
-            [ngClass]="{ 'is-invalid': startDate.invalid && startDate.touched, 'is-valid': startDate.valid && startDate.touched }" 
-            required 
-          />
-        </div>
-        <label for="endDate">Fecha de Fin</label>
-        <div class="col-12">
-          <input 
-            #endDate="ngModel" 
-            type="date" 
-            class="form-control"
-            class="input"  
-            id="endDate" 
-            name="endDate" 
-            placeholder="End Date"
-            [(ngModel)]="newChallengeOutdoor.endDate" 
-            [ngClass]="{ 'is-invalid': endDate.invalid && endDate.touched, 'is-valid': endDate.valid && endDate.touched }" 
-            required 
-          />
-        </div>
-        @if(newChallengeOutdoor.badgeId){
-        <label for="badge">Insigna a Obtener</label>
-        <div class="col-12">
-          <select 
-            #badge="ngModel" 
-            class="mb-3 form-select"
-            id="badge" 
-            name="badge" 
-            [(ngModel)]="newChallengeOutdoor.badgeId.badgeId"
-            (ngModelChange)="newChallengeOutdoor.badgeId.badgeId = +$event" 
-            required
-          >
-            <option *ngFor="let badge of badgeList" [value]="badge.badgeId">{{ badge.title }}</option>
-          </select>
-        </div>
-        }
-        <div class="col-12 mt-3">
-          <button
-            type="button"
-            (click)="addChallengeOudoor()"
-            class="btn btn-primary d-flex align-items-center"
-          >
-            <i class="fa-solid fa-plus white me-2"></i>
-            <p class="mb-0"> {{ titleComp }} </p>
-          </button>
-        </div>
-      </div>
+    <label for="description">Descripción</label>
+    <div class="col-md-12">
+      <textarea
+        #description="ngModel"
+        class="form-control"
+        id="description"
+        name="description"
+        placeholder="Descripción del desafío"
+        [(ngModel)]="newChallengeOutdoor.description"
+        [ngClass]="{
+          'is-invalid': description.invalid && description.touched,
+          'is-valid': description.valid && description.touched
+        }"
+        required
+      ></textarea>
     </div>
-  </div>  
+    <label for="requirement">Requerimientos del desafío</label>
+    <div class="col-md-12">
+      <input
+        #requirement="ngModel"
+        type="text"
+        class="form-control"
+        id="requirement"
+        name="requirement"
+        placeholder="Requerimientos"
+        [(ngModel)]="newChallengeOutdoor.requirement"
+        [ngClass]="{
+          'is-invalid': requirement.invalid && requirement.touched,
+          'is-valid': requirement.valid && requirement.touched
+        }"
+        required
+      />
+    </div>
+    <label for="startDate">Fecha de Inicio</label>
+    <div class="col-md-12">
+      <input
+        #startDate="ngModel"
+        type="date"
+        class="form-control"
+        id="startDate"
+        name="startDate"
+        placeholder="Start Date"
+        [(ngModel)]="newChallengeOutdoor.startDate"
+        [ngClass]="{
+          'is-invalid': startDate.invalid && startDate.touched,
+          'is-valid': startDate.valid && startDate.touched
+        }"
+        required
+      />
+    </div>
+    <label for="endDate">Fecha de Fin</label>
+    <div class="col-md-12">
+      <input
+        #endDate="ngModel"
+        type="date"
+        class="form-control"
+        id="endDate"
+        name="endDate"
+        placeholder="End Date"
+        [(ngModel)]="newChallengeOutdoor.endDate"
+        [ngClass]="{
+          'is-invalid': endDate.invalid && endDate.touched,
+          'is-valid': endDate.valid && endDate.touched
+        }"
+        required
+      />
+    </div>
+    @if(newChallengeOutdoor.badgeId){
+    <label for="badge">Insignia a Obtener</label>
+    <div class="col-md-12">
+      <select
+        #badge="ngModel"
+        class="mb-3 form-select"
+        id="badge"
+        name="badge"
+        [(ngModel)]="newChallengeOutdoor.badgeId.badgeId"
+        (ngModelChange)="newChallengeOutdoor.badgeId.badgeId = +$event"
+        required
+      >
+        <option *ngFor="let badge of badgeList" [value]="badge.badgeId">
+          {{ badge.title }}
+        </option>
+      </select>
+    </div>
+    }
+    <div class="col-md-12 mt-3">
+      <button
+        type="button"
+        (click)="addChallengeOudoor()"
+        class="btn btn-primary d-flex align-items-center"
+      >
+        <i class="fa-solid fa-plus white me-2"></i>
+        <p class="mb-0">{{ titleComp }}</p>
+      </button>
+    </div>
+  </div>
+</div>

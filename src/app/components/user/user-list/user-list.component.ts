@@ -12,7 +12,11 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { RolService } from "../../../services/rol.service";
 import { FilterPipe } from "./filter.pipe";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
-import { MatPaginator, MatPaginatorModule, PageEvent } from "@angular/material/paginator";
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  PageEvent,
+} from "@angular/material/paginator";
 import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { AuthService } from "../../../services/auth.service"; // Import your auth service
@@ -37,7 +41,6 @@ import { AuthService } from "../../../services/auth.service"; // Import your aut
   styleUrls: ["./user-list.component.scss"],
 })
 export class UserListComponent implements OnInit {
-  public search: string = "";
   filterText: string = "";
   private userService = inject(UserService);
   private authService = inject(AuthService); // Inject your auth service
@@ -54,7 +57,7 @@ export class UserListComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource.data = this.userList;
-    console.log("User List: ", this.dataSource);
+
     this.currentUserId = this.getUserIdFromLocalStorage(); // Use 'this' to call instance method
   }
 
@@ -68,9 +71,7 @@ export class UserListComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  pageEvent(event: PageEvent) {
-    console.log("Event", event);
-  }
+  pageEvent(event: PageEvent) {}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
@@ -80,7 +81,6 @@ export class UserListComponent implements OnInit {
   }
 
   showDetail(user: IUser, modal: any) {
-    console.log("Usuario: ", user, "modal: ", modal);
     this.selectedUser = { ...user };
     modal.show();
   }
@@ -89,24 +89,23 @@ export class UserListComponent implements OnInit {
     const authUser = localStorage.getItem("auth_user");
     if (authUser) {
       const user = JSON.parse(authUser);
-      return user.id ? Number(user.id) : null; 
+      return user.id ? Number(user.id) : null;
     }
-    return null; 
+    return null;
   }
-  
 
   deleteUser(userId: number) {
-    if (userId !== this.currentUserId) { 
+    if (userId !== this.currentUserId) {
       this.userService.deleteUser(userId);
     } else {
       Swal.fire({
-        icon: 'error',
-        title: 'Lo sentimos',
-        iconColor: 'white',
-        color: 'white',
-        background:'#d54f16',
-        position: 'center',
-        text: 'No puedes borrar el usuario actualmente loggeado',
+        icon: "error",
+        title: "Lo sentimos",
+        iconColor: "white",
+        color: "white",
+        background: "#d54f16",
+        position: "center",
+        text: "No puedes borrar el usuario actualmente autenticado",
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,

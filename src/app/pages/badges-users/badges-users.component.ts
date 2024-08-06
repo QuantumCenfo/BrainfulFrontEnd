@@ -24,6 +24,7 @@ export class BadgesUsersComponent implements OnInit {
   userID: number = this.getUserIdFromLocalStorage() || 0;
 
   ngOnInit(): void {
+    console.log("User ID: ", this.userID);
     this.userBadgesService.getUserBadges(this.userID);
     this.authService.getUserAuthorities();
     this.route.data.subscribe((data) => {

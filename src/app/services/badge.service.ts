@@ -110,6 +110,8 @@ export class BadgeService extends BaseService<IBadge> {
               background: "#16c2d5",
               timer: 2000,
               showConfirmButton: false,
+            }).then(() => {
+              window.location.reload();
             });
           },
           error: (err: any) => {
