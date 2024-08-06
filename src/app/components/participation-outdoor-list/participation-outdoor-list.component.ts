@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from "@angular/core";
+import { Component, inject, Input, OnInit, ViewChild } from "@angular/core";
 import { IPartcipationOutdoor } from "../../interfaces";
 import { ParticipationOutdoorService } from "../../services/participation-outdoor.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -7,8 +7,8 @@ import { ModalComponent } from "../modal/modal.component";
 import { ValidationModalComponent } from "../validation-modal/validation-modal.component";
 import { FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatPaginatorModule, PageEvent } from "@angular/material/paginator";
-import { MatSortModule } from "@angular/material/sort";
+import { MatPaginator, MatPaginatorModule, PageEvent } from "@angular/material/paginator";
+import { MatSort, MatSortModule } from "@angular/material/sort";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 
 @Component({
@@ -31,11 +31,12 @@ import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 export class ParticipationOutdoorListComponent implements OnInit {
   @Input() participationList: IPartcipationOutdoor[] = [];
   public selectedItem: IPartcipationOutdoor = {};
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   dataSource = new MatTableDataSource<IPartcipationOutdoor>([]);
   filteredDataSource = new MatTableDataSource<IPartcipationOutdoor>();
   public currentParticipation: IPartcipationOutdoor = {};
-  private participationService = inject(ParticipationOutdoorService);
+
 
   public modalService = inject(NgbModal);
 
@@ -43,6 +44,17 @@ export class ParticipationOutdoorListComponent implements OnInit {
     this.dataSource.data = this.participationList;
     this.filterDataSource();
   }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value
+      .trim()
+      .toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
 
   showDetail(participation: IPartcipationOutdoor, modal: any) {
     this.currentParticipation = { ...participation };

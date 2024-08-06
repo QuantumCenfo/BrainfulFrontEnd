@@ -1,9 +1,10 @@
 import { Injectable, signal } from "@angular/core";
 import { BaseService } from "./base-service";
-import { IRole, IUser } from "../interfaces";
+import { IUser } from "../interfaces";
 import { Observable, catchError, tap, throwError } from "rxjs";
 import { HttpHeaders } from "@angular/common/http";
 import Swal from "sweetalert2";
+import { SweetAlertService } from "./sweet-alert-service.service";
 
 @Injectable({
   providedIn: "root",
@@ -11,11 +12,16 @@ import Swal from "sweetalert2";
 export class UserService extends BaseService<IUser> {
   protected override source: string = "users";
   private userListSignal = signal<IUser[]>([]);
-
+  private userSignal = signal<IUser>({});
   get users$() {
     return this.userListSignal;
   }
-
+  get user$() {
+    return this.userSignal;
+  }
+  constructor(private sweetAlertService: SweetAlertService) {
+    super();
+  }
   getAllSignal() {
     this.findAll().subscribe({
       next: (response: any) => {
@@ -28,7 +34,17 @@ export class UserService extends BaseService<IUser> {
       },
     });
   }
-
+  getUserInfoSignal() {
+    const source = `${this.source}/me`;
+    this.http.get(source).subscribe({
+      next: (response: any) => {
+        this.userSignal.set(response);
+      },
+      error: (error: any) => {
+        console.error("Error fetching user info", error);
+      },
+    });
+  }
   saveUserSignal(user: IUser): Observable<any> {
     return this.add(user).pipe(
       tap((response: any) => {
@@ -58,33 +74,32 @@ export class UserService extends BaseService<IUser> {
       next: (res: any) => {
         this.userListSignal.update((users: any) => [res, ...users]);
         console.log("Response: ", res);
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "El usuario ha sido agregado",
-          icon: "success",
-          iconColor: "white",
-          color: "white",
-          showConfirmButton: false,
-          background: "#16c2d5",
-          timer: 2000,
-        }).then(() => {
-          window.location.reload();
-        });
+        this.sweetAlertService
+          .showSuccess("El usuario ha sido creado")
+          .then(() => {
+            window.location.reload();
+          });
       },
       error: (err: any) => {
-        Swal.fire({
-          title: "Error",
-          text: "Hubo un problema al agregar el usuario",
-          icon: "error",
-          iconColor: "white",
-          color: "white",
-          background: "#16c2d5",
-        });
+        this.sweetAlertService.showError(
+          "Hubo un problema al agregar el usuario"
+        );
         console.log("Error: ", err);
       },
     });
   }
 
+  getUser(userId: number) {
+    this.findAll().subscribe({
+      next: (res: any) => {
+        res.reverse();
+        this.userListSignal.set(res);
+      },
+      error: (err: any) => {
+        console.error("Error fetching user by ID", err);
+      },
+    });
+  }
   updateUser(user: IUser, imageFile: File): Observable<IUser> {
     const formData = new FormData();
     formData.append("user", JSON.stringify(user));
@@ -96,56 +111,46 @@ export class UserService extends BaseService<IUser> {
   }
 
   handleUpdateUser(user: IUser, imageFile: File) {
-    Swal.fire({
-      title: "Esta seguro que desea actualizar el usuario?",
-      icon: "question",
-
-      iconColor: "white",
-      color: "white",
-      background: "#d54f16",
-      position: "center",
-      confirmButtonColor: "#ff9f1c",
-      cancelButtonColor: "#16c2d5",
-      showCancelButton: true,
-      showConfirmButton: true,
-      confirmButtonText: "Si, actualizar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.updateUser(user, imageFile).subscribe({
-          next: (res: any) => {
-            const updatedUsers = this.userListSignal().map((u) =>
-              u.id === user.id ? res : u
-            );
-            this.userListSignal.set(updatedUsers);
-            console.log("Response: ", res);
-
-            Swal.fire({
-              title: "¡Éxito!",
-              text: "El usuario ha sido actualizado",
-              icon: "success",
-              iconColor: "white",
-              color: "white",
-              background: "#16c2d5",
-              timer: 2000,
-              showConfirmButton: false,
-            }).then(() => {
-              window.location.reload();
-            });
-          },
-          error: (err: any) => {
-            console.log("Error: ", err);
-            Swal.fire({
-              title: "Error",
-              text: "Hubo un problema al actualizar el usuario",
-              icon: "error",
-              iconColor: "white",
-              color: "white",
-              background: "#16c2d5",
-            });
-          },
-        });
-      }
-    });
+    this.sweetAlertService.showQuestion(
+      "¿Está seguro que desea actualizar el usuario?"
+    );
+    this.sweetAlertService
+      .showQuestion(
+        "Esta seguro que desea actualizar el usuario?",
+        "Esta acción no se puede deshacer."
+      )
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.updateUser(user, imageFile).subscribe({
+            next: (res: any) => {
+              const updatedUsers = this.userListSignal().map((u) =>
+                u.id === user.id ? res : u
+              );
+              this.userListSignal.set(updatedUsers);
+              console.log("Response: ", res);
+              console.log("User updated successfully");
+              Swal.fire({
+                title: "¡Éxito!",
+                text: "El usuario ha sido actualizado",
+                icon: "success",
+                iconColor: "white",
+                color: "white",
+                background: "#16c2d5",
+                timer: 2000,
+                showConfirmButton: false,
+              }).then(() => {
+                window.location.reload();
+              });
+            },
+            error: (err: any) => {
+              console.log("Error: ", err);
+              this.sweetAlertService.showError(
+                "Hubo un problema al actualizar el usuario"
+              );
+            },
+          });
+        }
+      });
   }
 
   updateUserSignal(user: IUser): Observable<any> {
@@ -179,47 +184,30 @@ export class UserService extends BaseService<IUser> {
   }
 
   deleteUser(userId: number) {
-    Swal.fire({
-      title: "Seguro que desea eliminar el usuario?",
-      text: "No podrá recuperar la información",
-      icon: "warning",
-      iconColor: "white",
-      color: "white",
-      background: "#d54f16",
-      position: "center",
-      confirmButtonColor: "#ff9f1c",
-      cancelButtonColor: "#16c2d5",
-      confirmButtonText: "Si, eliminar",
-      showCancelButton: true,
-      showConfirmButton: true,
-    }).then((res) => {
-      if (res.isConfirmed) {
-        this.del(userId).subscribe({
-          next: () => {
-            const deletedUser = this.userListSignal().filter(
-              (u: IUser) => u.id !== userId
-            );
-            this.userListSignal.set(deletedUser);
-            Swal.fire({
-              title: "¡Éxito!",
-              text: "El usuario ha sido eliminado",
-              icon: "success",
-              iconColor: "white",
-              color: "white",
-              background: "#16c2d5",
-              timer: 2000,
-              showConfirmButton: false,
-            }).then(() => {
+    this.sweetAlertService
+      .showQuestion(
+        "¿Está seguro que desea eliminar el usuario?",
+        "No podrá recuperar la información"
+      )
+      .then((res) => {
+        if (res.isConfirmed) {
+          this.del(userId).subscribe({
+            next: () => {
+              const deletedUser = this.userListSignal().filter(
+                (u: IUser) => u.id !== userId
+              );
+              this.userListSignal.set(deletedUser);
+              this.sweetAlertService.showSuccess(
+                "El usuario ha sido eliminado"
+              );
               window.location.reload();
-            });
-          },
-          error: (err: any) => {
-            console.log("error");
-
-            return throwError(() => new Error("Error al borrar el usuario"));
-          },
-        });
-      }
-    });
+            },
+            error: (err: any) => {
+              console.log("error");
+              this.sweetAlertService.showError("Error al borrar el usuario");
+            },
+          });
+        }
+      });
   }
 }

@@ -1,5 +1,4 @@
 import { Component, inject, ViewChild } from "@angular/core";
-import { ProfileService } from "../../services/profile.service";
 import { CommonModule } from "@angular/common";
 import { UserListComponent } from "../../components/user/user-list/user-list.component";
 import { UserFormComponent } from "../../components/user/user-from/user-form.component";
@@ -37,12 +36,8 @@ export class ProfileComponent {
   ediUser() {
     this.Modal.show();
   }
-
-  [x: string]: any;
-  public profileService = inject(ProfileService);
-
   constructor() {
-    this.profileService.getUserInfoSignal();
+    this.userService.getUserInfoSignal();
     console.log(this.currentUser);
   }
 }

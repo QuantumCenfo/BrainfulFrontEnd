@@ -21,6 +21,7 @@ import { OutdoorFormComponent } from "../outdoor-form/outdoor-form.component";
 import Swal from "sweetalert2";
 import { ParticipationOutdoorService } from "../../services/participation-outdoor.service";
 import { Router } from "@angular/router";
+import { SweetAlertService } from "../../services/sweet-alert-service.service";
 import { CarouselComponent } from "../carousel/carousel.component";
 
 @Component({
@@ -44,6 +45,7 @@ export class ChallengeListComponent {
   private participationServices = inject(ParticipationOutdoorService);
   private outDoorChallenge = inject(ChallengeOutdoorService);
   private gameChallengService = inject(ChallengeGameService);
+  private alertService = inject(SweetAlertService);
   public currentOutDoorChallenge: IChallengeOutdoor = {};
 
   colors = ["#9816D5", "#2f9ca8", "#65b32a", "#FF9F1C"];
@@ -98,15 +100,9 @@ export class ChallengeListComponent {
           },
         });
     } else {
-      Swal.fire({
-        title: "Oops...",
-        text: "Porfavor suba una imagen",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        confirmButtonColor: "#ff9f1c",
-      });
+      this.alertService.showWarning(
+        "Porfavor suba una imagen",
+      );
     }
   }
 

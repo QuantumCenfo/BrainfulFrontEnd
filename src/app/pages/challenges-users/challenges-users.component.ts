@@ -15,7 +15,7 @@ export class ChallengesUsersComponent {
   public challengeOutDoorService = inject(ChallengeOutdoorService);
   public  challengeGameService = inject(ChallengeGameService);
   ngOnInit(): void {
-    this.challengeGameService.getAllActiveChallenges();
-    this.challengeOutDoorService.getAllActiveChallenges();
+    this.challengeGameService.getAllChallengesByStatus('active');
+    this.challengeOutDoorService.getAllChallengesByStatus('active');
   }
 }

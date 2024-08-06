@@ -17,6 +17,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TryAgainModalComponent } from "../try-again-modal/try-again-modal.component";
 import { ActivatedRoute, Route, Router } from "@angular/router";
 import { SimonSaysService } from "../../services/simon-says.service";
+import { SweetAlertService } from "../../services/sweet-alert-service.service";
 
 @Component({
   selector: "app-sequence-game",
@@ -27,6 +28,7 @@ import { SimonSaysService } from "../../services/simon-says.service";
 })
 export class SequenceGameComponent implements OnInit {
   title = "Simon Dice";
+  public alertService = inject(SweetAlertService);
 
   //private gameDificulty: string = "Facil";
 
@@ -228,15 +230,7 @@ export class SequenceGameComponent implements OnInit {
   // Inicia el juego y la secuencia del temporizador
   startGame(): void {
     if (this.difficulty == "") {
-      Swal.fire({
-        title: "Oops...",
-        text: "Seleccione una dificultad antes de comenzar el juego.",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        confirmButtonColor: "#ff9f1c",
-      });
+      this.alertService.showdifficultyWarning('Ooops...','Seleccione una dificultad antes de comenzar el juego.');
     } else {
       this.isStarted = true;
       this.points = 0;

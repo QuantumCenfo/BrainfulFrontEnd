@@ -4,6 +4,7 @@ import { IComment, IForum, IResponse } from "../interfaces";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Observable } from "rxjs";
 import Swal from "sweetalert2";
+import { SweetAlertService } from "./sweet-alert-service.service";
 
 @Injectable({
   providedIn: "root",
@@ -15,6 +16,12 @@ export class CommentService extends BaseService<IComment> {
 
   get comments$() {
     return this.commentsSignal;
+  }
+  constructor(
+   
+    private sweetAlertService: SweetAlertService
+  ) {
+    super();
   }
 
   //Get all games
@@ -39,28 +46,15 @@ export class CommentService extends BaseService<IComment> {
           response,
           ...forums,
         ]);
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "El comentario ha sido agregado",
-          icon: "success",
-          iconColor: "white",
-          color: "white",
-          showConfirmButton: false,
-          background: "#16c2d5",
-          timer: 2000,
-        });
+        this.sweetAlertService.showSuccess(
+          "El comentario ha sido agregado"
+        );
       },
       error: (error: any) => {
         console.error("error", error);
-        Swal.fire({
-          title: "Oops...",
-          text: "Ha ocurrido un error agregando el comentario",
-          icon: "warning",
-          iconColor: "white",
-          color: "white",
-          background: "#16c2d5",
-          timer: 2000,
-        });
+        this.sweetAlertService.showError(
+          "Ha ocurrido un error agregando el comentario"
+        );
       },
     });
   }
@@ -72,77 +66,42 @@ export class CommentService extends BaseService<IComment> {
           comment.commentId === item.commentId ? item : comment
         );
         this.commentsSignal.set(updatedItems);
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "El comentario ha sido modificado",
-          icon: "success",
-          iconColor: "white",
-          color: "white",
-          showConfirmButton: false,
-          background: "#16c2d5",
-          timer: 2000,
-        });
+        this.sweetAlertService.showSuccess(
+          "El comentario ha sido modificado"
+        );
       },
       error: (error: any) => {
         
         console.error("error", error);
-        Swal.fire({
-          title: "Oops...",
-          text: "Ha ocurrido un error modificando el comentario",
-          icon: "warning",
-          iconColor: "white",
-          color: "white",
-          background: "#16c2d5",
-          timer: 2000,
-        });
+        this.sweetAlertService.showError(
+          "Ha ocurrido un error modificando el comentario"
+        );
       },
     });
   }
 
   delete(commentId: number) {
-    Swal.fire({
-      title: "¿Estás seguro que deseas eliminar el comentario?",
-      text: "No podrás revertir esto",
-      icon: "warning",
-      iconColor: "white",
-      color: "white",
-      background: "#d54f16",
-      position: "center",
-      confirmButtonColor: "#ff9f1c",
-      cancelButtonColor: "#16c2d5",
-      confirmButtonText: "Si, eliminar",
-      showCancelButton: true,
-      showConfirmButton: true,
-    }).then((res) => {
+    this.sweetAlertService.showQuestion(
+      "¿Estás seguro que deseas eliminar el comentario?",
+      "No podrás revertir esto",
+    ).then((res) => {
       if (res.isConfirmed) {
         this.del(commentId).subscribe({
           next: () => {
-            const deletedForum = this.commentsSignal().filter(
+            const deletedComments = this.commentsSignal().filter(
               (comment: IComment) => comment.commentId !== commentId
             );
-            this.commentsSignal.set(deletedForum);
-            Swal.fire({
-              title: "¡Éxito!",
-              text: "El comentario ha sido eliminado",
-              icon: "success",
-              iconColor: "white",
-              color: "white",
-              showConfirmButton: false,
-              background: "#16c2d5",
-              timer: 2000,
-            });
+            this.commentsSignal.set(deletedComments);
+            this.sweetAlertService.showSuccess(
+              "El comentario ha sido eliminado",
+            );
           },
           error: (err: any) => {
-            console.error("Error deleting badge", err);
-            Swal.fire({
-              title: "Oops...",
-              text: "Ha ocurrido un error eliminando el comentario",
-              icon: "warning",
-              iconColor: "white",
-              color: "white",
-              background: "#16c2d5",
-              timer: 2000,
-            });
+            console.error("Error deleting comment", err);
+            this.sweetAlertService.showError(
+              "Ha ocurrido un error eliminando el comentario",
+        
+            );
           },
         });
       }

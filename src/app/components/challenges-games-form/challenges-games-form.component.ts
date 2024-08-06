@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BadgeService } from '../../services/badge.service';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-challenges-games-form',
@@ -22,7 +23,7 @@ export class ChallengesGamesFormComponent implements OnInit{
   public badgeService = inject(BadgeService);
   public gameService = inject(GameService);
   public challengeGameService = inject(ChallengeGameService);
-
+private alertService =inject(SweetAlertService);
   @Input() titleComp: string = 'Añadir Desafío';
   @Input() badgeList: IBadge[] = [];
   @Input() gameList: IGame[] = [];
@@ -62,42 +63,28 @@ export class ChallengesGamesFormComponent implements OnInit{
       !this.newChallengeGame.badgeId?.badgeId ||
       !this.newChallengeGame.gameId?.gameId
     ) {
-      this.showAlert('Campos vacíos', 'Por favor, complete todos los campos requeridos.');
+      this.alertService.showError('Campos vacíos', 'Por favor, complete todos los campos requeridos.');
       return false;
     }
 
     if (this.newChallengeGame.objectiveScore < 0 || this.newChallengeGame.objectiveTime < 0) {
-      this.showAlert('Números negativos', 'Por favor, introduce valores mayores o iguales a cero en los campos numéricos.');
+      this.alertService.showError('Números negativos', 'Por favor, introduce valores mayores o iguales a cero en los campos numéricos.');
       return false;
     }
 
     if (this.isPastDate(this.newChallengeGame.startDate)) {
-      this.showAlert('Fecha inválida', 'La fecha de inicio debe ser hoy o una fecha futura.');
+      this.alertService.showError('Fecha inválida', 'La fecha de inicio debe ser hoy o una fecha futura.');
       return false;
     }
 
     if (this.isEndDateInvalid(this.newChallengeGame.startDate, this.newChallengeGame.endDate)) {
-      this.showAlert('Fecha inválida', 'La fecha de fin debe ser mayor que la fecha de inicio.');
+      this.alertService.showError('Fecha inválida', 'La fecha de fin debe ser mayor que la fecha de inicio.');
       return false;
     }
 
     return true;
   }
 
-  showAlert(title: string, text: string) {
-    Swal.fire({
-      icon: 'error',
-      title: title,
-      iconColor: 'white',
-      color: 'white',
-      background:'#d54f16',
-      position: 'center',
-      text: text,
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-    });
-  }
 
   isPastDate(date: Date): boolean {
     const today = new Date();

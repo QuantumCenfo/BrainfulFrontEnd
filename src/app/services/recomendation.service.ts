@@ -1,9 +1,8 @@
-import { inject, Injectable, signal } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { IRecomendation, IResponse, IUser } from "../interfaces";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { BaseService } from "./base-service";
 import { Observable } from "rxjs";
-import Swal from "sweetalert2";
+import { SweetAlertService } from "./sweet-alert-service.service";
 
 @Injectable({
   providedIn: "root",
@@ -14,16 +13,20 @@ export class RecomendationService extends BaseService<IRecomendation> {
  
   private user: IUser = { email: "", authorities: [] };
 
+  constructor(private sweetAlertService: SweetAlertService) {
+    super();
+  }
+
   get recomendations$() {
     return this.recommendationSignal;
   }
-  public override find(
-    id: string | number
-  ): Observable<IResponse<IRecomendation>> {
+
+  public override find(id: string | number): Observable<IResponse<IRecomendation>> {
     return this.http.get<IResponse<IRecomendation>>(
-      this.source + "/" + "user" + "/" + id
+      `${this.source}/user/${id}`
     );
   }
+
   getUserIdFromLocalStorage(): number | undefined {
     const authUser = localStorage.getItem("auth_user");
     if (authUser) {
@@ -32,6 +35,7 @@ export class RecomendationService extends BaseService<IRecomendation> {
     }
     return undefined;
   }
+
   public getAllRecomendationsById() {
     const user_id: number | undefined = this.getUserIdFromLocalStorage();
     if (user_id !== undefined) {
@@ -51,31 +55,22 @@ export class RecomendationService extends BaseService<IRecomendation> {
   }
 
   public delete(recommendation: IRecomendation) {
-    Swal.fire({
-      title: "Seguro que desea eliminar la recomendación?",
-      icon: "warning",
-      iconColor: "white",
-      color: "white",
-      background: "#d54f16",
-      position: "center",
-      confirmButtonColor: "#ff9f1c",
-      cancelButtonColor: "#16c2d5",
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonText: "Si, eliminar",
-    }).then((res) => {
+    this.sweetAlertService.showQuestion(
+      "¿Está seguro que desea eliminar la recomendación?",
+      "No podrá recuperar la información",
+    ).then((res) => {
       if (res.isConfirmed) {
         this.del(recommendation.recommendationId).subscribe({
           next: () => {
             const updatedItems = this.recommendationSignal().filter(
-              (r: IRecomendation) =>
-                r.recommendationId != recommendation.recommendationId
+              (r: IRecomendation) => r.recommendationId != recommendation.recommendationId
             );
             this.recommendationSignal.set(updatedItems);
+            this.sweetAlertService.showSuccess("La recomendación ha sido eliminada", " ");
           },
           error: (error: any) => {
-           
             console.error("error", error);
+            this.sweetAlertService.showError("Hubo un problema al eliminar la recomendación", " ");
           },
         });
       }

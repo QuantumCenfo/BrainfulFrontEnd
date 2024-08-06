@@ -8,6 +8,7 @@ import { UserBadgeService } from '../../services/user-badge.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import emailjs from 'emailjs-com';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class ValidationModalComponent {
   private participationOutdoorService = inject(ParticipationOutdoorService);
   private userBadgeservice = inject(UserBadgeService);
   isImageEnlarged = false;
+  public alertService = inject(SweetAlertService);
   private router = inject(Router);
  
   toggleImageSize(): void {
@@ -47,18 +49,7 @@ export class ValidationModalComponent {
         badge: { badgeId: this.participation.challengeOutdoor.badgeId.badgeId }
       };
       this.userBadgeservice.save(userBadge);
-      Swal.fire({
-        iconColor: "white",
-        color: "white",
-        background: "#36cf4f",
-        confirmButtonColor: "#ff9f1c",
-        cancelButtonColor: "#16c2d5",
-        title: "Participacion Validada",
-        icon: "success",
-        showConfirmButton: false,
-        showCancelButton: false,
-        
-      }).then((result) => {
+      this.alertService.showSuccess('Participacion Validada').then((result) => {
         if (this.participation.user?.email && this.participation.user?.name) {
           console.log(this.participation.user.email,this.participation.user.name)
           this.sendEmail(

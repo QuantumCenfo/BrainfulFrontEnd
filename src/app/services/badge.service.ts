@@ -4,6 +4,7 @@ import { IBadge } from "../interfaces";
 import { catchError, from, throwError } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import Swal from "sweetalert2";
+import { SweetAlertService } from "./sweet-alert-service.service";
 
 @Injectable({
   providedIn: "root",
@@ -17,6 +18,9 @@ export class BadgeService extends BaseService<IBadge> {
     return this.badgeSignal;
   }
 
+  constructor(private sweetAlertService: SweetAlertService) {
+    super();
+  }
   getAllBadges() {
     this.findAll().subscribe({
       next: (res: any) => {
@@ -48,21 +52,13 @@ export class BadgeService extends BaseService<IBadge> {
     this.addBadge(badge, imageFile).subscribe({
       next: (res: any) => {
         this.badgeSignal.update((badges: any) => [res, ...badges]);
-        console.log("Response: ", res);
-        console.log("Badge added successfully");
-        Swal.fire({
-          title: "¡Éxito!",
-          text: "La insignia ha sido agregada",
-          icon: "success",
-          iconColor: "white",
-          color: "white",
-          showConfirmButton: false,
-          background: "#16c2d5",
-          timer: 2000,
-        });
+
+        this.sweetAlertService.showSuccess("La insignia ha sido agregada");
       },
       error: (err: any) => {
-        console.log("Error: ", err);
+        this.sweetAlertService.showError(
+          "Hubo un problema agregando la insignia"
+        );
       },
     });
   }
@@ -78,103 +74,61 @@ export class BadgeService extends BaseService<IBadge> {
   }
 
   handleUpdateBadge(badge: IBadge, imageFile: File) {
-    Swal.fire({
-      title: "Esta seguro que desea actualizar la medalla?",
-      icon: "question",
+    this.sweetAlertService
+      .showQuestion(
+        "¿Está seguro que desea actualizar la medalla?",
+        "No podrás revertir esto"
+      )
+      .then((res) => {
+        if (res.isConfirmed) {
+          this.updateBadge(badge, imageFile).subscribe({
+            next: (res: any) => {
+              const updatedBadge = this.badgeSignal().map((b: IBadge) =>
+                b.badgeId === badge.badgeId ? badge : b
+              );
+              this.badgeSignal.set(updatedBadge);
 
-      iconColor: "white",
-      color: "white",
-      background: "#d54f16",
-      position: "center",
-      confirmButtonColor: "#ff9f1c",
-      cancelButtonColor: "#16c2d5",
-      showCancelButton: true,
-      showConfirmButton: true,
-      confirmButtonText: "Si, actualizar",
-    }).then((res) => {
-      if (res.isConfirmed) {
-        this.updateBadge(badge, imageFile).subscribe({
-          next: (res: any) => {
-            const updatedBadge = this.badgeSignal().map((b: IBadge) =>
-              b.badgeId === badge.badgeId ? badge : b
-            );
-            this.badgeSignal.set(updatedBadge);
-            console.log("Response: ", res);
-            console.log("Badge updated successfully");
-            Swal.fire({
-              title: "¡Éxito!",
-              text: "La insignia ha sido actualizada",
-              icon: "success",
-              iconColor: "white",
-              color: "white",
-              background: "#16c2d5",
-              timer: 2000,
-              showConfirmButton: false,
-            }).then(() => {
-              window.location.reload();
-            });
-          },
-          error: (err: any) => {
-            console.log("Error: ", err);
-          },
-        });
-      }
-    });
+              this.sweetAlertService.showSuccess(
+                "La insignia ha sido actualizada"
+              );
+            },
+            error: (err: any) => {
+              console.log("Error: ", err);
+            },
+          });
+        }
+      });
   }
 
   deleteBadge(badgeId: number) {
-    Swal.fire({
-      title: "Seguro que desea eliminar la medalla?",
-      text: "No podrá recuperar la información",
-      icon: "warning",
-      iconColor: "white",
-      color: "white",
-      background: "#d54f16",
-      position: "center",
-      confirmButtonColor: "#ff9f1c",
-      cancelButtonColor: "#16c2d5",
-      confirmButtonText: "Si, eliminar",
-      showCancelButton: true,
-      showConfirmButton: true,
-    }).then((res) => {
-      if (res.isConfirmed) {
-        this.del(badgeId).subscribe({
-          next: () => {
-            const deletedBadge = this.badgeSignal().filter(
-              (badge: IBadge) => badge.badgeId !== badgeId
-            );
-            this.badgeSignal.set(deletedBadge);
-            Swal.fire({
-              title: "¡Éxito!",
-              text: "La insignia ha sido eliminada",
-              icon: "success",
-              iconColor: "white",
-              color: "white",
-              background: "#16c2d5",
-              timer: 2000,
-              showConfirmButton: false,
-            });
-          },
-          error: (err: any) => {
-            console.log("error");
-            Swal.fire({
-              icon: "warning",
-              title: "Lo sentimos",
-              iconColor: "white",
-              color: "white",
-              background: "#d54f16",
-              position: "center",
-              text: "No puedes borrar una insignia que tenga un desafío asociado",
-              showConfirmButton: false,
-              timer: 10000,
-              timerProgressBar: true,
-            });
-            return throwError(
-              () => new Error("Error al agregar la participación")
-            );
-          },
-        });
-      }
-    });
+    this.sweetAlertService
+      .showQuestion(
+        "¿Está seguro que desea eliminar la medalla?",
+        "No podrá recuperar la información"
+      )
+      .then((res) => {
+        if (res.isConfirmed) {
+          this.del(badgeId).subscribe({
+            next: () => {
+              const deletedBadge = this.badgeSignal().filter(
+                (badge: IBadge) => badge.badgeId !== badgeId
+              );
+              this.badgeSignal.set(deletedBadge);
+              this.sweetAlertService.showSuccess(
+                "La insignia ha sido eliminada"
+              );
+            },
+            error: (err: any) => {
+              console.log("error");
+              this.sweetAlertService.showError(
+                "No puedes borrar una insignia que tenga un desafío asociado"
+              );
+              return throwError(
+                () => new Error("Error al agregar la participación")
+              );
+            },
+          });
+        }
+      });
   }
 }

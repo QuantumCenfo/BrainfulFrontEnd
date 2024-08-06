@@ -1,10 +1,11 @@
 import { CommonModule } from "@angular/common";
-import { Component, ViewChild } from "@angular/core";
+import { Component, inject, ViewChild } from "@angular/core";
 import { FormsModule, NgModel } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from "../../../services/auth.service";
 import { IUser } from "../../../interfaces";
 import Swal from "sweetalert2";
+import { SweetAlertService } from "../../../services/sweet-alert-service.service";
 
 @Component({
   selector: "app-signup",
@@ -22,7 +23,7 @@ export class SigUpComponent {
   @ViewChild("password") passwordModel!: NgModel;
   @ViewChild("image") imageModel!: NgModel;
   @ViewChild("birthDate") birthDateModel!: NgModel;
-
+  public alertService = inject(SweetAlertService);
   public user: IUser = {};
   public imageFile: File | null = null;
 
@@ -46,25 +47,15 @@ export class SigUpComponent {
       this.authService.signup(this.user, this.imageFile!).subscribe({
         next: () => {
           this.validSignup = true;
-          Swal.fire({
-            icon: "success",
-            title: "Registro Exitoso",
-            text: "¡Usuario registrado con éxito!",
-            showConfirmButton: false,
-            timer: 2000,
-          }).then(() => {
-            this.router.navigate(["/login"]);
+          this.alertService.showSuccess('Registro Exitoso','H¡Usuario registrado con éxito!').then(() => {
+          this.router.navigate(["/login"]);
           });
+          
         },
         error: (err: any) => {
           this.signUpError = err.description;
-          Swal.fire({
-            icon: "error",
-            title: "Error de Registro",
-            text: "Hubo un error al registrar el usuario. Inténtalo nuevamente.",
-            showConfirmButton: false,
-            timer: 2000,
-          });
+          this.alertService.showError('Error de Registro','Hubo un error al registrar el usuario. Inténtalo nuevamente.');
+         
         },
       });
     }

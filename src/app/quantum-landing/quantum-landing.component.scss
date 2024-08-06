@@ -54,38 +54,42 @@ nav {
 }
 
 .nav-links a {
+  font-size: 20px;
   color: var(--black);
   text-decoration: none;
 }
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+.nav-links a:hover {
+  cursor:pointer;
+  color: var(--black);
+  text-decoration: underline;
 }
+
 
 #description {
   background-color: #ececec;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+
 }
 
-.app-logo img {
-  max-width: 500px;
-  width: 100%;
-  height: auto;
-  margin-left: -140px;
-}
-
-.app-description p {
-  max-width: 900px;
-  width: 100%;
-  margin: 0;
+.app-logo {
+  width: 50%;
   font-size: 1.5rem;
-  text-indent: 2em;
+  
+  text-align: center;
+}
+.app-description  {
+
+  width: 50%;
+  font-size: 1.5rem;
+ 
   text-align: justify;
+}
+.app-description p {
+letter-spacing: 2px;
+  width: 90%;
+  font-size: 24px;
 }
 
 #mvv {
@@ -158,18 +162,39 @@ nav {
 }
 
 #products {
-  background-color:#ffffff;
-  color: var(--black);
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+
+ background-color: #ececec;
+ 
 }
+.products {
+
+  background-color: #ececec;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
 
 .product {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+  width: 50%;
+  font-size: 1.5rem;
+  text-indent: 2em;
+  text-align: center;
 }
+.product img  {
+  width: 100%;
+ 
+}
+.product-desc {
+  width: 50%;
+  font-size: 1.5rem;
+  text-indent: 2em;
+  text-align: center;
+}
+.product-desc p {
+  letter-spacing: 2px;
+    width: 90%;
+    font-size: 24px;
+  }
 
 .product-logo {
   max-width: 350px;
@@ -182,6 +207,7 @@ nav {
 }
 
 .tituloP {
+  text-align: center;
   font-size: 35px;
 }
 footer {
@@ -191,7 +217,9 @@ footer {
   text-align: center;
   position: relative;
 }
-
+*{
+  font-size: 18px;
+}
 #scroll-top {
   background-color: #ffffff;
   color: #064971;
@@ -206,6 +234,12 @@ footer {
 }
 
 @media (max-width: 768px) {
+  header {
+    padding: 23px;
+    background-color: #ffffff;
+    color: #000000;
+    border-bottom: 1px solid #ececec;
+}
   nav,
   #description,
   #mvv,
@@ -219,38 +253,204 @@ footer {
     margin-bottom: 1rem;
   }
   .nav-links {
+    text-align: center;
     width: 100%;
     justify-content: space-between;
     margin-top: 1rem;
     font-size: 18px;
     flex-direction: column;
   }
-
+  .logo img {
+    height: 127px;
+    margin-top: 0px; 
+    margin-left: 0px; 
+}
   .mvv-card {
     width: 100%;
   }
 
   #description {
+    padding: 21px;
     flex-direction: column;
     text-align: center;
   }
 
   .app-logo img {
-    max-width: 200px;
-    margin-left: 10px;
+     
+          margin-top: 0px;
+          margin-left: 0px;
+          width: 0%;
   }
 
   .logo img {
-    margin-left: -10px;
+    
   }
 
   .app-description h2 {
     width: 100%;
     max-width: none;
   }
-
+  .app-description{
+    width: 100%;
+    font-size: 20px;
+    
+    text-align: justify;
+}
+.app-description p{
+  padding: 35px;
+        width: 100%;
+        font-size: 17px;
+        text-align: justify;
+}
+.product-desc p{
+  padding: 35px;
+        width: 100%;
+        font-size: 17px;
+        text-align: justify;
+}
+.products {
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+  padding: 41px;
+}
   .team-carousel {
     margin-left: 700px;
     justify-content: center;
   }
+  .product {
+    width: 100%;
+
+    text-align: center;
 }
+.product img{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.product-desc {
+  width: 100%;
+  font-size: 1.5rem;
+   text-indent: 0rem; 
+  text-align: center;
+}
+footer {
+  background-color: #399dff;
+  color: #ffffff;
+  padding: 5rem;
+  text-align: center;
+  position: relative;
+}
+}
+
+
+@media (max-width: 1024px) {
+  header {
+    padding: 23px;
+    background-color: #ffffff;
+    color: #000000;
+    border-bottom: 1px solid #ececec;
+}
+  nav,
+  #description,
+  #mvv,
+  .product {
+    flex-direction: column;
+  }
+
+  .nav-links,
+  .app-logo,
+  .mvv-card {
+    margin-bottom: 1rem;
+  }
+  .nav-links {
+    text-align: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 18px;
+    flex-direction: column;
+  }
+  .logo img {
+    height: 127px;
+    margin-top: 0px; 
+    margin-left: 0px; 
+}
+  .mvv-card {
+    width: 100%;
+  }
+
+  #description {
+    padding: 21px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .app-logo img {
+     
+          margin-top: 0px;
+          margin-left: 0px;
+          width: 0%;
+  }
+
+  .logo img {
+    
+  }
+
+  .app-description h2 {
+    width: 100%;
+    max-width: none;
+  }
+  .app-description{
+    width: 100%;
+    font-size: 20px;
+    
+    text-align: justify;
+}
+.app-description p{
+  padding: 35px;
+        width: 100%;
+        font-size: 17px;
+        text-align: justify;
+}
+.product-desc p{
+  padding: 35px;
+        width: 100%;
+        font-size: 17px;
+        text-align: justify;
+}
+.products {
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+  padding: 41px;
+}
+  .team-carousel {
+    margin-left: 700px;
+    justify-content: center;
+  }
+  .product {
+  
+
+    text-align: center;
+}
+.product img{
+  display: flex;
+  justify-content: center;
+ 
+}
+.product-desc {
+  width: 100%;
+  font-size: 1.5rem;
+   text-indent: 0rem; 
+  text-align: center;
+}
+footer {
+  background-color: #399dff;
+  color: #ffffff;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+}
+}
+

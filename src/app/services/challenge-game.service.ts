@@ -5,6 +5,7 @@ import { BaseService } from "./base-service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { SweetAlertService } from './sweet-alert-service.service';
 
 @Injectable({
   providedIn: "root",
@@ -16,8 +17,8 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
   private inactiveChallengeGameSignal = signal<IChallengeGame[]>([]);
   public challengeGameSignal = signal<IChallengeGame[]>([]);
   public router = inject(Router);
-  constructor(protected override http: HttpClient) {
-    super();  
+  constructor(protected override http: HttpClient,  private sweetAlertService: SweetAlertService ) {
+    super();
   }
 
   get activeChallengeGame$() {
@@ -32,68 +33,40 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
     return this.challengeGameSignal;
   }
 
-  getAllActiveChallenges() {
-    this.http.get<IChallengeGame[]>(`${this.source}/active-challenges`).subscribe({
+  getAllChallengesByStatus(status: string) {
+    this.http.get<IChallengeGame[]>(`${this.source}/challenges?status=${status}`).subscribe({
       next: (res: IChallengeGame[]) => {
         res.reverse();
-        this.activeChallengeGameSignal.set(res);
-        console.log("Active challenges fetched successfully");
+        if (status === 'active') {
+          this.activeChallengeGameSignal.set(res);
+        } else if (status === 'inactive') {
+          this.inactiveChallengeGameSignal.set(res);
+        }
+        console.log(`${status.charAt(0).toUpperCase() + status.slice(1)} challenges fetched successfully`);
         console.log("Response: ", res);
       },
       error: (err: any) => {
-        console.error("Error fetching active challenges", err);
+        console.error(`Error fetching ${status} challenges`, err);
       },
     });
   }
-
-  getAllInactiveChallenges() {
-    this.http.get<IChallengeGame[]>(`${this.source}/inactive-challenges`).subscribe({
-      next: (res: IChallengeGame[]) => {
-        res.reverse();
-        this.inactiveChallengeGameSignal.set(res);
-        console.log("Inactive challenges fetched successfully");
-        console.log("Response: ", res);
-      },
-      error: (err: any) => {
-        console.error("Error fetching inactive challenges", err);
-      },
-    });
-  }
+  
 
 
   public save(item: IChallengeGame) {
     this.add(item).subscribe({
       next: (response: any) => {
         this.challengeGameSignal.update((results: IChallengeGame[]) => [response, ...results]);
-        Swal.fire({
-          iconColor: "white",
-          color: "white",
-          background: "#36cf4f",
-          confirmButtonColor: "#ff9f1c",
-          cancelButtonColor: "#16c2d5",
-          title: "Desafío guardado",
-          icon: "success",
-          timer: 3000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-          showCancelButton: false,
-        }).then(() => {
+        this.sweetAlertService.showSuccess(
+          "Desafío guardado",
+        ).then(() => {
           window.location.reload();
         });
       },
       error: (error : any) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Lo sentimos',
-          iconColor: 'white',
-          color: 'white',
-          background:'#d54f16',
-          position: 'center',
-          text: 'Hubo un error guardando el desafío',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        }).then(() => {
+        this.sweetAlertService.showError(
+          "Hubo un error guardando el desafío",
+        ).then(() => {
           window.location.reload();
         });
       }
@@ -107,35 +80,16 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
           cg.challengeId === challengeGame.challengeId ? res : cg
         );
         this.challengeGameSignal.set(updatedChallengeGames);
-        Swal.fire({
-          iconColor: "white",
-          color: "white",
-          background: "#36cf4f",
-          confirmButtonColor: "#ff9f1c",
-          cancelButtonColor: "#16c2d5",
-          title: "Desafío actualizado",
-          icon: "success",
-          timer: 3000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-          showCancelButton: false,
-        }).then(() => {
+        this.sweetAlertService.showSuccess(
+          "Desafío actualizado"
+        ).then(() => {
           window.location.reload();
         });
       },
       error: (err: any) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Lo sentimos',
-          iconColor: 'white',
-          color: 'white',
-          background:'#d54f16',
-          position: 'center',
-          text: 'Hubo un error actualizando el desafío',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        }).then(() => {
+        this.sweetAlertService.showError(
+          "Hubo un error actualizando el desafío "
+        ).then(() => {
           window.location.reload();
         });
       },
@@ -143,24 +97,27 @@ export class ChallengeGameService extends BaseService<IChallengeGame> {
   }
 
   deleteChallengeGame(badgeId: number) {
-    Swal.fire({
-      title: "Seguro que desea eliminar el desafio?",
-      text: "No podrá recuperar la información",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Si, eliminar",
-    }).then((res) => {
+    this.sweetAlertService.showQuestion(
+      "¿Estás seguro que deseas eliminar el comentario?",
+      "No podrás revertir esto",
+    ).then((res) => {
       this.del(badgeId).subscribe({
         next: () => {
           const deletedChallengeGame = this.challengeGameSignal().filter(
             (badge: IChallengeGame) => badge.badgeId !== badgeId
           );
           this.challengeGameSignal.set(deletedChallengeGame);
-
-          console.log("Desafio borrado successfully");
-        }
+          this.sweetAlertService.showSuccess(
+            "El desafío ha sido eliminado",
+          );
+        },
+        error: (err: any) => {
+ 
+          this.sweetAlertService.showError(
+            "Ha ocurrido un error eliminando el desafío",
+      
+          );
+        },
       });
     }).then(() => {
       window.location.reload();

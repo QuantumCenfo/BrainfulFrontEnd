@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { Router, ActivatedRoute, NavigationStart, } from '@angular/router';
 import { TryAgainModalComponent } from '../try-again-modal/try-again-modal.component';
 import { FormsModule } from '@angular/forms';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-reaction-game',
@@ -33,6 +34,7 @@ export class ReactionGameComponent implements OnInit {
   public router = inject(Router)
   public route = inject(ActivatedRoute)
   
+  public alertService = inject(SweetAlertService);
 
   ngOnInit(): void {
     this.setDifficulty('easy');
@@ -252,18 +254,7 @@ export class ReactionGameComponent implements OnInit {
     audio.play();
   }
   showLossAlert() {
-    Swal.fire({
-      iconColor: 'white',
-      color: 'white',
-      background: '#ff6347',
-      confirmButtonColor: '#ff9f1c',
-      title: '¡Oops!',
-      text: 'Has perdido el juego',
-      icon: 'error',
-      showCancelButton: true,
-      confirmButtonText: 'Intentar de nuevo',
-      cancelButtonText: 'Volver al Menú de juegos',
-    }).then((result) => {
+    this.alertService.showdifficultyWarning('Ooops...','Seleccione una dificultad antes de comenzar el juego.').then((result) => {
       if (result.isConfirmed) {
         this.resetGame();
       } else {

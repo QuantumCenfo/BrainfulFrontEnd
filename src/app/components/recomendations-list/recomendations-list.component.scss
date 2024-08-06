@@ -12,13 +12,25 @@ table {
   width: 100%;
   font-size: 20px;
     background-color: #16c2d5;
+    margin-bottom: 1rem;
 }
 th,td{
   color: rgb(255, 255, 255);
 }
+th{
+  font-size: 20px;
+}
+.input-filter {
+  border:2px;
+  border-style: solid;
+  border-color: #16c2d5;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
 mat-paginator {
   font-size: 16px;
-  background-color: #a1d1ec;
+  background-color: #16c2d5;
 }
 .placeholder {
   padding: 70px;
