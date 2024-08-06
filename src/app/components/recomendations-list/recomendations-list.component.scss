@@ -15,7 +15,7 @@ table {
     margin-bottom: 1rem;
 }
 th,td{
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 th{
   font-size: 20px;
@@ -29,8 +29,12 @@ th{
   width: 100%;
 }
 mat-paginator {
+  color: #000000;
   font-size: 16px;
   background-color: #16c2d5;
+}
+.mdc-notched-outline__leading{
+  border-color: #000000;
 }
 .placeholder {
   padding: 70px;
