@@ -1,8 +1,13 @@
 <div class="row info-container">
-    <div class="col-12 col-md-6 mx-auto">
-      <div class="profile-card">
-        <div class="image-placeholder">
-        <img *ngIf="userService.user$()?.image else elseBlockImg " [src]="userService.user$().image" alt="User Image" class="user-img"/>
+  <div class="col-12 col-md-6 mx-auto">
+    <div class="profile-card">
+      <div class="image-placeholder">
+        <img
+          *ngIf="userService.user$()?.image; else elseBlockImg"
+          [src]="userService.user$().image"
+          alt="User Image"
+          class="user-img"
+        />
         <ng-template #elseBlockImg>
           <img
             src="../../../../assets/icons/default user.jpeg"
@@ -12,24 +17,26 @@
           />
         </ng-template>
       </div>
-        <div class="info-item">
-          <label>Nombre:</label>
-          <p>{{userService.user$().name}}</p>
-        </div>
-        <div class="info-item">
-          <label>Apellido:</label>
-          <p>{{userService.user$().lastname}}</p>
-        </div>
-        <div class="info-item">
-          <label>Email:</label>
-          <p>{{userService.user$().email}}</p>
-        </div>
-        <button class="modify-button" (click)="ediUser()">Modificar</button>
+      <div class="info-item">
+        <label>Nombre:</label>
+        <p>{{ userService.user$().name }}</p>
       </div>
+      <div class="info-item">
+        <label>Apellido:</label>
+        <p>{{ userService.user$().lastname }}</p>
+      </div>
+      <div class="info-item">
+        <label>Email:</label>
+        <p>{{ userService.user$().email }}</p>
+      </div>
+      <button class="modify-button" (click)="ediUser()">Modificar</button>
     </div>
   </div>
+</div>
 
- <app-modal size="lg" #ediModal>
+<app-chat></app-chat>
+
+<app-modal size="lg" #ediModal>
   <app-profile-edit-modal
     [title]="'Update User'"
     (callParentEvent)="onFormEventCalled($event)"

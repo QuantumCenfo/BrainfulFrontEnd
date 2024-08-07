@@ -1,0 +1,12 @@
+<div class="chat-container">
+  <div class="messages">
+    <div *ngFor="let message of messages">{{ message }}</div>
+  </div>
+  <input
+    [(ngModel)]="userMessage"
+    (keyup.enter)="sendMessage()"
+    placeholder="Type your message..."
+    class="form-control"
+  />
+  <button class="btn btn-primary" (click)="sendMessage()">Enviar</button>
+</div>

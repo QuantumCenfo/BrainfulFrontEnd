@@ -7,6 +7,7 @@ import { ModalComponent } from "../../components/modal/modal.component";
 import { ProfileEditModalComponent } from "../../components/profile-edit-modal/profile-edit-modal.component";
 import { IUser } from "../../interfaces";
 import { UserService } from "../../services/user.service";
+import { ChatComponent } from "../chat/chat.component";
 
 @Component({
   selector: "app-profile",
@@ -18,6 +19,7 @@ import { UserService } from "../../services/user.service";
     LoaderComponent,
     ModalComponent,
     ProfileEditModalComponent,
+    ChatComponent,
   ],
   templateUrl: "./profile.component.html",
   styleUrl: "./profile.component.scss",
