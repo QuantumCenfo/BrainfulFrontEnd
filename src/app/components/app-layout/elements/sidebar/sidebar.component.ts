@@ -5,6 +5,7 @@ import { LayoutService } from '../../../../services/layout.service';
 import { AuthService } from '../../../../services/auth.service';
 import { SvgIconComponent } from '../../../svg-icon/svg-icon.component';
 import { routes } from '../../../../app.routes';
+import { MyAccountComponent } from '../../../my-account/my-account.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,8 @@ import { routes } from '../../../../app.routes';
     CommonModule,
     RouterLink,
     RouterLinkActive,
-    SvgIconComponent
+    SvgIconComponent,
+    MyAccountComponent
   ],
   templateUrl: './sidebar.component.html',
 })

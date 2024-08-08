@@ -1,0 +1,58 @@
+.fa-regular, .far {
+    font-size: 30px;
+    font-weight: 600;
+}
+.child{
+width: 50%;
+}
+.d-flex {
+    
+    display: flex !important;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.father{
+    padding: 12px;
+}
+span,
+p,
+label {
+  font-size: 18px;
+  font-family: Dosis, "Dosis", sans-serif;
+}
+.inner-child{
+    width: 100%;
+    }
+    
+.profile{
+    border-width: 0px;
+    border-style: solid ;
+    background-color: #16c2d5;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+.logout{
+    margin-top: 20px;
+    border-width: 0px;
+    background-color: #FF9F1C;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+.profile:hover{
+    border-width: 0px;
+    border-style: solid ;
+    background-color: #15b5c7;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.logout:hover{
+    border-width: 0px;
+    background-color: #ee961a;
+    padding: 10px;
+    border-radius: 10px;
+}
