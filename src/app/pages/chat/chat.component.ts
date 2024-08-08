@@ -13,15 +13,16 @@ import { FormsModule } from "@angular/forms";
 export class ChatComponent {
   userMessage: string = "";
   messages: string[] = [];
+  isChatOpen: boolean = false;
 
-  private chatService: ChatService = inject(ChatService);
+  public chatService: ChatService = inject(ChatService);
 
   sendMessage() {
     if (this.userMessage.trim()) {
       this.messages.push(`You: ${this.userMessage}`);
       this.chatService.sendMessage(this.userMessage).subscribe(
         (res) => {
-          this.messages.push(`Bot: ${res}`);
+          this.messages.push(`Brainy: ${res}`);
           this.userMessage = "";
         },
         (err) => {
@@ -32,5 +33,9 @@ export class ChatComponent {
         }
       );
     }
+  }
+
+  openChat() {
+    this.isChatOpen = !this.isChatOpen;
   }
 }

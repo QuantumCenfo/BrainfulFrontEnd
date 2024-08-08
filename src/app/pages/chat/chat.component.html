@@ -1,12 +1,18 @@
-<div class="chat-container">
+<div class="chat-container" id="chat-box">
+  <h1>Chat</h1>
   <div class="messages">
     <div *ngFor="let message of messages">{{ message }}</div>
   </div>
   <input
     [(ngModel)]="userMessage"
     (keyup.enter)="sendMessage()"
-    placeholder="Type your message..."
-    class="form-control"
+    placeholder="Escriba su mensaje..."
+    class="form-control mt-3"
   />
-  <button class="btn btn-primary" (click)="sendMessage()">Enviar</button>
+  <div>
+    <button class="btn btn-primary mt-3" (click)="sendMessage()">Enviar</button>
+    <button class="btn btn-danger mt-3 mx-3" (click)="chatService.closeChat()">
+      Cerrar
+    </button>
+  </div>
 </div>
