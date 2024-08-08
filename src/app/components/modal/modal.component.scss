@@ -6,9 +6,9 @@ h2 {
 }
 
 .modal-content {
-  font-family: Dosis, "Dosis", sans-serif;
-  border: none;
-  border-radius: 15px;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
@@ -20,35 +20,58 @@ h2 {
   background-color: #ffffff;
   color: #ffffff;
   border: none;
+  transition: all 0.3s ease-in-out;
 }
 
-.btn-close {
-  background: none;
-  border: none;
+.modal-header {
+  background-color: #ffffff;
+  color: #fff;
+  border-bottom: none;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header .modal-title {
+  margin: 0;
   font-size: 1.5rem;
-  color: #ffffff;
-  opacity: 0.8;
-  transition: opacity 0.2s;
+  font-weight: 600;
 }
 
-.btn-close:hover {
-  opacity: 1;
+.modal-body {
+  padding: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
 }
 
-.btn-primary {
-  background-color: #0077b6;
-  border-color: #0077b6;
-  transition: background-color 0.2s;
+.modal-footer {
+  background-color: #f8f9fa;
+  border-top: none;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.btn-primary:hover {
-  background-color: #023e8a;
-  border-color: #023e8a;
+.modal-footer .btn {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.btn-secondary {
-  background-color: #adb5bd;
-  border-color: #adb5bd;
+.modal-footer .btn:hover {
+  background-color: #5a6268;
+}
+
+.modal-footer .btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
 }
 .btn-secondary:hover {
   background-color: #9da4aa;

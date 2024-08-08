@@ -53,28 +53,6 @@ export class ChallengeListComponent {
   currentOutdoorIndex: number = 0;
   currentGameIndex: number = 0;
 
-  onNextOutdoorChallenge() {
-    const next = this.currentOutdoorIndex + 1;
-    this.currentOutdoorIndex =
-      next === this.outdoorChallengeList.length ? 0 : next;
-  }
-
-  onPrevOutdoorChallenge() {
-    const prev = this.currentOutdoorIndex - 1;
-    this.currentOutdoorIndex =
-      prev === -1 ? this.outdoorChallengeList.length - 1 : prev;
-  }
-
-  onNextGameChallenge() {
-    const next = this.currentGameIndex + 1;
-    this.currentGameIndex = next === this.gameChallengeList.length ? 0 : next;
-  }
-  onPrevGameChallenge() {
-    const prev = this.currentGameIndex - 1;
-    this.currentGameIndex =
-      prev === -1 ? this.gameChallengeList.length - 1 : prev;
-  }
-
   showDetail(challengeOutdoor: IChallengeOutdoor, modal: any) {
     this.currentOutDoorChallenge = { ...challengeOutdoor };
     modal.show();
@@ -98,46 +76,10 @@ export class ChallengeListComponent {
           },
         });
     } else {
-      this.alertService.showWarning(
-        "Porfavor suba una imagen",
-      );
+      this.alertService.showWarning("Por favor suba una imagen");
     }
   }
 
-  getBoxShadow(index: number): string {
-    const color = this.colors[index % this.colors.length];
-    return this.generateBoxShadow(color);
-  }
-  getColor(index: number): string {
-    return this.colors[index % this.colors.length];
-  }
-
-  generateBoxShadow(color: string): string {
-    const darkerColor = this.lightenColor(color, -20); // You can adjust the lightness
-    return `2px 0px 0px 3px ${darkerColor}`;
-  }
-
-  generateGradient(color: string): string {
-    const lightColor = this.lightenColor(color, 30); // You can adjust the lightness
-    return `linear-gradient(45deg, ${color} 0%, ${lightColor} 57%, ${color} 100%)`;
-  }
-
-  lightenColor(color: string, percent: number): string {
-    const num = parseInt(color.slice(1), 16),
-      amt = Math.round(2.55 * percent),
-      R = (num >> 16) + amt,
-      G = ((num >> 8) & 0x00ff) + amt,
-      B = (num & 0x0000ff) + amt;
-    return `#${(
-      0x1000000 +
-      (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
-      (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
-      (B < 255 ? (B < 1 ? 0 : B) : 255)
-    )
-      .toString(16)
-      .slice(1)
-      .toUpperCase()}`;
-  }
   goToGames() {
     this.router.navigate(["app/games"]);
   }
