@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   EventEmitter,
   Input,
@@ -26,7 +27,7 @@ import { MatSelect, MatSelectModule } from "@angular/material/select";
   templateUrl: "./user-form.component.html",
   styleUrl: "./user-form.component.scss",
 })
-export class UserFormComponent {
+export class UserFormComponent implements AfterViewInit {
   user_id: number = this.getUserIdFromLocalStorage() || 0;
   @Input() title: string = "";
   @Input() user: IUser = {
@@ -37,8 +38,11 @@ export class UserFormComponent {
     password: "brain123",
     role: { id: undefined } as IUserRole,
   };
-
+  
   public modalService = inject(NgbModal);
+  ngAfterViewInit(): void {
+    
+  }
 
   @Output() callParentEvent = new EventEmitter<{
     user: IUser;

@@ -1,5 +1,5 @@
 import { GameService } from './../../services/game.service';
-import { inject, OnInit } from '@angular/core';
+import { AfterViewInit, inject, OnInit } from '@angular/core';
 import { IChallengeGame, IBadge, IGame } from './../../interfaces/index';
 import { ChallengeGameService } from '../../services/challenge-game.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
@@ -19,30 +19,40 @@ import { SweetAlertService } from '../../services/sweet-alert-service.service';
   templateUrl: './challenges-games-form.component.html',
   styleUrls: ['./challenges-games-form.component.scss']
 })
-export class ChallengesGamesFormComponent implements OnInit{
+export class ChallengesGamesFormComponent implements OnInit, AfterViewInit{
   public badgeService = inject(BadgeService);
   public gameService = inject(GameService);
   public challengeGameService = inject(ChallengeGameService);
-private alertService =inject(SweetAlertService);
+  private alertService =inject(SweetAlertService);
   @Input() titleComp: string = 'Añadir Desafío';
   @Input() badgeList: IBadge[] = [];
   @Input() gameList: IGame[] = [];
   @Output() callParentEvent: EventEmitter<IChallengeGame> = new EventEmitter<IChallengeGame>();
-
+  
   @Input() newChallengeGame: IChallengeGame = {
     badgeId: {
-      badgeId: 1
+      badgeId: 0
     },
     gameId: {
       gameId: 1
     }
   };
-
+  
   ngOnInit(): void {
     this.badgeService.getAllBadges();
     this.gameService.getAllSignal();
   }
-
+  
+  ngAfterViewInit(): void {
+    this.newChallengeGame={
+      badgeId: {
+        badgeId: 0
+      },
+      gameId: {
+        gameId: 0
+      }
+    }
+  }
   addChallenge() {
     if (this.validateForm()) {
       console.log('New Challenge Game Data:', this.newChallengeGame);

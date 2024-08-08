@@ -123,6 +123,7 @@
         (ngModelChange)="newChallengeGame.badgeId.badgeId = +$event"
         required
       >
+        <option value="0" selected disabled>Seleccione una opción</option>
         <option *ngFor="let badge of badgeList" [value]="badge.badgeId">
           {{ badge.title }}
         </option>
@@ -141,6 +142,7 @@
         (ngModelChange)="newChallengeGame.gameId.gameId = +$event"
         required
       >
+      <option value="0" selected disabled>Seleccione una opción</option>
         <option *ngFor="let game of gameList" [value]="game.gameId">
           {{ game.name }}
         </option>

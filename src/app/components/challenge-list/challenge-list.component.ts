@@ -43,8 +43,6 @@ export class ChallengeListComponent {
   @Input() gameChallengeList: IChallengeGame[] = [];
 
   private participationServices = inject(ParticipationOutdoorService);
-  private outDoorChallenge = inject(ChallengeOutdoorService);
-  private gameChallengService = inject(ChallengeGameService);
   private alertService = inject(SweetAlertService);
   public currentOutDoorChallenge: IChallengeOutdoor = {};
 
