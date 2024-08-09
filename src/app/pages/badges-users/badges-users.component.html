@@ -1,7 +1,10 @@
 <div class="container">
   @defer {
 
-  <app-user-badge-list [badgeList]="userBadgesService.userBadges$()" />
+  <app-user-badge-list
+    [badgeList]="userBadgesService.userBadges$()"
+  ></app-user-badge-list>
+
   } @loading (after 100ms; minimum 1s) {
   <app-loader />
   }

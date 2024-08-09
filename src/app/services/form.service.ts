@@ -3,17 +3,23 @@ import { BaseService } from "./base-service";
 import { IForm } from "../interfaces";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import Swal from "sweetalert2";
+import { SweetAlertService } from "./sweet-alert-service.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class FormService extends BaseService<IForm> {
   protected override source: string = "forms";
-  private snackBar = inject(MatSnackBar);
   private formsListSignal = signal<IForm[]>([]);
 
   get forms$() {
     return this.formsListSignal;
+  }
+  constructor(
+  
+    private sweetAlertService: SweetAlertService
+  ) {
+    super();
   }
 
   public save(item: IForm) {
@@ -23,32 +29,14 @@ export class FormService extends BaseService<IForm> {
           response,
           ...results,
         ]);
-        Swal.fire({
-          iconColor: "white",
-          color: "white",
-          background: "#36cf4f",
-          confirmButtonColor: "#ff9f1c",
-          cancelButtonColor: "#16c2d5",
-          title: "Recomendación Guardada",
-          icon: "success",
-          timer: 10000,
-          showConfirmButton: false,
-          showCancelButton: false,
-        });
+        this.sweetAlertService.showSuccess(
+          "Recomendación Guardada",
+        );
       },
       error: (error: any) => {
-        Swal.fire({
-          icon: "error",
-          title: "Lo sentimos",
-          iconColor: "white",
-          color: "white",
-          background: "#d54f16",
-          position: "center",
-          text: "El servicio de recomendaciones no esta disponible en este momento. Inténtelo más tarde",
-          showConfirmButton: false,
-          timer: 10000,
-          timerProgressBar: true,
-        });
+        this.sweetAlertService.showError(
+          "El servicio de recomendaciones no está disponible en este momento. Inténtelo más tarde",
+        );
       },
     });
   }

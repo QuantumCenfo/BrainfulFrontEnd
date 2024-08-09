@@ -128,8 +128,13 @@ export class AuthService {
     return allowedUser && isAdmin;
   }
 
-  public signup(user: IUser): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>("auth/signup", user);
+  public signup(user: IUser, imageFile: File): Observable<ILoginResponse> {
+    const formData = new FormData();
+    formData.append("user", JSON.stringify(user));
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+    return this.http.post<ILoginResponse>("auth/signup", formData);
   }
 
   public logout() {

@@ -1,11 +1,11 @@
 <div class="register-container">
   <div class="register-card">
     <div class="logo-container">
-        <img
-          class="company-logo"
-          src="../../../../assets/icons/brainfulLogoG.png"
-          alt="Logo"
-        />
+      <img
+        class="company-logo"
+        src="../../../../assets/icons/brainfulLogoG.png"
+        alt="Logo"
+      />
     </div>
     <div class="login-link">
       <h4>¿Ya tienes cuenta?</h4>
@@ -17,7 +17,9 @@
           <div class="form-fields">
             <div class="form-row">
               <div class="form-group">
-                <label for="name" class="form-label">Nombre</label>
+                <label for="name" class="form-label"
+                  >Nombre <span style="color: red">*</span>
+                </label>
                 <input
                   #name="ngModel"
                   type="text"
@@ -37,7 +39,9 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="lastname" class="form-label">Apellidos</label>
+                <label for="lastname" class="form-label"
+                  >Apellidos <span style="color: red">*</span></label
+                >
                 <input
                   #lastname="ngModel"
                   type="text"
@@ -58,7 +62,9 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="email" class="form-label">Email</label>
+              <label for="email" class="form-label"
+                >Email <span style="color: red">*</span></label
+              >
               <input
                 #email="ngModel"
                 type="text"
@@ -78,7 +84,9 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="password" class="form-label">Contraseña</label>
+              <label for="password" class="form-label"
+                >Contraseña <span style="color: red">*</span></label
+              >
               <input
                 #password="ngModel"
                 type="password"
@@ -97,10 +105,46 @@
                 Ingresa una contraseña valida
               </div>
             </div>
+            <div class="form-group">
+              <label for="birthDate" class="form-label"
+                >Fecha de Nacimiento <span style="color: red">*</span>
+              </label>
+              <input
+                type="date"
+                #birthDate="ngModel"
+                class="form-control"
+                id="birthDate"
+                name="birthDate"
+                [(ngModel)]="user.birthDate"
+                [ngClass]="{
+                  'is-invalid': birthDate.invalid && birthDate.touched,
+                  'is-valid': birthDate.valid && birthDate.touched
+                }"
+                required
+              />
+            </div>
+            <div class="form-group col-md-12">
+              <label for="image">Foto</label>
+              <input
+                type="file"
+                id="image"
+                name="image"
+                class="form-control"
+                #image="ngModel"
+                (change)="onFileChange($event)"
+                [(ngModel)]="user.image"
+                [ngClass]="{
+                  'is-invalid': image.invalid && image.touched,
+                  'is-valid': image.valid && image.touched
+                }"
+              />
+            </div>
           </div>
         </div>
-        <button class="btn btn-primary btn-block w-100" type="submit">Registrarse</button>
-        <p *ngIf="signUpError" class="text-danger">{{signUpError}}</p>
+        <button class="btn btn-primary btn-block w-100" type="submit">
+          Registrarse
+        </button>
+        <p *ngIf="signUpError" class="text-danger">{{ signUpError }}</p>
         <p *ngIf="validSignup" class="text-success">Usuario registrado!</p>
       </form>
     </div>

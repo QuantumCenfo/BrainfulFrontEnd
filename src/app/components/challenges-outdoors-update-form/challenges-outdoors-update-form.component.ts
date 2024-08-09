@@ -1,9 +1,10 @@
 import { ChallengeOutdoorService } from './../../services/challenge-outdoor.service';
 import { IChallengeOutdoor, IBadge } from './../../interfaces/index';
-import { Component, EventEmitter, Input,Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input,Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-challenges-outdoors-update-form',
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
   styleUrl: './challenges-outdoors-update-form.component.scss'
 })
 export class ChallengesOutdoorsUpdateFormComponent {
-
+  public alertService = inject(SweetAlertService);
   @Input() titleComp: string = 'Actualizar Fechas';
   @Input() toUpdateDateChallengeOutdoor: IChallengeOutdoor = {
     badgeId:{
@@ -36,7 +37,7 @@ export class ChallengesOutdoorsUpdateFormComponent {
   validateForm(): boolean {
     // Validación de campos en blanco
     if (!this.toUpdateDateChallengeOutdoor.startDate || !this.toUpdateDateChallengeOutdoor.endDate) {
-      this.showAlert('Campos vacíos', 'Por favor, complete todas las fechas requeridas.');
+      this.alertService.showError('Campos vacíos', 'Por favor, complete todas las fechas requeridas.');
       return false;
     }
 
@@ -45,12 +46,12 @@ export class ChallengesOutdoorsUpdateFormComponent {
 
     // Validación de fechas
     if (this.isPastDate(startDateString)) {
-      this.showAlert('Fecha inválida', 'La fecha de inicio debe ser hoy o una fecha futura.');
+      this.alertService.showError('Fecha inválida', 'La fecha de inicio debe ser hoy o una fecha futura.');
       return false;
     }
 
     if (this.isEndDateInvalid(startDateString, endDateString)) {
-      this.showAlert('Fecha inválida', 'La fecha de fin debe ser mayor que la fecha de inicio.');
+      this.alertService.showError('Fecha inválida', 'La fecha de fin debe ser mayor que la fecha de inicio.');
       return false;
     }
 
@@ -81,19 +82,6 @@ export class ChallengesOutdoorsUpdateFormComponent {
       return endDate <= startDate;
   }
 
-  showAlert(title: string, text: string) {
-    Swal.fire({
-      icon: 'error',
-      title: title,
-      iconColor: 'white',
-      color: 'white',
-      background:'#d54f16',
-      position: 'center',
-      text: text,
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-    });
-  }
+ 
 
 }

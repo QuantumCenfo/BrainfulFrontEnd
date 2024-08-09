@@ -7,7 +7,6 @@ export interface IResponse<T> {
   data: T;
 }
 
-
 export interface IPartcipationOutdoor {
   participationOutdoorId?: number;
   evidence?: string;
@@ -24,7 +23,7 @@ export interface IChallengeOutdoor {
   name?: string;
   startDate?: string;
   endDate?: string;
-  badgeId?:IBadge
+  badgeId?: IBadge;
 }
 export interface IComment {
   commentId?: number;
@@ -33,7 +32,6 @@ export interface IComment {
   user?: IUser;
   forum?: IForum;
 }
-
 
 export interface IAuthority {
   authority: string;
@@ -134,19 +132,23 @@ export interface IUser {
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;
-  role?: IUserRole;
+  role?: IUserRole | null;
   birthDate?: string;
   authorities?: IAuthority[];
 }
 export interface IUserRole {
-  name : string,
+  id?: number;
+  name: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface IUserBadge {
   userBadgeId?: number;
   badge?: IBadge;
   user?: IUser;
-  obtainedDate?: string
+  obtainedDate?: string;
 }
 
 export interface IChallengeGame {
@@ -170,11 +172,37 @@ export interface IForum {
   user?: IUser;
 }
 
-export interface IContent {
-  contentId?: number;
-  title?: string;
-  description?: string;
-  typeMedia?: string;
-  url?: string;
-  publishDate?: Date;
+export interface IChatResponse {
+  id: string;
+  object: string;
+  created: number;
+  model: string;
+  usage: {
+    prompt_tokens: number;
+    completion_tokens: number;
+    total_tokens: number;
+  };
+  choices: [
+    {
+      message: {
+        role: string;
+        content: string;
+      };
+      finish_reason: string;
+      index: number;
+    }
+  ];
+}
+
+export interface ErrorResponse {
+  error: {
+    message: string;
+    type?: string;
+    param?: string | null;
+    code?: string | null;
+  };
+}
+export interface Message {
+  role: "user" | "assistant" | "system" | "error";
+  content: string;
 }

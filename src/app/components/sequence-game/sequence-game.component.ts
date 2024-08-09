@@ -17,16 +17,29 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { TryAgainModalComponent } from "../try-again-modal/try-again-modal.component";
 import { ActivatedRoute, Route, Router } from "@angular/router";
 import { SimonSaysService } from "../../services/simon-says.service";
+import { SweetAlertService } from "../../services/sweet-alert-service.service";
+import { LeaderboardComponent } from "../leaderboard/leaderboard.component";
+import { GameResultsService } from "../../services/game-results.service";
+import { ModalComponent } from "../modal/modal.component";
 
 @Component({
   selector: "app-sequence-game",
   standalone: true,
-  imports: [TimerComponent, CommonModule, FormsModule],
+  imports: [
+    TimerComponent,
+    CommonModule,
+    FormsModule,
+    LeaderboardComponent,
+    ModalComponent,
+  ],
   templateUrl: "./sequence-game.component.html",
   styleUrl: "./sequence-game.component.scss",
 })
 export class SequenceGameComponent implements OnInit {
   title = "Simon Dice";
+  public alertService = inject(SweetAlertService);
+
+  public gameResultsService = inject(GameResultsService);
 
   //private gameDificulty: string = "Facil";
 
@@ -36,6 +49,7 @@ export class SequenceGameComponent implements OnInit {
   //Nos permite acceder a propiedades y metodos del componente hijo
   @ViewChild(TimerComponent)
   timerComponent!: TimerComponent;
+  @ViewChild("puntosModal") puntosModal!: ModalComponent;
 
   // Colores de los botones utilizados en el juego
   buttonColours: string[] = ["purple", "blue", "green", "orange"];
@@ -222,21 +236,16 @@ export class SequenceGameComponent implements OnInit {
       }
     );
   }
-  exitGames(){
-    this.router.navigate(['/app/games'])
+  exitGames() {
+    this.router.navigate(["/app/games"]);
   }
   // Inicia el juego y la secuencia del temporizador
   startGame(): void {
     if (this.difficulty == "") {
-      Swal.fire({
-        title: "Oops...",
-        text: "Seleccione una dificultad antes de comenzar el juego.",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        confirmButtonColor: "#ff9f1c",
-      });
+      this.alertService.showdifficultyWarning(
+        "Ooops...",
+        "Seleccione una dificultad antes de comenzar el juego."
+      );
     } else {
       this.isStarted = true;
       this.points = 0;
@@ -253,11 +262,11 @@ export class SequenceGameComponent implements OnInit {
 
     let stringDifficutly: string = "";
     if (this.difficulty === "easy") {
-      stringDifficutly = "Facil";
+      stringDifficutly = "Fácil";
     } else if (this.difficulty === "medium") {
       stringDifficutly = "Medio";
     } else if (this.difficulty === "hard") {
-      stringDifficutly = "Dificil";
+      stringDifficutly = "Difícil";
     }
 
     const gameResults: IGameResults = {
@@ -279,5 +288,8 @@ export class SequenceGameComponent implements OnInit {
       return user.id ? Number(user.id) : undefined;
     }
     return undefined;
+  }
+  showModal() {
+    this.puntosModal.show();
   }
 }

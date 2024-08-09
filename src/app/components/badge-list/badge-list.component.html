@@ -1,34 +1,69 @@
 <div class="container2">
-  <div class="container" *ngFor="let badge of badgeList">
-    <div class="badge-container">
-      <div class="badge-img">
-        <img src="{{ badge.url }}" alt="Imagen de insignia" />
-      </div>
-      <div class="info-container">
-        <h3>{{ badge.title }}</h3>
-        <p>{{ badge.description }}</p>
-      </div>
-
-      <div class="btn-container d-flex justify-content-evenly">
-        <button
-          class="btn btn-primary" 
-          (click)="showDetailModal(badge, showModal)"
+  <div class="container text-center">
+    <div class="row">
+      <div
+        class="col-md-6 col-sm-12 mb-5 badge-container mx-5"
+        *ngFor="let badge of badgeList; let i = index"
+        (click)="flipCard(i)"
+      >
+        <div
+          class="badge-card"
+          [ngStyle]="{
+            background: getColor(i),
+            'box-shadow': getBoxShadow(i)
+          }"
+          [ngClass]="{ flipped: flippedIndexes.includes(i) }"
         >
-          <i class="fa-regular fa-pen-to-square"></i>
-        </button>
-        <button class="btn btn-primary" (click)="delteBadge(badge.badgeId!)">
-          <i class="fa-regular fa-trash-can"></i>
-        </button>
+          <div class="badge-front">
+            <img
+              *ngIf="badge.url; else elseBlockImg"
+              [src]="badge.url"
+              alt="Badge image"
+              width="85px"
+              height="85px"
+            />
+            <ng-template #elseBlockImg>
+              <img
+                src="../../../assets/icons/medal.png"
+                alt="Badge image"
+                width="85px"
+                height="85px"
+              />
+            </ng-template>
+          </div>
+          <div class="badge-back">
+            <div class="btn-container">
+              <ng-container *ngIf="isAllowed">
+                <button
+                  class="btn btn-primary"
+                  (click)="showDetailModal(badge, showModal)"
+                >
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button
+                  class="btn btn-primary"
+                  (click)="delteBadge(badge.badgeId!)"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </ng-container>
+            </div>
+            <div class="card-back-content">
+              <h3>{{ badge.title }}</h3>
+              <p>{{ badge.description }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <app-modal #showModal>
+      <app-badge-form
+        (callParentEvent)="onFormEventCalled($event)"
+        [badge]="selectedBadge"
+        [actualFile]="selectedFile"
+        [btn]="'Actualizar'"
+      />
+    </app-modal>
   </div>
 </div>
-
-<app-modal #showModal>
-  <app-badge-form
-    (callParentEvent)="onFormEventCalled($event)"
-    [badge]="selectedBadge"
-    [actualFile]="selectedFile"
-    [btn]="'Actualizar'"
-  />
-</app-modal>

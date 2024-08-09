@@ -1,57 +1,118 @@
-.table {
-    margin-top: 100px;
-    width: 100%;
-    margin-bottom: 1rem;
-    color: #212529;
-    vertical-align: top;
-    background-color: rgb(255, 255, 255);
-    
+table {
+  width: 100%;
+  margin-bottom: 1rem;
+  vertical-align: top;
+  background-color: #16c2d5;
+  font-size: 20px;
+  border-collapse: collapse;
+  overflow: hidden;
 }
-tbody, td, tfoot, th, thead, tr {
-    border-color: #ff9f1c; 
-    border-style: solid;
-    border-width: 3px;
+*{
+  font-size: 18px;
+}
+
+.container2 {
+  padding: 70px;
+  border-radius: 10px;
+  width: 100%;
+  overflow-x: auto;
 }
 .btn-danger {
-    color: #fff;
-    background-color: #ff9f1c;
-    border-color: #ff9f1c;
+  color: #fff;
+  background-color: #ff9f1c;
+  border-color: #ff9f1c;
 }
 .btn-danger:hover {
-    color: #fff;
-    background-color: #ee9211;
-    border-color: #ee9211;
+  color: #fff;
+  background-color: #ee9211;
+  border-color: #ee9211;
 }
-table {
-    border-collapse: collapse;
-    
-    overflow: hidden;
-  }
-  
-  th, td {
-    padding: 1em;
-   
-    border-bottom: 2px solid white; 
-  }
-  
-  .css-mine {
-    margin-top: 2em;
-    clear: both;
-  }
-  
-  body {
-    margin: 1.5em;
-  }
-  .label{
-   font-weight: normal;
-    text-align: center;
-    font-family: Dosis, "Dosis", sans-serif;
-  }
+.placeholder {
+  text-align: center;
+  font-size: 26px;
+  margin-top: 20px;
+  color: #000000;
+}
 
-  
-  @media (max-width: 1200px) {
-    th, td {
-      padding: 4px;
-      border-bottom: 2px solid white; 
-    }
+
+
+th,td{
+  color: rgb(0, 0, 0);
+}
+.css-mine {
+  margin-top: 2em;
+  clear: both;
+}
+th{
+  font-size: 20px;
+}
+.input-filter {
+  border:2px;
+  border-style: solid;
+  border-color: #16c2d5;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+body {
+  margin: 1.5em;
+}
+.label {
+  font-weight: normal;
+  text-align: center;
+  font-family: Dosis, "Dosis", sans-serif;
+}
+mat-paginator {
+  font-size: 16px;
+  color: black;
+  background-color: #16c2d5;
+}
+
+@media (max-width: 1024px) {
+  .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+    overflow-x:auto
   }
+  
+  table {
+    width: 100%;
+    font-size: 18px;
+      background-color: #16c2d5;
+  }
+*{
+  font-size: 20px;
+}
+}
+
+@media (max-width: 768px) {
+  .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+    overflow-x:auto
+  }
+  
+  table {
+    width: 100%;
+    font-size: 20px;
+      background-color: #16c2d5;
+  }
+}
+
+@media (max-width: 480px) {
+   .container2 {
+    padding-top: 15px;
+    border-radius: 10px;
+    width: 100%;
+    overflow-x:auto
+  }
+  
+  table {
+    width: 100%;
+    font-size: 20px;
+    background-color: #16c2d5;
+  }
+ 
+}

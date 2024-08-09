@@ -32,7 +32,6 @@ export class OutdoorFormComponent {
   public modalService = inject(NgbModal);
   public challenge = inject(ChallengeListComponent);
 
-  private challengeGameService = inject(ChallengeGameService);
 
   private router = inject(Router);
 

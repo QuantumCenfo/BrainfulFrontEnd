@@ -4,18 +4,19 @@ import { IChallengeGame, IChallengeOutdoor } from '../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from './sweet-alert-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChallengeOutdoorService extends BaseService<IChallengeOutdoor> {
   protected override source: string = "challengeOutdoor";
-  private snackBar = inject(MatSnackBar);
+
   private challengeOutdoorSignal = signal<IChallengeOutdoor[]>([]);
   private activeChallengeOutdoorSignal = signal<IChallengeOutdoor[]>([]);
   private inactiveChallengeOutdoorSignal = signal<IChallengeOutdoor[]>([]);
 
-  constructor(protected override http: HttpClient) {
+  constructor(protected override http: HttpClient,  private sweetAlertService: SweetAlertService ) {
     super();
   }
 
@@ -30,31 +31,20 @@ export class ChallengeOutdoorService extends BaseService<IChallengeOutdoor> {
   get challengeOutdoors$() {
     return this.challengeOutdoorSignal;
   }
-
-  getAllActiveChallenges() {
-    this.http.get<IChallengeOutdoor[]>(`${this.source}/active-challenges`).subscribe({
+  getAllChallengesByStatus(status: string) {
+    this.http.get<IChallengeOutdoor[]>(`${this.source}/challenges?status=${status}`).subscribe({
       next: (res: IChallengeOutdoor[]) => {
         res.reverse();
-        this.activeChallengeOutdoorSignal.set(res);
-        console.log("Active challenges fetched successfully");
+        if (status === 'active') {
+          this.activeChallengeOutdoorSignal.set(res);
+        } else if (status === 'inactive') {
+          this.inactiveChallengeOutdoorSignal.set(res);
+        }
+        console.log(`${status.charAt(0).toUpperCase() + status.slice(1)} challenges fetched successfully`);
         console.log("Response: ", res);
       },
       error: (err: any) => {
-        console.error("Error fetching active challenges", err);
-      },
-    });
-  }
-
-  getAllInactiveChallenges() {
-    this.http.get<IChallengeOutdoor[]>(`${this.source}/inactive-challenges`).subscribe({
-      next: (res: IChallengeOutdoor[]) => {
-        res.reverse();
-        this.inactiveChallengeOutdoorSignal.set(res);
-        console.log("Inactive challenges fetched successfully");
-        console.log("Response: ", res);
-      },
-      error: (err: any) => {
-        console.error("Error fetching inactive challenges", err);
+        console.error(`Error fetching ${status} challenges`, err);
       },
     });
   }
@@ -63,35 +53,16 @@ export class ChallengeOutdoorService extends BaseService<IChallengeOutdoor> {
     this.add(item).subscribe({
       next: (response: any) => {
         this.challengeOutdoorSignal.update((results: IChallengeOutdoor[]) => [response, ...results]);
-        Swal.fire({
-          iconColor: "white",
-          color: "white",
-          background: "#36cf4f",
-          confirmButtonColor: "#ff9f1c",
-          cancelButtonColor: "#16c2d5",
-          title: "Desafío externo guardado",
-          icon: "success",
-          timer: 3000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-          showCancelButton: false,
-        }).then(() => {
+        this.sweetAlertService.showSuccess(
+          "Desafío externo guardado",
+        ).then(() => {
           window.location.reload();
         });
       },
       error: (error : any) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Lo sentimos',
-          iconColor: 'white',
-          color: 'white',
-          background:'#d54f16',
-          position: 'center',
-          text: 'Hubo un error guardando el desafío externo',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        }).then(() => {
+        this.sweetAlertService.showError(
+          "Hubo un error guardando el desafío externo",
+        ).then(() => {
           window.location.reload();
         });
       }
@@ -105,35 +76,16 @@ export class ChallengeOutdoorService extends BaseService<IChallengeOutdoor> {
           co.outdoorChallengeId === challengeOutdoor.outdoorChallengeId ? res : co
         );
         this.challengeOutdoorSignal.set(updatedChallengeOutdoors);
-        Swal.fire({
-          iconColor: "white",
-          color: "white",
-          background: "#36cf4f",
-          confirmButtonColor: "#ff9f1c",
-          cancelButtonColor: "#16c2d5",
-          title: "Desafío externo actualizado",
-          icon: "success",
-          timer: 3000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-          showCancelButton: false,
-        }).then(() => {
+        this.sweetAlertService.showSuccess(
+          "Desafío externo actualizado"
+        ).then(() => {
           window.location.reload();
         });
       },
       error: (err: any) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Lo sentimos',
-          iconColor: 'white',
-          color: 'white',
-          background:'#d54f16',
-          position: 'center',
-          text: 'Hubo un error actualizando el desafío externo',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        }).then(() => {
+        this.sweetAlertService.showError(
+          "Hubo un error actualizando el desafío externo"
+        ).then(() => {
           window.location.reload();
         });
       },

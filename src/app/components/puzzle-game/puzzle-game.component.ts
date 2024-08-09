@@ -10,6 +10,7 @@ import { TryAgainModalComponent } from '../try-again-modal/try-again-modal.compo
 import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-puzzle-game',
@@ -32,7 +33,8 @@ export class PuzzleComponent implements OnChanges {
   cards: string = ""; 
   started = false;
   points: number = 0;
-  
+  public alertService = inject(SweetAlertService);
+
   gameId: number | undefined;
   public puzzleService = inject(PuzzleService);
   private routerSubscription: Subscription;
@@ -112,15 +114,7 @@ export class PuzzleComponent implements OnChanges {
       }
       this.timerComponent.timer(timer); 
     } else {
-      Swal.fire({
-        title: 'Oops...',
-        text: 'Seleccione una dificultad antes de comenzar el juego.',
-        icon: 'warning',
-        iconColor: 'white',
-        color: 'white',
-        background: '#16c2d5',
-        confirmButtonColor: '#ff9f1c',
-      });
+      this.alertService.showdifficultyWarning('Ooops...','Seleccione una dificultad antes de comenzar el juego.');
       this.isGameRunning = false;
     }
   }
@@ -335,6 +329,7 @@ export class PuzzleComponent implements OnChanges {
 
   showVictoryAlert() {
     this.timerComponent.stopTimer();
+    
     Swal.fire({
       iconColor: 'white',
       color: 'white',

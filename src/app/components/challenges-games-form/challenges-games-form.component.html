@@ -1,144 +1,163 @@
-<div class="container">
+<div class="container challenge-container">
   <div>
     <img
       src="../../../assets/icons/LogoCerebro.png"
       alt="Brainful logo"
-      class="brain-logo"
+      class=""
+      width="175px"
+      height="100px"
     />
   </div>
+  <h2>Desafió Digitales</h2>
+
   <div class="row">
-    <!--<div class="col-12">
-      <h2>{{ titleComp }}</h2>
-    </div>-->
-    <div class="row">
-      <label for="title">Título Desafío</label>
-      <div class="col-12">
-        <input 
-          #title="ngModel" 
-          type="text" 
-          class="form-control"
-          class="input" 
-          id="title" 
-          name="title" 
-          placeholder="Título del Desafío"
-          [(ngModel)]="newChallengeGame.title" 
-          [ngClass]="{ 'is-invalid': title.invalid && title.touched, 'is-valid': title.valid && title.touched }" 
-          required 
-        />
-      </div>
-      <label for="description">Descripción</label>
-      <div class="col-12">
-        <textarea 
-          #description="ngModel" 
-          class="form-control"
-          id="description" 
-          name="description" 
-          placeholder="Descripción del desafío"
-          [(ngModel)]="newChallengeGame.description" 
-          [ngClass]="{ 'is-invalid': description.invalid && description.touched, 'is-valid': description.valid && description.touched }" 
-          required 
-        ></textarea>
-      </div>
-      <label for="objectiveScore">Puntos Objetivo</label>
-      <div class="col-12">
-        <input 
-          #objectiveScore="ngModel" 
-          type="number" 
-          class="form-control"
-          class="number"  
-          id="objectiveScore" 
-          name="objectiveScore" 
-          [(ngModel)]="newChallengeGame.objectiveScore" 
-          [ngClass]="{ 'is-invalid': objectiveScore.invalid && objectiveScore.touched, 'is-valid': objectiveScore.valid && objectiveScore.touched }" 
-          required 
-        />
-      </div>
-      <label for="objectiveTime">Tiempo Restante Objetivo (en segundos)</label>
-      <div class="col-12">
-        <input 
-          #objectiveTime="ngModel" 
-          type="number" 
-          class="form-control" 
-          class="number"  
-          id="objectiveTime" 
-          name="objectiveTime" 
-          [(ngModel)]="newChallengeGame.objectiveTime" 
-          [ngClass]="{ 'is-invalid': objectiveTime.invalid && objectiveTime.touched, 'is-valid': objectiveTime.valid && objectiveTime.touched }" 
-          required 
-        />
-      </div>
-      <label for="startDate">Fecha de Inicio</label>
-      <div class="col-12">
-        <input 
-          #startDate="ngModel" 
-          type="date" 
-          class="form-control"
-          class="input"  
-          id="startDate" 
-          name="startDate" 
-          placeholder="Start Date"
-          [(ngModel)]="newChallengeGame.startDate" 
-          [ngClass]="{ 'is-invalid': startDate.invalid && startDate.touched, 'is-valid': startDate.valid && startDate.touched }" 
-          required 
-        />
-      </div>
-      <label for="endDate">Fecha de Fin</label>
-      <div class="col-12">
-        <input 
-          #endDate="ngModel" 
-          type="date" 
-          class="form-control"
-          class="input"  
-          id="endDate" 
-          name="endDate" 
-          placeholder="End Date"
-          [(ngModel)]="newChallengeGame.endDate" 
-          [ngClass]="{ 'is-invalid': endDate.invalid && endDate.touched, 'is-valid': endDate.valid && endDate.touched }" 
-          required 
-        />
-      </div>
-      @if(newChallengeGame.badgeId){
-      <label for="badge">Insigna a Obtener</label>
-      <div class="col-12">
-        <select 
-          #badge="ngModel" 
-          class="form-control" 
-          id="badge" 
-          name="badge" 
-          [(ngModel)]="newChallengeGame.badgeId.badgeId"
-          (ngModelChange)="newChallengeGame.badgeId.badgeId = +$event" 
-          required
-        >
-          <option *ngFor="let badge of badgeList" [value]="badge.badgeId">{{ badge.title }}</option>
-        </select>
-      </div>
-      }
-      @if(newChallengeGame.gameId){
-      <label for="game">Juego para el desafío</label>
-      <div class="col-12">
-        <select 
-          #game="ngModel" 
-          class="form-control" 
-          id="game" 
-          name="game" 
-          [(ngModel)]="newChallengeGame.gameId.gameId"
-          (ngModelChange)="newChallengeGame.gameId.gameId = +$event"  
-          required
-        >
-          <option *ngFor="let game of gameList" [value]="game.gameId">{{ game.name }}</option>
-        </select>
-      </div>
-      }
-      <div class="col-12 mt-3">
-        <button
-          type="button"
-          (click)="addChallenge()"
-          class="btn btn-primary d-flex align-items-center"
-        >
-          <i class="fa-solid fa-plus white me-2"></i>
-          <p class="mb-0"> {{ titleComp }} </p>
-        </button>
-      </div>
+    <label for="title">Título Desafío</label>
+    <div class="col-md-12">
+      <input
+        #title="ngModel"
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        placeholder="Título del Desafío"
+        [(ngModel)]="newChallengeGame.title"
+        [ngClass]="{
+          'is-invalid': title.invalid && title.touched,
+          'is-valid': title.valid && title.touched
+        }"
+        required
+      />
+    </div>
+    <label for="description">Descripción</label>
+    <div class="col-md-12">
+      <textarea
+        #description="ngModel"
+        class="form-control"
+        id="description"
+        name="description"
+        placeholder="Descripción del desafío"
+        [(ngModel)]="newChallengeGame.description"
+        [ngClass]="{
+          'is-invalid': description.invalid && description.touched,
+          'is-valid': description.valid && description.touched
+        }"
+        required
+      ></textarea>
+    </div>
+    <label for="objectiveScore">Puntos Objetivo</label>
+    <div class="col-md-12">
+      <input
+        placeholder="0"
+        #objectiveScore="ngModel"
+        type="number"
+        class="form-control"
+        id="objectiveScore"
+        name="objectiveScore"
+        [(ngModel)]="newChallengeGame.objectiveScore"
+        [ngClass]="{
+          'is-invalid': objectiveScore.invalid && objectiveScore.touched,
+          'is-valid': objectiveScore.valid && objectiveScore.touched
+        }"
+        required
+      />
+    </div>
+    <label for="objectiveTime">Tiempo Restante Objetivo (en segundos)</label>
+    <div class="col-md-12">
+      <input
+        placeholder="0"
+        #objectiveTime="ngModel"
+        type="number"
+        class="form-control"
+        id="objectiveTime"
+        name="objectiveTime"
+        [(ngModel)]="newChallengeGame.objectiveTime"
+        [ngClass]="{
+          'is-invalid': objectiveTime.invalid && objectiveTime.touched,
+          'is-valid': objectiveTime.valid && objectiveTime.touched
+        }"
+        required
+      />
+    </div>
+    <label for="startDate">Fecha de Inicio</label>
+    <div class="col-md-12">
+      <input
+        #startDate="ngModel"
+        type="date"
+        class="form-control"
+        id="startDate"
+        name="startDate"
+        placeholder="Start Date"
+        [(ngModel)]="newChallengeGame.startDate"
+        [ngClass]="{
+          'is-invalid': startDate.invalid && startDate.touched,
+          'is-valid': startDate.valid && startDate.touched
+        }"
+        required
+      />
+    </div>
+    <label for="endDate">Fecha de Fin</label>
+    <div class="col-md-12">
+      <input
+        #endDate="ngModel"
+        type="date"
+        class="form-control"
+        id="endDate"
+        name="endDate"
+        placeholder="End Date"
+        [(ngModel)]="newChallengeGame.endDate"
+        [ngClass]="{
+          'is-invalid': endDate.invalid && endDate.touched,
+          'is-valid': endDate.valid && endDate.touched
+        }"
+        required
+      />
+    </div>
+    @if(newChallengeGame.badgeId){
+    <label for="badge">Insignia a Obtener</label>
+    <div class="col-md-12">
+      <select
+        class="mb-3 form-select form-control"
+        id="badge"
+        name="badge"
+        [(ngModel)]="newChallengeGame.badgeId.badgeId"
+        (ngModelChange)="newChallengeGame.badgeId.badgeId = +$event"
+        required
+      >
+        <option value="0" selected disabled>Seleccione una opción</option>
+        <option *ngFor="let badge of badgeList" [value]="badge.badgeId">
+          {{ badge.title }}
+        </option>
+      </select>
+    </div>
+
+    } @if(newChallengeGame.gameId){
+    <label for="game">Juego para el desafío</label>
+    <div class="col-md-12">
+      <select
+        #game="ngModel"
+        class="mb-3 form-select form-control"
+        id="game"
+        name="game"
+        [(ngModel)]="newChallengeGame.gameId.gameId"
+        (ngModelChange)="newChallengeGame.gameId.gameId = +$event"
+        required
+      >
+      <option value="0" selected disabled>Seleccione una opción</option>
+        <option *ngFor="let game of gameList" [value]="game.gameId">
+          {{ game.name }}
+        </option>
+      </select>
+    </div>
+    }
+    <div class="col-md-12 mt-3">
+      <button
+        type="button"
+        (click)="addChallenge()"
+        class="btn btn-primary d-flex align-items-center"
+      >
+        <i class="fa-solid fa-plus white me-2"></i>
+        <p class="mb-0">{{ titleComp }}</p>
+      </button>
     </div>
   </div>
 </div>

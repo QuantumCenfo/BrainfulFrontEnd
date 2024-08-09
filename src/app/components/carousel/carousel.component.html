@@ -1,0 +1,53 @@
+<div
+  class="d-flex flex-column justify-content-center align-items-center text-end"
+>
+  <h1 class="title">{{ title }}</h1>
+  <div
+    class="col-md-12 col-sm-12 badge-container-externos mx-5 shadow p-4 mb-5 bg-body-tertiary rounded-3"
+  >
+    <ng-container *ngIf="list && list.length">
+      <div
+        class="badge-card"
+        [ngStyle]="{
+          background: getColor(currentIndex),
+          'box-shadow': getBoxShadow(currentIndex)
+        }"
+      >
+        <div class="badge-front slide">
+          <img
+            [src]="list[currentIndex].badgeId?.url"
+            alt="Badge image"
+            width="85px"
+            height="85px"
+          />
+        </div>
+      </div>
+
+      <div class="d-flex row text-center">
+        <h3>{{ list[currentIndex]?.name || list[currentIndex]?.title }}</h3>
+        <p>{{ list[currentIndex]?.description }}</p>
+      </div>
+      <ng-container *ngIf="btn === 'Intentar Desafió'; else elseBlockBtn">
+        <button class="btn btn-primary" (click)="goToGames()">
+          <p>{{ btn }}</p>
+        </button>
+      </ng-container>
+      <ng-template #elseBlockBtn>
+        <button
+          class="btn btn-primary"
+          (click)="onDetail.emit(list[currentIndex])"
+        >
+          <p>{{ btn }}</p>
+        </button>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
+<div class="arrow-container mb-5">
+  <button class="control prev btn btn-primary" (click)="onPrevClick()">
+    <span class="arrow left"></span>
+  </button>
+  <button class="control next btn btn-primary" (click)="onNextClick()">
+    <span class="arrow right"></span>
+  </button>
+</div>

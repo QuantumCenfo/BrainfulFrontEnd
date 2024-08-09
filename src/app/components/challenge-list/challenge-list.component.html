@@ -1,39 +1,29 @@
 <div class="container2">
-  <h1 class="center-text">Desafios Externos</h1>
-  <div class="container" *ngFor="let outDoorChallenge of outdoorChallengeList">
-    <div class="badge-container">
-      <div class="badge-img">
-        <img src="{{ outDoorChallenge.badgeId?.url }}" alt="Imagen de insignia" />
-      </div>
-      <div class="info-container">
-        <p>{{ outDoorChallenge.name }}</p>
-        <p>{{ outDoorChallenge.description }}</p>
-      </div>
-      <div class="btn-container d-flex justify-content-evenly">
-        <button
-          class="btn btn-primary" (click)="showDetail(outDoorChallenge, formModal)">
-          <p>Completar Desafío</p>
-        </button>
-      </div>
-    </div>
+  <div class="container text-center">
+    <app-carousel
+      [list]="outdoorChallengeList"
+      [colors]="colors"
+      (onDetail)="showDetail($event, formModal)"
+      [btn]="'Completar Desafió'"
+      [title]="'Desafíos Externos'"
+    ></app-carousel>
   </div>
-  <h1 class="center-text">Desafios Digitales</h1>
-  <div class="container" *ngFor="let gameChallenge of gameChallengeList">
-    <div class="badge-container">
-      <div class="badge-img">
-        <img src="{{ gameChallenge.badgeId?.url }}" alt="Imagen de insignia" />
-      </div>
-      <div class="info-container">
-        <p>{{ gameChallenge.title }}</p>
-        <p>{{ gameChallenge.description }}</p>
-      </div>
-    </div>
-  </div>
-</div>
 
-<app-modal #formModal>
-  <app-outdoor-form 
-  (callParentEvent)="onFormEventCalled($event)"
-    [outDoorChallenge]="currentOutDoorChallenge">
-  </app-outdoor-form>
-</app-modal>
+  <div class="container text-center">
+    <app-carousel
+      [list]="gameChallengeList"
+      [colors]="colors"
+      (onDetail)="goToGames()"
+      [btn]="'Intentar Desafió'"
+      [title]="'Desafíos Digitales'"
+    ></app-carousel>
+  </div>
+
+  <app-modal #formModal>
+    <app-outdoor-form
+      (callParentEvent)="onFormEventCalled($event)"
+      [outDoorChallenge]="currentOutDoorChallenge"
+    >
+    </app-outdoor-form>
+  </app-modal>
+</div>

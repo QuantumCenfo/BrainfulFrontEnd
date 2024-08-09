@@ -1,0 +1,55 @@
+<div class="leaderboard">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Puesto</th>
+        <th scope="col">Puntos</th>
+        <th scope="col">Dificultad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let gr of gameResults; let i = index">
+        <ng-container *ngIf="gameId === gr.gameId?.gameId">
+          <ng-container [ngSwitch]="i - 1">
+            <ng-container *ngSwitchCase="1">
+              <th scope="row">
+                <img
+                  src="../../../assets/icons/medal (1).png"
+                  alt="Primer lugar"
+                  width="30px"
+                  height="30px"
+                />
+              </th>
+            </ng-container>
+            <ng-container *ngSwitchCase="2">
+              <th scope="row">
+                <img
+                  src="../../../assets/icons/medal (2).png"
+                  alt="Segundo Lugar"
+                  width="30px"
+                  height="30px"
+                />
+              </th>
+            </ng-container>
+            <ng-container *ngSwitchCase="3">
+              <th scope="row">
+                <img
+                  src="../../../assets/icons/medal (3).png"
+                  width="30px"
+                  height="30px"
+                  alt="Tercer Lugar"
+                />
+              </th>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <th scope="row">{{ i - 1 }}</th>
+            </ng-container>
+          </ng-container>
+
+          <td>{{ gr.score }}</td>
+          <td>{{ gr.levelDifficulty }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
