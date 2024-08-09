@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ReactionGameService extends BaseService<IGameResults>{
   protected override source: string = "gameResults";
-  private snackBar = inject(MatSnackBar);
+
   private resultsListSignal = signal<IGameResults[]>([]);
   constructor(protected override http: HttpClient) {
     super();  
@@ -22,11 +22,7 @@ export class ReactionGameService extends BaseService<IGameResults>{
         this.resultsListSignal.update((results: IGameResults[]) => [response, ...results]);
       },
       error: (error : any) => {
-        this.snackBar.open(error.error.description, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
+       
         console.error('error', error);
         console.error('error', error);
       }

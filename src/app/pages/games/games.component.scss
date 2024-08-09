@@ -68,26 +68,9 @@
     h3 {
       margin-top: 0;
     }
-
-    button {
-      background-color: #b5dee7;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 12px;
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    button:hover {
-      background-color: #43b4ce;
-    }
   }
 }
-h3{
+h3 {
   font-size: 20px;
   font-family: Dosis, "Dosis", sans-serif;
 }
@@ -116,4 +99,16 @@ h3{
   .right {
     right: 10px;
   }
+}
+
+.game-btn {
+  background-color: #16c2d5;
+}
+
+.game-btn:hover {
+  background-color: #1fb1c2;
+  transform: translateY(-2px);
+}
+.btn-container {
+  min-height: 100px;
 }

@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IForum } from '../../interfaces';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-forum-form',
@@ -18,6 +19,7 @@ export class CategoriasFormComponent {
   @Input() title: string = 'Agregar';
   @Input() toUpdateForum: IForum = {};
   @Output() callParentEvent: EventEmitter<IForum> = new EventEmitter<IForum>();
+  private alertService = inject(SweetAlertService);
   public badWordsDictionary: Set<string> = new Set([
     'puto',
     'puta',
@@ -107,28 +109,18 @@ export class CategoriasFormComponent {
       }
       else
       {
-        Swal.fire({
-          title: "Oops...",
-          text: "Este foro podría contener palabras inapropiadas. Por favor, revisa el contenido antes de proceder.",
-          icon: "warning",
-          iconColor: "white",
-          color: "white",
-          background: "#16c2d5",
-          timer: 5000,
-        });
+        this.alertService.showError(
+          "Este foro podría contener palabras inapropiadas. Por favor, revisa el contenido antes de proceder.",
+        ); 
+       
       }
     }
     else
     {
-      Swal.fire({
-        title: "Oops...",
-        text: "Falta de agregar titulo o descripción del foro",
-        icon: "warning",
-        iconColor: "white",
-        color: "white",
-        background: "#16c2d5",
-        timer: 2000,
-      });
+      this.alertService.showError(
+        "Falta de agregar titulo o descripción del foro",
+      ); 
+     
     }
   }
 

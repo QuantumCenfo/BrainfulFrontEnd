@@ -19,6 +19,6 @@ export const appConfig: ApplicationConfig = {
         accessTokenInterceptor,
         //handleErrorsInterceptor
       ])
-    ), provideAnimationsAsync()
+    ), provideAnimationsAsync(), provideAnimationsAsync()
   ]
 };

@@ -1,9 +1,10 @@
 import { IChallengeGame, IBadge, IGame } from './../../interfaces/index';
 import { ChallengeGameService } from '../../services/challenge-game.service';
-import { Component, EventEmitter, Input,Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input,Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-challenges-games-update-form',
@@ -16,6 +17,7 @@ import Swal from 'sweetalert2';
   styleUrl: './challenges-games-update-form.component.scss'
 })
 export class ChallengesGamesUpdateFormComponent {
+  private alertService = inject(SweetAlertService)
   @Input() titleComp: string = 'Actualizar Fechas';
   @Input() toUpdateDateChallengeGame: IChallengeGame = {
     badgeId:{
@@ -39,7 +41,7 @@ export class ChallengesGamesUpdateFormComponent {
   validateForm(): boolean {
     // Validación de campos en blanco
     if (!this.toUpdateDateChallengeGame.startDate || !this.toUpdateDateChallengeGame.endDate) {
-      this.showAlert('Campos vacíos', 'Por favor, complete todas las fechas requeridas.');
+      this.alertService.showError('Campos vacíos', 'Por favor, complete todas las fechas requeridas.');
       return false;
     }
 
@@ -48,12 +50,12 @@ export class ChallengesGamesUpdateFormComponent {
 
     // Validación de fechas
     if (this.isPastDate(startDate)) {
-      this.showAlert('Fecha inválida', 'La fecha de inicio debe ser hoy o una fecha futura.');
+      this.alertService.showError('Fecha inválida', 'La fecha de inicio debe ser hoy o una fecha futura.');
       return false;
     }
 
     if (this.isEndDateInvalid(startDate, endDate)) {
-      this.showAlert('Fecha inválida', 'La fecha de fin debe ser mayor que la fecha de inicio.');
+      this.alertService.showError('Fecha inválida', 'La fecha de fin debe ser mayor que la fecha de inicio.');
       return false;
     }
 
@@ -76,20 +78,7 @@ export class ChallengesGamesUpdateFormComponent {
     return endDate <= startDate;
   }
 
-  showAlert(title: string, text: string) {
-    Swal.fire({
-      icon: 'error',
-      title: title,
-      iconColor: 'white',
-      color: 'white',
-      background:'#d54f16',
-      position: 'center',
-      text: text,
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-    });
-  }
+
 
   
 }

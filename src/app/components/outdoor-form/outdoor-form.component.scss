@@ -8,14 +8,20 @@
   }
   .info {
     padding: 12px;
-    color: rgb(255, 255, 255);
-    background-color: #00a4bd;
-    border: solid 2px #ff9f1c;
+    color: rgb(0, 0, 0);
+  
     border-radius: 5px;
     min-width: 100px;
     min-height: 100px;
     text-align: center;
-    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+
+  }
+  .val-container-child p{
+    margin:15px
+  }
+  h1{
+    font-weight: 500;
+    font-family: Dosis, "Dosis", sans-serif;
   }
   .image-validation {
     width: 100%;
@@ -49,9 +55,9 @@
   .file-input label {
     display: block;
     position: relative;
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
+    width: 72px;
+    height: 75px;
+    border-radius: 21px;
     background: linear-gradient(40deg, #7cecf9, #66b9c2);
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
     display: flex;
@@ -80,8 +86,14 @@
     flex-wrap: wrap;
     align-items: center;
   }
+  .fa-2xl {
+    font-size: 36px;
+    line-height: .03125em;
+    vertical-align: -.1875em;
+}
   .btn-container {
-    transform: translateX(167px);
+    width: 100%;
+   margin: 45px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

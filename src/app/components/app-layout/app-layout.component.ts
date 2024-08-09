@@ -5,6 +5,7 @@ import { SidebarComponent } from './elements/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { LayoutService } from '../../services/layout.service';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+import { ScreenSizeService } from '../../services/screensize.service';
 
 @Component({
   selector: 'app-layout',
@@ -21,7 +22,7 @@ import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 export class AppLayoutComponent {
   public title?: string;
 
-  constructor(public layoutService: LayoutService) {
+  constructor(public layoutService: LayoutService ,public screenSizeService: ScreenSizeService) {
     this.layoutService.title.subscribe((title) => (this.title = title));
   }
 }

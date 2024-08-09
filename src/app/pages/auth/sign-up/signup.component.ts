@@ -1,27 +1,31 @@
-import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
-import { IUser } from '../../../interfaces';
-import Swal from 'sweetalert2';
+import { CommonModule } from "@angular/common";
+import { Component, inject, ViewChild } from "@angular/core";
+import { FormsModule, NgModel } from "@angular/forms";
+import { Router, RouterLink } from "@angular/router";
+import { AuthService } from "../../../services/auth.service";
+import { IUser } from "../../../interfaces";
+import Swal from "sweetalert2";
+import { SweetAlertService } from "../../../services/sweet-alert-service.service";
 
 @Component({
-  selector: 'app-signup',
+  selector: "app-signup",
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  templateUrl: "./signup.component.html",
+  styleUrls: ["./signup.component.scss"],
 })
-export class SigUpComponent {  
+export class SigUpComponent {
   public signUpError!: String;
   public validSignup!: boolean;
-  @ViewChild('name') nameModel!: NgModel;
-  @ViewChild('lastname') lastnameModel!: NgModel;
-  @ViewChild('email') emailModel!: NgModel;
-  @ViewChild('password') passwordModel!: NgModel;
-
+  @ViewChild("name") nameModel!: NgModel;
+  @ViewChild("lastname") lastnameModel!: NgModel;
+  @ViewChild("email") emailModel!: NgModel;
+  @ViewChild("password") passwordModel!: NgModel;
+  @ViewChild("image") imageModel!: NgModel;
+  @ViewChild("birthDate") birthDateModel!: NgModel;
+  public alertService = inject(SweetAlertService);
   public user: IUser = {};
+  public imageFile: File | null = null;
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -40,30 +44,23 @@ export class SigUpComponent {
       this.passwordModel.control.markAsTouched();
     }
     if (this.emailModel.valid && this.passwordModel.valid) {
-      this.authService.signup(this.user).subscribe({
+      this.authService.signup(this.user, this.imageFile!).subscribe({
         next: () => {
           this.validSignup = true;
-          Swal.fire({
-            icon: 'success',
-            title: 'Registro Exitoso',
-            text: '¡Usuario registrado con éxito!',
-            showConfirmButton: false,
-            timer: 2000
-          }).then(() => {
-            this.router.navigate(['/login']);
+          this.alertService.showSuccess('Registro Exitoso','H¡Usuario registrado con éxito!').then(() => {
+          this.router.navigate(["/login"]);
           });
+          
         },
         error: (err: any) => {
           this.signUpError = err.description;
-          Swal.fire({
-            icon: 'error',
-            title: 'Error de Registro',
-            text: 'Hubo un error al registrar el usuario. Inténtalo nuevamente.',
-            showConfirmButton: false,
-            timer: 2000
-          });
-        }
+          this.alertService.showError('Error de Registro','Hubo un error al registrar el usuario. Inténtalo nuevamente.');
+         
+        },
       });
     }
+  }
+  onFileChange(event: any) {
+    this.imageFile = event.target.files[0];
   }
 }

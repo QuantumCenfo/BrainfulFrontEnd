@@ -1,15 +1,15 @@
 .btn-round {
-  border-radius: 50%;
-  width: 75px;
-  height: 75px;
-  font-size: 20px;
-  line-height: 20px;
-  padding: 0;
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 18px;
+  padding: 10px;
   margin: 16px;
 
   color: #ffffff;
-  border: 1px solid #ced4da;
+
   transition: all 0.3s;
+  text-align: center;
 }
 
 .btn-container {

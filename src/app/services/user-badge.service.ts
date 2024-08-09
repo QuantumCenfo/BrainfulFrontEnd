@@ -9,31 +9,29 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class UserBadgeService extends BaseService<IUserBadge> {
   protected override source: string = "userbadge";
-  private snackBar = inject(MatSnackBar);
+
   private userBadgeSignal = signal<IUserBadge[]>([]);
 
   get userBadges$() {
     return this.userBadgeSignal;
   }
+  
   public save(userBadge: IUserBadge) {
     this.add(userBadge).subscribe({
       next: (response: any) => {
-        this.userBadgeSignal.update((results: IUserBadge[]) => [response, ...results]);
+        this.userBadgeSignal.update((results: IUserBadge[]) => [
+          response,
+          ...results,
+        ]);
       },
-      error: (error : any) => {
-        this.snackBar.open(error.error.description, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
-        console.error('error', error);
-        console.error('error', error);
-      }
-    })
-  } 
- 
+      error: (error: any) => {
+        console.error("error", error);
+      },
+    });
+  }
+
   getUserBadges(userId: number) {
-    this.findAll().subscribe({
+    this.find(userId).subscribe({
       next: (res: any) => {
         res.reverse();
         this.userBadgeSignal.set(res);

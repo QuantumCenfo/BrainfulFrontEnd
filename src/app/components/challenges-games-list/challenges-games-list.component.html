@@ -1,46 +1,69 @@
-<h2>Desafíos Activos</h2>
-<div class="challenge-list">
-    <div class="challenge-card" *ngFor="let challenge of activeChallengeGameList">
-      <h3>{{ challenge.title }}</h3>
-      <p>{{ challenge.description }}</p>
-      <div class="footer-card">
-        <span class="edit-text-custom">Editar fechas</span>
-        <button class="btn-primary-custom edit-button-custom" (click)="showModalUpdate(challenge)">
-          <i class="fa-regular fa-pen-to-square"></i>
-        </button>
-        <button class="btn-primary-custom edit-button-custom" (click)="delteChallengeGame(challenge.challengeId!)">
-          <i class="fa-regular fa-trash-can"></i>
-        </button>
-      </div>
-    </div>
-</div>
+<h1>Desfíos Digitales</h1>
 <div class="d-flex justify-content-center align-items-center">
-  <app-add-button (click)="showModal()"></app-add-button>
+  <app-add-button [text]="'Agregar'" (click)="showModal()"></app-add-button>
 </div>
-<h2>Desafíos Inactivos</h2>
+<p>Desafíos Activos</p>
+
 <div class="challenge-list">
-<div class="challenge-card" *ngFor="let challenge of inactiveChallengeGameList">
+  <div class="challenge-card" *ngFor="let challenge of activeChallengeGameList">
     <h3>{{ challenge.title }}</h3>
     <p>{{ challenge.description }}</p>
     <div class="footer-card">
-        <span class="edit-text-custom">Editar fechas</span>
-        <button class="btn-primary-custom edit-button-custom" (click)="showModalUpdate(challenge)">
-          <i class="fa-regular fa-pen-to-square"></i>
-        </button>
-        <button class="btn-primary-custom edit-button-custom" (click)="delteChallengeGame(challenge.challengeId!)">
-          <i class="fa-regular fa-trash-can"></i>
-        </button>
+      <span class="edit-text-custom">Editar fechas</span>
+      <button
+        class="btn-primary-custom edit-button-custom"
+        (click)="showModalUpdate(challenge)"
+      >
+        <i class="fa-regular fa-pen-to-square"></i>
+      </button>
+      <button
+        class="btn-primary-custom edit-button-custom"
+        (click)="delteChallengeGame(challenge.challengeId!)"
+      >
+        <i class="fa-regular fa-trash-can"></i>
+      </button>
     </div>
+  </div>
 </div>
 
+<p>Desafíos Inactivos</p>
+<div class="challenge-list">
+  <div
+    class="challenge-card"
+    *ngFor="let challenge of inactiveChallengeGameList"
+  >
+    <h3>{{ challenge.title }}</h3>
+    <p>{{ challenge.description }}</p>
+    <div class="footer-card">
+      <span class="edit-text-custom">Editar fechas</span>
+      <button
+        class="btn-primary-custom edit-button-custom"
+        (click)="showModalUpdate(challenge)"
+      >
+        <i class="fa-regular fa-pen-to-square"></i>
+      </button>
+      <button
+        class="btn-primary-custom edit-button-custom"
+        (click)="delteChallengeGame(challenge.challengeId!)"
+      >
+        <i class="fa-regular fa-trash-can"></i>
+      </button>
+    </div>
+  </div>
 
-
-<app-modal #formModalUpdate>
-    <app-challenges-games-update-form (callParentEvent)="onFormUpdateEventCalled($event)" [toUpdateDateChallengeGame]="selectedChallengeGame">
+  <app-modal #formModalUpdate>
+    <app-challenges-games-update-form
+      (callParentEvent)="onFormUpdateEventCalled($event)"
+      [toUpdateDateChallengeGame]="selectedChallengeGame"
+    >
     </app-challenges-games-update-form>
-</app-modal>
-<app-modal #formModal>
-  <app-challenges-games-form (callParentEvent)="onFormEventCalled($event)" [badgeList]="badgeService.badges$()" [gameList]="gameService.games$()">
-  </app-challenges-games-form>
-</app-modal>
-  
+  </app-modal>
+  <app-modal #formModal>
+    <app-challenges-games-form
+      (callParentEvent)="onFormEventCalled($event)"
+      [badgeList]="badgeService.badges$()"
+      [gameList]="gameService.games$()"
+    >
+    </app-challenges-games-form>
+  </app-modal>
+</div>

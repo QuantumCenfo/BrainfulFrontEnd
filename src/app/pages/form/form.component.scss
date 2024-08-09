@@ -7,8 +7,8 @@ h1{
 }
 
 .container{
-    background-color: #00a4bd;
-    padding: 20px;
+    background-color: #16c2d5;
+    padding: 50px;
     border-radius: 10px;
     width: 100%;
     max-width: 800px;
@@ -24,8 +24,9 @@ h1{
 }
 
 h1 {
+    font-size: 30px;
     text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
     margin-bottom: 20px;
 }
 
@@ -43,7 +44,7 @@ form {
 }
 
 label {
-    color: white;
+    color: rgb(0, 0, 0);
     margin-bottom: 15px;
     font-size: 20px;
     text-align: center;

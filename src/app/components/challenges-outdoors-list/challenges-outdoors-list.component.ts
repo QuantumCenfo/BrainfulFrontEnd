@@ -31,8 +31,8 @@ export class ChallengeOutdoorsListComponent {
   ngOnInit(): void {
     this.badgeService.getAllBadges();
     this.gameService.getAllSignal();
-    this.challengeOutdoorService.getAllActiveChallenges();
-    this.challengeOutdoorService.getAllInactiveChallenges();
+    this.challengeOutdoorService.getAllChallengesByStatus('active');
+    this.challengeOutdoorService.getAllChallengesByStatus('inactive');
   }
 
   showModalUpdate(item: IChallengeOutdoor) {

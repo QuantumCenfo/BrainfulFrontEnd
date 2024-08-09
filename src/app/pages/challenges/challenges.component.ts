@@ -47,10 +47,10 @@ export class ChallengesComponent implements OnInit {
   ngOnInit(): void {
     this.badgeService.getAllBadges();
     this.gameService.getAllSignal();
-    this.challengeGameService.getAllActiveChallenges();
-    this.challengeGameService.getAllInactiveChallenges();
-    this.challengeOutdoorService.getAllActiveChallenges();
-    this.challengeOutdoorService.getAllInactiveChallenges();
+    this.challengeGameService.getAllChallengesByStatus('active');
+    this.challengeGameService.getAllChallengesByStatus('inactive');
+    this.challengeOutdoorService.getAllChallengesByStatus('active');
+    this.challengeOutdoorService.getAllChallengesByStatus('inactive');
   }
 
   

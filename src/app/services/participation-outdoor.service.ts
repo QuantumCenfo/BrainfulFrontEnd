@@ -4,6 +4,7 @@ import { IPartcipationOutdoor } from '../interfaces';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from './sweet-alert-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoo
   public override source: string = "participationsOutdoor";
 
   public participationOutdoorSignal = signal<IPartcipationOutdoor[]>([]);
-  constructor(public override http: HttpClient) {
+  constructor(
+    public override http: HttpClient,
+    private sweetAlertService: SweetAlertService
+  ) {
     super();
   }
   get participations$() {
@@ -24,35 +28,29 @@ export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoo
       next: (res: any) => {
         res.reverse();
         this.participationOutdoorSignal.set(res);
-        console.log("Participations fetched successfully");
-        console.log("Response: ", res);
+  
       },
       error: (err: any) => {
         console.error("Error fetching Participations", err);
       },
     });
   }
-  updateParticipation(id: number, participation: IPartcipationOutdoor): Observable<IPartcipationOutdoor> {
-  
-   
+   updateParticipation(id: number, participation: IPartcipationOutdoor): Observable<IPartcipationOutdoor> {
     console.log(participation);
-    return this.http.put<IPartcipationOutdoor>(`${this.source}/${id}`, participation);
+    return this.http.put<IPartcipationOutdoor>(`${this.source}/${id}`, participation).pipe(
+      catchError((error) => {
+      
+        this.sweetAlertService.showError("Error actualizando participación", " ");
+        return throwError(() => new Error('Error  actualizando participación'));
+      })
+    );
   }
   addParticipation(participation: IPartcipationOutdoor, imageFile: File) {
     
     const formData = new FormData();
     formData.append("participationOutdoor", JSON.stringify(participation));
     formData.append("image", imageFile);
-    Swal.fire({
-      title: "¡Éxito!",
-            text: "La participación ha sido agregada",
-            icon: "success",
-            iconColor: "white",
-            color: "white",
-            showConfirmButton: false,
-            background: "#16c2d5",
-            timer: 2000,
-    });
+    this.sweetAlertService.showSuccess("La participación ha sido agregada", " ");
     return this.http.post(this.source, formData, {
       
       headers: new HttpHeaders({}),
@@ -61,18 +59,10 @@ export class ParticipationOutdoorService extends BaseService<IPartcipationOutdoo
       
       catchError((error) => {
         
-        Swal.fire({
-          icon: 'warning',
-          title: 'Lo sentimos',
-          iconColor: 'white',
-          color: 'white',
-          background:'#d54f16',
-          position: 'center',
-          text: 'No puedes volver a completar el desafio hasta que tu intento sea revisado ',
-          showConfirmButton: false,
-          timer: 10000,
-          timerProgressBar: true,
-        });
+        this.sweetAlertService.showWarning(
+          "No puedes volver a completar el desafío hasta que tu intento sea revisado",
+          "#d54f16"
+        );
         return throwError(() => new Error('Error al agregar la participación'));
       })
     );
