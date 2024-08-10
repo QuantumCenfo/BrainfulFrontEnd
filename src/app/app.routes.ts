@@ -122,7 +122,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRole.superAdmin],
           name: "Contenido Educativo",
-          showInSidebar: false,
+          showInSidebar: true,
         },
       },
       {
@@ -199,7 +199,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRole.user],
           name: "ContenidoEducativo",
-          showInSidebar: false,
+          showInSidebar: true,
         },
       },
       {

@@ -1,0 +1,20 @@
+<h1>Contenido Educativo</h1>
+<div class="carousel-content-list">
+    <div class="arrow left" (click)="prevSlide()">&#8249;</div>
+    <div class="carousel-content-list-content">
+      <div *ngFor="let content of contentList; let i = index" [class.active]="i === currentIndex" class="carousel-content-list-item">
+        <h2>{{ content.title }}</h2>
+        <p>{{ content.description }}</p>
+        <iframe 
+        *ngIf="content.url" 
+        [src]="getSanitizedUrl(content.url)" 
+        width="80%" 
+        height="315" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+    <div class="arrow right" (click)="nextSlide()">&#8250;</div>
+  </div>
