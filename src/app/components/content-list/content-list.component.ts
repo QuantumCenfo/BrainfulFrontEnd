@@ -58,5 +58,9 @@ export class ContentListComponent implements OnInit {
     const match = url.match(regExp);
     return match ? match[1] : null;
   }
+
+  redirectToUrl(url: string): void {
+    window.open(url, '_blank'); // Abre el URL en una nueva pestaña
+  }
 }
 
