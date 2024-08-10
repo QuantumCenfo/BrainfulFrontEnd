@@ -63,10 +63,10 @@ body {
   font-size: 18px;
   color: #fff;
   background-color: #ff9f1c;
-  border-radius: 10px;
+  border-radius: 0.25rem;
   border-color: #ff9f1c;
 }
-.btn-primary  p{
+.btn-primary p {
   font-size: 18px;
   margin: 0px;
 }
@@ -96,7 +96,6 @@ body {
   align-items: center;
   padding: 31px 30px;
   position: relative;
-
 }
 .page-wrapper.compact-wrapper .page-body-wrapper .page-body {
   min-height: calc(100vh - 51px);
@@ -297,34 +296,34 @@ ul {
 .btn-primary {
   color: #fff;
   background-color: #ff9f1c;
-  border-radius: 10px;
+  border-radius: 0.25rem;
   border-color: #ff9f1c;
 }
 
 .btn-primary:hover {
   color: #fff;
   background-color: #ec951a;
-  border-radius: 10px;
+  border-radius: 0.25rem;
   border-color: #ec951a;
 }
 
 .btn-primary:focus {
   color: #fff;
   background-color: #ec951a;
-  border-radius: 10px;
+  border-radius: 0.25rem;
   border-color: #ec951a;
 }
 .btn-secondary {
   font-size: 18px;
   color: #fff;
   background-color: #16c2d5;
-  border-radius: 10px;
+  border-radius: 0.25rem;
   border-color: #16c2d5;
 }
 .btn-secondary:hover {
   color: #fff;
   background-color: #13acbd;
-  border-radius: 10px;
+  border-radius: 0.25rem;
   border-color: #13acbd;
 }
 @media (min-width: 576px) {
@@ -356,8 +355,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-
-.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links {
+.page-wrapper.compact-wrapper
+  .page-body-wrapper
+  div.sidebar-wrapper
+  .sidebar-main
+  .sidebar-links {
   height: calc(83vh - 115px) !important;
   left: -300px;
   z-index: 99;
