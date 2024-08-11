@@ -1,1 +1,106 @@
-<p>content-form works!</p>
+<div class="container content-container">
+    <div>
+      <img
+        src="../../../assets/icons/LogoCerebro.png"
+        alt="Brainful logo"
+        class=""
+        width="175px"
+        height="100px"
+      />
+    </div>
+    <h2>Contenido Educativo</h2>
+  
+    <div class="row">
+      <label for="title">Título Contenido</label>
+      <div class="col-md-12">
+        <input
+          #title="ngModel"
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          placeholder="Título del Desafío"
+          [(ngModel)]="newContent.title"
+          [ngClass]="{
+            'is-invalid': title.invalid && title.touched,
+            'is-valid': title.valid && title.touched
+          }"
+          required
+        />
+      </div>
+      <label for="description">Descripción</label>
+      <div class="col-md-12">
+        <textarea
+          #description="ngModel"
+          class="form-control"
+          id="description"
+          name="description"
+          placeholder="Descripción del desafío"
+          [(ngModel)]="newContent.description"
+          [ngClass]="{
+            'is-invalid': description.invalid && description.touched,
+            'is-valid': description.valid && description.touched
+          }"
+          required
+        ></textarea>
+      </div>
+      <label for="url">URL</label>
+      <div class="col-md-12">
+        <input
+          #url="ngModel"
+          type="text"
+          class="form-control"
+          id="url"
+          name="url"
+          placeholder="URL del contenido"
+          [(ngModel)]="newContent.url"
+          [ngClass]="{
+            'is-invalid': url.invalid && url.touched,
+            'is-valid': url.valid && url.touched
+          }"
+          required
+        />
+      </div>
+      <label for="startDate">Fecha de Publicación</label>
+      <div class="col-md-12">
+        <input
+          #publishDate="ngModel"
+          type="date"
+          class="form-control"
+          id="publishDate"
+          name="publishDate"
+          placeholder="Start Date"
+          [(ngModel)]="newContent.publishDate"
+          [ngClass]="{
+            'is-invalid': publishDate.invalid && publishDate.touched,
+            'is-valid': publishDate.valid && publishDate.touched
+          }"
+          required
+        />
+      </div>
+      <label for="typeMedia">Tipo de Contenido</label>
+      <div class="col-md-12">
+        <select
+          class="mb-3 form-select form-control"
+          id="typeMedia"
+          name="typeMedia"
+          [(ngModel)]="newContent.typeMedia"
+          required
+        >
+          <option value="none" selected disabled>Seleccione una opción</option>
+          <option value="Articulo">Artículo</option>
+          <option value="Video">Vídeo</option>
+        </select>
+      </div>
+      <div class="col-md-12 mt-3">
+        <button
+          type="button"
+          (click)="addContent()"
+          class="btn btn-primary d-flex align-items-center"
+        >
+          <i class="fa-solid fa-plus white me-2"></i>
+          <p class="mb-0">{{ titleComp }}</p>
+        </button>
+      </div>
+    </div>
+  </div>

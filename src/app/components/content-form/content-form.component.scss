@@ -1,0 +1,10 @@
+.content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.content-container input, textarea, select {
+    border-color: #ff9f1c;
+}

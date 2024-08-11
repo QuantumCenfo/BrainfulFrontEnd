@@ -1,4 +1,7 @@
 <h1>Contenido Educativo</h1>
+<div class="d-flex justify-content-center align-items-center">
+  <app-add-button [text]="'Agregar'" (click)="showModal()"></app-add-button>
+</div>
 <div class="carousel-content-list">
     <div class="arrow left" (click)="prevSlide()">&#8249;</div>
     <div class="carousel-content-list-content">
@@ -25,3 +28,11 @@
     </div>
     <div class="arrow right" (click)="nextSlide()">&#8250;</div>
   </div>
+
+
+  <app-modal #formModal>
+    <app-content-form
+      (callParentEvent)="onFormEventCalled($event)"
+    >
+    </app-content-form>
+  </app-modal>

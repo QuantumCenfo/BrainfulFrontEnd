@@ -46,7 +46,7 @@ export class ContentService extends BaseService<IContent>{
           background: "#36cf4f",
           confirmButtonColor: "#ff9f1c",
           cancelButtonColor: "#16c2d5",
-          title: "Desafío guardado",
+          title: "Contenido guardado",
           icon: "success",
           timer: 3000,
           timerProgressBar: true,
@@ -64,7 +64,7 @@ export class ContentService extends BaseService<IContent>{
           color: 'white',
           background:'#d54f16',
           position: 'center',
-          text: 'Hubo un error guardando el desafío',
+          text: 'Hubo un error guardando el contenido',
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
@@ -88,7 +88,7 @@ export class ContentService extends BaseService<IContent>{
           background: "#36cf4f",
           confirmButtonColor: "#ff9f1c",
           cancelButtonColor: "#16c2d5",
-          title: "Desafío actualizado",
+          title: "Contenido actualizado",
           icon: "success",
           timer: 3000,
           timerProgressBar: true,
@@ -106,7 +106,7 @@ export class ContentService extends BaseService<IContent>{
           color: 'white',
           background:'#d54f16',
           position: 'center',
-          text: 'Hubo un error actualizando el desafío',
+          text: 'Hubo un error actualizando el contenido',
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
@@ -119,7 +119,7 @@ export class ContentService extends BaseService<IContent>{
 
   deleteChallengeGame(contentId: number) {
     Swal.fire({
-      title: "Seguro que desea eliminar el desafio?",
+      title: "Seguro que desea eliminar el contenido?",
       text: "No podrá recuperar la información",
       icon: "warning",
       showCancelButton: true,
@@ -134,7 +134,7 @@ export class ContentService extends BaseService<IContent>{
           );
           this.contentSignal.set(deletedContent);
 
-          console.log("Desafio borrado successfully");
+          console.log("Contenido borrado successfully");
         }
       });
     }).then(() => {

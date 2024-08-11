@@ -7,6 +7,7 @@ import { AddButtonComponent } from "../add-button/add-button.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ContentFormComponent } from "../content-form/content-form.component";
 
 @Component({
   selector: 'app-content-list',
@@ -16,6 +17,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
     FormsModule,
     NgbModule,
     ModalComponent,
+    ContentFormComponent,
     AddButtonComponent
   ],
   templateUrl: './content-list.component.html',
@@ -24,8 +26,10 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class ContentListComponent implements OnInit {
   @Input() contentList: IContent[] = [];
   public contentService = inject(ContentService);
+  public modalService = inject(NgbModal);
   public selectedContent: IContent = {};
   sanitizer: DomSanitizer = inject(DomSanitizer);
+  @ViewChild("formModal") formModal!: ModalComponent;
   currentIndex: number = 0;
 
   ngOnInit(): void {
@@ -60,7 +64,17 @@ export class ContentListComponent implements OnInit {
   }
 
   redirectToUrl(url: string): void {
-    window.open(url, '_blank'); // Abre el URL en una nueva pestaña
+    window.open(url, '_blank');
+  }
+
+  showModal() {
+    this.formModal.show();
+  }
+
+  onFormEventCalled(params: IContent) {
+    console.log("Content Data to Save:", params);
+    this.contentService.save(params);
+    this.modalService.dismissAll();
   }
 }
 
