@@ -76,5 +76,15 @@ export class ContentListComponent implements OnInit {
     this.contentService.save(params);
     this.modalService.dismissAll();
   }
+
+  deleteCurrentContent() {
+    const currentContent = this.contentList[this.currentIndex];
+    if (currentContent) {
+      const currentContentId = currentContent.mediaId;
+      if (currentContentId) {
+        this.contentService.deleteContent(currentContentId);
+      }
+    }
+  }
 }
 

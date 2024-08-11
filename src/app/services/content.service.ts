@@ -76,10 +76,10 @@ export class ContentService extends BaseService<IContent>{
   }
 
   updateDateChallengeGame(challengeGame: IContent) {
-    this.edit(challengeGame.contentId, challengeGame).subscribe({
+    this.edit(challengeGame.mediaId, challengeGame).subscribe({
       next: (res: any) => {
         const updatedContents = this.contentSignal().map((c) =>
-          c.contentId === challengeGame.contentId ? res : c
+          c.mediaId === challengeGame.mediaId ? res : c
         );
         this.contentSignal.set(updatedContents);
         Swal.fire({
@@ -117,7 +117,7 @@ export class ContentService extends BaseService<IContent>{
     });
   }
 
-  deleteChallengeGame(contentId: number) {
+  deleteContent(contentId: number) {
     Swal.fire({
       title: "Seguro que desea eliminar el contenido?",
       text: "No podrá recuperar la información",
@@ -130,7 +130,7 @@ export class ContentService extends BaseService<IContent>{
       this.del(contentId).subscribe({
         next: () => {
           const deletedContent = this.contentSignal().filter(
-            (content: IContent) => content.contentId !== contentId
+            (content: IContent) => content.mediaId !== contentId
           );
           this.contentSignal.set(deletedContent);
 

@@ -1,6 +1,7 @@
 <h1>Contenido Educativo</h1>
-<div class="d-flex justify-content-center align-items-center">
+<div class="d-flex justify-content-end align-items-center">
   <app-add-button [text]="'Agregar'" (click)="showModal()"></app-add-button>
+  <button type="button" class="btn btn-primary btn-round" (click)="deleteCurrentContent()">Borrar</button>
 </div>
 <div class="carousel-content-list">
     <div class="arrow left" (click)="prevSlide()">&#8249;</div>

@@ -208,7 +208,7 @@ export interface Message {
 }
 
 export interface IContent {
-  contentId?: number;
+  mediaId?: number;
   title?: string;
   description?: string;
   typeMedia?: string;
