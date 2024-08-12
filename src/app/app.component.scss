@@ -1,6 +1,11 @@
 .open-btn {
+  background-color: #ffa62b;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
   position: fixed;
-  z-index: 9999;
-  right: 0;
-  bottom: 0;
+  bottom: 55px;
+  right: 28px;
 }

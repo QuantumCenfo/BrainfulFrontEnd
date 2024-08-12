@@ -217,3 +217,11 @@ export interface IResponse<T> {
   status: string;
   message: string;
 }
+export interface IContent {
+  mediaId?: number;
+  title?: string;
+  description?: string;
+  typeMedia?: string;
+  url?: string;
+  publishDate?: Date;
+}

@@ -1,1 +1,7 @@
-<p>contents works!</p>
+<div class="container">
+    @defer {
+    <app-content-list [contentList]="contentService.content$()"></app-content-list>
+    }@loading ( after 100ms; minimum 1s) {
+    <app-loader />
+    }
+</div>

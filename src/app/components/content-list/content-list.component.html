@@ -1,0 +1,39 @@
+<h1>Contenido Educativo</h1>
+<div class="d-flex justify-content-end align-items-center">
+  <app-add-button [text]="'Agregar'" (click)="showModal()"></app-add-button>
+  <button type="button" class="btn btn-primary btn-round" (click)="deleteCurrentContent()">Borrar</button>
+</div>
+<div class="carousel-content-list">
+    <div class="arrow left" (click)="prevSlide()">&#8249;</div>
+    <div class="carousel-content-list-content">
+      <div *ngFor="let content of contentList; let i = index" [class.active]="i === currentIndex" class="carousel-content-list-item">
+        <h2>{{ content.title }}</h2>
+        <p>{{ content.description }}</p>
+        <iframe 
+        *ngIf="content.typeMedia === 'Video'" 
+        [src]="getSanitizedUrl(content.url)" 
+        width="80%" 
+        height="315" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+        ></iframe>
+        <button 
+          *ngIf="content.typeMedia === 'Articulo'" 
+          (click)="redirectToUrl(content.url!)"
+          class="btn btn-article"
+        >
+          Leer Artículo
+        </button>
+      </div>
+    </div>
+    <div class="arrow right" (click)="nextSlide()">&#8250;</div>
+  </div>
+
+
+  <app-modal #formModal>
+    <app-content-form
+      (callParentEvent)="onFormEventCalled($event)"
+    >
+    </app-content-form>
+  </app-modal>
