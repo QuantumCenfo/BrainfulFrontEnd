@@ -30,6 +30,7 @@ import { BarinfulLandingComponent } from "./pages/Brainful/barinful-landing/bari
 import { RecomendationsComponent } from "./pages/recomendations/recomendations.component";
 import { ParticipationsComponent } from "./pages/participations/participations.component";
 import { ForumsDetailsComponent } from "./pages/forums details/forumsDetails.component";
+import { HabitsComponent } from "./pages/habits/habits.component";
 
 export const routes: Routes = [
   {
@@ -151,7 +152,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRole.user],
           name: "Recordatorios",
-          showInSidebar: false,
+          showInSidebar: true,
         },
       },
       {
@@ -204,11 +205,11 @@ export const routes: Routes = [
       },
       {
         path: "habits",
-        component: ContentsUsersComponent,
+        component: HabitsComponent,
         data: {
           authorities: [IRole.user],
           name: "Hábitos",
-          showInSidebar: false,
+          showInSidebar: true,
         },
       },
       {
