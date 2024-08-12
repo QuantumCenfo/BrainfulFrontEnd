@@ -57,6 +57,9 @@ input, select, textarea, button {
     border-color: #ff9f1c ;
     border-radius: 5px;
 }
+.button-send{
+    border-radius: 0.25rem !important;
+}
 .invalid input,
 .invalid select {
   border-color: red;
@@ -66,26 +69,28 @@ input, select, textarea {
 }
 
 button {
-  
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: #ff9f1c;
-    color: white;
+    color: rgb(0, 0, 0);
     cursor: pointer;
     margin-top: 10px;
     align-self: center;
     width: 100px;
-    margin-left: 330px;
+    margin-left: 300px;
 }
 
 button:hover {
     background-color:  #ee9211;
-    color: white;
+    color: rgb(0, 0, 0);
     cursor: pointer;
     margin-top: 10px;
     align-self: center;
     width: 100px;
-    margin-left: 330px;
+    margin-left:  300px;
     border-style: solid;
     border-color: #ee9211;
+    transform: translateY(-2px);
 }
 
 textarea {

@@ -61,14 +61,17 @@ body {
 
 .btn-primary {
   font-size: 18px;
-  color: #fff;
+  color: #000000;
   background-color: #ff9f1c;
   border-radius: 0.25rem;
   border-color: #ff9f1c;
+  border: 0px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .btn-primary p {
   font-size: 18px;
   margin: 0px;
+  color: #000000;
 }
 
 .error-snackbar .mdc-snackbar__surface {
@@ -232,6 +235,7 @@ ol,
 ul {
   padding-left: 0rem;
 }
+
 @media only screen and (max-width: 575.98px) {
   .page-wrapper.compact-wrapper .page-header .header-wrapper .toggle-sidebar,
   .page-wrapper.compact-sidebar .page-header .header-wrapper .toggle-sidebar {
@@ -294,24 +298,39 @@ ul {
 // }
 
 .btn-primary {
-  color: #fff;
   background-color: #ff9f1c;
   border-radius: 0.25rem;
   border-color: #ff9f1c;
 }
 
 .btn-primary:hover {
-  color: #fff;
+  transform: translateY(-2px);
+  color: #000;
   background-color: #ec951a;
   border-radius: 0.25rem;
   border-color: #ec951a;
 }
+.btn-danger{
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 1px;
+  border-radius: 0.25rem;
+}
+.btn-danger:hover{
+  transform: translateY(-2px);
 
+}
+i{
+  color: #ffffff;
+}
 .btn-primary:focus {
-  color: #fff;
+  color: #000000;
   background-color: #ec951a;
   border-radius: 0.25rem;
   border-color: #ec951a;
+}
+.fa-thumb-tack{
+  color: #000;
+
 }
 .btn-secondary {
   font-size: 18px;
