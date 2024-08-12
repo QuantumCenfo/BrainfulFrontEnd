@@ -1,1 +1,7 @@
-<p>contents-users works!</p>
+<div class="container">
+    @defer {
+    <app-content-list-users [contentList]="contentService.content$()"></app-content-list-users>
+    }@loading ( after 100ms; minimum 1s) {
+    <app-loader />
+    }
+</div>

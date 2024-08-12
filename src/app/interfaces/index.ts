@@ -206,3 +206,12 @@ export interface Message {
   role: "user" | "assistant" | "system" | "error";
   content: string;
 }
+
+export interface IContent {
+  mediaId?: number;
+  title?: string;
+  description?: string;
+  typeMedia?: string;
+  url?: string;
+  publishDate?: Date;
+}
