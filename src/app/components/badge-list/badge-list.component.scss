@@ -22,7 +22,9 @@ label {
   cursor: pointer;
   transform-style: preserve-3d;
 }
-
+.btn-primary .btn{
+       box-shadow: none;
+}
 .badge-card {
   width: 150px;
   min-height: 175px;
@@ -94,7 +96,7 @@ label {
 
 .btn {
   
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
   background: none;
   border: none;
   cursor: pointer;
