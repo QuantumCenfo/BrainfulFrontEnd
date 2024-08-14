@@ -3,10 +3,6 @@ export interface ILoginResponse {
   expiresIn: number;
 }
 
-export interface IResponse<T> {
-  data: T;
-}
-
 export interface IPartcipationOutdoor {
   participationOutdoorId?: number;
   evidence?: string;
@@ -207,6 +203,20 @@ export interface Message {
   content: string;
 }
 
+export interface IReminder {
+  reminderId?: number;
+  reminderDate: string;
+  reminderType?: string;
+  name?: string;
+  reminderDetails: string;
+  user: IUser; 
+}
+
+export interface IResponse<T> {
+  data: T;
+  status: string;
+  message: string;
+}
 export interface IContent {
   mediaId?: number;
   title?: string;

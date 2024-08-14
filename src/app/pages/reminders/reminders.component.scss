@@ -1,0 +1,69 @@
+.reminders-container {
+    padding: 20px;
+
+  
+    h2 {
+      font-family: Dosis, "Dosis", sans-serif;
+      margin-bottom: 20px;
+      margin-top: 20px;
+      font-size: 30px;
+    }
+  
+    .add-reminder {
+      text-align: right;
+      margin-bottom: 20px;
+  
+      button {
+        background-color: #ffa500;
+        border: none;
+        border-radius: 20%;
+        width: 90px;
+        height: 90px;
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  
+    .reminder-lists {
+      .reminder-list {
+        margin-bottom: 20px;
+  
+        h3 {
+          margin-bottom: 10px;
+          font-size: 25px;
+        }
+      }
+    }
+  }
+  
+  app-reminder-list {
+    display: block;
+    background-color: #ffa500;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    color: white;
+  
+    .reminder-list {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      span {
+        flex-grow: 1;
+      }
+  
+      .reminder-actions {
+        display: flex;
+        gap: 10px;
+  
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 5px;
+        }
+      }
+    }
+  }

@@ -1,0 +1,45 @@
+<form class="habitCont" autocomplete="off" #habitForm="ngForm" (ngSubmit)="onSubmit(habitForm)">
+  <img
+    src="../../../assets/icons/LogoCerebro.png"
+    alt="Brainful logo"
+    class="brain-logo"
+  />
+  <div class="form-content contInfoH">
+    <div class="form-group">
+      <label for="habitType">Nombre del hábito</label>
+      <input
+        type="text"
+        id="habitType"
+        class="infoDetailsH"
+        name="habitType"
+        [(ngModel)]="habit.habitType"
+        #habitType="ngModel"
+        required
+      />
+      <div *ngIf="habitType.invalid && habitType.touched" class="error-message">
+        El nombre del hábito es requerido.
+      </div>
+    </div>
+    <div class="form-group contInfoH">
+      <label for="habitDetails">Detalles del Hábito</label>
+      <textarea
+        id="habitDetails"
+        name="habitDetails"
+        class="infoDetailsH"
+        [(ngModel)]="habit.habitDetails"
+        #habitDetails="ngModel"
+        required
+      ></textarea>
+      <div *ngIf="habitDetails.invalid && habitDetails.touched" class="error-message">
+        Los detalles del hábito son requeridos.
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="button" (click)="onCancel()">Cancelar</button>
+      <button type="submit" [disabled]="habitForm.invalid">Guardar</button>
+    </div>
+    <div *ngIf="habitForm.invalid && habitForm.submitted" class="error-message">
+      Por favor, complete todos los campos requeridos.
+    </div>
+  </div>
+</form>

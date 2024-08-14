@@ -1,0 +1,63 @@
+<form class="habitCont" (ngSubmit)="onSubmit()" #reminderForm="ngForm">
+  <img
+    src="../../../assets/icons/LogoCerebro.png"
+    alt="Brainful logo"
+    class="brain-logo"
+  />
+  <div class="form-content contInfoH">
+    <div class="form-group">
+      <label for="title">Nombre</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        class="infoDetailsH"
+        [(ngModel)]="reminder.name"
+        required
+        #title="ngModel"
+      />
+      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="error-message">
+        Nombre es requerido.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="reminderDate">Fecha</label>
+      <input
+        type="date"
+        id="reminderDate"
+        name="reminderDate"
+        class="infoDetailsH"
+        [(ngModel)]="reminder.reminderDate"
+        required
+        #reminderDate="ngModel"
+      />
+      <div *ngIf="reminderDate.invalid && (reminderDate.dirty || reminderDate.touched)" class="error-message">
+        Fecha es requerida.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="details">Detalles</label>
+      <textarea
+        id="details"
+        name="details"
+        class="infoDetailsH"
+        [(ngModel)]="reminder.reminderDetails"
+        rows="4"
+        required
+        #details="ngModel"
+      ></textarea>
+      <div *ngIf="details.invalid && (details.dirty || details.touched)" class="error-message">
+       Detalles es requerido.
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="reminderForm.invalid">Guardar</button>
+    </div>
+    <div *ngIf="reminderForm.invalid && reminderForm.submitted" class="error-message">
+      Por Favor completa todos los campos.
+    </div>
+  </div>
+</form>

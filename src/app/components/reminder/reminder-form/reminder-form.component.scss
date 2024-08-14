@@ -1,0 +1,65 @@
+.brain-logo {
+    min-width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.habitCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    height: 500px;
+}
+
+.contInfoH {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-size: 17px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.infoDetailsH {
+    border: 1px solid #FF9F1C;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #FF9F1C;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #ffa01cad;
+}
+
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
