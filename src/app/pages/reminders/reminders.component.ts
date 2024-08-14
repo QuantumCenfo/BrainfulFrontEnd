@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { ReminderService } from '../../services/reminder.service';
 import { IReminder, IUser } from '../../interfaces';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { ReminderListComponent } from '../../components/reminder/reminder-list/r
 import { ModalComponent } from "../../components/modal/modal.component";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import Swal from 'sweetalert2';
+import { SweetAlertService } from '../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-reminders',
@@ -16,6 +17,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./reminders.component.scss']
 })
 export class RemindersComponent implements OnInit {
+  public alertService = inject(SweetAlertService);
   todayReminders: IReminder[] = [];
   tomorrowReminders: IReminder[] = [];
   selectedReminder: IReminder = {} as IReminder;
@@ -122,32 +124,19 @@ export class RemindersComponent implements OnInit {
   }
 
   deleteReminder(id: number): void {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: '¿Estás seguro de eliminar el recordatorio?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+    this.alertService.showQuestion(
+      '¿Estás seguro?',
+      "¿Quieres eliminar el recordatorio?",
+    ).then((result) => {
       if (result.isConfirmed) {
         this.reminderService.deleteReminder(id).subscribe({
           next: () => {
             this.loadReminders();
-            Swal.fire(
-              '¡Eliminado!',
-              'El recordatorio fue eliminado',
-              'success'
-            );
+            this.alertService.showSuccess('Tu recordatorio ha sido borrado');
           },
           error: (error) => {
             console.error('Error deleting reminder', error);
-            Swal.fire(
-              'Error!',
-              'There was a problem deleting the reminder.',
-              'error'
-            );
+            this.alertService.showError('Hubo un problema borrando tu recordatorio.');
           }
         });
       }

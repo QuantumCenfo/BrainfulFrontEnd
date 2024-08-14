@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { IReminder } from '../../../interfaces/index';
+import { SweetAlertService } from '../../../services/sweet-alert-service.service';
 
 @Component({
   selector: 'app-reminder-form',
@@ -12,6 +13,7 @@ import { IReminder } from '../../../interfaces/index';
   styleUrls: ['./reminder-form.component.scss']
 })
 export class ReminderFormComponent {
+  public alertService = inject(SweetAlertService);
   @Input() reminder!: IReminder;
   @Input() toUpdateForum: IReminder = {
     reminderDate: '',
@@ -24,30 +26,17 @@ export class ReminderFormComponent {
   onSubmit(): void {
     if (this.reminder.name && this.reminder.reminderDate && this.reminder.reminderDetails) {
       // Confirm save action
-      Swal.fire({
-        title: '¿Estás seguro?',
-        text: "¿Quieres guardar el recordatorio?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '¡Sí, Guardar!'
-      }).then((result) => {
+      this.alertService.showQuestion(
+        '¿Estás seguro?',
+        "¿Quieres guardar el recordatorio?",
+      ).then((result) => {
         if (result.isConfirmed) {
           this.save.emit(this.reminder);
-          Swal.fire(
-            '¡Guardado!',
-            'Tu recordatorio fue guardado.',
-            'success'
-          );
+          this.alertService.showSuccess('Tu recordatorio fue guardado.');
         }
       });
     } else {
-      Swal.fire(
-        'Error!',
-        'Please fill in all required fields.',
-        'error'
-      );
+      this.alertService.showError('Hubo un problema guardando tu recordatorio.');
     }
   }
 

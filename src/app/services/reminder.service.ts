@@ -34,13 +34,14 @@ export class ReminderService extends BaseService<IReminder> {
   }
 
   deleteReminder(id: number): Observable<void> {
+    
     return this.http.delete<void>(`${this.source}/${id}`).pipe(
       catchError(this.handleError.bind(this))
     );
   }
 
   private handleError(error: any): Observable<never> {
-    this.sweetAlertService.showError('An error occurred', error.message);
+    this.sweetAlertService.showError('Hubo un error', error.message);
     return throwError(() => new Error('Error occurred, please try again later.'));
   }
 }
