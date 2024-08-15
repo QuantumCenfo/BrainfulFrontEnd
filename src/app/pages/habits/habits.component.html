@@ -1,14 +1,23 @@
 <div class="habits-container">
-  <div class="habit-card" *ngFor="let habit of habitService.habits$()" 
-       (mouseenter)="expandHabit(habit)" 
-       (mouseleave)="collapseHabit(habit)">
+  <div
+    class="habit-card"
+    *ngFor="let habit of habitService.habits$()"
+    (mouseenter)="expandHabit(habit)"
+    (mouseleave)="collapseHabit(habit)"
+  >
     <h3>{{ habit.habitType }}</h3>
     <p class="detailsHab">{{ habit.habitDetails }}</p>
     <div class="btnEliminarH">
-    <button class="eliminarH" *ngIf="isExpanded(habit)" (click)="deleteHabit(habit)">Eliminar</button>
+      <button
+        class="eliminarH"
+        *ngIf="isExpanded(habit)"
+        (click)="deleteHabit(habit)"
+      >
+        Eliminar
+      </button>
     </div>
   </div>
-  <div class="add-habit-card">
+  <div class="add-habit-card" (click)="openAddHabitModal()">
     <button class="btnHabits" (click)="openAddHabitModal()">+</button>
   </div>
 </div>

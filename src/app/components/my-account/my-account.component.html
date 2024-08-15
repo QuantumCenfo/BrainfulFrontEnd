@@ -4,18 +4,18 @@
       <i class="fa-regular fa-user"></i>
     </div>
 
-    <button class="profile" routerLink="profile"><span>Profile</span></button>
+    <button class="profile" routerLink="profile"><span>Perfil</span></button>
   </div>
   <div class="d-flex child">
     <div class="d-flex inner-child">
-      <p class="mb-0">{{userName}}</p>
+      <p class="mb-0">{{ userName }}</p>
       <!-- Conditionally display "Admin" if userRole is "Super_Admin" -->
       <p class="mb-0" *ngIf="userRole === 'SUPER_ADMIN'">Admin</p>
-      <p class="mb-0" *ngIf="userRole !== 'SUPER_ADMIN'">{{userRole}}</p>
+      <p class="mb-0" *ngIf="userRole !== 'SUPER_ADMIN'">{{ userRole }}</p>
     </div>
 
     <button class="logout" (click)="logout()">
-      <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span>
+      <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Salir</span>
     </button>
   </div>
 </div>
