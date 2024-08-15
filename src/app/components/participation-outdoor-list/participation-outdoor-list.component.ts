@@ -29,7 +29,10 @@ import { MatTableDataSource, MatTableModule } from "@angular/material/table";
   styleUrl: "./participation-outdoor-list.component.scss",
 })
 export class ParticipationOutdoorListComponent implements OnInit {
-  @Input() participationList: IPartcipationOutdoor[] = [];
+  @Input() set participationList(value: IPartcipationOutdoor[]) {
+    this.dataSource.data = value;
+    this.filterDataSource();
+  }
   public selectedItem: IPartcipationOutdoor = {};
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -41,9 +44,12 @@ export class ParticipationOutdoorListComponent implements OnInit {
   public modalService = inject(NgbModal);
 
   ngOnInit(): void {
-    this.dataSource.data = this.participationList;
-    this.filterDataSource();
+    if (this.participationList) {
+      this.dataSource.data = this.participationList;
+      this.filterDataSource();
+    }
   }
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
       .trim()

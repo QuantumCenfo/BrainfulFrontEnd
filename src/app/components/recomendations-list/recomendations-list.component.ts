@@ -23,6 +23,7 @@ import { MatSort, MatSortModule } from "@angular/material/sort";
 })
 export class RecomendationsListComponent {
   @Input() recomendationList: IRecomendation[] = [];
+  
   public selectedItem: IRecomendation = {};
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -33,9 +34,10 @@ export class RecomendationsListComponent {
   dataSource = new MatTableDataSource<IRecomendation>([]);
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.dataSource.data = this.recomendationList;
+    if (this.recomendationList) {
+      this.dataSource.data = this.recomendationList;
+     
+    }
   }
 
   deleteRecomendation(recomendation: IRecomendation) {
