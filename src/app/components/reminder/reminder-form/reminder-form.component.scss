@@ -50,11 +50,13 @@ button {
 
 button[type="submit"] {
     background-color: #FF9F1C;
-    color: white;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button[type="submit"]:hover {
-    background-color: #ffa01cad;
+    transform: translateY(-2px);
+    background-color: #e38f1b;
 }
 
 

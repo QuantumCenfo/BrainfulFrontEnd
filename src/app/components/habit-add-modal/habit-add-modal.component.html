@@ -35,8 +35,8 @@
       </div>
     </div>
     <div class="form-actions">
-      <button type="button" (click)="onCancel()">Cancelar</button>
       <button type="submit" [disabled]="habitForm.invalid">Guardar</button>
+      <button type="button" (click)="onCancel()">Cancelar</button>
     </div>
     <div *ngIf="habitForm.invalid && habitForm.submitted" class="error-message">
       Por favor, complete todos los campos requeridos.

@@ -38,18 +38,27 @@
   align-items: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
-  .btnHabits {
-    font-size: 3rem;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    background-color: #ff9f1c;
-  }
+  
 }
+.btnHabits {
+  font-size: 3rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  background-color: #ff9f1c;
+}
+
 .add-habit-card:hover {
+  background-color: #eb941a;
+  
   transform: translateY(-2px);
   cursor: pointer;
+  .btnHabits{
+    background-color: #eb941a;
+   
+  }
 }
+
 .detailsHab {
   width: 160px;
   height: 80px;
