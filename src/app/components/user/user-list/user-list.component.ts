@@ -47,7 +47,9 @@ export class UserListComponent implements OnInit {
   private authService = inject(AuthService); // Inject your auth service
   public rolService = inject(RolService);
   public modalService = inject(NgbModal);
-  @Input() userList: IUser[] = [];
+  @Input() set userList(value: IUser[]) {
+    this.dataSource.data = value;
+  }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   public selectedUser: IUser = {};
@@ -58,9 +60,11 @@ export class UserListComponent implements OnInit {
   dataSource = new MatTableDataSource<IUser>([]);
 
   ngOnInit(): void {
-    this.dataSource.data = this.userList;
-
-    this.currentUserId = this.getUserIdFromLocalStorage(); // Use 'this' to call instance method
+    if (this.userList) {
+      this.dataSource.data = this.userList;
+      this.currentUserId = this.getUserIdFromLocalStorage(); // Use 'this' to call instance method
+    }
+   
   }
 
   ngAfterViewInit(): void {

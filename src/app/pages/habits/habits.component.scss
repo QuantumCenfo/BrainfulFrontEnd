@@ -1,0 +1,141 @@
+.habits-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 80px;
+}
+
+.habit-card {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.add-habit-card {
+  width: 200px;
+  height: 200px;
+  background-color: #ff9f1c;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  
+}
+.btnHabits {
+  font-size: 3rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  background-color: #ff9f1c;
+}
+
+.add-habit-card:hover {
+  background-color: #eb941a;
+  
+  transform: translateY(-2px);
+  cursor: pointer;
+  .btnHabits{
+    background-color: #eb941a;
+   
+  }
+}
+
+.detailsHab {
+  width: 160px;
+  height: 80px;
+}
+.btnEliminarH {
+  background-color: #7cecf9;
+
+  width: 200px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eliminarH {
+  border: 1px #16c2d5;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #ff9f1c;
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .habits-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .add-habit-card {
+    .btnEliminarH {
+    }
+
+    .eliminarH {
+    }
+  }
+
+  @media (max-width: 900px) {
+    .habits-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    .add-habit-card {
+      height: 100px;
+      width: 100px;
+    }
+  }
+
+  .btnHabits {
+  }
+
+  .btnEliminarH {
+  }
+
+  .eliminarH {
+  }
+}
+
+@media (max-width: 480px) {
+  .habits-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .add-habit-card {
+  }
+
+  .btnHabits {
+  }
+
+  .btnEliminarH {
+  }
+
+  .eliminarH {
+  }
+}

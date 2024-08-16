@@ -107,16 +107,17 @@
             background-color: #FF9F1C;
             border: none;
             font-size: 18px;
-            border-radius: 12px;
-            color: #fff;
+            border-radius: 0.25rem;
+            color: #000000;
             padding: 10px 20px;
             font-weight: normal;
             display: block;
             margin: 20px auto;
             cursor: pointer;
             transition: background-color 0.3s;
-
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             &:hover {
+                transform: translateY(-2px);
                 background-color: darken(#FF9F1C, 10%);
             }
         }

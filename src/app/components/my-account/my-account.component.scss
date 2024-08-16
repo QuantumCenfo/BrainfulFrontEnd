@@ -31,28 +31,35 @@ label {
     background-color: #16c2d5;
     margin-top: 10px;
     padding: 10px;
-    border-radius: 10px;
-    
+    border-radius: 0.25rem ;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .logout{
     margin-top: 20px;
     border-width: 0px;
     background-color: #FF9F1C;
     padding: 10px;
-    border-radius: 10px;
-
+    border-radius: 0.25rem ;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+i{
+    color: black;
 }
 .profile:hover{
+    transform: translateY(-2px);
     border-width: 0px;
     border-style: solid ;
     background-color: #15b5c7;
     margin-top: 10px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 0.25rem ;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .logout:hover{
+    transform: translateY(-2px);
     border-width: 0px;
     background-color: #ee961a;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 0.25rem ;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

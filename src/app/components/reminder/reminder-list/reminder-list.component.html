@@ -1,0 +1,11 @@
+<div class="reminder-list">
+  <span>{{ reminder.reminderDetails }}</span>
+  <div class="reminder-actions">
+    <button (click)="onEdit()">
+      <i class="fa-solid fa-pencil btnRemList"></i>
+    </button>
+    <button class="btn-delete" (click)="onDelete()">
+      <i class="fa-regular fa-trash-can btnRemList"></i>
+    </button>
+  </div>
+</div>

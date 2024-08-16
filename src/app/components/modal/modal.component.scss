@@ -1,8 +1,8 @@
 * {
   font-family: Dosis, "Dosis", sans-serif;
 }
-h2 {
-  font-family: Dosis, "Dosis", sans-serif;
+ .h2 {
+  font-family: Dosis, "Dosis", sans-serif !important;
 }
 
 .modal-content {
@@ -58,14 +58,16 @@ h2 {
   background-color: #6c757d;
   color: #fff;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .modal-footer .btn:hover {
+  transform: translateY(-2px);
   background-color: #5a6268;
 }
 

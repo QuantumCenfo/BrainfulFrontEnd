@@ -1,1 +1,38 @@
-<p>reminders works!</p>
+<div class="reminders-container">
+  <h2>Recordatorios</h2>
+  <div class="add-reminder">
+    <button class="btn btn-primary" (click)="openReminderForm()">
+      Agregar
+    </button>
+  </div>
+  <div class="reminder-lists">
+    <div class="reminder-list">
+      <h3>Hoy</h3>
+      <app-reminder-list
+        *ngFor="let reminder of todayReminders"
+        [reminder]="reminder"
+        (edit)="editReminder($event)"
+        (delete)="deleteReminder($event)"
+      >
+      </app-reminder-list>
+    </div>
+    <div class="reminder-list">
+      <h3>Próximos</h3>
+      <app-reminder-list
+        *ngFor="let reminder of tomorrowReminders"
+        [reminder]="reminder"
+        (edit)="editReminder($event)"
+        (delete)="deleteReminder($event)"
+      >
+      </app-reminder-list>
+    </div>
+  </div>
+  <app-modal #reminderModal [title]="modalTitle">
+    <app-reminder-form
+      [reminder]="selectedReminder"
+      (save)="saveReminder($event)"
+      (close)="closeReminderForm()"
+    >
+    </app-reminder-form>
+  </app-modal>
+</div>

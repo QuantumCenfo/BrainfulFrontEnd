@@ -6,9 +6,9 @@
 
 .my-forums-button {
   background-color: #FF9F1C;
-  color: #fff;
+  color: #000000;
   border: none;
-  border-radius: 11px;
+  border-radius: 0.25rem;
   width: 120px;
   height: 50px;
   font-size: 20px;
@@ -21,6 +21,7 @@
 }
 
 .my-forums-button:hover {
+  transform: translateY(-2px);
   background-color: #ee971e; /* Color de fondo cuando se pasa el ratón */
 }
 
@@ -53,13 +54,13 @@
 
 .forum-title {
   font-size: 2rem; /* Tamaño grande del título */
-  color: #fff; /* Color blanco para el texto del título */
+  color: #000000; /* Color blanco para el texto del título */
   margin: 0;
 }
 
 .forum-description {
   font-size: 1rem; /* Tamaño más pequeño para la descripción */
-  color: #f0f0f0; /* Color gris claro para la descripción */
+  color: #000000; /* Color gris claro para la descripción */
   margin: 5px 0 0; /* Margen superior solo para separar del título */
   overflow: hidden; /* Ocultar desbordamiento */
   text-overflow: ellipsis; /* Agregar puntos suspensivos */
@@ -72,7 +73,7 @@
 .delete-button {
   background: none;
   border: none;
-  color: #fff; /* Color del ícono */
+  color: #ffffff; /* Color del ícono */
   font-size: 1.5rem;
   cursor: pointer;
   position: absolute;
@@ -93,9 +94,9 @@
 
 .add-button {
   background-color: #FF9F1C;
-  color: #fff;
+  color: #000000;
   border: none;
-  border-radius: 11px;
+  border-radius: 0.25rem;
   width: 141px;
   height: 52px;
   font-size: 20px;
@@ -108,6 +109,7 @@
 }
 
 .add-button:hover {
+  transform: translateY(-2px);
   background-color: #ee9211;
 }
 h2{
