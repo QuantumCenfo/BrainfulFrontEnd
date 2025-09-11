@@ -1,6 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { ChatService } from "./services/chat.service";
+
 
 @Component({
   selector: "app-root",
@@ -10,6 +10,6 @@ import { ChatService } from "./services/chat.service";
   styleUrl: "./app.component.scss",
 })
 export class AppComponent {
-  public chatService = inject(ChatService);
+
   title = "brainful";
 }
