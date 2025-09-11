@@ -8,7 +8,7 @@ import { UserService } from "../../services/user.service";
 import { CommonModule } from "@angular/common";
 import { RolService } from "../../services/rol.service";
 import { AddButtonComponent } from "../../components/add-button/add-button.component";
-import { ChatService } from "../../services/chat.service";
+
 
 @Component({
   selector: "app-users",
@@ -27,7 +27,7 @@ import { ChatService } from "../../services/chat.service";
 export class UsersComponent implements OnInit {
   public userService = inject(UserService);
   public rolService = inject(RolService);
-  public chatService = inject(ChatService);
+
   ngOnInit(): void {
     this.userService.getAllSignal();
     this.rolService.getAllSignal();

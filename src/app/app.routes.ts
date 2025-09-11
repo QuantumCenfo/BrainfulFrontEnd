@@ -15,7 +15,7 @@ import { ContentsComponent } from "./pages/contents/contents.component";
 import { BadgesUsersComponent } from "./pages/badges-users/badges-users.component";
 
 import { ForumsComponent } from "./pages/forums/forums.component";
-import { RemindersComponent } from "./pages/reminders/reminders.component";
+//import { RemindersComponent } from "./pages/reminders/reminders.component";
 import { GamesComponent } from "./pages/games/games.component";
 import { FormComponent } from "./pages/form/form.component";
 import { ContentsUsersComponent } from "./pages/contents-users/contents-users.component";
@@ -146,7 +146,7 @@ export const routes: Routes = [
         component: ForumsDetailsComponent,
         data: { authorities: [IRole.user], name: "Foro detallado", showInSidebar: false },
       },
-      {
+      /*{
         path: "reminders",
         component: RemindersComponent,
         data: {
@@ -154,7 +154,7 @@ export const routes: Routes = [
           name: "Recordatorios",
           showInSidebar: true,
         },
-      },
+      }*/
       {
         path: "games",
         component: GamesComponent,
@@ -176,7 +176,7 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
-      {
+      /*{
         path: "recommendations",
         component: RecomendationsComponent,
         data: {
@@ -184,8 +184,8 @@ export const routes: Routes = [
           name: "Recomendaciones",
           showInSidebar: true,
         },
-      },
-      {
+      }*/
+      /*{
         path: "form",
         component: FormComponent,
         data: {
@@ -193,7 +193,7 @@ export const routes: Routes = [
           name: "Cuestionario",
           showInSidebar: true,
         },
-      },
+      }*/
       {
         path: "contents-user",
         component: ContentsUsersComponent,
