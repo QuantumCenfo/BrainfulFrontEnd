@@ -5,7 +5,10 @@ pipeline {
 		} 
 	}
 	options { timestamps() }
-	environment { CI = 'true' }
+	environment { 
+		CI = 'true' 
+		CHROME_BIN = '/usr/bin/chromium'
+		}
 
 	stages {
 		stage('Checkout') { 
@@ -13,6 +16,16 @@ pipeline {
 				checkout scm 
 			}
 		}
+
+		stage('Install system deps') {
+            steps {
+                sh '''
+                  apt-get update
+                  apt-get install -y chromium
+                '''
+            }
+        }
+
 
 		stage('Install') { 
 			steps { 
@@ -23,7 +36,7 @@ pipeline {
 		stage('Unit Tests + Coverage') {
 			steps { 
 				catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-					sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadless' 
+					sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI' 
 				}
 			}
 			post {
@@ -47,7 +60,7 @@ pipeline {
 			}
 			post { 
 				always { 
-					junit 'test-results/junit.xml' 
+					junit 'test-results/junit.xml', allowEmptyResults: true
 				}
 			}
 		}
