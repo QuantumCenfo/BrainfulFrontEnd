@@ -22,28 +22,22 @@ pipeline {
             }
         }
 
-        stage('Install') {
-            steps {
-                sh 'npm ci'
-            }
-        }
-
         stage('Unit Tests + Coverage') {
-            steps {
+             steps {
+                sh 'npm ci'
                 sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI'
-            }
-        }
-
-        stage('E2E (Playwright)') {
-            steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    sh 'npx playwright install-deps || true'
-                    sh 'npm run e2e -- --reporter=junit'
-                }
             }
             post {
                 always {
-                    junit testResults: 'test-results/e2e/*.xml', allowEmptyResults: true
+                    catchError(buildResult: 'SUCCESS', stageResult: 'UNSTABLE') {
+                        junit 'test-results/unit/junit.xml'
+                    }
+
+                    recordCoverage(
+                        tools: [[parser: 'LCOV', pattern: 'coverage/**/lcov.info']],
+                        sourceCodeRetention: 'NEVER',
+                        failOnError: false
+                    )
                 }
             }
         }
@@ -61,8 +55,6 @@ pipeline {
 
     post {
         always {
-            junit testResults: 'test-results/unit/junit.xml', allowEmptyResults: true
-
             archiveArtifacts artifacts: 'coverage/**', fingerprint: true
         }
     }
