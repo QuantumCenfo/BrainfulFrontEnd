@@ -30,26 +30,28 @@ pipeline {
 		stage('Install') { 
 			steps { 
 				sh 'npm ci' 
-			} 
+			}
 		}
 
 		stage('Unit Tests + Coverage') {
-			steps { 
-				catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-					sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI' 
-				}
-			}
-			post {
-				always {
-					junit testResults: 'test-results/unit/junit.xml', allowEmptyResults: true
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI'
+                }
+            }
+            post {
+                always {
+                    junit testResults: 'test-results/unit/**/*.xml', allowEmptyResults: true
 
-					publishCoverage(
-						adapters: [lcovAdapter('coverage/**/lcov.info')],
-						sourceFileResolver: sourceFiles('STORE_ALL_BUILD')
-					)
-				}
-			}
-		}
+                    publishCoverage(
+                        adapters: [
+                            lcovAdapter('coverage/BrainfulFrontEnd/lcov.info')
+                        ],
+                        sourceFileResolver: sourceFiles('STORE_ALL_BUILD')
+                    )
+                }
+            }
+        }
 
 		stage('E2E (Playwright)') {
 			steps {
