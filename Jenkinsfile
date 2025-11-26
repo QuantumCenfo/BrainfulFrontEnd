@@ -4,10 +4,7 @@ pipeline {
 			image 'node:20-bullseye' 
 		} 
 	}
-	options { 
-		timestamps() 
-		ansiColor('xterm')
-		}
+	options { timestamps() }
 	environment { 
 		CI = 'true' 
 		CHROME_BIN = '/usr/bin/chromium'
@@ -50,13 +47,6 @@ pipeline {
                 sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI'
             }
         }
-    }
-
-    post {
-        always {
-            junit 'test-results/unit/junit.xml'
-            archiveArtifacts artifacts: 'coverage/**', fingerprint: true
-        }
 
 		stage('E2E (Playwright)') {
 			steps {
@@ -81,5 +71,12 @@ pipeline {
 				}
 			}
 		}
+    }
+
+    post {
+        always {
+            junit 'test-results/unit/junit.xml'
+            archiveArtifacts artifacts: 'coverage/**', fingerprint: true
+        }
 	}
 }
