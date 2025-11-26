@@ -41,7 +41,7 @@ pipeline {
 			}
 			post {
 				always {
-					junit 'test-results/unit/junit.xml'
+					junit testResults: 'test-results/unit/junit.xml', allowEmptyResults: true
 
 					publishCoverage(
 						adapters: [lcovAdapter('coverage/**/lcov.info')],
@@ -60,7 +60,7 @@ pipeline {
 			}
 			post { 
 				always { 
-					junit 'test-results/junit.xml', allowEmptyResults: true
+					junit testResults: 'test-results/unit/junit.xml', allowEmptyResults: true
 				}
 			}
 		}

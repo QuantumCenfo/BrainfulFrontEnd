@@ -5,7 +5,6 @@ module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
-    browsers: ['ChromeHeadlessCI'],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
@@ -35,12 +34,13 @@ module.exports = function (config) {
         { type: 'lcovonly' }
       ]
     },
+    reporters: ['progress', 'kjhtml', 'junit'],
     junitReporter: {
       outputDir: 'test-results/unit',
       outputFile: 'junit.xml',
       useBrowserName: false
     },
-    reporters: ['progress', 'kjhtml', 'junit'],
+    browsers: ['ChromeHeadlessCI'],
     restartOnFileChange: true,
     customLaunchers: {
       ChromeHeadlessCI: {
