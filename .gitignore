@@ -132,3 +132,38 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Playwright
+playwright-report/
+test-results/
+playwright/.cache/
+junit.xml
+**/junit.xml
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# IDE - IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Angular specific
+/.angular/cache
+.angular/
+dist/
+tmp/
+out-tsc/
+
+# SonarQube
+.scannerwork/
