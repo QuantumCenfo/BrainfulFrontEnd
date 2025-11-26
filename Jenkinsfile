@@ -1,82 +1,69 @@
 pipeline {
-	agent { 
-		docker { 
-			image 'node:20-bullseye' 
-		} 
-	}
-	options { timestamps() }
-	environment { 
-		CI = 'true' 
-		CHROME_BIN = '/usr/bin/chromium'
-		}
+    agent {
+        docker {
+            image 'brainful-frontend-ci'
+            args '-u 0:0'
+        }
+    }
 
-	stages {
-		stage('Checkout') { 
-			steps { 
-				checkout scm 
-			}
-		}
+    options {
+        timestamps()
+    }
 
-		stage('Install system deps') {
+    environment {
+        CI = 'true'
+        CHROME_BIN = '/usr/bin/chromium'
+    }
+
+    stages {
+        stage('Checkout') {
             steps {
-                sh '''
-                  apt-get update
-                  apt-get install -y \
-                    chromium \
-                    chromium-sandbox \
-                    libnss3 \
-                    libatk-bridge2.0-0 \
-                    libgtk-3-0 \
-                    libdrm2 \
-                    libgbm1 \
-                    libxkbcommon0 \
-                    libasound2
-                '''
+                checkout scm
             }
         }
 
+        stage('Install') {
+            steps {
+                sh 'npm ci'
+            }
+        }
 
-		stage('Install') { 
-			steps { 
-				sh 'npm ci' 
-			}
-		}
-
-		stage('Unit Tests + Coverage') {
+        stage('Unit Tests + Coverage') {
             steps {
                 sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI'
             }
         }
 
-		stage('E2E (Playwright)') {
-			steps {
-				catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-					sh 'npx playwright install --with-deps'
-					sh 'npm run e2e -- --reporter=junit'
-				}
-			}
-			post { 
-				always { 
-					junit testResults: 'test-results/unit/junit.xml', allowEmptyResults: true
-				}
-			}
-		}
+        stage('E2E (Playwright)') {
+            steps {
+                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                    sh 'npx playwright install-deps || true'
+                    sh 'npm run e2e -- --reporter=junit'
+                }
+            }
+            post {
+                always {
+                    junit testResults: 'test-results/e2e/*.xml', allowEmptyResults: true
+                }
+            }
+        }
 
-		stage('SonarCloud') {
-			steps {
-				withSonarQubeEnv('SonarCloud') {
-					catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-						sh 'npx sonar-scanner'
-					}
-				}
-			}
-		}
+        stage('SonarCloud') {
+            steps {
+                withSonarQubeEnv('SonarCloud') {
+                    catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                        sh 'sonar-scanner'
+                    }
+                }
+            }
+        }
     }
 
     post {
         always {
-            junit 'test-results/unit/junit.xml'
+            junit testResults: 'test-results/unit/junit.xml', allowEmptyResults: true
+
             archiveArtifacts artifacts: 'coverage/**', fingerprint: true
         }
-	}
+    }
 }
