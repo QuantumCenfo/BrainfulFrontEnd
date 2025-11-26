@@ -23,13 +23,13 @@ pipeline {
 		stage('Unit Tests + Coverage') {
 			steps { 
 				catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-					sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI' 
+					sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadless' 
 				}
 			}
 			post {
 				always {
 					junit 'test-results/unit/junit.xml'
-					
+
 					publishCoverage(
 						adapters: [lcovAdapter('coverage/**/lcov.info')],
 						sourceFileResolver: sourceFiles('STORE_ALL_BUILD')
