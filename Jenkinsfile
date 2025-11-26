@@ -4,7 +4,10 @@ pipeline {
 			image 'node:20-bullseye' 
 		} 
 	}
-	options { timestamps() }
+	options { 
+		timestamps() 
+		ansiColor('xterm')
+		}
 	environment { 
 		CI = 'true' 
 		CHROME_BIN = '/usr/bin/chromium'
@@ -20,8 +23,17 @@ pipeline {
 		stage('Install system deps') {
             steps {
                 sh '''
-                  apt-get update
-                  apt-get install -y chromium
+                  sudo apt-get update
+                  sudo apt-get install -y \
+                    chromium \
+                    chromium-sandbox \
+                    libnss3 \
+                    libatk-bridge2.0-0 \
+                    libgtk-3-0 \
+                    libdrm2 \
+                    libgbm1 \
+                    libxkbcommon0 \
+                    libasound2
                 '''
             }
         }
@@ -35,22 +47,15 @@ pipeline {
 
 		stage('Unit Tests + Coverage') {
             steps {
-                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                    sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI'
-                }
+                sh 'npx ng test --watch=false --code-coverage --browsers=ChromeHeadlessCI'
             }
-            post {
-                always {
-                    junit testResults: 'test-results/unit/**/*.xml', allowEmptyResults: true
+        }
+    }
 
-                    publishCoverage(
-                        adapters: [
-                            lcovAdapter('coverage/BrainfulFrontEnd/lcov.info')
-                        ],
-                        sourceFileResolver: sourceFiles('STORE_ALL_BUILD')
-                    )
-                }
-            }
+    post {
+        always {
+            junit 'test-results/unit/junit.xml'
+            archiveArtifacts artifacts: 'coverage/**', fingerprint: true
         }
 
 		stage('E2E (Playwright)') {
