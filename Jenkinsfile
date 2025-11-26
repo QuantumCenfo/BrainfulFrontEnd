@@ -34,7 +34,7 @@ pipeline {
                     }
 
                     recordCoverage(
-                        tools: [[parser: 'LCOV', pattern: 'coverage/**/lcov.info']],
+                        tools: [[parser: 'COBERTURA', pattern: 'coverage/**/cobertura-coverage.info']],
                         sourceCodeRetention: 'NEVER',
                         failOnError: false
                     )
